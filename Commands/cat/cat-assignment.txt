@@ -1,0 +1,26 @@
+
+1. Create a new file with some content
+	cat "abc" >> abc.txt
+
+2. See the contents of a file
+	cat abc.txt
+	
+3. Create a file and open it to type the content.
+	cat > efg.txt
+		type the content
+		and here
+		[CTRL+C] to exit
+
+4. Redirect file content to other file
+
+	cat sourcefile > otherfile
+	
+5. copy multiple file content to other file.
+	cat sourcefile1 sourcefile2 sourcefile3 > otherfile	
+	
+6.  Display Multiple File Content
+	cat abc.txt efg.txt
+	
+7. Display Line Numbers
+	Use -n switch to display the line numbers with results of cat command.
+	cat -n abc.txt

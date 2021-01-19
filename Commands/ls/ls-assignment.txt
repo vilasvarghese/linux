@@ -1,0 +1,14 @@
+Syntax
+ls [OPTION] [FILE]
+
+	1. ls
+	2. use -l switch to view the long listing of files.
+		ls -l
+	3. specific file
+		ls -l <filename>
+	4. Hidden file
+		ls -la
+	5. See file size in human readable format
+		ls lh
+	6. Recursively list files in current directory and sub directories
+		ls -lR

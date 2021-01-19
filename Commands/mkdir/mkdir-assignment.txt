@@ -1,0 +1,23 @@
+1. mkdir vilas 
+
+2. Create directory inside another directory
+	mkdir /etc/abc
+	
+3. If parent directory doesn’t exist
+	above command will fail. 
+	Use -p option to create any parent directory if not exists.
+
+	mkdir -p /var/www/vilas/training
+
+4. Permissions of the file can be mentioned using -m option
+	mkdir -m 777 testdir 
+	mkdir -m 755 testdir 
+	mkdir -m a=rwx testdir 
+	mkdir -m u=rwx,g=rw,o=r testdir
+	
+5. Create multiple directories
+
+	mkdir -p /tmp/test1 /tmp/test
+		or
+	mkdir -p /tmp/{test1,test2}
+	
