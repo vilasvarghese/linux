@@ -179,7 +179,7 @@ THE LINUX FILE SYSTEM
 		These are known as special files.
 
 		File Types in Linux:
-		There are three types of files. 
+		There are multiple types of files. 
 			The first character in file permissions under ls -l commands shows the type of file. 
 				(-)
 					Regular file 	 

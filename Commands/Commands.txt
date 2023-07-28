@@ -1,0 +1,426 @@
+• Basic Linux Commands
+-----------------------------------------------------------------------
+    pwd - Print working directory
+    ls - List files and directories
+    cd - Change directory
+    mkdir - Make directory
+    rmdir - Remove directory
+    touch - Create an empty file
+    cp - Copy files or directories
+    mv - Move or rename files/directories
+    rm - Remove files or directories
+    cat - Concatenate and display file content
+    less - View file content page by page
+    head - Display the beginning of a file
+    tail - Display the end of a file
+    grep - Search for patterns in files
+    find - Search for files and directories
+    man - Display the manual page for a command
+    ps - Display running processes
+    kill - Terminate processes
+    top - Monitor system processes and resources
+    chmod - Change file permissions
+    chown - Change file ownership
+    tar - Archive files
+    gzip - Compress files
+    unzip - Extract files from a ZIP archive
+    df - Display disk space usage
+    du - Estimate file and directory space usage
+    free - Display system memory usage
+    ifconfig - Configure network interfaces
+    ping - Test network connectivity
+    netstat - Display network statistics
+    ssh - Securely connect to a remote server
+    scp - Securely copy files between local and remote systems
+    wget - Download files from the internet
+    curl - Transfer data with URLs
+    shutdown - Shutdown or restart the system
+    reboot - Reboot the system
+    uname - Display system information
+    who - Display logged-in users
+    history - Display command history
+    alias - Create command aliases
+    df -h - Display disk space usage in human-readable format
+    du -h - Estimate file and directory space usage in human-readable format
+    ps aux - Display detailed information about running processes
+    tar -xvf - Extract files from a tarball
+    gzip -d - Decompress a compressed file
+    find . -name "filename" - Search for a file by name in the current directory and subdirectories
+    grep -r "pattern" . - Search for a pattern recursively in the current directory and subdirectories
+    date - Display the current date and time
+    cal - Display a calendar for the current month
+    whoami - Display the current user's username
+	
+	
+	clear - Clear the terminal screen
+    echo - Display a message or value
+    wc - Count lines, words, and characters in a file
+    sort - Sort lines of text files
+    cut - Cut out sections from lines of a file
+    sed - Stream editor for text manipulation
+    awk - Pattern scanning and processing language
+    diff - Compare two files line by line
+    ln - Create links to files
+    grep -v "pattern" - Inverse search; display lines that do not match the pattern
+    chmod +x filename - Make a file executable
+    which - Show the full path of a command
+    whois - Look up domain registration information
+    finger - Display user information
+    nc - Network utility for reading/writing data across networks
+    ssh-keygen - Generate SSH key pairs
+    tar -cvf - Create a tarball (archive) of files
+    tar -tvf - List the contents of a tarball
+    tar -xvf - Extract files from a tarball
+    unzip -l - List the contents of a ZIP archive
+    unzip -d - Extract files from a ZIP archive to a specific directory
+    ln -s - Create symbolic links to files or directories
+    time - Measure the execution time of a command
+    ps -aux | grep "process" - Search for a specific process
+    df -i - Display inode usage
+    du -s - Display only the total size of a directory
+    chgrp - Change group ownership of a file or directory
+    shutdown -h now - Shutdown the system immediately
+    reboot -h now - Reboot the system immediately
+    uname -a - Display all system information
+    who -H - Show header in 'who' command output
+    history -c - Clear command history
+    sudo !! - Re-run the last command with sudo
+    locate - Find files by name
+    find /path/to/search -name "filename" - Search for a file by name in a specific directory
+    grep -C 2 "pattern" - Display lines before and after the matched pattern
+    ps -eLf - Display threads for all processes
+    df -hT - Display disk space usage with filesystem type
+    du -h -d 1 - Display the size of the directories in the current directory
+    tar -czvf - Create a compressed tarball (gzip)
+    tar -xzvf - Extract files from a compressed tarball (gzip)
+    zip -r - Create a ZIP archive recursively
+    zip -d - Remove files from a ZIP archive
+    ps -e -o pcpu,cpu,nice,state,cputime,args --sort pcpu | head -n 10 - Display top CPU-consuming processes
+    lsof -i - Display information about open internet connections
+    killall - Signal processes by name
+    top -u username - Monitor resource usage for a specific user
+    ifconfig interface up/down - Bring a network interface up or down
+    scp -r - Securely copy directories between local and remote systems
+    grep -rli "pattern" . - Search for a pattern in files and display matching filenames only
+
+
+-----------------------------------------------------------------------
+• File Permission Management
+-----------------------------------------------------------------------
+
+In Linux, file permissions are an essential aspect of the operating system's security model. They control access to files and directories, determining who can read, write, and execute them. Linux uses a combination of permission bits and ownership to manage file access. Understanding and managing file permissions are crucial for maintaining system security and ensuring data integrity.
+
+Linux File Permission Types:
+
+    Read (r): Allows the user to read the file's content and view its attributes (e.g., permissions, owner, group).
+    Write (w): Allows the user to modify the file's content and attributes. Users with write access can also delete the file or modify its permissions.
+    Execute (x): Allows the user to execute the file if it is a script or a binary executable. For directories, execute permission is necessary to access its contents (i.e., list files and directories within).
+
+File Permission Classes:
+
+    User (Owner): The owner of the file.
+    Group: A group of users that share the same permissions.
+    Others: Any other user on the system who is not the owner or part of the group.
+
+File Permission Representation:
+File permissions are represented by a 10-character string, where the first character represents the file type (e.g., "-" for regular files, "d" for directories). The next three characters represent permissions for the user, followed by three characters for the group, and the last three characters for others. Each character can be "r" for read, "w" for write, and "x" for execute. If a permission is not granted, it is represented by "-".
+
+Examples of File Permission Representations:
+
+    rw-r--r-- (Owner: Read/Write, Group: Read, Others: Read)
+    drwxr-xr-x (Owner: Read/Write/Execute, Group: Read/Execute, Others: Read/Execute)
+
+Changing File Permissions:
+File permissions can be modified using the "chmod" command. Permissions can be set explicitly using numeric values (e.g., 755, 644) or using symbolic notation (e.g., u+r, g+w).
+
+File Ownership:
+Each file in Linux is associated with an owner and a group. The owner has special privileges, such as changing permissions and changing the file's group. The "chown" command is used to change file ownership, while "chgrp" changes the group ownership.
+
+Default File Permissions:
+The "umask" command determines the default permissions assigned to new files and directories created by users. It is subtracted from a maximum value (usually 777 for directories and 666 for files) to calculate the actual permissions.
+
+In summary, file permissions in Linux play a critical role in controlling access to files and ensuring system security. Properly managing file permissions is essential to protect sensitive data and maintain the integrity of the system.
+
+
+
+
+
+
+File permission management in Linux is essential for controlling access to files and directories. Here are some commands commonly used to manage file permissions:
+
+    chmod: Change file permissions.
+        Syntax: chmod [options] permissions filename
+        Example: chmod u+rwx file.txt (Grants read, write, and execute permissions to the owner of the file.)
+
+    chown: Change file ownership.
+        Syntax: chown [options] owner[:group] filename
+        Example: chown john:users file.txt (Changes the owner of the file to "john" and the group to "users.")
+
+    chgrp: Change file group ownership.
+        Syntax: chgrp [options] group filename
+        Example: chgrp users file.txt (Changes the group ownership of the file to "users.")
+
+    umask: Set the default file permissions for newly created files and directories.
+        Syntax: umask [mode]
+        Example: umask 0022 (Sets the default permissions for newly created files to 644 and directories to 755.)
+
+    ls: List files and directories with their permissions.
+        Syntax: ls -l [filename]
+        Example: ls -l file.txt (Displays the permissions of "file.txt" along with other file attributes.)
+
+    id: Display user and group information.
+        Syntax: id [username]
+        Example: id john (Displays information about the user "john," including their primary group.)
+
+    groups: Display the groups a user belongs to.
+        Syntax: groups [username]
+        Example: groups john (Shows the groups that the user "john" is a member of.)
+
+    su: Switch user or become the superuser.
+        Syntax: su [username]
+        Example: su john (Switches to user "john" and prompts for their password.)
+
+    sudo: Execute a command with administrative privileges.
+        Syntax: sudo [command]
+        Example: sudo ls /root (Lists the contents of the "/root" directory with root privileges.)
+
+    adduser: Create a new user account.
+        Syntax: adduser [username]
+        Example: adduser jane (Creates a new user account named "jane.")
+
+    deluser: Delete a user account.
+        Syntax: deluser [username]
+        Example: deluser jane (Deletes the user account "jane.")
+
+    passwd: Change user password.
+        Syntax: passwd [username]
+        Example: passwd john (Prompts to change the password for user "john.")
+
+    getfacl: Display file access control lists (ACLs).
+        Syntax: getfacl [filename]
+        Example: getfacl file.txt (Shows the ACLs associated with "file.txt.")
+
+    setfacl: Set file access control lists (ACLs).
+        Syntax: setfacl [options] acl-specification filename
+        Example: setfacl -m u:john:rw file.txt (Grants read and write permissions to user "john" on "file.txt.")
+-----------------------------------------------------------------------
+• User Creation
+-----------------------------------------------------------------------
+
+Use the useradd command followed by the desired username to create the new user. For example, to create a user named "john":
+
+
+
+sudo useradd john
+
+This command will create a new user account with default settings, including the user's home directory (usually located in /home/username).
+
+Set a password for the new user using the passwd command:
+
+
+
+sudo passwd john
+
+You'll be prompted to enter and confirm the password for the new user.
+
+Optionally, you can provide additional user information, such as the user's full name, phone number, or other details, using the useradd command with the -c flag:
+
+
+
+sudo useradd -c "John Doe" john
+
+By default, a new user will be a member of their own group with the same name as the username. If you want to add the user to an existing group, use the -G flag:
+
+
+
+sudo useradd -G groupname john
+
+Replace groupname with the name of the existing group.
+
+If you want to create a user with a specific home directory, you can use the -d flag with the useradd command:
+
+
+
+sudo useradd -d /path/to/custom/home john
+
+Replace /path/to/custom/home with the desired directory path.
+
+To grant administrative privileges (sudo access) to the new user, add the user to the sudo group:
+
+
+
+    sudo usermod -aG sudo john
+
+    This command adds the user "john" to the sudo group, allowing them to run administrative commands with sudo.
+
+    Finally, to ensure the changes take effect, restart the system or log out and log back in with the new user account.
+
+That's it! You have successfully created a new user account in Linux. The new user can now log in and use the system with the specified username and password.
+
+-----------------------------------------------------------------------
+• Shell Scripts
+-----------------------------------------------------------------------
+simple.sh
+
+-----------------------------------------------------------------------
+• SSH and VI Utility
+-----------------------------------------------------------------------
+
+    i - Enter insert mode (to start inserting text).
+    Example: Press i, then type "This is some text", and press Esc.
+
+    a - Append text after the cursor.
+    Example: Press a, then type " to append text", and press Esc.
+
+    o - Open a new line below the current line and enter insert mode.
+    Example: Press o, then type "This is a new line", and press Esc.
+
+    O - Open a new line above the current line and enter insert mode.
+    Example: Press O, then type "This is a new line above", and press Esc.
+
+    x - Delete the character under the cursor.
+    Example: Move the cursor to the character you want to delete and press x.
+
+    dd - Delete the current line.
+    Example: Position the cursor on the line you want to delete and press dd.
+
+    yy - Yank (copy) the current line.
+    Example: Position the cursor on the line you want to copy and press yy.
+
+    p - Paste the yanked text after the cursor.
+    Example: Press p to paste the yanked line below the cursor.
+
+    P - Paste the yanked text before the cursor.
+    Example: Press P to paste the yanked line above the cursor.
+
+    u - Undo the last change.
+    Example: Press u to undo the last action.
+
+    Ctrl + r - Redo the undone change.
+    Example: Press u to undo, then press Ctrl + r to redo.
+
+    :w - Save the changes (write the file).
+    Example: Type :w and press Enter to save the changes.
+
+    :q - Quit vi (exit).
+    Example: Type :q and press Enter to exit vi.
+
+    :q! - Quit vi without saving changes (force quit).
+    Example: If you made changes but want to exit without saving, type :q! and press Enter.
+
+    :wq - Save changes and quit vi.
+    Example: Type :wq and press Enter to save the changes and exit vi.
+
+    /search - Search for the specified text (press n to find the next occurrence).
+    Example: Type /example and press Enter to search for the word "example."
+
+    ?search - Search backward for the specified text (press n to find the previous occurrence).
+    Example: Type ?text and press Enter to search backward for the word "text."
+
+    :s/old/new - Replace the first occurrence of "old" with "new" in the current line.
+    Example: Type :s/text/word and press Enter to replace "text" with "word" in the current line.
+
+    :s/old/new/g - Replace all occurrences of "old" with "new" in the current line.
+    Example: Type :s/text/word/g and press Enter to replace all occurrences of "text" with "word" in the current line.
+
+    :n - Go to line number "n".
+    Example: Type :10 and press Enter to jump to line 10.
+
+    gg - Go to the first line of the file.
+    Example: Press gg to go to the beginning of the file.
+
+    G - Go to the last line of the file.
+    Example: Press G to go to the end of the file.
+
+    yyyG - Yank (copy) multiple lines, starting from the current line to line "y".
+    Example: Type 10yy and press G to yank 10 lines, starting from the current line to line 10.
+
+    :set number - Display line numbers.
+    Example: Type :set number and press Enter to display line numbers in the left margin.
+
+    :set nonumber - Hide line numbers.
+    Example: Type :set nonumber and press Enter to hide line numbers.
+
+    :set ic - Ignore case when searching.
+    Example: Type :set ic and press Enter to perform case-insensitive searches.
+
+    :set noic - Perform case-sensitive searches.
+    Example: Type :set noic and press Enter to perform case-sensitive searches.
+
+    :set hlsearch - Highlight search results.
+    Example: Type :set hlsearch and press Enter to highlight search matches.
+
+    :set nohlsearch - Turn off search result highlighting.
+    Example: Type :set nohlsearch and press Enter to disable search result highlighting.
+
+    :help - Open the vi help documentation.
+    Example: Type :help and press Enter to access vi's help pages.
+
+-----------------------------------------------------------------------
+Practical Includes :
+1. Creation of User
+-----------------------------------------------------------------------
+Refer: "User Creation"
+
+-----------------------------------------------------------------------
+2. Establishing SSH Connection to the Server
+-----------------------------------------------------------------------
+	Refer my recording
+-----------------------------------------------------------------------
+3. File creation and Manipulation using VI editor.
+-----------------------------------------------------------------------
+	Refer my recording 
+-----------------------------------------------------------------------
+4. Managing permissions
+-----------------------------------------------------------------------
+	Refer my recording 
+
+-----------------------------------------------------------------------
+5. Basic commands execution
+-----------------------------------------------------------------------
+	Refer my recording 
+-----------------------------------------------------------------------
+6. Writing Shell Scripts Programs
+-----------------------------------------------------------------------
+
+A shell script is a collection of commands written in a scripting language that the shell (command-line interpreter) can execute. In Linux and Unix-like operating systems, the shell (usually Bash) is a command-line interface that allows users to interact with the operating system.
+
+A shell script allows users to automate repetitive tasks, execute a sequence of commands, and perform complex operations by writing a series of commands in a text file. Shell scripts are lightweight, easy to create, and are often used for various administrative tasks, system maintenance, data processing, and automation.
+
+Overview of Writing a Shell Script:
+
+    Choose a Shell: Most Linux systems use the Bash shell as the default. However, other shells like Zsh, Ksh, and Dash are also available. Decide which shell you want to use based on your requirements.
+
+    Create a New File: Use a text editor (e.g., nano, vi, or vscode) to create a new file for your shell script. Give it a .sh extension to indicate that it's a shell script.
+
+    Specify the Shell: Start the script with a "shebang" line to specify the shell to be used. For Bash scripts, the shebang is typically #!/bin/bash. For other shells, adjust accordingly.
+
+    Write Your Script: Add the desired commands to your script, one per line. You can include variable assignments, loops, conditional statements, function definitions, and command-line arguments.
+
+    Save the Script: Save the script file in an appropriate location. Make sure the file is executable to run it.
+
+    Make the Script Executable: Use the chmod command to make the script executable by the user. For example: chmod +x your_script.sh
+
+    Execute the Script: Run the script by typing its filename preceded by ./ in the terminal. For example: ./your_script.sh
+
+Example Shell Script:
+
+Here's a simple example of a shell script that prompts the user for their name and greets them:
+
+bash
+
+#!/bin/bash
+
+# Prompt the user for their name
+echo "Hello! What's your name?"
+read name
+
+# Greet the user with a personalized message
+echo "Hello, $name! Welcome to the world of shell scripting!"
+
+When you run the script, it will prompt you to enter your name and display a personalized greeting message.
+
+Remember that shell scripts are versatile and can perform a wide range of tasks. As you gain experience, you can write more complex scripts to automate various tasks and streamline your workflow. Always remember to test your scripts and ensure they work as expected before using them in a production environment.
+
+
+-----------------------------------------------------------------------
