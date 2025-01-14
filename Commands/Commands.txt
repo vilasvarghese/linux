@@ -108,6 +108,25 @@
 • File Permission Management
 -----------------------------------------------------------------------
 
+d 					rwx					rwx					rwx
+directory/file		owner permisison	group permission	otheruser permission 
+					011
+					3
+					
+					
+					
+					bytes		8 bits 
+					
+					00000010
+					1	- 00000001
+					2	- 00000010
+					3	- 00000011
+					4	- 00000100
+					5	- 00000101
+					6	- 00000110
+					7	- 00000111
+
+
 In Linux, file permissions are an essential aspect of the operating system's security model. They control access to files and directories, determining who can read, write, and execute them. Linux uses a combination of permission bits and ownership to manage file access. Understanding and managing file permissions are crucial for maintaining system security and ensuring data integrity.
 
 Linux File Permission Types:
@@ -210,8 +229,7 @@ File permission management in Linux is essential for controlling access to files
 Use the useradd command followed by the desired username to create the new user. For example, to create a user named "john":
 
 
-
-sudo useradd john
+	sudo useradd john
 
 This command will create a new user account with default settings, including the user's home directory (usually located in /home/username).
 
@@ -219,7 +237,7 @@ Set a password for the new user using the passwd command:
 
 
 
-sudo passwd john
+	sudo passwd john
 
 You'll be prompted to enter and confirm the password for the new user.
 
@@ -227,13 +245,13 @@ Optionally, you can provide additional user information, such as the user's full
 
 
 
-sudo useradd -c "John Doe" john
+	sudo useradd -c "John Doe" john
 
 By default, a new user will be a member of their own group with the same name as the username. If you want to add the user to an existing group, use the -G flag:
 
 
 
-sudo useradd -G groupname john
+	sudo useradd -G groupname john
 
 Replace groupname with the name of the existing group.
 
@@ -241,7 +259,7 @@ If you want to create a user with a specific home directory, you can use the -d 
 
 
 
-sudo useradd -d /path/to/custom/home john
+	sudo useradd -d /path/to/custom/home john
 
 Replace /path/to/custom/home with the desired directory path.
 
