@@ -2,6 +2,24 @@ Day – 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 LINUX BASICS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. What is Linux?
+
+Linux is an open-source, Unix-like operating system kernel initially developed by Linus Torvalds in 1991. Unlike proprietary operating systems such as Windows and macOS, Linux is free to use, modify, and distribute. While "Linux" strictly refers to the kernel—the core program that manages hardware resources and system operations—the term is commonly used to describe an entire operating system that combines the Linux kernel with various software tools and utilities.
+
+Key Characteristics:
+
+Open Source: Linux’s source code is freely available, allowing anyone to study, modify, and distribute it.
+
+Portability: Linux runs on a wide range of hardware platforms, from personal computers to mainframes and IoT devices.
+
+Security: Its robust design and active community make Linux one of the most secure operating systems.
+
+Multi-user and Multi-tasking: Linux supports multiple users and processes simultaneously.
+
+
+
+
 	• Concept of an Operating System
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		Most important software that runs on a computer. 
@@ -71,6 +89,45 @@ LINUX BASICS
 		Memory management and virtual memory multitasking
 		Error detection and handling
 		Information and Resource Protection
+		
+		
+		
+		
+	Popular Linux Distributions
+	---------------------------
+		A Linux distribution (or distro) combines the Linux kernel with various software packages to create a complete operating system. Different distributions cater to different use cases, from general-purpose computing to specialized tasks like server management or penetration testing.
+
+		4.1. General-Purpose Distributions:
+
+			Ubuntu: 
+				User-friendly and beginner-friendly, widely used for desktops and servers.
+			Fedora: 
+				A cutting-edge distro focused on innovation and open-source principles.
+			Debian: 
+				Known for its stability and extensive software repository.
+			Linux Mint: 
+				A popular choice for desktop users due to its ease of use and elegant interface.
+
+		4.2. Server and Enterprise Distributions:
+
+			Red Hat Enterprise Linux (RHEL): 
+				Widely used in enterprise environments, with commercial support.
+			CentOS: 
+				A free, community-supported version of RHEL.
+			SUSE Linux Enterprise Server (SLES): 
+				Focused on enterprise-grade stability and support.
+
+		4.3. Specialized Distributions:
+
+			Kali Linux: 
+				Designed for penetration testing and security auditing.
+			Arch Linux: 
+				A minimalist distro for advanced users who prefer manual configuration.
+			Raspberry Pi OS: 
+				Optimized for Raspberry Pi devices.
+
+	
+		
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Linux architecture
 	https://tecadmin.net/tutorial/linux/linux-architecture/
@@ -106,7 +163,7 @@ LINUX BASICS
 				All application like 
 					web browser, 
 					media player, 
-					text editor etc.
+					text  or etc.
 			User
 				We users
 
@@ -633,6 +690,16 @@ Following are the prerequisites
 	• Basic commands: pwd, date, clear, ls, cal, who
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		ls folder
+		pwd 
+		
+		ls: Lists files and directories in the current directory.
+		ls -l: Lists files with detailed information (permissions, owner, size, etc.).
+		ls -a: Lists all files and directories, including hidden files (starting with a dot).
+		ls -lh: Lists files with human-readable sizes (e.g., 1.5M instead of 1536000).
+
+		who -H - Show header in 'who' command output
+    
+	
 		
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Wild card characters: *,?,[],^,-
@@ -643,6 +710,8 @@ Following are the prerequisites
 		mkdir command 
 			Used for creating new directories/folder on Unix/Linux systems.
 			Refer mkdir folder
+			mkdir new_directory: Creates a new directory named "new_directory".
+			mkdir -p dir1/dir2/dir3: Creates directories recursively.
 			
 		
 		cd
@@ -661,25 +730,39 @@ Following are the prerequisites
 				"..": Parent directory	
 				"~"	:	home directory
 				"–"	: 	previos directory
-						
+				
+				
+				cd ..: Moves to the parent directory.
+				cd /: Moves to the root directory.
+				cd /home/user: Moves to the home directory of user.
+				cd Documents: Moves to the "Documents" directory in the current directory.
+
+		rmdir
+			rmdir empty_dir: Removes an empty directory named "empty_dir".
+			rmdir -p dir1/dir2/dir3: Removes directories recursively if they are empty.
+			
+		$HOME 
+			~
+			
+			
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Using absolute and relative path method for changing directories
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-LINUX VI EDITOR
+LINUX VI  OR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Working modes in vi editor
+	• Working modes in vi  or
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Creating, editing text files
+	• Creating,  ing text files
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Save and quit commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Text edit mode commands
+	• Text   mode commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Cursor movement commands
@@ -691,10 +774,10 @@ LINUX VI EDITOR
 	• Replacing text commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Copy/Cut & Paste commands
+	•  /Cut & Paste commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Other miscellaneous commands in vi editor
+	• Other miscellaneous commands in vi  or
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -712,29 +795,43 @@ MANAGING FILES & DIRECTORIES
 		touch existingfile.txt
 		ls -ltr
 		
+		
+		
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Displaying contents of file: cat
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		Linux cat command is used to 
 			display file content
 			create new files 
-			copy file contents to other files.
+			  file contents to other files.
 			
 			
-			Refer cat directory
-			
+			Refer cat directory (more detailed)
+				cat file1.txt: Displays the contents of "file1.txt" on the screen.
+				cat file1.txt file2.txt > output.txt: Concatenates the contents of "file1.txt" and "file2.txt" and redirects the output to "output.txt".
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Copying files and directories: cp
+	•  ing files and directories: cp
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		cp file1.txt new_file1.txt: Copies "file1.txt" to "new_file1.txt".
+		cp -r dir1 dir2: Recursively copies the directory "dir1" to "dir2".
+		cp -R equivalent to cp -r 
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Removing files: rm
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		rm file1.txt: Deletes the file "file1.txt".
+		rm -r dir1: Recursively deletes the directory "dir1" and all its contents.
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Renaming Files and directories: mv
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		mv file1.txt new_location/: Moves "file1.txt" to the "new_location" directory.
+		mv file1.txt new_filename.txt: Renames "file1.txt" to "new_filename.txt".
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• File locating command: find
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	find (Search for Files and Directories)
+		find . -name "filename.txt": Searches for the file named "filename.txt" in the current directory and its subdirectories.
+		find . -type f: Finds all files (not directories) in the current directory and its subdirectories.
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Sorting file contents: sort
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -755,6 +852,249 @@ MANAGING FILES & DIRECTORIES
 			cut -d":" -f1-4,6 /etc/passwd
 			cut -d":" -f1-3,5-7 /etc/passwd
 			
+			
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	• Other commands 
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+	less (View File Content Page by Page)
+		less file1.txt: 
+			Displays the contents of "file1.txt" one screen at a time, allowing you to scroll through the file.
+	
+	head (Display the Beginning of a File)
+		head -n 10 file1.txt: Displays the first 10 lines of "file1.txt".
+	
+	tail (Display the End of a File)
+		tail -n 10 file1.txt: Displays the last 10 lines of "file1.txt".
+		tail -f logfile.txt: Continuously displays the latest lines added to "logfile.txt".
+	
+	
+	man (Display the Manual Page for a Command)
+		man ls: Displays the manual page for the "ls" command.
+
+
+	kill (Terminate Processes)
+
+		kill <process_id>: Sends a signal to the process with the specified ID to terminate it.
+		kill -9 <process_id>: Sends a stronger signal (SIGKILL) to the process to force its termination.
+	top (Monitor System Processes and Resources)
+
+		top: Displays a dynamic view of the currently running processes, CPU usage, memory utilization, and other system information.
+
+
+	tar (Archive Files)
+
+		tar -cvzf archive.tar.gz file1.txt file2.txt: Creates a compressed tar archive named "archive.tar.gz" containing "file1.txt" and "file2.txt".
+		tar -xvf archive.tar 
+		tar -xvfz archive.tar.gz: Extracts the contents of "archive.tar.gz".
+		
+
+	df
+		* Purpose: Displays disk space usage.
+		* Example: df -h (displays disk space usage in human-readable format)
+		Details:
+			This command displays the available and used disk space on all mounted filesystems in a human-readable format (e.g., GB, MB).
+		How it works:
+			It retrieves filesystem information and formats it for display.
+		Options:
+			-T: Include the filesystem type.
+		 
+		df -hT
+			df -hT - Display disk space usage with filesystem type
+		df -i
+			-i: Show inode usage instead of disk space.
+	 
+	
+
+	du
+		* Purpose: Estimates file and directory space usage.
+		* Example: du -sh (displays disk usage in human-readable format for the current directory and its subdirectories)
+		du - Estimate File and Directory Space Usage
+		Command Example:
+		 
+		 
+		 
+		du -h
+		Details:
+			This command estimates the disk space usage of files and directories, showing sizes in human-readable format.
+			How it works:
+			It traverses the directory structure and calculates the size of each file and directory.
+			Options:
+			-d 1: Display the size of directories one level deep.
+			du -h -d 1
+				Display the size of the directories in the current directory
+			-s: Show only the total size.
+			
+			 
+			du -sh
+
+
+	free
+		* Purpose: Displays system memory usage (total, used, free, etc.).
+
+	ifconfig
+		* Purpose: (Older command) Configure and display network interface information.
+		* Note: ip command is generally preferred in newer systems.
+
+
+	netstat
+		* Purpose: Display network statistics and connections.
+		* Example: netstat -an (displays all network connections)
+
+	scp
+		* Purpose: Securely   files between local and remote systems.
+		* Example: scp local_file.txt user@remote_server:/path/to/remote/directory
+		scp - Securely   Files Between Local and Remote Systems
+		Command Example:
+		 
+		 
+		 
+		scp file.txt user@remote_server:/path/to/destination
+		Details:
+		This command copies file.txt from the local system to the specified path on the remote server.
+		How it works:
+		Uses SSH for secure file transfer.
+		Options:
+		-r:   directories recursively.
+		 
+		 
+		 
+		scp -r /local/directory user@remote_server:/remote/destination
+
+
+
+	wget
+		* Purpose: Download files from the internet.
+		* Example: wget http://example.com/file.zip
+
+	curl
+		* Purpose: 
+			Transfer data with URLs (more versatile than wget, can handle various protocols like HTTP, HTTPS, FTP).
+
+	shutdown
+		* Purpose: Shutdown or restart the system.
+		* Example: shutdown -h now (shuts down the system immediately)
+
+	reboot
+		Purpose: Restart the system.
+		reboot -h now - Reboot the system immediately
+    
+	uname
+		* Purpose: Display system information (kernel name, hostname, etc.).
+		uname -a
+			The output 
+				MINGW64_NT-10.0-22631 LAPTOP-BUA2IBR3 3.4.10-87d57229.x86_64 2024-02-14 20:17 UTC x86_64 Msys from the uname -a command provides information about your system:
+
+			MINGW64_NT-10.0-22631: 
+				This indicates that you are using the MinGW-w64 environment
+					a port of the GNU Compiler Collection (GCC) to the Windows operating system.
+
+			MINGW64: 
+				Stands for "Minimalist GNU for Windows 64-bit."
+			NT-10.0-22631: 
+				Refers to the Windows NT version, specifically Windows 10, with build number 22631.
+			LAPTOP-BUA2IBR3: 
+				This is the hostname of your computer.
+
+			3.4.10-87d57229.x86_64: 
+				This is the kernel version.
+
+			3.4.10: 
+				The major, minor, and patch version of the kernel.
+			-87d57229.x86_64: 
+				A specific build or revision number, along with the architecture (x86_64, indicating 64-bit).
+			2024-02-14 20:17 UTC: 
+				This is the date and time the kernel was compiled.
+
+			x86_64: 
+				This indicates the system architecture (64-bit).
+
+			Msys: 
+				This signifies that you are using the MSYS2 environment, which provides a more comprehensive set of tools and libraries for developing with MinGW-w64 on Windows.
+
+	who
+		* Purpose: Display currently logged-in users.
+	whoami
+
+	history
+		* Purpose: Display a list of previously executed commands.
+
+	alias
+		* Purpose: Create shortcuts for frequently used commands.
+		* Example: alias ll='ls -l' (creates an alias "ll" for the command "ls -l")
+
+	ps aux
+		* Purpose: 
+			Display detailed information about running processes (user, CPU usage, memory usage, etc.).
+
+	
+	
+	gzip - Compress Files
+	Command Example:
+		gzip filename.txt
+		Details:
+			This command compresses the file filename.txt into a .gz file (filename.txt.gz) to save disk space.
+		How it works:
+			gzip uses a compression algorithm to reduce the file size.
+			The original file is replaced with the compressed .gz version.
+		Options:
+			-v: Verbose mode; displays compression details.
+		gzip -v filename.txt
+			-k: Keep the original file after compression.
+		gzip -k filename.txt
+
+
+	unzip - Extract Files from a ZIP Archive
+	Command Example:
+		unzip archive.zip
+		Details:
+			This command extracts the contents of archive.zip into the current directory.
+		How it works:
+		It reads the ZIP archive and decompresses its contents.
+		Options:
+			-l: List the contents of the ZIP file without extracting.
+		unzip -l archive.zip
+			unzip -l - List the contents of a ZIP archive
+		unzip -d 
+			-d: Extract the contents to a specific directory.
+			unzip archive.zip -d /path/to/destination
+
+
+Add the below commands also 
+	echo - Display a message or value
+    sort - Sort lines of text files
+    
+	which - Show the full path of a command
+    whois - Look up domain registration information
+    nc - Network utility for reading/writing data across networks
+    ssh-keygen - Generate SSH key pairs
+    
+    ln -s - Create symbolic links to files or directories
+    time - Measure the execution time of a command
+    
+	ps -aux | grep "process" - Search for a specific process
+    du -s - Display only the total size of a directory
+    
+	history -c - Clear command history
+    sudo !! - Re-run the last command with sudo
+    
+	locate - Find files by name
+    ps -eLf - Display threads for all processes
+    
+    du -h -d 1 - 
+    
+	zip -r - Create a ZIP archive recursively
+    zip -d - Remove files from a ZIP archive
+    ps -e -o pcpu,cpu,nice,state,cputime,args --sort pcpu | head -n 10 - Display top CPU-consuming processes
+		not working. make it work - imp command 
+	lsof -i - Display information about open internet connections
+    killall - Signal processes by name
+    top -u username - Monitor resource usage for a specific user
+    
+	
+
+ 
+ 
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Lab session
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -772,31 +1112,32 @@ MANAGING FILES & DIRECTORIES (cont’d)
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Pattern locating command: grep, fgrep, egrep
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
 	grep: “Global Regular Expression Print“. 
 	Used for searching content from files based on a pattern or regular expression.
 
 			Synatx:
 			grep "PATTERN" [FILE]
 			
-		1. Search all users under /etc/passwd have the bash shell.
-			grep "bash" /etc/passwd
+		1. Search all users under /etc/passwd have the   shell.
+			grep " " /etc/passwd
 
 		2. Grep command can take the output of another command as input using pipes. 
 		
-			cat /etc/passwd | grep "bash"
+			cat /etc/passwd | grep " "
 			
 			
 		3. Case Sensitive Search
 			Grep uses -i option to run NOT case-sensitive search.
 			grep -i "SearchPattern" filename
-			grep -i "BASH" /etc/passwd
+			grep -i " " /etc/passwd
 
 		4. Search Recursively 
 			Using the -r switch grep to search for pattern recursively for all files under the specified directory and their subdirectories.
 
 			grep -r "SearchPattern" <directory>
-			grep -r "bash" /etc
-			sudo grep -r "bash" /etc
+			grep -r " " /etc
+			sudo grep -r " " /etc
 			
 		5. Print Matching Filename Only
 			The default grep prints the matching content on the output with the respective file names. You can hide the content and display only filename in grep output.
@@ -822,6 +1163,14 @@ MANAGING FILES & DIRECTORIES (cont’d)
 			Tagsgrep, grep command, linux command
 			Doc navigation← Linux - teeLinux - wc →
 
+	
+		
+			grep -v "pattern" - Inverse search; display lines that do not match the pattern
+			
+			grep -C 2 "pattern" - Display lines before and after the matched pattern
+			
+			grep -rli "pattern" . - Search for a pattern in files and display matching filenames only
+		
 	
 	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -940,7 +1289,7 @@ FILE ACCESS PERMISSIONS
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Modifying the Permissions
 		From command line, 
-			the permissions are edited by using the command chmod. 
+			the permissions are  ed by using the command chmod. 
 			You can assign the permissions explicitly or by using a binary reference as described below.
 
 		Explicitly Defining Permissions
@@ -1033,6 +1382,9 @@ FILE ACCESS PERMISSIONS
 			Not set displayed in the special permission part of the permissions display
 			Represented as t in the executable portion of the all users permissions
 		
+		chmod +x filename - Make a file executable
+    
+		
 		Setuid/Setgid Special Permissions
 		---------------------------------
 		setuid/setguid permissions 
@@ -1067,13 +1419,18 @@ FILE ACCESS PERMISSIONS
 
 		home directories– The users’ home directories are important because you do not want other users to be able to view and modify the files in another user’s documents of desktop. To remedy this you will want the directory to have the drwx______ (700) permissions, so lets say we want to enforce the correct permissions on the user user1’s home directory that can be done by issuing the command chmod 700 /home/user1.
 		bootloader configuration files– If you decide to implement password to boot specific operating systems then you will want to remove read and write permissions from the configuration file from all users but root. To do you can change the permissions of the file to 700.
-		system and daemon configuration files– It is very important to restrict rights to system and daemon configuration files to restrict users from editing the contents, it may not be advisable to restrict read permissions, but restricting write permissions is a must. In these cases it may be best to modify the rights to 644.
+		system and daemon configuration files– It is very important to restrict rights to system and daemon configuration files to restrict users from  ing the contents, it may not be advisable to restrict read permissions, but restricting write permissions is a must. In these cases it may be best to modify the rights to 644.
 		firewall scripts – It may not always be necessary to block all users from reading the firewall file, but it is advisable to restrict the users from writing to the file. In this case the firewall script is run by the root user automatically on boot, so all other users need no rights, so you can assign the 700 permissions.
 
 
 	Other commands chgrp and chattr
 	https://tecadmin.net/tutorial/linux/linux-file-permissions/
+		chgrp - Change group ownership of a file or directory
+    
+
+
 	
+
 
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Default file access permission: umask
@@ -1176,6 +1533,30 @@ FILE ARCHIVE AND COMPRESSION
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• tape archive - tar
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	tar -xvf - Extract Files from a Tarball
+	Command Example:
+	 
+	 
+	 
+	tar -xvf archive.tar
+	Details:
+	This command extracts the contents of the tar archive archive.tar.
+	How it works:
+	Reads the tar file and unpacks its contents into the current directory.
+	Options:
+	-C <directory>: Extract files to a specific directory.
+	 
+	 
+	 
+	tar -xvf archive.tar -C /path/to/destination
+	
+	tar -cvf - Create a tarball (archive) of files
+    tar -tvf - List the contents of a tarball
+    tar -xvf - Extract files from a tarball
+    
+	tar -czvf - Create a compressed tarball (gzip)
+    tar -xzvf - Extract files from a compressed tarball (gzip)
+    
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• File compression using gzip
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1241,13 +1622,13 @@ AWK
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SHELL Scripting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Bash Shell Scripting
+  Shell Scripting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Environment Variables – env
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Types of shells: sh, ksh, bash, csh, tcsh
+	• Types of shells: sh, ksh,  , csh, tcsh
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• System defined shell variables: $HOME, $USER, $LOGNAME, $PATH, etc.,
@@ -1262,7 +1643,7 @@ Bash Shell Scripting
 	• Built-In Versus Linux Commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• The Bash Hash Table
+	• The   Hash Table
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• The Set and Shopt Commands
@@ -1449,4 +1830,24 @@ Other Utility Commands
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		o continue and break 
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
+	ping - Test Network Connectivity
+		Command Example:
+		 
+		 
+		 
+		ping google.com
+		Details:
+		This command sends ICMP echo requests to google.com to test connectivity and measure response time.
+		How it works:
+		Displays the time taken for each packet to travel to the destination and back.
+		Options:
+		-c <count>: Limit the number of packets sent.
+		 
+		 
+		 
+		ping -c 5 google.com
+		-i <interval>: Set the interval between packets.
+		 
+		 
+		 
+		ping -i 2 google.com
