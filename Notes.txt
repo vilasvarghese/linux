@@ -1084,9 +1084,10 @@ Add the below commands also
     du -h -d 1 - 
     
 	zip -r - Create a ZIP archive recursively
-    zip -d - Remove files from a ZIP archive
-    ps -e -o pcpu,cpu,nice,state,cputime,args --sort pcpu | head -n 10 - Display top CPU-consuming processes
-		not working. make it work - imp command 
+    zip -d - 
+		Remove files from a ZIP archive
+    ps -e | awk '{print $1}'  | sort pcpu 
+		filter command output using awk 
 	lsof -i - Display information about open internet connections
     killall - Signal processes by name
     top -u username - Monitor resource usage for a specific user
