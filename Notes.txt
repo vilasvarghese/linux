@@ -674,17 +674,149 @@ Following are the prerequisites
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Linux Boot Process – various stages during booting
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Linux boot process involves a series of stages to bring the system up and running. Here's a breakdown of the key steps:   
+
+1. Power-On Self-Test (POST)
+
+	Initiated by BIOS/UEFI: When the computer is powered on, the BIOS (Basic Input/Output System) or UEFI (Unified Extensible Firmware Interface) takes control.   
+	Hardware Checks: POST performs a series of tests on the system's hardware components (CPU, RAM, hard drive, etc.) to ensure they are functioning correctly.   
+	Boot Device Selection: Based on the boot order in the BIOS/UEFI settings, it determines the boot device (usually the hard drive).
+2. Boot Loader
+
+	Loading the Boot Loader: The BIOS/UEFI loads the boot loader from the boot device (typically located in the Master Boot Record (MBR) or the GUID Partition Table (GPT)). Common boot loaders include GRUB (Grand Unified Bootloader) and LILO (Linux Loader).   
+	Boot Loader Functions:
+	Kernel Loading: The boot loader locates the Linux kernel image on the hard drive and loads it into memory.   
+	Kernel Parameters: It may allow the user to pass kernel parameters (e.g., boot options, kernel debugging flags) during the boot process.   
+	Kernel Transfer: The boot loader transfers control to the loaded Linux kernel.
+3. Kernel Initialization
+
+	Kernel Startup: The Linux kernel begins its initialization process.   
+	Hardware Initialization: The kernel initializes hardware devices (e.g., CPU, memory, disk drives, network interfaces) and loads necessary drivers.   
+	Filesystem Initialization: The kernel mounts the root filesystem, which contains the core system files and user data.   
+4. Init Process
+
+	init Process: The kernel starts the init process, which is the first process to run in the Linux system.
+	Runlevel Management: init is responsible for setting the system's runlevel, which determines the services and processes that are started.
+	Runlevels: Different runlevels define different system states (e.g., single-user mode, multi-user mode, graphical mode).   
+5. System Startup
+
+	Service Startup: init or its successor (like systemd) starts system services (daemons) such as network services (SSH, DHCP), file systems, and graphical display managers.
+	User Login: Once the system is ready, users can log in to their accounts.
+6. User Interface
+
+	Graphical User Interface (GUI): If a graphical desktop environment is installed, the display manager starts and presents the user with a login screen.
+	Command-Line Interface (CLI): In text-based environments, users can log in directly to a command-line prompt.   
+
+Key Points:
+
+	The boot process involves a complex interplay between hardware and software components.   
+	The specific steps and their order may vary slightly depending on the Linux distribution and system configuration.
+	The boot loader plays a crucial role in the booting process, selecting the kernel and providing initial parameters.
+
+
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Various run-levels using init command
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The init command and its associated runlevels are a core concept in older Linux distributions. However, with the rise of systemd, the traditional runlevels have become less prominent.
+
+Here's a breakdown of the common runlevels associated with the init command:
+
+Runlevel 0: Halt - Shuts down the system completely.
+Runlevel 1: Single-user Mode - A maintenance mode with limited functionality. Networking is typically disabled, and only the root user can log in.
+Runlevel 2: Multi-user Mode - Similar to Runlevel 3, but with networking disabled.
+Runlevel 3: Multi-user Mode with Networking - The standard runlevel for most systems. Allows multiple users to log in and provides full network connectivity.
+Runlevel 4: User-definable - Can be customized for specific system needs.
+Runlevel 5: Graphical Mode - Starts the X Window System for a graphical user interface.
+Runlevel 6: Reboot - Restarts the system.
+Important Notes:
+
+Systemd: In modern Linux distributions, systemd has largely replaced init as the process manager.
+Target States: systemd uses "target states" instead of traditional runlevels. These target states (e.g., multi-user.target, graphical.target) provide a more flexible and descriptive way to define system states.
+Runlevel 3 is often the default runlevel in older systems.
+While the concept of runlevels is still relevant, it's important to understand that the implementation and usage may vary significantly between different Linux distributions.
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	• Starting the system in Single User mode
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+GRUB and systemd-boot: These are common boot loaders used in Linux systems.
+Edit Boot Options: You need to access the boot options during the startup process.
+Append "single": Adding the word "single" to the kernel command line instructs the system to boot into single-user mode.
+Save and Boot: After modifying the boot options, you need to save the changes and proceed with the boot process.
+Note:
+
+The exact steps and key combinations might vary slightly depending on the specific bootloader and Linux distribution.
+Booting into single-user mode provides access to the system with root privileges for maintenance and troubleshooting.
+It's crucial to proceed with caution in single-user mode as changes made in this mode can have significant system-wide effects.
+I hope this helps! Let me know if you have any other questions.
+1. During Boot Process:
+
+GRUB (Grand Unified Boot Loader):
+
+If you're using GRUB, at the GRUB boot prompt, press the "e" key to edit the boot options.
+Locate the line starting with "linux" or "linuxefi".
+Append the word "single" to the end of that line.
+Press Ctrl+x to save the changes and boot into single-user mode.
+systemd-boot:
+
+If you're using systemd-boot, press the "e" key at the systemd-boot prompt.
+Locate the line starting with "linux" or "linuxefi".
+Append "single" to the end of that line.
+Press Ctrl+x to save the changes and boot into single-user mode.
+2. After Boot (if you have access to a console):
+
+If you can already access a running system, you can often reboot into single-user mode by pressing a specific key during the boot process (usually Ctrl+Alt+Del or Ctrl+Alt+F1). The exact key combination varies depending on the system and its configuration.
+Key Points:
+
+Single-user mode provides a way to access and repair the system without the usual graphical interface or network services.
+It's often used for system administration tasks, troubleshooting, and recovering from system failures.
+Be cautious when working in single-user mode, as you have direct access to the system and can potentially cause damage if not done carefully.
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	• Accessing help using man, info, what is and -- help.
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. man (Manual Pages)
+
+Purpose: Provides comprehensive, detailed information about commands, system calls, libraries, and other system components.
+Usage: man <command_name>
+Example: man ls (displays the manual page for the ls command)
+Key Features:
+Detailed descriptions of command usage, options, and examples.
+Often includes a SYNOPSIS section summarizing the command's syntax.
+Can be lengthy and may require navigation within the manual page.
+2. info
+
+Purpose: An alternative to man for accessing online documentation.
+Usage: info <command_name>
+Example: info ls
+Key Features:
+Uses a hypertext-like format for easier navigation.
+Often provides more extensive documentation than man for some commands.
+May require the installation of the info package.
+3. whatis
+
+Purpose: Provides a short, one-line description of a command or function.
+Usage: whatis <command_name>
+Example: whatis ls (displays a brief description of the ls command)
+4. --help (Built-in Help)
+
+Purpose: Many commands have a built-in --help option that provides a concise summary of the command's usage and available options.
+Usage: <command_name> --help
+Example: ls --help
+In Summary:
+
+man: The most comprehensive source for detailed information about commands.
+info: An alternative to man with hypertext-like navigation.
+whatis: Provides a quick overview of a command.
+--help: Offers a brief, built-in summary of a command's usage.
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	• Basic commands: pwd, date, clear, ls, cal, who
@@ -699,11 +831,75 @@ Following are the prerequisites
 
 		who -H - Show header in 'who' command output
     
-	
+1. date
+
+date: Displays the current date and time.
+date +%Y-%m-%d: Displays the date in YYYY-MM-DD format.
+date +%H:%M:%S: Displays the time in HH:MM:SS format.
+date "+%Y-%m-%d %H:%M:%S": Displays both date and time in a combined format.
+date -u: Displays the date and time in UTC (Coordinated Universal Time).
+date --set="2024-07-04 10:00:00": Sets the system date and time (requires root privileges).
+2. clear
+
+clear: Clears the terminal screen.
+reset: Clears the screen and resets terminal settings (colors, attributes, etc.).
+3. ls
+
+ls: Lists files and directories in the current directory.
+ls -l: Lists files with detailed information (permissions, owner, size, etc.).
+ls -a: Lists all files and directories, including hidden files (starting with a dot).
+ls -h: Displays file sizes in a human-readable format (e.g., 1K, 2M, 1G).
+ls -R: Recursively lists files and directories in the current directory and all subdirectories.
+ls -t: Sorts files by modification time (newest first).
+4. cal
+
+cal: Displays the calendar for the current month.
+cal <month> <year>: Displays the calendar for a specific month and year (e.g., cal 7 2024).
+cal <year>: Displays the calendar for the entire year.
+5. who
+
+who: Displays a list of currently logged-in users.
+who -u: Displays more detailed information about logged-in users, including login time and terminal	
+
+
 		
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Wild card characters: *,?,[],^,-
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Wildcards are special characters used in file and directory names to represent a set of characters or any number of characters. Here's a breakdown of the common wildcards and their usage:
+
+* (Asterisk)
+
+	Matches any sequence of characters (including zero characters).
+	Examples:
+	ls * : Lists all files and directories in the current directory.
+	rm *.txt : Deletes all files ending with ".txt".
+	? (Question Mark)
+
+Matches any single character.
+Examples:
+	ls f?.txt : Lists files starting with "f", followed by any single character, and ending with ".txt".
+	ls my_file_?.txt : Matches files like "my_file_1.txt", "my_file_a.txt", etc.
+	[] (Square Brackets)
+
+Matches any single character within the brackets.
+Examples:
+	ls f[oa]t.txt : Matches "fat.txt" and "fot.txt".
+	ls f[0-9].txt : Matches files starting with "f", followed by a single digit (0-9), and ending with ".txt".
+	^ (Caret within square brackets)
+
+Matches any character not within the brackets.
+Example: ls f[^a-c].txt : Matches files starting with "f", followed by any character except "a", "b", or "c", and ending with ".txt".
+	- (Hyphen within square brackets)
+
+Specifies a range of characters.
+	Example: ls f[a-z].txt : Matches files starting with "f", followed by any lowercase letter, and ending with ".txt".
+Important Notes:
+
+These wildcards are often used with commands like ls, rm, cp, mv, and find.
+Be cautious when using wildcards, especially with commands like rm, as they can unintentionally delete or modify multiple files.
+The specific behavior of wildcards may vary slightly depending on the shell you are using (e.g., Bash, Zsh).
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Managing directories: mkdir, cd, rmdir, $HOME, ~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -748,6 +944,8 @@ Following are the prerequisites
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Using absolute and relative path method for changing directories
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	cd /home/user - absolute
+	cd user - relative 
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 LINUX VI  OR
@@ -755,30 +953,181 @@ LINUX VI  OR
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Working modes in vi  or
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To open a file with vi, use the following command:
+
+vi filename
+
+	If the file exists, vi will open it for editing.
+	If the file does not exist, vi creates a new file with the specified name.
+
+4. Navigating in vi
+
+Once in Command Mode, use the following keys to navigate:
+
+4.1 Moving the Cursor
+
+	h: Move left
+	l: Move right
+	j: Move down
+	k: Move up
+
+4.2 Word Navigation
+
+	w: Move to the beginning of the next word.
+	e: Move to the end of the current/next word.
+	b: Move to the beginning of the current/previous word.
+
+4.3 Line Navigation
+
+	0: Move to the beginning of the current line.
+	^: Move to the first non-whitespace character on the current line.
+	$: Move to the end of the current line.
+4.4 Scrolling
+
+	Ctrl-d: Scroll down half a screen.
+	Ctrl-u: Scroll up half a screen.
+	Ctrl-f: Scroll forward one full screen.
+	Ctrl-b: Scroll backward one full screen.
+
+5. Switching to Insert Mode
+
+	To start inserting or editing text, switch to Insert Mode by pressing:
+
+	i: Insert text before the current cursor position.
+	I: Insert text at the beginning of the current line.
+	a: Append text after the current cursor position.
+	A: Append text at the end of the current line.
+	o: Open a new line below the current line and insert text.
+	O: Open a new line above the current line and insert text.
+
+To return to Command Mode, press Esc.
+
+6. Saving and Exiting
+
+	In Ex Mode, you can save and exit using the following commands:
+
+	:w: Save the file without exiting.
+	:q: Exit if no changes have been made.
+	:wq or :x: Save and exit.
+	:q!: Quit without saving changes.
+
+7. Deleting Text
+
+	In Command Mode, use the following commands to delete text:
+
+	x: Delete the character under the cursor.
+	X: Delete the character before the cursor.
+	dd: Delete the current line.
+	d$: Delete from the cursor to the end of the line.
+	d0: Delete from the cursor to the beginning of the line.
+
+8. Copying and Pasting Text
+
+	vi uses registers for copying and pasting text:
+	yy: Copy (yank) the current line.
+	yw: Copy from the cursor to the end of the word.
+	y$: Copy from the cursor to the end of the line.
+	p: Paste the copied text after the cursor.
+	P: Paste the copied text before the cursor.
+
+9. Searching and Replacing Text
+
+9.1 Searching
+
+	/pattern: Search for pattern forward.
+	?pattern: Search for pattern backward.
+	n: Repeat the search in the same direction.
+	N: Repeat the search in the opposite direction.
+
+9.2 Replacing
+
+	:s/old/new/: Replace the first occurrence of old with new on the current line.
+	:s/old/new/g: Replace all occurrences of old with new on the current line.
+	:%s/old/new/g: Replace all occurrences of old with new in the entire file.
+	:%s/old/new/gc: Replace all occurrences with confirmation for each change.
+
+10. Undo and Redo
+
+	u: Undo the last change.
+	U: Undo all changes on the current line.
+	Ctrl-r: Redo the undone change.
+
+11. Advanced Features
+
+11.1 Working with Multiple Files
+	:e filename: Open another file in vi.
+	:n: Move to the next file.
+	:prev: Move to the previous file.
+
+11.2 Splitting Windows
+
+	:split filename: Open a file in a new split window.
+	Ctrl-w: Switch between split windows.
+
+11.3 Recording Macros
+	q<register>: Start recording a macro into a register (e.g., qa).
+	Perform the actions you want to record.
+	q: Stop recording.
+	@<register>: Play back the recorded macro.
+
+12. Customizing vi
+
+	You can customize vi through the .vimrc (or .exrc) configuration file. Examples:
+	Enable line numbers:
+	set number
+	Enable syntax highlighting:
+	syntax on
+	Set auto-indentation:
+	set autoindent
+	:set paste 
+		retain the paste formating
+
+13. Tips and Best Practices
+
+	Practice frequently to become familiar with commands.
+	Use :help within vi to access detailed documentation.
+	Create backups of configuration files before editing.
+	Customize your .vimrc for a personalized editing experience.
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	• Creating,  ing text files
+	• Creating text files
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+already covered
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Save and quit commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+already covered	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Text   mode commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+already covered	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Cursor movement commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+already covered	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Text deletion commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+already covered	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Replacing text commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:%s/old_text/new_text/g
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	•  /Cut & Paste commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+already covered		
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Other miscellaneous commands in vi  or
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+already covered		
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MANAGING FILES & DIRECTORIES
@@ -1084,10 +1433,10 @@ Add the below commands also
     du -h -d 1 - 
     
 	zip -r - Create a ZIP archive recursively
-    zip -d - Remove files from a ZIP archive
-    ps -e | awk '{print $1}'| sort 
-	
-	 
+    zip -d - 
+		Remove files from a ZIP archive
+    ps -e | awk '{print $1}'  | sort pcpu 
+		filter command output using awk 
 	lsof -i - Display information about open internet connections
     killall - Signal processes by name
     top -u username - Monitor resource usage for a specific user
@@ -1107,9 +1456,153 @@ MANAGING FILES & DIRECTORIES (cont’d)
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• File comparing commands: cmp, comm, diff, patch
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+1 cmp compares two files byte by byte and reports the first point of difference.
+
+Syntax:
+
+cmp [options] file1 file2
+Example:
+	cmp file1.txt file2.txt
+
+Output:
+
+If the files differ, cmp displays the byte and line number where the first difference occurs.
+
+If the files are identical, there is no output.
+
+Common Option:
+
+-l: Lists all differing bytes.
+
+2. comm
+
+comm compares two sorted files line by line and displays three columns:
+
+Lines unique to the first file.
+
+Lines unique to the second file.
+
+Lines common to both files.
+
+Syntax:
+
+comm [options] file1 file2
+
+Example:
+
+comm file1.txt file2.txt
+
+Common Options:
+
+-1: Suppress lines unique to the first file.
+
+-2: Suppress lines unique to the second file.
+
+-3: Suppress lines common to both files.
+
+3. diff
+
+diff displays the differences between two files line by line. It is more descriptive and widely used for text comparison.
+
+Syntax:
+
+diff [options] file1 file2
+
+Example:
+
+diff file1.txt file2.txt
+
+Output:
+
+Differences are shown with line numbers and markers (< for file1, > for file2).
+
+Common Options:
+
+-u: Unified format, displaying changes in context.
+
+-c: Context format, showing more detailed differences.
+
+4. patch
+
+patch applies changes to a file using a patch file, typically generated by diff.
+
+Syntax:
+
+patch [options] original_file patch_file
+
+Example:
+
+Generate a patch file:
+
+diff -u file1.txt file2.txt > changes.patch
+
+Apply the patch:
+
+patch file1.txt < changes.patch
+
+Output:
+
+The original file is updated with the changes specified in the patch.
+
+Common Options:
+
+-pN: Strips N leading components from file paths in the patch file.
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• File utilities: wc, join
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Purpose: Counts the number of lines, words, and characters in a file.
+
+Syntax: wc [OPTION]... [FILE]...
+
+Common Options:
+
+-l: Counts the number of lines.
+-w: Counts the number of words.
+-c: Counts the number of characters.
+-L: Prints the length of the longest line.
+-m: Counts the number of characters (same as -c).
+--files0-from=FILE: Reads input from the list of files delimited by the null character.
+Examples:
+
+wc myfile.txt: Displays the number of lines, words, and characters in "myfile.txt".
+wc -l myfile.txt: Displays only the number of lines in "myfile.txt".
+wc -w myfile.txt: Displays only the number of words in "myfile.txt".
+wc -c myfile.txt: Displays only the number of characters in "myfile.txt".
+wc -L myfile.txt: Displays the length of the longest line in "myfile.txt".
+join
+
+Purpose: Joins lines from two files based on a common field.
+
+Syntax: join [OPTION]... FILE1 FILE2
+
+Common Options:
+
+-1 FIELD: Specifies the field number to join on in FILE1.
+-2 FIELD: Specifies the field number to join on in FILE2.
+-a FILE: Display unpairable lines from FILE.
+-e FIELD: Replace missing fields with FIELD.
+-o FORMAT: Output fields in the specified format.
+Example:
+
+Let's say you have two files:
+
+file1.txt: Contains a list of IDs and names (e.g., "1 John", "2 Jane", "3 David")
+file2.txt: Contains a list of IDs and ages (e.g., "1 25", "2 30", "3 28")
+To join these files based on the ID:
+
+Bash
+
+join -1 1 -2 1 file1.txt file2.txt
+This command will join the lines in file1.txt and file2.txt based on the first field (ID) in each file, producing an output like:
+
+1 John 25
+2 Jane 30
+3 David 28
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Pattern locating command: grep, fgrep, egrep
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1177,6 +1670,51 @@ MANAGING FILES & DIRECTORIES (cont’d)
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Translate : tr
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Purpose:
+
+It's a command-line utility used to translate or delete characters from standard input (or a file) and write the results to standard output.
+It can be used for various text manipulation tasks, such as:
+Character translation: Replace one set of characters with another.
+Character deletion: Remove specific characters from input.
+Character squeezing: Replace multiple occurrences of a character with a single occurrence.
+Basic Syntax:
+
+Bash
+
+tr [OPTION]... SET1 SET2
+SET1: Specifies the set of characters to be translated or deleted.
+SET2: Specifies the set of characters to be substituted for the characters in SET1. If SET2 is shorter than SET1, the last character in SET2 is repeated.
+Common Options:
+
+-d: Delete characters in SET1.
+-s: Squeeze repeated characters in SET1.
+-c: Complement SET1 (translate or delete characters not in SET1).
+-t: Same as -s (squeeze repeated characters).
+-squeezeset: Squeeze repeated characters in SQUEEZESET.
+Examples:
+
+Translate lowercase letters to uppercase:
+
+Bash
+
+echo "hello world" | tr 'a-z' 'A-Z' 
+Delete all vowels:
+
+Bash
+
+echo "hello world" | tr -d 'aeiouAEIOU'
+Replace all spaces with underscores:
+
+Bash
+
+echo "hello world" | tr ' ' '_'
+Squeeze multiple spaces into a single space:
+
+Bash
+
+echo "hello   world" | tr -s ' ' 
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Lab session
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
