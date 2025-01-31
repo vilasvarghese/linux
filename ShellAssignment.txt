@@ -1,0 +1,7 @@
+Print 
+	even numbers 
+	odd numbers 
+	numbers divisible by 3 
+		but not by 5 
+	prime numbers 
+	number of lines in a file 

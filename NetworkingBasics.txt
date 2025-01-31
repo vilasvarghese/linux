@@ -1155,7 +1155,7 @@ How Ping Works
 					Determines that User B is on its local network.
 					Forwards the frame to User B's computer.
 		Reception and Reassembly:
-
+	
 			User B's computer receives the Ethernet frames.
 			The Ethernet frame is stripped off.
 			The IP header is examined and stripped off.

@@ -1,0 +1,921 @@
+1. Automating Server Provisioning
+Shell scripts can be used to automate the setup of servers, including installing dependencies, configuring users, and setting up services.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Install necessary packages
+apt-get update
+apt-get install -y nginx docker.io
+
+# Create a new user
+useradd -m -s /bin/  devopsuser
+
+# Start and enable services
+systemctl start nginx
+systemctl enable nginx
+systemctl start docker
+systemctl enable docker
+
+
+
+
+
+
+
+Write a shell script to clone a git repo and deploy maven based java application on tomcat.
+1. Download tomcat 
+	unzip 
+		webapps
+		bin 
+		
+2. write shell script
+	input: git repo.
+	clone the repo.
+	get inside 
+	mvn clean package 
+		target folder - war file 
+	copy *.war to webapps of tomcat 
+	$tomcat/bin/catalina.bat start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Deploying Applications
+Shell scripts can automate the deployment of applications by pulling the latest code, building artifacts, and restarting services.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Pull the latest code
+git pull origin main
+
+# Build the application
+mvn clean package
+
+# Deploy the application
+cp target/myapp.jar /opt/myapp/
+systemctl restart myapp-service
+
+
+
+
+
+
+
+
+3. Log Rotation and Cleanup
+Automate log rotation and cleanup to prevent disk space issues.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Compress and move logs older than 7 days
+find /var/log/myapp -name "*.log" -type f -mtime +7 -exec gzip {} \;
+
+# Delete logs older than 30 days
+find /var/log/myapp -name "*.log.gz" -type f -mtime +30 -exec rm -f {} \;
+
+
+
+
+
+
+
+4. Monitoring Disk Usage
+Shell scripts can monitor disk usage and send alerts if usage exceeds a threshold.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+THRESHOLD=90
+USAGE=$(df / | grep / | awk '{ print $5 }' | sed 's/%//g')
+
+if [ $USAGE -gt $THRESHOLD ]; then
+  echo "Disk usage is above $THRESHOLD%!" | mail -s "Disk Alert" admin@example.com
+fi
+
+
+
+
+
+5. Automating Backups
+Automate backups of critical data or databases using shell scripts.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Backup database
+mysqldump -u root -p'password' mydatabase > /backup/mydatabase_$(date +%F).sql
+
+# Compress the backup
+gzip /backup/mydatabase_$(date +%F).sql
+
+# Delete backups older than 30 days
+find /backup -name "*.sql.gz" -type f -mtime +30 -exec rm -f {} \;
+
+
+
+
+
+
+
+
+
+6. Health Checks for Services
+Automate health checks for critical services and restart them if they fail.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+SERVICE="nginx"
+if systemctl is-active --quiet $SERVICE; then
+  echo "$SERVICE is running."
+else
+  echo "$SERVICE is not running. Restarting..."
+  systemctl restart $SERVICE
+fi
+
+
+
+
+
+7. Automating SSL Certificate Renewal
+Use shell scripts to automate SSL certificate renewal with Let's Encrypt.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Renew SSL certificates
+certbot renew --quiet
+
+# Reload Nginx to apply new certificates
+systemctl reload nginx
+
+
+
+
+
+
+
+8. Scaling Infrastructure
+Shell scripts can be used to scale infrastructure up or down based on demand.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Scale up Docker containers
+TARGET_CONTAINERS=5
+CURRENT_CONTAINERS=$(docker ps -q | wc -l)
+
+if [ $CURRENT_CONTAINERS -lt $TARGET_CONTAINERS ]; then
+  docker-compose up -d --scale web=$TARGET_CONTAINERS
+fi
+
+
+
+
+
+9. Automating Configuration Management
+Use shell scripts to manage configuration files across multiple servers.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Sync configuration files to remote servers
+CONFIG_FILE="/etc/myapp/config.conf"
+SERVERS=("server1" "server2" "server3")
+
+for SERVER in "${SERVERS[@]}"; do
+  scp $CONFIG_FILE $SERVER:/etc/myapp/
+done
+
+
+
+
+
+
+10. Automating CI/CD Pipelines
+Shell scripts can be integrated into CI/CD pipelines to automate builds, tests, and deployments.
+
+Example:
+
+ 
+ 
+#!/bin/ 
+# Build and test the application
+mvn clean package
+
+# Run unit tests
+mvn test
+
+# Deploy to staging
+if [ "$ENVIRONMENT" == "staging" ]; then
+  scp target/myapp.jar user@staging-server:/opt/myapp/
+  ssh user@staging-server "systemctl restart myapp-service"
+fi
+
+
+-------------------------
+
+1. Automating Server Provisioning
+Shell scripts can be used to automate the setup of servers, including installing dependencies, configuring users, and setting up services.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Install necessary packages
+apt-get update
+apt-get install -y nginx docker.io
+
+# Create a new user
+useradd -m -s /bin/bash devopsuser
+
+# Start and enable services
+systemctl start nginx
+systemctl enable nginx
+systemctl start docker
+systemctl enable docker
+2. Deploying Applications
+Shell scripts can automate the deployment of applications by pulling the latest code, building artifacts, and restarting services.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Pull the latest code
+git pull origin main
+
+# Build the application
+mvn clean package
+
+# Deploy the application
+cp target/myapp.jar /opt/myapp/
+systemctl restart myapp-service
+3. Log Rotation and Cleanup
+Automate log rotation and cleanup to prevent disk space issues.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Compress and move logs older than 7 days
+find /var/log/myapp -name "*.log" -type f -mtime +7 -exec gzip {} \;
+
+# Delete logs older than 30 days
+find /var/log/myapp -name "*.log.gz" -type f -mtime +30 -exec rm -f {} \;
+4. Monitoring Disk Usage
+Shell scripts can monitor disk usage and send alerts if usage exceeds a threshold.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+THRESHOLD=90
+USAGE=$(df / | grep / | awk '{ print $5 }' | sed 's/%//g')
+
+if [ $USAGE -gt $THRESHOLD ]; then
+  echo "Disk usage is above $THRESHOLD%!" | mail -s "Disk Alert" admin@example.com
+fi
+5. Automating Backups
+Automate backups of critical data or databases using shell scripts.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Backup database
+mysqldump -u root -p'password' mydatabase > /backup/mydatabase_$(date +%F).sql
+
+# Compress the backup
+gzip /backup/mydatabase_$(date +%F).sql
+
+# Delete backups older than 30 days
+find /backup -name "*.sql.gz" -type f -mtime +30 -exec rm -f {} \;
+6. Health Checks for Services
+Automate health checks for critical services and restart them if they fail.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+SERVICE="nginx"
+if systemctl is-active --quiet $SERVICE; then
+  echo "$SERVICE is running."
+else
+  echo "$SERVICE is not running. Restarting..."
+  systemctl restart $SERVICE
+fi
+7. Automating SSL Certificate Renewal
+Use shell scripts to automate SSL certificate renewal with Let's Encrypt.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Renew SSL certificates
+certbot renew --quiet
+
+# Reload Nginx to apply new certificates
+systemctl reload nginx
+8. Scaling Infrastructure
+Shell scripts can be used to scale infrastructure up or down based on demand.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Scale up Docker containers
+TARGET_CONTAINERS=5
+CURRENT_CONTAINERS=$(docker ps -q | wc -l)
+
+if [ $CURRENT_CONTAINERS -lt $TARGET_CONTAINERS ]; then
+  docker-compose up -d --scale web=$TARGET_CONTAINERS
+fi
+9. Automating Configuration Management
+Use shell scripts to manage configuration files across multiple servers.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Sync configuration files to remote servers
+CONFIG_FILE="/etc/myapp/config.conf"
+SERVERS=("server1" "server2" "server3")
+
+for SERVER in "${SERVERS[@]}"; do
+  scp $CONFIG_FILE $SERVER:/etc/myapp/
+done
+10. Automating CI/CD Pipelines
+Shell scripts can be integrated into CI/CD pipelines to automate builds, tests, and deployments.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Build and test the application
+mvn clean package
+
+# Run unit tests
+mvn test
+
+# Deploy to staging
+if [ "$ENVIRONMENT" == "staging" ]; then
+  scp target/myapp.jar user@staging-server:/opt/myapp/
+  ssh user@staging-server "systemctl restart myapp-service"
+fi
+Summary
+Shell scripting is a versatile tool in DevOps for automating repetitive tasks, managing infrastructure, and improving efficiency. These examples demonstrate how shell scripts can be used in real-world scenarios to streamline operations and reduce manual effort.
+
+could you please share more advanced use cases?
+Certainly! Here are 10 advanced use cases of shell scripting in DevOps, showcasing more complex and sophisticated scenarios:
+
+1. Dynamic Infrastructure Provisioning with Terraform and Shell
+Use shell scripts to dynamically generate Terraform configuration files and apply them based on input parameters.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+ENVIRONMENT=$1
+COUNT=$2
+
+# Generate Terraform configuration
+cat <<EOF > terraform.tfvars
+environment = "$ENVIRONMENT"
+instance_count = $COUNT
+EOF
+
+# Apply Terraform
+terraform init
+terraform apply -auto-approve
+2. Blue-Green Deployment Automation
+Automate blue-green deployments using shell scripts to minimize downtime.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Deploy new version (green)
+docker-compose -f docker-compose-green.yml up -d
+
+# Wait for green to be healthy
+while ! curl -s http://green-app:8080/health | grep -q "OK"; do
+  sleep 5
+done
+
+# Switch traffic to green
+sed -i 's/blue-app/green-app/' /etc/nginx/nginx.conf
+nginx -s reload
+
+# Shutdown old version (blue)
+docker-compose -f docker-compose-blue.yml down
+3. Automated Canary Deployments
+Implement canary deployments to gradually roll out new versions of an application.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+NEW_VERSION=$1
+TRAFFIC_PERCENT=10
+
+# Deploy canary
+kubectl set image deployment/myapp myapp=myapp:$NEW_VERSION
+kubectl scale deployment/myapp --replicas=$(($(kubectl get deployment/myapp -o jsonpath='{.spec.replicas}') * $TRAFFIC_PERCENT / 100))
+
+# Monitor canary for errors
+if kubectl logs -l app=myapp --tail=100 | grep -q "ERROR"; then
+  echo "Canary deployment failed. Rolling back."
+  kubectl rollout undo deployment/myapp
+else
+  echo "Canary deployment successful. Scaling up."
+  kubectl scale deployment/myapp --replicas=10
+fi
+4. Automated Security Patching
+Automate the process of applying security patches across a fleet of servers.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+SERVERS=("server1" "server2" "server3")
+
+for SERVER in "${SERVERS[@]}"; do
+  ssh $SERVER "sudo apt-get update && sudo apt-get upgrade -y"
+  if [ $? -eq 0 ]; then
+    echo "Security patches applied successfully on $SERVER."
+  else
+    echo "Failed to apply patches on $SERVER."
+  fi
+done
+5. Automated Disaster Recovery
+Create a shell script to automate disaster recovery processes, such as restoring databases and services.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+# Restore database
+scp /backup/mydatabase_latest.sql user@dbserver:/tmp/
+ssh user@dbserver "mysql -u root -p'password' mydatabase < /tmp/mydatabase_latest.sql"
+
+# Restart services
+ssh user@dbserver "systemctl restart mysql"
+ssh user@webserver "systemctl restart nginx"
+6. Dynamic Load Balancer Configuration
+Automatically update load balancer configurations based on server health checks.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+BACKEND_SERVERS=("server1" "server2" "server3")
+CONFIG_FILE="/etc/nginx/backend.conf"
+
+# Generate new backend configuration
+echo "upstream backend {" > $CONFIG_FILE
+for SERVER in "${BACKEND_SERVERS[@]}"; do
+  if curl -s http://$SERVER:8080/health | grep -q "OK"; then
+    echo "  server $SERVER;" >> $CONFIG_FILE
+  fi
+done
+echo "}" >> $CONFIG_FILE
+
+# Reload Nginx
+nginx -s reload
+7. Automated Certificate Management with ACME
+Use shell scripts to automate the issuance and renewal of SSL certificates using ACME protocols.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+DOMAIN="example.com"
+EMAIL="admin@example.com"
+
+# Issue a new certificate
+certbot certonly --standalone -d $DOMAIN --non-interactive --agree-tos -m $EMAIL
+
+# Deploy the certificate
+cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/nginx/ssl/
+cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /etc/nginx/ssl/
+
+# Reload Nginx
+systemctl reload nginx
+8. Automated Log Analysis and Alerting
+Analyze logs in real-time and trigger alerts based on specific patterns.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+LOG_FILE="/var/log/myapp/application.log"
+ALERT_PATTERN="ERROR|CRITICAL"
+
+tail -f $LOG_FILE | while read LINE; do
+  if echo $LINE | grep -qE "$ALERT_PATTERN"; then
+    echo "Alert: $LINE" | mail -s "Application Error Alert" admin@example.com
+  fi
+done
+9. Automated Database Schema Migrations
+Automate database schema migrations during application deployments.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+DB_HOST="dbserver"
+DB_USER="root"
+DB_PASS="password"
+DB_NAME="mydatabase"
+
+# Apply migrations
+for MIGRATION in $(ls /opt/myapp/migrations/*.sql); do
+  mysql -h $DB_HOST -u $DB_USER -p$DB_PASS $DB_NAME < $MIGRATION
+  if [ $? -ne 0 ]; then
+    echo "Migration failed: $MIGRATION"
+    exit 1
+  fi
+done
+10. Automated Multi-Cloud Deployment
+Deploy applications across multiple cloud providers using shell scripts.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+CLOUDS=("aws" "gcp" "azure")
+
+for CLOUD in "${CLOUDS[@]}"; do
+  case $CLOUD in
+    aws)
+      terraform -chdir=./aws init
+      terraform -chdir=./aws apply -auto-approve
+      ;;
+    gcp)
+      terraform -chdir=./gcp init
+      terraform -chdir=./gcp apply -auto-approve
+      ;;
+    azure)
+      terraform -chdir=./azure init
+      terraform -chdir=./azure apply -auto-approve
+      ;;
+  esac
+done
+
+
+
+
+
+
+
+
+
+
+
+
+
+More advanced?
+
+
+1. Automated Java Application Build and Deployment
+Automate the build, testing, and deployment of a Java application using Maven or Gradle.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+PROJECT_DIR="/path/to/java/project"
+DEPLOY_DIR="/opt/myapp"
+
+# Build the project
+cd $PROJECT_DIR
+mvn clean package
+
+# Check if build succeeded
+if [ $? -ne 0 ]; then
+  echo "Build failed!"
+  exit 1
+fi
+
+# Deploy the application
+cp target/myapp.jar $DEPLOY_DIR/
+systemctl restart myapp-service
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Automated Database Backup and Restore
+Automate the backup and restoration of a MySQL or PostgreSQL database for a Java application.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+DB_HOST="localhost"
+DB_USER="root"
+DB_PASS="password"
+DB_NAME="mydatabase"
+BACKUP_DIR="/backup"
+
+# Backup the database
+mysqldump -h $DB_HOST -u $DB_USER -p$DB_PASS $DB_NAME > $BACKUP_DIR/mydatabase_$(date +%F).sql
+
+# Restore the database (if needed)
+# mysql -h $DB_HOST -u $DB_USER -p$DB_PASS $DB_NAME < $BACKUP_DIR/mydatabase_$(date +%F).sql
+
+
+
+
+
+
+
+
+
+
+
+
+3. Automated Log Rotation for Java Applications
+Rotate and compress logs generated by a Java application to save disk space.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+LOG_DIR="/var/log/myapp"
+MAX_DAYS=30
+
+# Compress logs older than 7 days
+find $LOG_DIR -name "*.log" -type f -mtime +7 -exec gzip {} \;
+
+# Delete logs older than 30 days
+find $LOG_DIR -name "*.log.gz" -type f -mtime +$MAX_DAYS -exec rm -f {} \;
+
+
+
+
+
+
+
+
+
+
+
+4. Automated Health Checks for Java Applications
+Monitor the health of a Java application and restart it if it becomes unresponsive.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+APP_URL="http://localhost:8080/health"
+MAX_RETRIES=3
+RETRY_COUNT=0
+
+while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+  RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $APP_URL)
+  if [ "$RESPONSE" == "200" ]; then
+    echo "Application is healthy."
+    exit 0
+  else
+    echo "Application is not responding. Retrying..."
+    RETRY_COUNT=$((RETRY_COUNT + 1))
+    sleep 5
+  fi
+done
+
+# Restart the application if health check fails
+echo "Application is down. Restarting..."
+systemctl restart myapp-service
+
+
+
+
+
+
+
+
+
+5. Automated Dependency Installation for Java Projects
+Automate the installation of dependencies for a Java project using a shell script.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+PROJECT_DIR="/path/to/java/project"
+
+# Install Maven dependencies
+cd $PROJECT_DIR
+mvn dependency:resolve
+
+# Install system dependencies (e.g., MySQL, Redis)
+sudo apt-get update
+sudo apt-get install -y mysql-server redis-server
+
+
+
+
+
+
+
+
+
+6. Automated Configuration Management for Java Applications
+Manage configuration files for a Java application across multiple environments (e.g., dev, staging, prod).
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+ENVIRONMENT=$1
+CONFIG_DIR="/etc/myapp"
+APP_CONFIG="$CONFIG_DIR/application.properties"
+
+# Copy the appropriate configuration file
+cp $CONFIG_DIR/application-$ENVIRONMENT.properties $APP_CONFIG
+
+# Restart the application to apply the new configuration
+systemctl restart myapp-service
+
+
+
+
+
+
+
+
+
+
+
+7. Automated Performance Testing for Java Applications
+Run performance tests for a Java application using a tool like Apache JMeter and analyze the results.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+JMETER_HOME="/opt/jmeter"
+TEST_PLAN="/path/to/test-plan.jmx"
+RESULTS_DIR="/path/to/results"
+
+# Run the JMeter test plan
+$JMETER_HOME/bin/jmeter -n -t $TEST_PLAN -l $RESULTS_DIR/results.jtl
+
+# Analyze the results (e.g., generate a report)
+$JMETER_HOME/bin/jmeter -g $RESULTS_DIR/results.jtl -o $RESULTS_DIR/report
+
+
+
+
+
+
+
+
+
+8. Automated File Processing for Java Applications
+Process and move files from one directory to another for a Java application.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+INPUT_DIR="/path/to/input"
+OUTPUT_DIR="/path/to/output"
+PROCESSED_DIR="/path/to/processed"
+
+# Process files in the input directory
+for FILE in $INPUT_DIR/*.csv; do
+  # Run a Java program to process the file
+  java -jar /path/to/myapp.jar $FILE
+
+  # Move the processed file to the output directory
+  mv $FILE $OUTPUT_DIR/
+
+  # Archive the processed file
+  mv $FILE $PROCESSED_DIR/
+done
+
+
+
+
+
+
+
+
+
+9. Automated Email Notifications for Java Application Events
+Send email notifications for specific events in a Java application (e.g., errors, warnings).
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+LOG_FILE="/var/log/myapp/application.log"
+ALERT_PATTERN="ERROR|WARN"
+RECIPIENT="admin@example.com"
+
+# Monitor the log file for errors or warnings
+tail -f $LOG_FILE | while read LINE; do
+  if echo $LINE | grep -qE "$ALERT_PATTERN"; then
+    echo "Alert: $LINE" | mail -s "Application Alert" $RECIPIENT
+  fi
+done
+
+
+
+
+
+
+10. Automated Version Management for Java Applications
+Manage multiple versions of a Java application and switch between them dynamically.
+
+Example:
+
+bash
+Copy
+#!/bin/bash
+VERSION=$1
+APP_HOME="/opt/myapp"
+VERSIONS_DIR="$APP_HOME/versions"
+
+# Check if the requested version exists
+if [ ! -d "$VERSIONS_DIR/$VERSION" ]; then
+  echo "Version $VERSION does not exist."
+  exit 1
+fi
+
+# Switch to the requested version
+ln -sfn $VERSIONS_DIR/$VERSION $APP_HOME/current
+
+# Restart the application
+systemctl restart myapp-service

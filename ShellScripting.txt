@@ -4,20 +4,20 @@ Shell scripting is the process of writing programs called scripts that leverage 
 
 The primary purpose of shell scripting is to streamline repetitive tasks.  Imagine manually copying and renaming dozens of files every day. A shell script can automate this process, saving you time and effort. Here are some key benefits:
 
-- **Automation:** Shell scripts eliminate the need to repeatedly type the same commands, reducing human error and saving valuable time.
-- **Efficiency:** Complex tasks involving multiple commands can be executed with a single script, improving workflow efficiency.
-- **Customization:** Scripts can be tailored to specific needs, making them highly adaptable for various scenarios.
-- **Portability:** In general, shell scripts written for one Unix-like system can run on others with minimal modifications.
-- **Resource Management:** Scripts can automate system administration tasks like managing files, processes, and user accounts.
+- **Automation:** Shell scripts eliminate the need to repeatedly type the same commands, reducing human error and saving valuable time.
+- **Efficiency:** Complex tasks involving multiple commands can be executed with a single script, improving workflow efficiency.
+- **Customization:** Scripts can be tailored to specific needs, making them highly adaptable for various scenarios.
+- **Portability:** In general, shell scripts written for one Unix-like system can run on others with minimal modifications.
+- **Resource Management:** Scripts can automate system administration tasks like managing files, processes, and user accounts.
 
 **Common Shells for Scripting**
 
 Several popular shells provide environments for creating and running scripts. Here are a few:
 
-- **Bash (Bourne Again SHell):** The most widely used shell, offering a rich set of features for scripting, including variables, conditional statements (like if/else), and functions. It's the default shell for many Linux distributions.
-- **sh (Bourne SHell):** The original Unix shell, considered simpler and lighter than Bash. It's often used for scripting on systems requiring a minimalistic approach.
-- **zsh (Z SHell):** An extension of Bash with additional features for customization and a powerful auto-completion function to suggest commands as you type. Popular among power users and developers.
-- **ksh (Korn SHell):** Offers advanced scripting capabilities like working with associative arrays (flexible data structures) and complex mathematical operations. Primarily used in Unix environments.
+- **Bash (Bourne Again SHell):** The most widely used shell, offering a rich set of features for scripting, including variables, conditional statements (like if/else), and functions. It's the default shell for many Linux distributions.
+- **sh (Bourne SHell):** The original Unix shell, considered simpler and lighter than Bash. It's often used for scripting on systems requiring a minimalistic approach.
+- **zsh (Z SHell):** An extension of Bash with additional features for customization and a powerful auto-completion function to suggest commands as you type. Popular among power users and developers.
+- **ksh (Korn SHell):** Offers advanced scripting capabilities like working with associative arrays (flexible data structures) and complex mathematical operations. Primarily used in Unix environments.
 
 **Example: Automating File Backups**
 
@@ -40,8 +40,76 @@ This script demonstrates the basic structure of a shell script with comments exp
 
 By learning shell scripting, you can unlock the power of automation and simplify your workflow on Unix-based systems.
 
+---------------------------------------------------
+
+Execute the script using 
+	./filename.sh
+	sh filename.sh 
+		Difference and impact of permissions 
+		
+		
+Grant permission to file using 
+	chmod 
+	chown 
+	
+
+	ls 
+		my permission - group permission - all user permissions 
+		
+		
+	Write shell script using 
+		touch 
+		mkdir 
+		rm 
+		pwd 
+		top 
+		
+
+#!/bin/sh Vs #!/bin/bash 
+
+###################################
+# Author: Vilas 
+# Date: 01/01/2025
+# This script prints the sum of two numbers 
+###################################
 
 
+
+
+>>nodehealth.sh 
+#!/bin/bash 
+
+###################################
+# Author: Vilas 
+# Date: 01/01/2025
+# This prints the health of the node 
+###################################
+
+set -x # debug mode. before each line execution prints what line is getting executed 
+set -e # exit script when there is an error - otherwise all errros will get printed in the following lines 
+set -o pipefail #set -e ignores errors if there is a pipe in command and the last command gets executed. This would set to check all commands in a line with pipe 
+
+echo "Print disc space "
+df -h 
+echo "Print memory"
+free -g 
+echo "Print cpu" 
+nproc 
+
+<<nodehealth.sh 
+
+
+how to write 
+	if then else fi 
+	iterations using 
+		for 
+		while 
+		until 
+		select?
+	
+
+
+---------------------------------------------------
 
 ### **Shell Scripting: Getting Started**
 
@@ -52,13 +120,13 @@ This guide equips you with the basics of creating and running shell scripts on U
 Before diving in, you'll need a text editor to write your scripts. Here are some popular options, including a beginner-friendly choice:
 
 - **Classic Editors:**
-    - `vi` and `vim`: Powerful but require some learning curve for beginners.
+    - `vi` and `vim`: Powerful but require some learning curve for beginners.
     - `emacs`: Another powerful option with extensive customization possibilities.
 - **Modern Editors:**
-    - **Visual Studio Code:** Free, user-friendly editor with excellent features for scripting.
-    - **Sublime Text:** Popular editor with a clean interface and scripting plugins.
+    - **Visual Studio Code:** Free, user-friendly editor with excellent features for scripting.
+    - **Sublime Text:** Popular editor with a clean interface and scripting plugins.
 - **Beginner-Friendly:**
-    - **nano:** A user-friendly editor pre-installed on most Unix systems, ideal for beginners.
+    - **nano:** A user-friendly editor pre-installed on most Unix systems, ideal for beginners.
 
 **Creating Your First Script:**
 
@@ -207,59 +275,59 @@ Reading data: Use cat to display a file's contents entirely or tools like head a
 Bash
 cat input.txt  # Read the entire content of input.txt
 head input.txt  # Display the first few lines of input.txt
-​
+ 
 Writing data: Use echo or printf to create new files or append content to existing ones.
 Bash
 echo "Hello, World!" > output.txt  # Create output.txt with "Hello, World!"
 echo "This is appended content." >> output.txt  # Append text to output.txt
-​
+ 
 User Input and Output:
 Input: Capture user input using read.
 Bash
 echo "Enter your name:"
 read name
 echo "Hello, $name!"  # Use the captured name in a greeting
-​
+ 
 Output: Provide informative messages for the user with echo or the more versatile printf.
 Bash
 printf "You entered: %s\n" "$name"  # Formatted output with variable insertion
-​
+ 
 Text Manipulation:
 Shell scripting offers tools to transform text data:
 Substrings: Extract specific portions of a string using string slicing syntax "${variable:start:length}".
 Bash
 name="Hello, World!"
 echo "${name:0:5}"  # Extract the first 5 characters (Hello)
-​
+ 
 Note: if you're referring to the position or length of a substring, those indices start from 0
 Replacement: Modify parts of a string with string substitution "${variable/old/new}".
 Bash
 message="This is an ERROR message."
 echo "${message/ERROR/WARNING}"  # Replace "ERROR" with "WARNING"
-​
+ 
 Case conversion: Change the case of text using parameter expansion.
 Bash
 name="HeLlO WoRlD"
 echo $name
 echo "${name,,}"  # Convert to lowercase
 echo "${name^^}"  # Convert to uppercase
-​
+ 
 Performing Calculations:
 Shell scripting provides several ways to perform arithmetic operations on integers:
 let command: Assign the result of an expression to a variable.
 Bash
 let sum=10+20
 echo $sum  # Prints: 30
-​
+ 
 expr command: Evaluate an expression and display the result.
 Bash
 difference=$(expr 50 - 30)
 echo $difference  # Prints: 20
-​
+ 
 Double parentheses: Perform arithmetic directly within an echo statement.
 Bash
 echo $((2 * 5 + 3))  # Prints: 13
-​
+ 
 Working with Arrays:
 Arrays store collections of values in an ordered manner. Bash offers two ways to create arrays:
 declare -a command: Explicitly declare an array and assign values.
@@ -267,7 +335,7 @@ Bash
 declare -a fruits=("apple" "banana" "cherry")
 echo ${fruits[1]}  # Access the second element (banana)
 echo ${fruits[@]}  # Access all the elements
-​
+ 
 Direct assignment: Assign multiple values to an array variable.
 Bash
 colors=("red" "green" "blue")
@@ -300,7 +368,7 @@ elif [ condition2 ]; then
 else
     # Code to execute if both conditions are false (optional)
 fi
-​
+ 
 Example:
 Bash
 #!/bin/bash
@@ -313,7 +381,7 @@ elif [[ $number -eq 15 ]]; then
 else
     echo "The number is less than 15."
 fi
-​
+ 
 Loops (for, while, until):
 Loops enable repeated execution of code blocks. Here's an overview of common loops:
 for loop: Iterates over a sequence of elements.
@@ -323,7 +391,7 @@ fruits=("apple" "banana" "cherry")
 for fruit in "${fruits[@]}"; do
     echo "I like to eat $fruit."
 done
-​
+ 
 while loop: Executes code as long as a condition is true.
 Bash
 #!/bin/bash
@@ -332,7 +400,7 @@ while [[ $count -le 5 ]]; do
     echo "Iteration: $count"
     count=$((count + 1))  # Increment counter
 done
-​
+ 
 until loop: Executes code until a condition becomes true.
 Bash
 #!/bin/bash
@@ -342,7 +410,7 @@ until [[ -f $file ]]; do
     sleep 5  # Wait 5 seconds
 done
 echo "File $file found!"
-​
+ 
 Case Statements:
 Case statements provide another way to handle multiple conditions.
 Bash
@@ -362,7 +430,7 @@ case $dayOfWeek in
     echo "It's a weekday."
     ;;
 esac
-​
+ 
 Remember:
 Use square brackets [] for condition evaluations in if statements.
 Double square brackets [[ ]] offer more flexibility for string comparisons.
@@ -393,7 +461,7 @@ function greet {
 }
 
 greet   # Call the function 
-​
+ 
 Function Parameters and Arguments
 Functions can accept arguments (inputs) passed when you call them.
 Inside the function, access these arguments using positional parameters like $1 (first argument), $2 (second argument), and so on.
@@ -407,7 +475,7 @@ function add {
 
 result=$(add 5 10)  # Call the function and capture the "return" value
 echo $result        # Prints: 15
-​
+ 
 Simulating Return Values:
 While Bash functions don't have built-in return values, you can simulate them by:
 Echoing the desired value within the function.
@@ -428,7 +496,7 @@ function test_var {
 
 test_var
 echo $var  # Prints: global (original value preserved)
-​
+ 
 Key Points:
 Functions promote code reusability, organization, and readability.
 Pass arguments to functions for customization.
@@ -451,48 +519,48 @@ touch: Creates an empty file.
 Bash
 #!/bin/bash
 touch new_file.txt
-​
+ 
 rm: Deletes a file (use with caution!).
 Bash
 #!/bin/bash
 rm important_file.txt  # Be mindful of what you delete!
-​
+ 
 Reading and Writing Files:
 Reading:
 cat: Displays the entire content of a file.
 Bash
 #!/bin/bash
 cat message.txt
-​
+ 
 head: Shows the first few lines of a file.
 Bash
 #!/bin/bash
 head -n 3 data.csv  # Display the first 3 lines
-​
+ 
 tail: Displays the last few lines of a file.
 Bash
 #!/bin/bash
 tail -n 2 log.txt  # Display the last 2 lines
-​
+ 
 Directory Operations:
 Creating directories:
 mkdir: Creates a new directory.
 Bash
 #!/bin/bash
 mkdir new_directory
-​
+ 
 Navigating directories:
 cd: Changes the current working directory.
 Bash
 #!/bin/bash
 cd new_directory
-​
+ 
 Deleting directories:
 rmdir: Deletes an empty directory.
 Bash
 #!/bin/bash
 rmdir new_directory  # Ensure the directory is empty before deletion
-​
+ 
 Remember:
 Be cautious when using rm to avoid accidental data loss.
 Consider using mv (move) to rename or relocate files within the filesystem.
@@ -549,7 +617,7 @@ While Bash doesn't have a native try-catch block, you can achieve similar functi
 
 In this example, if `command1` fails, the code within the `||` block (catch block) executes.
 
-**Using `command` with `set -e` to check if a command inside a command fails**
+**Using `command` with `set -e` to check if a command inside a command fails**
 
 This approach utilizes the `command` builtin with `set -e`:
 
@@ -767,209 +835,209 @@ This script offers a basic introduction to handling arrays and performing arithm
 
 | 6. | Functions and Modularization: A script defining and using a function with parameters. |  |  |
 | --- | --- | --- | --- |
-|  | This script will demonstrate how to define and use a function with parameters in shell scripting. 
+|  | This script will demonstrate how to define and use a function with parameters in shell scripting. 
  |  |  |
-|  | #!/bin/bash 
-# This script demonstrates defining and using functions with parameters 
- 
-# Function to greet a user 
-greet_user() { 
-    local name=$1 
-    echo "Hello, $name!" 
-} 
- 
-# Function to calculate the square of a number 
-calculate_square() { 
-    local number=$1 
-    echo "$((number * number))" 
-} 
- 
-# Calling the greet_user function 
-greet_user "Alice" 
- 
-# Calling the calculate_square function and capturing the result 
-square=$(calculate_square 4) 
+|  | #!/bin/bash 
+# This script demonstrates defining and using functions with parameters 
+ 
+# Function to greet a user 
+greet_user() { 
+    local name=$1 
+    echo "Hello, $name!" 
+} 
+ 
+# Function to calculate the square of a number 
+calculate_square() { 
+    local number=$1 
+    echo "$((number * number))" 
+} 
+ 
+# Calling the greet_user function 
+greet_user "Alice" 
+ 
+# Calling the calculate_square function and capturing the result 
+square=$(calculate_square 4) 
 echo "Square of 4 is: $square" |  |  |
-|  | Explanation: 
-• Function Definition: The script defines two functions: greet_user and calculate_square. 
-• local Keyword: Inside the functions, local keyword is used to declare function-local variables. 
-• Function Parameters: The first parameter passed to the function is accessed via $1. 
-• Calling Functions: The functions are then called with specific arguments. 
-• Capturing Function Output: The output of calculate_square is captured in a variable square. |  |  |
-|  | How to Use: 
-1. Create the Script: Copy the script into a file, say functions_demo.sh. 
-2. Make it Executable: Run chmod +x functions_demo.sh to make it executable. 
-3. Execute the Script: Run it using ./functions_demo.sh. 
+|  | Explanation: 
+• Function Definition: The script defines two functions: greet_user and calculate_square. 
+• local Keyword: Inside the functions, local keyword is used to declare function-local variables. 
+• Function Parameters: The first parameter passed to the function is accessed via $1. 
+• Calling Functions: The functions are then called with specific arguments. 
+• Capturing Function Output: The output of calculate_square is captured in a variable square. |  |  |
+|  | How to Use: 
+1. Create the Script: Copy the script into a file, say functions_demo.sh. 
+2. Make it Executable: Run chmod +x functions_demo.sh to make it executable. 
+3. Execute the Script: Run it using ./functions_demo.sh. 
 This script is a basic introduction to using functions in shell scripts, an essential aspect of script modularization and reuse. Functions make scripts more organized and easier to maintain, especially for complex tasks. If you have any more specific requirements or need scripts for other topics, feel free to ask! |  |  |
 | 1.  | File Handling: Script for Reading from and Writing to a File |  |  |
 |  | This script will demonstrate how to read from and write to a file, along with performing some basic file operations in shell scripting. |  |  |
-|  | #!/bin/bash 
-# This script demonstrates file reading, writing, and basic file operations 
- 
-# Name of the file to use 
-filename="sample.txt" 
- 
-# Check if the file exists, if not create it 
-if [ ! -f "$filename" ]; then 
-    echo "Creating $filename as it does not exist." 
-    touch "$filename" 
-fi 
- 
-# Write to the file 
-echo "Writing to $filename." 
-echo "This is a sample text file." > "$filename" 
-echo "It contains some sample text." >> "$filename" 
- 
-# Read and display the contents of the file 
-echo "Reading from $filename:" 
-while IFS= read -r line; do 
-    echo "$line" 
-done < "$filename" 
- 
-# Append more text to the file 
-echo "Appending more text to $filename." 
-echo "This is another line of text." >> "$filename" 
- 
-# Display the updated file content 
-echo "Updated content of $filename:" 
-cat "$filename" 
- 
-# Delete the file (uncomment to enable) 
-# rm "$filename" 
+|  | #!/bin/bash 
+# This script demonstrates file reading, writing, and basic file operations 
+ 
+# Name of the file to use 
+filename="sample.txt" 
+ 
+# Check if the file exists, if not create it 
+if [ ! -f "$filename" ]; then 
+    echo "Creating $filename as it does not exist." 
+    touch "$filename" 
+fi 
+ 
+# Write to the file 
+echo "Writing to $filename." 
+echo "This is a sample text file." > "$filename" 
+echo "It contains some sample text." >> "$filename" 
+ 
+# Read and display the contents of the file 
+echo "Reading from $filename:" 
+while IFS= read -r line; do 
+    echo "$line" 
+done < "$filename" 
+ 
+# Append more text to the file 
+echo "Appending more text to $filename." 
+echo "This is another line of text." >> "$filename" 
+ 
+# Display the updated file content 
+echo "Updated content of $filename:" 
+cat "$filename" 
+ 
+# Delete the file (uncomment to enable) 
+# rm "$filename" 
 # echo "$filename has been deleted." |  |  |
-|  | Explanation: 
-• File Check and Creation: The script first checks if the specified file exists. If not, it creates the file using touch. 
-• Writing to a File: It writes and appends text to the file using > and >> redirection operators. 
-• Reading from a File: The script reads and displays the file content using a while loop and read command. 
-• Appending Text: It appends additional text to the file. 
-• Displaying Updated Content: The updated file content is displayed using cat. 
-• File Deletion: The script includes a commented out command to delete the file. Uncommenting rm "$filename" will delete the file. |  |  |
-|  | How to Use: 
-1. Save the Script: Copy this into a file, for instance, file_handling.sh. 
-2. Make It Executable: Use chmod +x file_handling.sh to make it executable. 
-3. Run the Script: Execute it with ./file_handling.sh. 
+|  | Explanation: 
+• File Check and Creation: The script first checks if the specified file exists. If not, it creates the file using touch. 
+• Writing to a File: It writes and appends text to the file using > and >> redirection operators. 
+• Reading from a File: The script reads and displays the file content using a while loop and read command. 
+• Appending Text: It appends additional text to the file. 
+• Displaying Updated Content: The updated file content is displayed using cat. 
+• File Deletion: The script includes a commented out command to delete the file. Uncommenting rm "$filename" will delete the file. |  |  |
+|  | How to Use: 
+1. Save the Script: Copy this into a file, for instance, file_handling.sh. 
+2. Make It Executable: Use chmod +x file_handling.sh to make it executable. 
+3. Run the Script: Execute it with ./file_handling.sh. 
 This script provides a basic understanding of file handling operations in shell scripting, such as creating, reading, writing, and appending files. If you need more complex examples or scripts for other topics, feel free to let me know! |  |  |
 | 8. | Error Handling and Debugging: Script with Error Trapping and Exit Status |  |  |
-|  | #!/bin/bash 
-# This script demonstrates error trapping and exit status handling 
- 
-# Function to read a file 
-read_file() { 
-    local file=$1 
-    if [ ! -f "$file" ]; then 
-        echo "Error: File '$file' not found." 
-        return 1 # Return with an error status 
-    fi 
- 
-    echo "Reading file '$file':" 
-    cat "$file" 
-    return 0 # Return with a success status 
-} 
- 
-# File to read 
-filename="example.txt" 
- 
-# Error trap 
-trap 'echo "An error occurred."; exit 1' ERR 
- 
-# Attempt to read the file 
-read_file "$filename" 
- 
-# Check the exit status 
-if [ $? -eq 0 ]; then 
-    echo "File read successfully." 
-else 
-    echo "Failed to read the file." 
+|  | #!/bin/bash 
+# This script demonstrates error trapping and exit status handling 
+ 
+# Function to read a file 
+read_file() { 
+    local file=$1 
+    if [ ! -f "$file" ]; then 
+        echo "Error: File '$file' not found." 
+        return 1 # Return with an error status 
+    fi 
+ 
+    echo "Reading file '$file':" 
+    cat "$file" 
+    return 0 # Return with a success status 
+} 
+ 
+# File to read 
+filename="example.txt" 
+ 
+# Error trap 
+trap 'echo "An error occurred."; exit 1' ERR 
+ 
+# Attempt to read the file 
+read_file "$filename" 
+ 
+# Check the exit status 
+if [ $? -eq 0 ]; then 
+    echo "File read successfully." 
+else 
+    echo "Failed to read the file." 
 fi |  |  |
-|  | Explanation: 
-• Function read_file: This function attempts to read a file and checks if the file exists. If the file is not found, it returns an error status (1). 
-• Error Trap (trap): The trap command catches any errors that occur during the execution of the script. In this case, if an error occurs, a message is displayed and the script exits with status 1. 
-• Exit Status Check ($?): After calling read_file, the script checks the exit status ($?). If it's 0, the file was read successfully; otherwise, it indicates failure. |  |  |
-|  | How to Use: 
-1. Create the Script: Copy the script into a file, for example, error_handling.sh. 
-2. Make it Executable: Change the script's permissions with chmod +x error_handling.sh. 
-3. Run the Script: Execute the script by typing ./error_handling.sh. 
+|  | Explanation: 
+• Function read_file: This function attempts to read a file and checks if the file exists. If the file is not found, it returns an error status (1). 
+• Error Trap (trap): The trap command catches any errors that occur during the execution of the script. In this case, if an error occurs, a message is displayed and the script exits with status 1. 
+• Exit Status Check ($?): After calling read_file, the script checks the exit status ($?). If it's 0, the file was read successfully; otherwise, it indicates failure. |  |  |
+|  | How to Use: 
+1. Create the Script: Copy the script into a file, for example, error_handling.sh. 
+2. Make it Executable: Change the script's permissions with chmod +x error_handling.sh. 
+3. Run the Script: Execute the script by typing ./error_handling.sh. 
 This script provides a basic introduction to error handling and debugging in shell scripts, particularly focusing on trapping errors and working with exit statuses. Advanced scripts often include more sophisticated error handling mechanisms to ensure robustness and reliability. If you need further examples or have other topics to cover, feel free to ask! |  |  |
 | 9. | Advanced Scripting Techniques: Script Utilizing Regular Expressions and Pattern Matching |  |  |
 |  | This script will demonstrate the use of regular expressions and pattern matching in shell scripting, particularly for text processing tasks. |  |  |
-|  | #!/bin/bash 
-# This script demonstrates the use of regular expressions and pattern matching 
- 
-# Function to validate email format 
-validate_email() { 
-    local email=$1 
-    local regex="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
- 
-    if [[ $email =~ $regex ]]; then 
-        echo "Valid email format." 
-    else 
-        echo "Invalid email format." 
-    fi 
-} 
- 
-# Function to extract phone numbers from a text 
-extract_phone_numbers() { 
-    local text=$1 
-    local phone_regex="([0-9]{3}-[0-9]{3}-[0-9]{4})" 
- 
-    echo "Extracted phone numbers:" 
-    while read -r line; do 
-        if [[ $line =~ $phone_regex ]]; then 
-            echo "${BASH_REMATCH[1]}" 
-        fi 
-    done <<< "$text" 
-} 
- 
-# Validate email example 
-email="example@email.com" 
-echo "Validating email: $email" 
-validate_email "$email" 
- 
-# Extract phone numbers example 
-sample_text="Call me at 123-456-7890 or at 987-654-3210." 
-echo "Extracting phone numbers from text:" 
+|  | #!/bin/bash 
+# This script demonstrates the use of regular expressions and pattern matching 
+ 
+# Function to validate email format 
+validate_email() { 
+    local email=$1 
+    local regex="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
+ 
+    if [[ $email =~ $regex ]]; then 
+        echo "Valid email format." 
+    else 
+        echo "Invalid email format." 
+    fi 
+} 
+ 
+# Function to extract phone numbers from a text 
+extract_phone_numbers() { 
+    local text=$1 
+    local phone_regex="([0-9]{3}-[0-9]{3}-[0-9]{4})" 
+ 
+    echo "Extracted phone numbers:" 
+    while read -r line; do 
+        if [[ $line =~ $phone_regex ]]; then 
+            echo "${BASH_REMATCH[1]}" 
+        fi 
+    done <<< "$text" 
+} 
+ 
+# Validate email example 
+email="example@email.com" 
+echo "Validating email: $email" 
+validate_email "$email" 
+ 
+# Extract phone numbers example 
+sample_text="Call me at 123-456-7890 or at 987-654-3210." 
+echo "Extracting phone numbers from text:" 
 extract_phone_numbers "$sample_text" |  |  |
-|  | Explanation: 
-• Function validate_email: This function uses a regular expression to validate the format of an email address. It employs the =~ operator for pattern matching in bash. 
-• Function extract_phone_numbers: This function demonstrates how to extract phone numbers from a given text using regular expressions. It reads through lines of text and matches the pattern defined in phone_regex. |  |  |
-|  | How to Use: 
-1. Save the Script: Copy this script into a file, like regex_demo.sh. 
-2. Make It Executable: Use chmod +x regex_demo.sh to make it executable. 
-3. Run the Script: Execute it with ./regex_demo.sh. 
+|  | Explanation: 
+• Function validate_email: This function uses a regular expression to validate the format of an email address. It employs the =~ operator for pattern matching in bash. 
+• Function extract_phone_numbers: This function demonstrates how to extract phone numbers from a given text using regular expressions. It reads through lines of text and matches the pattern defined in phone_regex. |  |  |
+|  | How to Use: 
+1. Save the Script: Copy this script into a file, like regex_demo.sh. 
+2. Make It Executable: Use chmod +x regex_demo.sh to make it executable. 
+3. Run the Script: Execute it with ./regex_demo.sh. 
 This script offers a glimpse into advanced scripting techniques involving regular expressions, which are powerful for text processing and pattern matching. Shell scripting provides robust tools for these tasks, making it useful for a wide range of applications. If you're interested in more advanced examples or scripts for other topics, feel free to let me know! |  |  |
 | 1.  | Working with External Commands: A script showing the use of command execution and pipelines. |  |  |
-|  | #!/bin/bash 
-# This script demonstrates the execution of external commands and the use of pipelines 
- 
-# Function to find and display processes running a specific command 
-display_processes() { 
-    local command_name=$1 
-    echo "Processes running '$command_name':" 
-    ps aux | grep "$command_name" | grep -v grep 
-} 
- 
-# Function to count the number of lines in a file 
-count_file_lines() { 
-    local file=$1 
-    local line_count=$(wc -l < "$file") 
-    echo "The file '$file' contains $line_count lines." 
-} 
- 
-# Display processes for a given command 
-command_to_check="bash" 
-display_processes "$command_to_check" 
- 
-# Count the number of lines in a file 
-file_to_check="sample.txt" 
+|  | #!/bin/bash 
+# This script demonstrates the execution of external commands and the use of pipelines 
+ 
+# Function to find and display processes running a specific command 
+display_processes() { 
+    local command_name=$1 
+    echo "Processes running '$command_name':" 
+    ps aux | grep "$command_name" | grep -v grep 
+} 
+ 
+# Function to count the number of lines in a file 
+count_file_lines() { 
+    local file=$1 
+    local line_count=$(wc -l < "$file") 
+    echo "The file '$file' contains $line_count lines." 
+} 
+ 
+# Display processes for a given command 
+command_to_check="bash" 
+display_processes "$command_to_check" 
+ 
+# Count the number of lines in a file 
+file_to_check="sample.txt" 
 count_file_lines "$file_to_check" |  |  |
-|  | Explanation: 
-• Function display_processes: This function uses ps aux to list all running processes, then filters them with grep to find processes related to a specific command. The grep -v grep part is used to exclude the grep command itself from the results. 
-• Pipelines (|): The script uses pipelines to pass the output of one command (ps aux) as input to another command (grep). 
-• Function count_file_lines: This function demonstrates how to use command substitution ($(...)) to capture the output of a command (wc -l) and then uses it in a script. |  |  |
-|  | How to Use: 
-1. Save the Script: Copy this script into a file, like external_commands.sh. 
-2. Make It Executable: Change the permissions with chmod +x external_commands.sh. 
-3. Run the Script: Execute it with ./external_commands.sh. 
+|  | Explanation: 
+• Function display_processes: This function uses ps aux to list all running processes, then filters them with grep to find processes related to a specific command. The grep -v grep part is used to exclude the grep command itself from the results. 
+• Pipelines (|): The script uses pipelines to pass the output of one command (ps aux) as input to another command (grep). 
+• Function count_file_lines: This function demonstrates how to use command substitution ($(...)) to capture the output of a command (wc -l) and then uses it in a script. |  |  |
+|  | How to Use: 
+1. Save the Script: Copy this script into a file, like external_commands.sh. 
+2. Make It Executable: Change the permissions with chmod +x external_commands.sh. 
+3. Run the Script: Execute it with ./external_commands.sh. 
 This script provides a basic overview of using external commands and pipelines, which are fundamental concepts in shell scripting for processing and manipulating data streams. If you need more detailed scripts or have other topics you'd like to cover, feel free to ask! |  |  |
 
 
@@ -989,60 +1057,60 @@ This script provides a basic overview of using external commands and pipelines, 
 
 | 1. | System Health Check Script |  |
 | --- | --- | --- |
-|  | #!/bin/bash 
-# System Health Check Script 
-echo "CPU and Memory Usage:" 
-top -bn1 | head -5 
-echo "Disk Usage:" 
-df -h 
-echo "Active Network Connections:" 
+|  | #!/bin/bash 
+# System Health Check Script 
+echo "CPU and Memory Usage:" 
+top -bn1 | head -5 
+echo "Disk Usage:" 
+df -h 
+echo "Active Network Connections:" 
 netstat -tuln |  |
 |  | Purpose: Regular health checks on servers for CPU, memory, disk, and network. |  |
 | 2. | Backup Script |  |
-|  | #!/bin/bash 
-# Backup Script 
+|  | #!/bin/bash 
+# Backup Script 
 tar -czf /backup/$(date +%Y%m%d_%H%M%S)_backup.tar.gz /important/data |  |
 |  | Purpose: Automated backup of critical directories. |  |
 | 3. | 3. Log File Cleaner |  |
-|  | #!/bin/bash 
-# Log File Cleaner 
+|  | #!/bin/bash 
+# Log File Cleaner 
 find /var/log -name "*.log" -type f -mtime +30 -exec rm -f {} \; |  |
 |  | Purpose: Cleanup old log files and free up space. |  |
 | 1.  | Deployment Script |  |
-|  | #!/bin/bash 
-# Deployment Script 
-git pull origin main 
-npm install 
-npm run build 
+|  | #!/bin/bash 
+# Deployment Script 
+git pull origin main 
+npm install 
+npm run build 
 systemctl restart myapp |  |
 |  | Purpose: Pull the latest code, build, and restart the application. |  |
 | 1.  | 5. SSL Certificate Expiry Check |  |
-|  | #!/bin/bash 
-# SSL Certificate Expiry Check 
+|  | #!/bin/bash 
+# SSL Certificate Expiry Check 
 echo | openssl s_client -servername example.com -connect example.com:443 2>/dev/null | openssl x509 -noout -dates |  |
 |  | Purpose: Check SSL certificate expiry dates. |  |
 | 1.  | Docker Container Health Check |  |
-|  | #!/bin/bash 
-# Docker Container Health Check 
+|  | #!/bin/bash 
+# Docker Container Health Check 
 docker ps -q | xargs docker inspect --format '{{ .Id }}: Health={{ .State.Health.Status }}' |  |
 |  | Purpose: Monitor the health status of all running Docker containers. |  |
 | 1.  | Network Latency Test |  |
-|  | #!/bin/bash 
-# Network Latency Test 
+|  | #!/bin/bash 
+# Network Latency Test 
 ping -c 4 google.com |  |
 |  | Purpose: Simple network latency test to an external site. |  |
 | 8. | Database Backup Script |  |
-|  | #!/bin/bash 
-# Database Backup Script 
+|  | #!/bin/bash 
+# Database Backup Script 
 mysqldump -u root -p mydatabase > /backup/mydatabase_$(date +%Y%m%d).sql |  |
 |  | Purpose: Backing up a MySQL database |  |
 | 1.  | User Account Audit |  |
-|  | #!/bin/bash 
-# User Account Audit 
+|  | #!/bin/bash 
+# User Account Audit 
 cut -d: -f1 /etc/passwd |  |
 | 1.  | Service Monitoring Script |  |
-|  | #!/bin/bash 
-# Service Monitoring Script 
+|  | #!/bin/bash 
+# Service Monitoring Script 
 systemctl status myservice |  |
 |  | Purpose: Check the status of a specific service |  |
 |  |  |  |
@@ -1055,47 +1123,47 @@ systemctl status myservice |  |
 
 |  | 11. Checking Disk Space |  |  |
 | --- | --- | --- | --- |
-|  | #!/bin/bash 
-# Check Disk Space Usage 
+|  | #!/bin/bash 
+# Check Disk Space Usage 
 df -h | grep -vE '^Filesystem|tmpfs|cdrom' |  |  |
 |  | 12. Monitoring CPU Load |  |  |
-|  | #!/bin/bash 
-# Monitor CPU Load 
+|  | #!/bin/bash 
+# Monitor CPU Load 
 uptime |  |  |
 |  | 13. Restarting a Service if Not Running |  |  |
-|  | #!/bin/bash 
-# Restart a Service if it's Not Running 
-service=my_service 
-if ! systemctl is-active --quiet $service; then 
-    systemctl restart $service 
+|  | #!/bin/bash 
+# Restart a Service if it's Not Running 
+service=my_service 
+if ! systemctl is-active --quiet $service; then 
+    systemctl restart $service 
 fi |  |  |
 |  | 14. Checking for Open Ports |  |  |
-|  | #!/bin/bash 
-# Check Open Ports 
+|  | #!/bin/bash 
+# Check Open Ports 
 netstat -tulnp |  |  |
 |  | 15.Updating System Packages |  |  |
-|  | #!/bin/bash 
-# Update System Packages 
+|  | #!/bin/bash 
+# Update System Packages 
 sudo apt-get update && sudo apt-get upgrade -y |  |  |
 |  | 16.Syncing Files with Remote Server |  |  |
-|  | #!/bin/bash 
-# Sync Files with Remote Server 
+|  | #!/bin/bash 
+# Sync Files with Remote Server 
 rsync -avz /local/directory/ user@remote:/remote/directory/ |  |  |
 |  | 17. Checking Website Availability |  |  |
-|  | #!/bin/bash 
-# Check Website Availability 
-curl -Is http://www.example.com/ | head -n 1 |  |  |
+|  | #!/bin/bash 
+# Check Website Availability 
+curl -Is http://www.example.com/ | head -n 1 |  |  |
 |  | 18. Database Health Check |  |  |
-|  | #!/bin/bash 
-# Check MySQL Database Health 
+|  | #!/bin/bash 
+# Check MySQL Database Health 
 mysqladmin -u root -p status |  |  |
 |  | 19. Extracting Logs for a Specific Date |  |  |
-|  | #!/bin/bash 
-# Extract Logs for a Specific Date 
+|  | #!/bin/bash 
+# Extract Logs for a Specific Date 
 grep '2023-03-15' /var/log/myapp.log |  |  |
 |  | 20.Listing Large Files |  |  |
-|  | #!/bin/bash 
-# List Large Files 
+|  | #!/bin/bash 
+# List Large Files 
 find / -type f -size +100M |  |  |
 
 
@@ -1106,49 +1174,49 @@ find / -type f -size +100M |  |  |
 
 |  | 21. Monitoring Memory Usage |  |  |
 | --- | --- | --- | --- |
-|  | #!/bin/bash 
-# Monitor Memory Usage 
+|  | #!/bin/bash 
+# Monitor Memory Usage 
 free -m |  |  |
 |  | 22. Checking HTTP Headers of a Website |  |  |
-|  | #!/bin/bash 
-# Check HTTP Headers 
-curl -I http://www.example.com/ |  |  |
+|  | #!/bin/bash 
+# Check HTTP Headers 
+curl -I http://www.example.com/ |  |  |
 |  | 23. Automating SSH into Server |  |  |
-|  | #!/bin/bash 
-# Automating SSH 
+|  | #!/bin/bash 
+# Automating SSH 
 ssh user@server 'bash -s' < local_script.sh |  |  |
 |  | 24. Creating a User Account |  |  |
-|  | #!/bin/bash 
-# Creating a User Account 
+|  | #!/bin/bash 
+# Creating a User Account 
 sudo useradd -m newuser |  |  |
 |  | 25. Killing a Process by Name |  |  |
-|  | #!/bin/bash 
-# Kill a Process by Name 
+|  | #!/bin/bash 
+# Kill a Process by Name 
 pkill -f process_name |  |  |
 |  | 26. Checking Inode Usage |  |  |
-|  | #!/bin/bash 
-# Check Inode Usage 
+|  | #!/bin/bash 
+# Check Inode Usage 
 df -i |  |  |
 |  | 27. Displaying Open Files by a Process |  |  |
-|  | #!/bin/bash 
-# Display Open Files by a Process 
+|  | #!/bin/bash 
+# Display Open Files by a Process 
 lsof -p PID |  |  |
 |  | 28. Automated FTP Upload |  |  |
-|  | #!/bin/bash 
-# Automated FTP Upload 
-ftp -n <<EOF 
-open http://ftp.example.com/ 
-user username password 
-put local_file.txt remote_file.txt 
-quit 
+|  | #!/bin/bash 
+# Automated FTP Upload 
+ftp -n <<EOF 
+open http://ftp.example.com/ 
+user username password 
+put local_file.txt remote_file.txt 
+quit 
 EOF |  |  |
 |  | 29. Checking Server Uptime |  |  |
-|  | #!/bin/bash 
-# Check Server Uptime 
+|  | #!/bin/bash 
+# Check Server Uptime 
 uptime -p |  |  |
 |  | 30. Archiving Old Logs |  |  |
-|  | #!/bin/bash 
-# Archive Old Logs 
+|  | #!/bin/bash 
+# Archive Old Logs 
 tar -czf logs-$(date +%Y%m%d).tar.gz /var/log/myapp/ |  |  |
 |  |  |  |  |
 

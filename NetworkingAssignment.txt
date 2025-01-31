@@ -1,0 +1,54 @@
+Networking assignment 
+---------------------
+Following commands were 
+What is my IP address configuration?
+Can you show me the network interfaces and their IP addresses?
+Can you ping google.com to check the internet connection?
+What is the hostname of this machine?
+Can you tell me the name assigned to this computer?
+Can you trace the route to google.com?
+I'd like to see the path taken by packets to reach google.com.
+
+Explain the different layers of OSI model 
+Explain the difference between Router, Switch, Hub and Bridge
+Explain the difference between TCP and UDP
+Explain subnetting 
+High level overview of Monolithic / Microservices 
+
+Implement firewall to support only ssh connectivity 
+Explain difference between symmetric and assymetric encryption 
+Eplain Threat Vs Vulnerability Vs Risk
+Public vs. Private IP Addresses Vs Elastic IP 
+Eplain 3-Way Handshake
+What is Ipsec?, 
+Explain different types of storage devices with in computer
+Explain different types of storage devices in computer networks
+Explain Hardware Vs Software Load balancer 
+Explain Nating and DNating 	
+
+	What is a modem, and what is its primary function?
+	How does a modem differ from a router?
+	What types of modems are available (e.g., DSL, cable, fiber)?
+How does a modem convert digital signals into analog signals and vice versa?
+How does a modem synchronize with an Internet Service Provider (ISP)?
+What is the application layer in the OSI model, and how does it differ from other layers?
+Explain the key functions of the application layer in detail with examples.
+Describe the working of the application layer in the OSI model. How does it communicate with the lower layers?
+List and explain any five application layer protocols, including their purposes and real-world examples.
+Compare and contrast the functions of DNS and HTTP as application layer protocols.
+What is the primary difference between symmetric encryption and asymmetric encryption, and in which scenarios is each typically used?
+How does key management differ between symmetric and asymmetric encryption, and why is key distribution a challenge in symmetric encryption?
+Explain how encryption and decryption work in symmetric encryption (e.g., AES) and asymmetric encryption (e.g., RSA). Provide examples of common algorithms for each type.
+
+What are the advantages and disadvantages of symmetric encryption compared to asymmetric encryption in terms of performance, security, and scalability?
+
+
+In a real-world system like HTTPS or email encryption (e.g., PGP), how are symmetric and asymmetric encryption used together to provide secure communication?
+
+Networking Demo :- Osi model ( Physical Layer )
+
+TCP / IP
+
+Subnetting and subnet mask
+What is Bridge?
+Tcp/Ip layer
