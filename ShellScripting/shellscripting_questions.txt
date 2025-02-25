@@ -1,0 +1,121 @@
+Basic Shell Scripting Questions
+Write a script to print "Hello, World!" to the terminal.
+Write a script to accept a user's name and greet them.
+Write a script to print the current date and time.
+Write a script to display the contents of a directory.
+Write a script to check if a given file exists or not.
+Write a script to count the number of files in a directory.
+Write a script to check if a given number is even or odd.
+Write a script to print the multiplication table of a given number.
+Write a script to reverse a string.
+Write a script to display system uptime.
+Working with Variables
+Write a script to swap two variables without using a third variable.
+Write a script to check if a variable is set or not.
+Write a script to print the number of arguments passed to it.
+Write a script to find the length of a string.
+Write a script to extract the filename and extension from a given file path.
+Conditional Statements & Loops
+Write a script to check if a number is positive, negative, or zero.
+Write a script to check if a year is a leap year or not.
+Write a script to find the largest of three numbers.
+Write a script to calculate the sum of all even numbers from 1 to N.
+Write a script to print the Fibonacci series up to N terms.
+Write a script to check if a number is prime or not.
+Write a script to find the factorial of a given number.
+Write a script to generate a random number between 1 and 100.
+Write a script to count the number of lines in a file.
+Write a script to read a file line by line.
+String Manipulation
+Write a script to convert a string to uppercase.
+Write a script to check if a string is a palindrome.
+Write a script to count the number of words in a given string.
+Write a script to replace a word in a file with another word.
+Write a script to extract email addresses from a text file.
+File Handling
+Write a script to create a backup of a given directory.
+Write a script to find and delete empty files in a directory.
+Write a script to display the first 10 lines of a file.
+Write a script to append text to a file.
+Write a script to remove duplicate lines from a file.
+Write a script to find and replace a word in multiple files.
+Write a script to display the file permissions of a given file.
+Write a script to sort the contents of a file alphabetically.
+Write a script to find the most frequently occurring word in a file.
+Write a script to display the last modified file in a directory.
+System & Process Management
+Write a script to display all running processes.
+Write a script to find the process ID of a running application.
+Write a script to check if a specific process is running.
+Write a script to list all users currently logged in.
+Write a script to check the system's disk usage.
+Write a script to monitor CPU usage in real-time.
+Write a script to kill a process by its name.
+Write a script to send an email notification when disk space is low.
+Write a script to schedule a cron job to run every hour.
+Write a script to automate software installation using apt or yum.
+
+
+
+
+												--------------------------
+												
+												
+Basic Shell Scripting Questions
+
+Write a script to print "Hello, World!" to the terminal.
+Write a script to accept a user's name and greet them.
+Write a script to print the current date and time.
+Write a script to display the contents of a directory.
+Write a script to check if a given file exists or not.
+Write a script to count the number of files in a directory.
+Write a script to check if a given number is even or odd.
+Write a script to print the multiplication table of a given number.
+Write a script to reverse a string.
+Write a script to display system uptime.
+Working with Variables
+Write a script to swap two variables without using a third variable.
+Write a script to check if a variable is set or not.
+Write a script to print the number of arguments passed to it.
+Write a script to find the length of a string.
+Write a script to extract the filename and extension from a given file path.
+Conditional Statements & Loops
+Write a script to check if a number is positive, negative, or zero.
+Write a script to check if a year is a leap year or not.
+Write a script to find the largest of three numbers.
+Write a script to calculate the sum of all even numbers from 1 to N.
+Write a script to print the Fibonacci series up to N terms.
+Write a script to check if a number is prime or not.
+Write a script to find the factorial of a given number.
+Write a script to generate a random number between 1 and 100.
+Write a script to count the number of lines in a file.
+Write a script to read a file line by line.
+String Manipulation
+Write a script to convert a string to uppercase.
+Write a script to check if a string is a palindrome.
+Write a script to count the number of words in a given string.
+Write a script to replace a word in a file with another word.
+Write a script to extract email addresses from a text file.
+File Handling
+Write a script to create a backup of a given directory.
+Write a script to find and delete empty files in a directory.
+Write a script to display the first 10 lines of a file.
+Write a script to append text to a file.
+Write a script to remove duplicate lines from a file.
+Write a script to find and replace a word in multiple files.
+Write a script to display the file permissions of a given file.
+Write a script to sort the contents of a file alphabetically.
+Write a script to find the most frequently occurring word in a file.
+Write a script to display the last modified file in a directory.
+System & Process Management
+Write a script to display all running processes.
+Write a script to find the process ID of a running application.
+Write a script to check if a specific process is running.
+Write a script to list all users currently logged in.
+Write a script to check the system's disk usage.
+Write a script to monitor CPU usage in real-time.
+Write a script to kill a process by its name.
+Write a script to send an email notification when disk space is low.
+Write a script to schedule a cron job to run every hour.
+Write a script to automate software installation using apt or yum.
+

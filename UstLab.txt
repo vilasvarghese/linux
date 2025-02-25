@@ -1,0 +1,149 @@
+
+Write a shell script that prints “Shell Scripting is Fun!” on the screen
+--------------------------------------------------------------------------
+
+#!/bin/bash
+
+echo "Shell Scripting is Fun!"
+
+
+
+--------------------------------------------------------------------------
+
+Modify the shell script from exercise 1 to include a variable. The variable will hold the contents of the message “Shell Scripting is Fun!”
+
+--------------------------------------------------------------------------
+
+#!/bin/bash
+
+message="Shell Scripting is Fun!"
+
+echo "$message"
+--------------------------------------------------------------------------
+
+Write a shell script to output a specified directory’s size.
+--------------------------------------------------------------------------
+#!/bin/bash
+
+# Function to calculate the size of a directory
+function dir_size() {
+  local dir="$1"
+  local size=0
+
+  find "$dir" -type f -exec du -b {} + | awk '{ size += $1 } END { print size }' 
+
+  echo "Size of directory '$dir': $(($size / 1024 / 1024)) MB" 
+}
+
+# Get the directory path from the user
+read -p "Enter the directory path: " dir_path
+
+# Calculate and display the directory size
+dir_size "$dir_path"
+
+
+
+--------------------------------------------------------------------------
+Write a shell script to show hardware information for Linux systems.
+--------------------------------------------------------------------------
+#!/bin/bash
+
+# Get CPU information
+cpuinfo=$(lscpu)
+
+# Get memory information
+meminfo=$(free -h)
+
+# Get disk information
+diskinfo=$(df -h)
+
+# Print the information
+echo "===== CPU Information ====="
+echo "$cpuinfo"
+echo ""
+
+echo "===== Memory Information ====="
+echo "$meminfo"
+echo ""
+
+echo "===== Disk Information ====="
+echo "$diskinfo"
+
+
+
+--------------------------------------------------------------------------
+Write a shell script to check if a number input from standard input is odd or even.
+--------------------------------------------------------------------------
+
+#!/bin/bash
+
+# Read the number from standard input
+read -p "Enter a number: " number
+
+# Check if the number is even or odd
+if (( $number % 2 == 0 )); then
+  echo "$number is even"
+else
+  echo "$number is odd"
+fi
+--------------------------------------------------------------------------
+Write a shell script to test if a number being entered is a Fibonacci number or not.
+--------------------------------------------------------------------------
+#!/bin/bash
+
+# Function to check if a number is a Fibonacci number
+is_fibonacci() {
+  local n=$1
+  local a=0
+  local b=1
+  local c
+
+  while [[ $c -lt $n ]]; do
+    c=$((a + b))
+    a=$b
+    b=$c
+  done
+
+  if [[ $n -eq $a ]]; then
+    echo "$n is a Fibonacci number"
+  else
+    echo "$n is not a Fibonacci number"
+  fi
+}
+
+# Get the number from the user
+read -p "Enter a number: " num
+
+# Check if the number is a Fibonacci number
+is_fibonacci "$num"
+
+--------------------------------------------------------------------------
+Write a script to zip a file.
+--------------------------------------------------------------------------
+#!/bin/bash
+
+# Get the file path from the user
+read -p "Enter the path to the file: " file_path
+
+# Get the desired zip file name
+read -p "Enter the desired zip file name: " zip_file_name
+
+# Zip the file
+zip -r "$zip_file_name" "$file_path"
+
+echo "File zipped successfully!"
+
+--------------------------------------------------------------------------
+Write a script to unzip a file.
+--------------------------------------------------------------------------
+
+#!/bin/bash
+
+# Get the path to the zip file from the user
+read -p "Enter the path to the zip file: " zip_file_path
+
+# Unzip the file
+unzip "$zip_file_path"
+
+echo "File unzipped successfully!"
+--------------------------------------------------------------------------

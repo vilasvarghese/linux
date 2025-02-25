@@ -1,0 +1,1214 @@
+1. What is the primary role of the "client" in a client-server architecture?
+A) To provide resources or services
+B) To request resources or services
+C) To manage network connections
+D) To encrypt data
+
+Answer: B) To request resources or services
+
+2. Which layer of the OSI model is responsible for transmitting raw bits over a physical medium?
+A) Data Link Layer
+B) Network Layer
+C) Physical Layer
+D) Transport Layer
+
+Answer: C) Physical Layer
+
+3. What is the main function of the Data Link Layer in the OSI model?
+A) Routing packets across networks
+B) Ensuring error-free data transfer between nodes
+C) Translating data formats
+D) Managing end-user services
+
+Answer: B) Ensuring error-free data transfer between nodes
+
+4. Which layer of the OSI model handles IP addressing and routing?
+A) Transport Layer
+B) Network Layer
+C) Session Layer
+D) Presentation Layer
+
+Answer: B) Network Layer
+
+5. What is the primary purpose of the Transport Layer in the OSI model?
+A) To establish, manage, and terminate sessions
+B) To ensure end-to-end data delivery and error handling
+C) To translate data formats for compatibility
+D) To transmit raw bits over a physical medium
+
+Answer: B) To ensure end-to-end data delivery and error handling
+
+6. Which layer of the OSI model is responsible for managing connections between devices?
+A) Session Layer
+B) Presentation Layer
+C) Application Layer
+D) Data Link Layer
+
+Answer: A) Session Layer
+
+7. What is the role of the Presentation Layer in the OSI model?
+A) To manage physical connections between devices
+B) To translate data formats and encrypt/decrypt data
+C) To route packets across networks
+D) To provide end-user services like web browsing
+
+Answer: B) To translate data formats and encrypt/decrypt data
+
+8. Which of the following protocols is used in the Application Layer of the OSI model?
+A) TCP
+B) IP
+C) FTP
+D) ARP
+
+Answer: C) FTP
+
+9. What is the correct order of data encapsulation in the OSI model?
+A) Bits → Frames → Packets → Segments → Data
+B) Data → Segments → Packets → Frames → Bits
+C) Data → Packets → Segments → Frames → Bits
+D) Bits → Packets → Frames → Segments → Data
+
+Answer: B) Data → Segments → Packets → Frames → Bits
+
+10. Which layer of the OSI model is responsible for adding source and destination MAC addresses to frames?
+A) Network Layer
+B) Data Link Layer
+C) Transport Layer
+D) Physical Layer
+
+Answer: B) Data Link Layer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Which layer of the OSI model is responsible for establishing physical connections between devices?
+
+a) Application Layer
+b) Transport Layer
+c) Network Layer
+d) Physical Layer
+
+Ans: d
+
+2. Which protocol is responsible for resolving IP addresses to MAC addresses?
+
+a) TCP
+b) UDP
+c) ARP
+d) ICMP
+
+Ans: c
+
+3. What is the main function of the Transport Layer in the OSI model?
+
+a) Routing data between networks
+b) End-to-end data delivery
+c) Physical connection establishment
+d) Data encoding and decoding
+
+Ans: b
+
+4. Which protocol is used for web browsing?
+
+a) FTP
+b) SMTP
+c) HTTP
+d) ICMP
+Ans: c
+
+5. What is the purpose of a router in a network?
+
+a) To convert digital signals to analog signals
+b) To direct data traffic between different networks
+c) To provide internet access to a single device
+d) To store and process data
+
+Ans: b
+
+6. Which topology connects all devices to a central hub?
+
+a) Bus
+b) Ring
+c) Star
+d) Mesh
+
+Ans: c
+
+7. What is the purpose of a DNS server?
+
+a) Translate domain names into IP addresses
+b) Filter network traffic
+c) Encrypt network communication
+d) Manage network devices
+
+Ans: a
+
+8. What does the HTTP status code 404 represent?
+
+a) Request successful
+b) Page not found
+c) Server error
+d) Access forbidden
+
+Ans: b
+
+9. Which layer of the OSI model is responsible for data encryption and decryption?
+
+a) Network Layer
+b) Presentation Layer
+c) Data Link Layer
+d) Application Layer
+
+Ans: b
+
+10. What is the primary function of a modem?
+
+a) Convert digital signals to analog signals and vice versa
+b) Direct data traffic between different networks
+c) Provide a firewall for network security
+d) Assign IP addresses to devices on a network
+
+
+Ans: a
+
+
+
+
+1. Which layer of the OSI model is responsible for error reporting and operational information?
+
+a) Physical Layer
+b) Data Link Layer
+c) Network Layer (specifically ICMP)
+d) Transport Layer
+
+Ans: c
+
+
+2. What is the primary function of the Ping utility?
+
+a) To transfer files between computers
+b) To test the reachability of a host on a network
+c) To encrypt network traffic
+d) To manage network devices
+
+Ans: b
+
+3. What does the "Time Exceeded" message in ICMP indicate?
+
+a) The destination host is unreachable.
+b) A packet has taken too long to reach its destination.
+c) The sender's IP address is invalid.
+d) The destination host is busy.
+
+Ans: b
+
+4. Which protocol is used to map IP addresses to MAC addresses?
+
+a) ARP
+b) ICMP
+c) TCP
+d) DNS
+
+Ans: a
+
+5. What is the purpose of TraceRoute?
+
+a) To track the path that packets take to reach a destination
+b) To transfer files between computers
+c) To block network traffic
+d) To configure network settings
+
+Ans: a
+
+
+6. What is the main function of the IP layer in the OSI model?
+
+a) Addressing and routing of packets
+b) End-to-end data delivery
+c) Physical connection establishment
+d) Data encoding and decoding
+
+Ans: a
+
+
+7. Which of the following is NOT a function of ICMP?
+
+a) Error reporting
+b) Operational information
+c) File transfer
+d) Echo Request/Reply
+
+Ans: c
+
+8. What does a TTL (Time-to-Live) value in an IP header indicate?
+
+a) The maximum size of the packet
+b) The maximum number of hops a packet can travel
+c) The time the packet is allowed to exist
+d) The priority of the packet
+
+Ans: b
+
+9. What is the purpose of a subnet mask?
+
+a) To encrypt network traffic
+b) To assign unique addresses to devices
+c) To divide a network into smaller subnetworks
+d) To translate domain names into IP addresses
+
+Ans: c
+
+10. Which of the following is NOT a key component of the TCP/IP model?
+
+a) TCP
+b) IP
+c) ICMP
+d) OSI
+
+Ans: d
+
+
+
+1. Which layer of the OSI model is responsible for end-to-end data delivery?
+
+a) Physical Layer
+b) Data Link Layer
+c) Transport Layer
+d) Network Layer
+
+Ans: c
+
+2. What is the main difference between TCP and UDP?
+
+a) TCP is connectionless, UDP is connection-oriented.
+b) TCP is connection-oriented, UDP is connectionless.
+c) TCP is faster, UDP is slower.
+d) TCP is used for streaming, UDP is used for file transfer.
+
+Ans: b
+
+3. What is the purpose of a subnet mask?
+
+a) To encrypt network traffic
+b) To assign unique addresses to devices
+c) To divide a network into smaller subnetworks
+d) To translate domain names into IP addresses
+
+Ans: c
+
+4. Which network device connects devices on a LAN and broadcasts data to all devices?
+
+a) Router
+b) Switch
+c) Hub
+d) Bridge
+Ans: c
+
+5. What is the primary function of a router?
+
+a) Directs data packets between different networks
+b) Connects devices on a single network segment
+c) Converts digital signals to analog signals
+d) Amplifies network signals
+
+Ans: a
+
+6. Which type of encryption uses the same key for both encryption and decryption?
+
+a) Symmetric Encryption
+b) Asymmetric Encryption
+c) Hashing
+d) Digital Signature
+
+Ans: A
+
+7. What is the main purpose of NAT (Network Address Translation)?
+
+a) To conserve public IP addresses
+b) To encrypt network traffic
+c) To improve network performance
+d) To prevent unauthorized access
+
+Ans: A
+
+8. Which protocol is responsible for resolving domain names into IP addresses?
+
+a) TCP
+b) UDP
+c) DNS
+d) ICMP
+
+Ans: c
+
+9. Which architecture emphasizes breaking down applications into small, independently deployable services?
+
+a) Monolithic Architecture
+b) Service-Oriented Architecture (SOA)
+c) Microservices Architecture
+d) Client-Server Architecture
+
+Ans: c
+
+10. What is the primary function of a firewall?
+
+a) To control network traffic based on security rules
+b) To amplify network signals
+c) To translate domain names into IP addresses
+d) To provide power to network devices
+
+Ans: a
+
+
+
+1. Which layer of the OSI model is primarily responsible for end-to-end data delivery?
+
+a) Physical Layer
+b) Data Link Layer
+c) Transport Layer
+d) Network Layer
+
+Ans: c
+
+2. What is the key difference between a firewall and an IPS?
+
+a) Firewalls operate at the application layer, while IPS operates at the network layer.
+b) Firewalls only block traffic, while IPS can actively prevent attacks.
+c) Firewalls filter traffic based on rules, while IPS analyzes traffic for malicious activity.
+d) Firewalls are hardware-based, while IPS is software-based.
+
+Ans: c
+
+3. What is a vulnerability in cybersecurity terms?
+
+a) The act of exploiting a weakness in a system.
+b) A weakness in a system that can be exploited by a threat.
+c) Any potential danger that could cause harm.
+d) The impact of a successful attack.
+
+Ans: b
+
+4. What is the primary function of a reverse proxy?
+
+a) To directly connect clients to backend servers.
+b) To forward client requests to the appropriate backend server.
+c) To block all incoming traffic.
+d) To encrypt data at rest.
+
+Ans: b
+
+5. Which network topology connects all devices to a central hub?
+
+a) Bus
+b) Star
+c) Ring
+d) Mesh
+
+Ans: b
+
+
+6. What is the primary advantage of IPv6 over IPv4?
+
+a) Vastly larger address space
+b) Simpler addressing scheme
+c) Better support for wireless networks
+d) Faster data transmission speeds
+
+Ans: a
+
+7. What is the main purpose of subnetting?
+
+a) To increase the number of available IP addresses.
+b) To improve network security.
+c) To enhance network performance.
+d) To divide a large network into smaller, more manageable subnetworks.
+
+Ans: d
+
+8. Which encryption method uses a single key for both encryption and decryption?
+
+a) Symmetric Encryption
+b) Asymmetric Encryption
+c) Public Key Encryption
+d) Hashing
+
+Ans: b
+
+9. Which network device connects two or more LAN segments?
+
+a) Hub
+b) Switch
+c) Bridge
+d) Modem
+
+Ans: c
+
+10. What is the primary goal of a hybrid network topology?
+
+a) To simplify network management.
+b) To combine the strengths of different topologies.
+c) To reduce the number of network devices.
+d) To eliminate the need for routers.
+
+
+Ans: b
+
+
+
+
+
+1. Which of the following is NOT a characteristic of a public IP address?
+
+a) Unique worldwide
+b) Assigned by an ISP
+c) Can be accessed from anywhere on the internet
+d) Assigned by the user
+
+Ans: d
+
+2. What is the purpose of NAT (Network Address Translation)?
+
+a) To assign unique public IP addresses to each device on a network.
+b) To enable multiple devices on a private network to share a single public IP address.
+c) To encrypt network traffic.
+d) To improve network performance.
+
+Ans: b
+
+
+3. Which of the following is NOT a step in the TCP 3-Way Handshake?
+
+a) SYN
+b) SYN-ACK
+c) RST (Reset)
+d) ACK
+
+Ans: c
+
+4. Which network topology connects all devices to a central hub?
+
+a) Bus
+b) Star
+c) Ring
+d) Mesh
+
+Ans: b
+
+5. What is the primary function of a DNS server?
+
+a) To encrypt network traffic.
+b) To assign IP addresses to devices.
+c) To translate domain names into IP addresses.
+d) To filter network traffic.
+
+Ans: c
+
+6. Which type of encryption uses a single key for both encryption and decryption?
+
+a) Symmetric Encryption
+b) Asymmetric Encryption
+c) Public Key Encryption
+d) Hashing
+
+Ans: a
+
+7. Which of the following is NOT a characteristic of IPv6?
+
+a) 128-bit address space
+b) Hexadecimal notation
+c) Simplified header format
+d) Limited number of addresses
+
+
+Ans: d
+
+8. What is the main difference between a firewall and an IPS?
+
+a) Firewalls operate at the application layer, while IPS operates at the network layer.
+b) Firewalls only block traffic, while IPS can actively prevent attacks.
+c) Firewalls filter traffic based on rules, while IPS analyzes traffic for malicious activity.
+d) Firewalls are hardware-based, while IPS is software-based.
+
+Ans: c
+
+9. Which network topology connects devices in a circular fashion?
+
+a) Bus
+b) Star
+c) Ring
+d) Mesh
+
+
+Ans: c
+
+10. What is the purpose of the 3-Way Handshake in TCP?
+
+a) To encrypt data transmission.
+b) To improve network performance.
+c) To establish a reliable connection between the client and server.
+d) To assign IP addresses to devices.
+
+Ans: c
+
+
+
+
+
+1. Which protocol is primarily used for sending emails?
+
+a) FTP
+b) SMTP
+c) POP3
+d) HTTP
+
+Ans: b
+
+2. What is the main function of POP3?
+
+a) Sending emails
+b) Downloading emails to the local device
+c) Managing emails on the server
+d) Establishing secure connections
+Ans: b
+
+3. In the TCP 3-Way Handshake, what does the SYN flag signify?
+
+a) Synchronization request
+b) Acknowledgment
+c) Data transmission
+d) Connection termination
+
+Ans: a
+
+4. Which network architecture is characterized by a central server that provides services to clients?
+
+a) Client-Server
+b) Peer-to-Peer
+c) Cloud Computing
+d) Mesh
+
+Ans: a
+
+5. What is the primary purpose of NAT (Network Address Translation)?
+
+a) To allow multiple devices on a private network to share a single public IP address.
+b) To encrypt network traffic.
+c) To improve network performance.
+d) To assign a unique public IP address to each device.
+
+Ans: a
+
+6. Which type of encryption uses a single key for both encryption and decryption?
+
+a) Symmetric Encryption
+b) Asymmetric Encryption
+c) Public Key Encryption
+d) Hashing
+
+Ans: a
+
+7. What is the main difference between IPv4 and IPv6?
+
+a) IPv6 has a much larger address space.
+b) IPv4 is more secure than IPv6.
+c) IPv4 is easier to configure.
+d) IPv4 is the latest version of the IP protocol.
+
+Ans: a
+
+8. Which network topology connects all devices in a circular fashion?
+
+a) Star
+b) Bus
+c) Ring
+d) Mesh
+
+Ans: c
+
+9. What is the primary function of an Intrusion Prevention System (IPS)?
+
+a) To control network access based on rules.
+b) To detect and prevent malicious activity within a network.
+c) To translate domain names into IP addresses.
+d) To amplify network signals.
+Ans: b
+
+
+10. What is a server farm?
+
+a) A collection of servers working together to provide services.
+b) A single powerful server for high-performance computing.
+c) A network of interconnected routers.
+d) A type of network topology.
+
+Ans: a
+
+
+
+
+
+
+
+
+
+
+
+1. Which of the following is NOT a primary function of a data center?
+
+a) Storing data
+b) Manufacturing hardware components
+c) Processing data
+d) Disseminating data
+
+
+Ans: b
+
+2. What is the primary advantage of using a colocation data center?
+
+a) Reduced upfront investment compared to building your own data center.
+b) Complete control over all aspects of the infrastructure.
+c) Highest level of security.
+d) Exclusive use of all resources within the facility.
+
+Ans: a
+
+3. Which type of storage device uses flash memory to store data?
+
+a) Hard Disk Drive (HDD)
+b) Solid-State Drive (SSD)
+c) Optical Disc
+d) Magnetic Tape
+
+Ans: b
+
+4. What is the primary function of RAID 0?
+
+a) To improve performance by striping data across multiple disks.
+b) To provide high fault tolerance by mirroring data.
+c) To distribute parity information across all disks.
+d) To combine mirroring and striping.
+
+Ans: a
+
+5. Which RAID level offers the highest fault tolerance?
+
+a) RAID 0
+b) RAID 5
+c) RAID 1
+d) RAID 6
+
+Ans: c
+
+6. What is the main purpose of a UPS (Uninterruptible Power Supply) in a data center?
+
+a) To provide backup power during power outages.
+b) To cool down the data center.
+c) To distribute power to individual servers.
+d) To monitor power consumption.
+
+Ans: a
+7. Which type of storage is directly connected to a single computer?
+
+a) Direct-Attached Storage (DAS)
+b) Network-Attached Storage (NAS)
+c) Storage Area Network (SAN)
+d) Cloud Storage
+
+Ans: a
+8. What is the primary advantage of a cloud data center?
+
+a) High scalability and flexibility.
+b) Complete control over the infrastructure.
+c) Lowest initial investment.
+d) Highest level of security.
+
+Ans: a
+9. What is a vulnerability in cybersecurity terms?
+
+a) A weakness in a system that can be exploited by a threat.
+b) Any potential danger that could cause harm.
+c) The act of exploiting a weakness in a system.
+d) The impact of a successful attack.
+
+Ans: a
+
+10. Which of the following is NOT a key component of a data center?
+
+a) Servers
+b) Storage Systems
+c) Networking Equipment
+d) End-user devices (e.g., laptops, desktops)
+
+
+Ans: d
+
+
+
+
+1. What is the primary purpose of a backup?
+
+a) To permanently delete unwanted files.
+b) To create copies of data for future recovery.
+c) To optimize storage space.
+d) To improve system performance.
+
+
+Ans: b
+
+2. What does RPO (Recovery Point Objective) represent?
+
+a) The time it takes to recover from a disaster.
+b) The amount of data loss that can be tolerated.
+c) The cost of implementing a recovery plan.
+d) The frequency of backup operations.
+
+Ans: b
+
+3. Which type of server specializes in storing and managing large amounts of data?
+
+a) Web Server
+b) Database Server
+c) File Server
+d) Mail Server
+
+Ans: b
+
+4. What is the main function of a firewall?
+
+a) To increase network speed.
+b) To improve network performance.
+c) To control network traffic and block unauthorized access.
+d) To encrypt network communication.
+
+Ans: c
+
+5. Which type of firewall examines individual packets based on their headers?
+
+a) Packet Filtering Firewall
+b) Stateful Inspection Firewall
+c) Application-Level Gateway
+d) Next-Generation Firewall
+
+Ans: a
+
+6. What is virtualization?
+
+a) The process of physically upgrading hardware components.
+b) Creating virtual versions of computer resources.
+c) The act of physically moving a server to a new location.
+d) The process of installing new software on a server.
+
+Ans: b
+
+7. Which type of storage device offers the fastest read/write speeds?
+
+a) Hard Disk Drive (HDD)
+b) Solid-State Drive (SSD)
+c) Optical Disc
+d) Magnetic Tape
+Ans: b
+
+8. What is the primary goal of a Disaster Recovery Plan (DRP)?
+
+a) To prevent disasters from occurring.
+b) To restore IT systems and data after a disaster.
+c) To improve employee productivity.
+d) To reduce the cost of IT operations.
+
+Ans: b
+9. What is a threat in cybersecurity terms?
+
+a) Any potential danger that could exploit a vulnerability.
+b) A weakness in a system that can be exploited.
+c) The impact of a successful attack.
+d) The act of exploiting a weakness in a system.
+
+Ans: a
+10. Which RAID level offers the best performance but no fault tolerance?
+
+a) RAID 0
+b) RAID 1
+c) RAID 5
+d) RAID 10
+
+Ans: a
+
+
+
+
+
+
+
+1. Which type of firewall examines network traffic based on the context of the connection?
+
+a) Packet Filtering Firewall
+b) Stateful Inspection Firewall
+c) Application-Level Gateway
+d) Next-Generation Firewall
+
+Ans: b
+
+2. What is the primary purpose of a firewall?
+
+a) To increase network speed.
+b) To improve network performance.
+c) To control network traffic and block unauthorized access.
+d) To encrypt network communication.
+
+Ans: c
+3. Which firewall type provides deep inspection of traffic, including application-level data?
+
+a) Packet Filtering Firewall
+b) Stateful Inspection Firewall
+c) Application-Level Gateway
+d) Next-Generation Firewall
+
+Ans: c
+4. What is the main advantage of a default-deny firewall policy?
+
+a) Allows all traffic by default.
+b) Blocks all traffic by default, requiring explicit rules to permit necessary traffic.
+c) Simplifies firewall configuration.
+d) Improves network performance.
+
+Ans: b
+5. What is network segmentation?
+
+a) Dividing a network into smaller, isolated segments to limit the impact of a security breach.
+b) Increasing the bandwidth of a network.
+c) Combining multiple networks into a single larger network.
+d) Encrypting all network traffic.
+
+Ans: a
+
+6. What is the purpose of a server?
+
+a) To control input devices like keyboards and mice.
+b) To provide services to other computers on a network.
+c) To store personal files and documents.
+d) To display information on a monitor.
+
+Ans: b
+7. Which type of server specializes in delivering web pages to users?
+
+a) File Server
+b) Web Server
+c) Mail Server
+d) Database Server
+
+Ans: b
+
+8. What is virtualization?
+
+a) The process of physically upgrading hardware components.
+b) Creating virtual versions of computer resources.
+c) The act of physically moving a server to a new location.
+d) The process of installing new software on a server.
+
+Ans: b
+
+
+9. What is the primary goal of load balancing?
+
+a) To increase network security.
+b) To reduce the cost of hardware.
+c) To distribute network traffic across multiple servers.
+d) To improve data backup and recovery.
+
+Ans: c
+
+
+10. What is the main purpose of a Disaster Recovery Plan (DRP)?
+
+a) To prevent disasters from occurring.
+b) To restore IT systems and data after a disaster.
+c) To improve employee productivity.
+d) To reduce the cost of IT operations.
+
+
+Ans: b
+
+
+
+
+
+
+
+
+
+
+1. What is the key difference between TCP and UDP?
+
+a) TCP is faster than UDP.
+b) TCP is connection-oriented, UDP is connectionless.  
+c) TCP is used for streaming, UDP is used for file transfer. 
+d) UDP is more reliable than TCP.
+
+Ans: b
+
+2. Which protocol ensures reliable data delivery by establishing a connection before transmitting data?
+
+a) UDP
+b) TCP
+c) HTTP
+d) DNS
+
+Ans: b
+
+3. What is the primary function of a router?
+
+a) To connect devices within the same network segment.
+b) To direct data packets between different networks.
+c) To amplify network signals.
+d) To translate domain names into IP addresses.
+
+Ans: b
+4. What is the primary function of a switch?
+
+a) To connect devices within the same network segment.
+b) To direct data packets between different networks.
+c) To amplify network signals.
+d) To translate domain names into IP addresses.
+
+Ans: a
+
+5. What does DNS stand for?
+
+
+a) Domain Name Server
+b) Dynamic Network System
+c) Data Naming System
+d) Distributed Network Service
+
+Ans: c
+6. What is the primary function of DNS?
+
+a) To translate domain names into IP addresses.
+b) To encrypt network traffic.
+c) To control network access.
+d) To manage network devices.
+
+Ans: a
+7. Which protocol is typically used for applications that require high speed and low latency, such as online gaming?
+
+a) TCP
+b) UDP
+c) HTTP
+d) FTP
+Ans: b
+
+8. Which firewall type examines individual packets based on their headers?
+
+a) Packet Filtering Firewall
+b) Stateful Inspection Firewall
+c) Application-Level Gateway
+d) Next-Generation Firewall
+
+Ans: a
+9. What is the main purpose of NAT (Network Address Translation)?
+
+a) To allow multiple devices on a private network to share a single public IP address.
+b) To improve network performance.
+c) To encrypt network traffic.
+d) To assign a unique public IP address to each device.
+
+Ans: a
+10. What is the primary goal of load balancing?
+
+a) To increase network security.
+b) To reduce the cost of hardware.
+c) To distribute network traffic across multiple servers.
+d) To improve data backup and recovery.
+
+Ans: c
+
+1. What is the primary function of NAT?
+
+a) To increase network speeds.
+b) To encrypt network traffic.
+c) To allow multiple devices on a private network to share a single public IP address. 
+d) To block unauthorized access to a network. 
+
+
+Ans: c
+2. Which layer of the OSI model is responsible for the physical characteristics of the network, such as cables and connectors?
+
+a) Data Link Layer
+b) Network Layer
+c) Physical Layer
+d) Transport Layer
+
+Ans: c
+3. What is the purpose of ARP?
+
+a) To map IP addresses to MAC addresses.
+b) To translate domain names into IP addresses.
+c) To encrypt network traffic.
+d) To control network access.
+
+Ans: a
+4. How does a switch differ from a hub?
+
+a) Switches forward traffic only to the intended destination, while hubs broadcast traffic to all connected devices. 
+b) Hubs operate at the data link layer, while switches operate at the physical layer.
+c) Switches are slower and less efficient than hubs.
+d) Hubs provide better security than switches.
+
+Ans: c
+5. What is the primary function of a firewall?
+
+a) To increase network speed.
+b) To improve network performance.
+c) To control network traffic and block unauthorized access.
+d) To translate domain names into IP addresses.
+Ans: a
+
+
+6. What is the main difference between a LAN and a WAN?
+
+a) Geographic scope: LANs cover a small area, while WANs cover a large area. 
+b) LANs are more secure than WANs. 
+c) LANs are always faster than WANs. 
+d) LANs use only wired connections, while WANs use only wireless connections.
+
+Ans: a
+
+
+7. Which protocol is connection-oriented and guarantees reliable data delivery?
+
+a) TCP
+b) UDP
+c) HTTP
+d) DNS
+Ans: a
+
+
+8. What does DHCP stand for?
+
+a) Dynamic Host Configuration Protocol
+b) Domain Host Control Protocol
+c) Data Handling Control Protocol
+d) Digital Host Communication Protocol
+
+dhcp utilizes udp and it is on application layer 
+
+Ans: a
+
+9. What is a VLAN?
+
+a) A logical grouping of network devices that are not limited by physical location.
+b) A type of physical network cable.
+c) A device that connects multiple networks together.
+d) A software application used for network management.
+
+Ans: a
+
+10. What is the main purpose of a VPN?
+
+a) To increase network speed.
+b) To improve network performance.
+c) To create a secure, encrypted connection over a public network.
+d) To translate domain names into IP addresses.
+Ans: c
+
+
+
+1. Which of the following protocols is connectionless and unreliable?
+
+a) TCP
+b) UDP
+c) HTTP
+d) FTP
+Ans: b
+
+2. What is the primary function of NAT (Network Address Translation)?
+
+a) To allow multiple devices on a private network to share a single public IP address.
+b) To increase network speeds.
+c) To encrypt network traffic.
+d) To block unauthorized access to a network.
+
+Ans: a
+3. Which layer of the OSI model is responsible for the physical transmission of data?
+
+a) Physical Layer
+b) Data Link Layer
+c) Network Layer
+d) Transport Layer
+Ans: a
+
+4. What protocol is used to translate domain names into IP addresses?
+
+a) DNS
+b) HTTP
+c) FTP
+d) TCP
+Ans: a
+
+5. Which protocol is used for secure shell access?
+
+a) Telnet
+b) SSH
+c) FTP
+d) HTTP
+
+Ans: b
+
+
+6. What is the primary function of a switch?
+
+a) To connect devices within the same network segment.
+b) To connect different networks together.
+c) To translate domain names into IP addresses.
+d) To provide internet access.
+
+Ans: a
+7. Which port number is commonly used for HTTP?
+
+a) 21
+b) 22
+c) 80
+d) 443
+Ans: c
+
+
+8. Which protocol is used for sending email messages?
+
+a) SMTP
+b) FTP
+c) HTTP
+d) DNS
+Ans: a
+
+9. What does CIDR stand for?
+
+a) Classless Inter-Domain Routing
+b) Common Internet Data Routing
+c) Computer Interconnection Data Routing
+d) Classless Internet Domain Resolution
+
+Ans: a
+
+
+10. What is the main purpose of a firewall?
+
+a) To increase network speeds.
+b) To improve network performance.
+c) To control network traffic and block unauthorized access.
+d) To translate domain names into IP addresses.
+
+Ans: c
+
+
+10 mcq questions with answers on the below details plz
