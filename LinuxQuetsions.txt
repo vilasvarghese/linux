@@ -1,0 +1,389 @@
+Project 1:
+----------
+Goal: Develop a script to quickly gather essential system health metrics and verify basic network connectivity from a remote server, suitable for a "quick check" scenario.
+
+Learning Objectives:
+
+	Mastering ssh for single-command remote execution.
+	Using uptime, df, free, lscpu, ip link show for basic system info.
+	Basic grep and awk for extracting specific data.
+	Output formatting for readability.
+	Implementing basic error handling for SSH connection failures.
+
+Connects to a remote server via SSH.
+
+Retrieves:
+	System uptime and load averages.
+	Disk space usage for / and /var (or critical partitions).
+	Memory and swap usage.
+	CPU count and architecture.
+	Status of primary network interfaces (UP/DOWN).
+	Prints a concise summary report to standard output.
+
+	Example ssh usage: ssh user@host "uptime && df -h / /var"
+	Security Aspect: Use SSH keys, not passwords.
+
+Project 2: Application-Specific Log Pattern Analysis
+----------
+Goal: Create a script to analyze a specific application log file for defined error patterns, count occurrences, and identify potential issues without consuming excessive resources.
+
+Learning Objectives:
+
+	Advanced grep with regex for pattern matching.
+	Using awk for counting, summing, and conditional logic on log lines.
+	Handling log rotation (e.g., analyzing app.log and app.log.1).
+	Implementing loops for processing multiple log files or time windows.
+	Efficiently processing large files (e.g., tail -n X | grep ...).
+
+Key Features:
+
+	Takes log file path and a list of regex patterns as input.
+	Reads the last N lines of the log file (to avoid full file reads).
+	Counts occurrences of each specified error pattern.
+	Identifies unique timestamps or message IDs associated with critical errors.
+	Generates a summary report: "Pattern X: Y occurrences, last seen at Z."
+
+	Avoiding infinite loops: Explicitly define the number of lines to read (tail -n) or the number of log files to process in a loop.
+	Resource Efficiency: Avoid cat large_file | grep if grep large_file is sufficient. Use awk for multiple operations in one pass.
+
+	Example Scenario: Count "DB connection failed" and "Service unavailable" errors in telecom_app.log.
+
+Project 3: Network Service & Port Audit
+----------
+Goal: Develop a script to audit listening network ports and verify the status of critical application-specific ports on a remote server, ensuring compliance and identifying unexpected open ports.
+
+Learning Objectives:
+
+	Using netstat or ss for detailed network information (-tulnp for TCP/UDP listening ports with process info).
+	Filtering output with grep for specific ports or processes.
+	Using awk to extract port numbers, PIDs, and program names.
+	Implementing conditional checks for expected vs. unexpected ports.
+	Handling sudo requirements for netstat/ss with -p (if necessary, carefully consider permissions).
+
+Key Features:
+
+Connects to a remote server.
+
+Lists all listening TCP/UDP ports.
+
+	Compares active listening ports against a predefined "whitelist" of expected ports.
+	Identifies and reports any ports listening that are not on the whitelist (potential security risk).
+	Verifies if specific critical application ports (e.g., 8080, 5060, 3868) are listening.
+	Reports the process associated with each listening port (if permissions allow).
+Example Output:
+
+	Listening Ports:
+	  TCP 22 (sshd)
+	  TCP 80 (nginx)
+	Unexpected Listening Ports:
+	  TCP 12345 (unknown_process)
+	Critical Port Check:
+	  Port 8080: NOT LISTENING
+	Security Aspect: Be cautious with sudo and ensure the script's execution context has minimal necessary privileges.
+
+
+
+Project 4: System Configuration Drift Detection
+----------
+Goal: Create a script to check for deviations in critical OS and software configurations against a predefined "golden standard" or expected values.
+
+Learning Objectives:
+	Reading and parsing configuration files (e.g., /etc/sysctl.conf, /etc/security/limits.conf, /etc/fstab, /etc/ntp.conf).
+	Using grep, sed, awk to extract specific configuration parameters.
+	Comparing extracted values with expected values (e.g., from a local config file or hardcoded in the script).
+	Checking package versions (rpm -q or dpkg -s).
+	Verifying kernel parameters (sysctl -a).
+	Generating an "audit report" of deviations.
+
+Key Features:
+
+Takes a remote server as input.
+
+Checks:
+
+	OS version (cat /etc/os-release).
+	NTP server configuration (grep "server" /etc/ntp.conf).
+	Specific sysctl parameters (e.g., net.ipv4.tcp_tw_reuse).
+	Presence and version of critical telecom software packages.
+	ulimit settings for the user running the application (if applicable).
+
+Reports any discrepancies.
+	Example Scenario: Ensure all servers run CentOS 7.9, use the correct NTP server, and have net.core.somaxconn set to 1024.
+
+Project 5: Comprehensive Remote Health & Audit Orchestrator
+----------
+Goal: Combine and orchestrate the functionalities from previous projects into a single, robust, and parameterized script that can generate a comprehensive health and audit report for multiple remote servers.
+
+Learning Objectives:
+
+Functions: Modularize code for reusability.
+	Argument Parsing: Use getopts for command-line arguments (e.g., --server <host>, --report-type <health|audit>, --output <csv|text>).
+	Looping over Servers: Read a list of servers from a file.
+	Efficient Remote Execution: Consider sending a temporary script to the remote server, executing it, and capturing its output, rather than multiple ssh commands. This minimizes SSH connection overhead.
+	Structured Output: Generate reports in a machine-readable format (e.g., simple CSV, JSON-like text) or well-formatted human-readable text.
+	Robust Error Handling: Implement trap for graceful exits, check all command exit codes.
+	Logging: Record script execution, errors, and warnings to a local log file.
+	Timeouts: Apply timeout to all remote commands to prevent hung processes.
+
+Key Features:
+
+Reads a list of target servers from an input file.
+
+For each server:
+
+	Executes a suite of checks (basic health, log patterns, network audit, config drift).
+	Collects all results.
+	Generates a consolidated report, potentially per-server or a summary across all servers.
+	Includes a "health score" or "compliance score" based on checks.
+	Avoiding Resource Exhaustion: The "send script to remote and execute" pattern is key here. The remote script can do all the awk/sed heavy lifting and only send back summarized data.
+Example Workflow:
+
+./telecom_auditor.sh --servers server_list.txt --report-type health --output csv
+
+The script reads server_list.txt.
+
+	For each server, it scps a small, dynamically generated script, sshes to execute it, captures output.
+	The remote script runs uptime, df, netstat, grep logs, etc., and prints a structured output.
+	The local telecom_auditor.sh parses this structured output and compiles the final CSV report.
+	These projects provide a solid foundation for engineers to become proficient in shell scripting for complex, distributed environments, directly addressing the challenges and requirements you've outlined. Emphasize hands-on implementation and thorough testing for each one.
+
+
+
+
+Project 6: Historical Resource Usage & Anomaly Detection
+---------
+Goal: Analyze historical CPU, Memory, and Disk I/O usage (from system logs or periodic snapshots) to identify unusual spikes or trends, helping predict resource exhaustion or pinpoint performance bottlenecks.
+
+Learning Objectives:
+	Parsing structured output from tools like sar, vmstat, iostat (if historical data is logged).
+	Using awk to calculate averages, differences, or thresholds over time periods.
+	Implementing simple statistical checks (e.g., current value > average + 2 * std_dev).
+	Managing and analyzing time-series data within shell (even if simple arrays/files).
+
+Key Features:
+	Takes a remote server and a time window (e.g., "last 4 hours") as input.
+	Retrieves relevant historical performance data (e.g., from /var/log/sa/saXX files for sar, or parsing custom logs).
+	Calculates average, max CPU utilization, memory free, and disk I/O rates.
+	Flags periods where metrics exceed predefined thresholds or show significant deviation from the average within the window.
+	Reports: "High CPU usage (95%) detected for 15 mins starting 14:30."
+
+Resource Efficiency: Do not pull entire historical log files. Filter and process remotely, send only summarized anomalies.
+
+Project 7: Inter-Server Connectivity & Service Dependency Validation
+---------
+Goal: Verify critical network connectivity and service port reachability between specific pairs of telecom servers, crucial for distributed application health.
+
+Learning Objectives:
+	Orchestrating ssh commands across multiple hosts for correlated checks.
+	Using nc (netcat) or telnet (if available, with timeout) for port connectivity checks.
+	Parsing ping output for latency and packet loss.
+	Conditional logic based on cross-server results.
+
+Key Features:
+	Takes a source server, a destination server, and a list of ports as input.
+	From the source server, attempts to ping the destination server.
+	From the source server, attempts to connect to each specified port on the destination server using nc or timeout telnet.
+	Reports connectivity status (ping success/failure, latency) and port reachability (open/closed/filtered).
+	Handles scenarios where a server might not respond or a port is blocked.
+
+Security Aspect: Ensure nc or telnet are used carefully with timeouts and minimal functionality.
+
+Project 8: Critical Process Health & Restart Readiness
+---------
+Goal: Beyond just checking if a process is running, assess its "health" (e.g., high memory usage, recent restarts, open file limits) and determine if it's in a state suitable for a planned restart.
+
+Learning Objectives:
+	Using ps aux, lsof -p <PID>, pmap -x <PID>.
+	Parsing process output to check memory, CPU, open file descriptors.
+	Analyzing journalctl or syslog for recent process crashes/restarts.
+	Implementing logic to assess "restart readiness" based on defined criteria.
+Key Features:
+	Takes a process name or PID as input.
+	Reports current CPU/Memory usage of the process.
+	Checks number of open file descriptors against limits.
+	Scans system logs for recent "restart" or "crash" events related to the process.
+	Assesses and reports if the process appears "healthy" or "unhealthy".
+	Provides a "restart recommendation" (e.g., "Ready for graceful restart," "Unstable, investigate first").
+	Resource Efficiency: Use grep and awk directly on ps output, avoid capturing full output unless absolutely necessary.
+
+Project 9: Log Correlation and Root Cause Hinting
+---------
+Goal: Analyze multiple related log files (e.g., application log, database log, system log) simultaneously for correlated events that might hint at a root cause for an issue.
+
+Learning Objectives:
+
+Reading and correlating log entries based on timestamps or common identifiers.
+
+Advanced awk scripting for multi-file processing and associative arrays for correlation.
+
+Using join or custom awk logic to merge data streams.
+
+Implementing basic heuristics for "root cause hinting" (e.g., "DB error in app log followed by network error in system log").
+
+Key Features:
+
+Takes a primary log file and associated auxiliary log files (e.g., /var/log/telecom_app.log, /var/log/pgsql.log, /var/log/syslog).
+
+Looks for a specific "trigger" event in the primary log (e.g., "Service Failure").
+
+Within a defined time window around the trigger, searches for correlated patterns in auxiliary logs (e.g., "DB connection refused," "Network unreachable").
+
+Reports: "Service Failure at [timestamp] likely correlated with: DB Error at [timestamp] in pgsql.log."
+
+Complexity: This is significantly harder due to time synchronization and pattern correlation. Start with simple timestamp matching.
+
+Project 10: Security Configuration Audit & Weakness Scan (Basic)
+---------
+Goal: Audit critical security configurations on a remote server to identify common weaknesses or deviations from security best practices relevant to the telecom environment.
+
+Learning Objectives:
+	Auditing file permissions (stat, find -perm).
+	Checking sudoers file for risky entries.
+	Examining sshd_config for insecure settings (e.g., PermitRootLogin, PasswordAuthentication).
+	Checking for default/known weak users.
+	Verifying firewall rules (e.g., iptables -L -n).
+	Parsing /etc/passwd and /etc/shadow (carefully, for metadata only).
+
+Key Features:
+
+Checks:
+	PermitRootLogin status in sshd_config.
+	PasswordAuthentication status in sshd_config.
+	Ownership and permissions of critical files (/etc/passwd, /etc/shadow, /etc/sudoers, sshd_config).
+	Presence of common default users with UID 0 other than root.
+	Basic iptables default policy (e.g., are incoming connections explicitly denied by default?).
+	Generates a "Security Audit Report" highlighting potential vulnerabilities or non-compliant settings.
+	Security Aspect: This project is about security. Ensure the script itself is secure and adheres to least privilege. Only report, do not modify.
+
+Project 11: NGINX/Apache Access Log Analysis for Traffic Peaks/Errors
+---------
+Goal: Analyze web server access logs to identify periods of unusually high traffic, 4xx/5xx error spikes, or potential denial-of-service attempts based on source IP.
+
+Learning Objectives:
+
+	Advanced awk for processing columnar data, calculating sums/averages.
+	Using sort and uniq -c for frequency counts (e.g., top IPs, top error codes).
+	Time-based grouping of log entries.
+	Regex for parsing standard web server log formats.
+
+Key Features:
+
+	Takes a web server access log path and a time window.
+	Calculates requests per second/minute over the window.
+	Identifies periods with abnormal request rates.
+	Counts occurrences of 4xx and 5xx HTTP status codes.
+	Identifies top N IP addresses with the most requests or errors.
+Reports summary: "Peak traffic (X req/sec) at Y. Z (5xx) errors detected."
+
+Project 12: NTP Synchronization & Jitter Analysis
+---------
+Goal: Verify the NTP synchronization status of a server, identifying configured peers, current offset, and jitter to ensure time accuracy, critical for telecom applications.
+
+Learning Objectives:
+
+	Parsing ntpq -p output.
+	Understanding NTP status flags (*, +, -, x).
+	Using awk to extract peer IP, offset, jitter, and reachability.
+	Implementing logic to determine synchronization health (e.g., synchronized to a stratum 1/2 server, acceptable offset/jitter).
+Key Features:
+
+Connects to a remote server.
+
+Executes ntpq -p.
+	Parses the output to identify:
+	The currently synchronized peer (marked with *).
+	Other reachable peers (marked with +).
+	Offset and jitter values for each peer.
+	Reports on the synchronization status: "Synchronized to X.Y.Z.W (stratum S) with offset O ms and jitter J ms."
+
+Flags if the server is unsynchronized or has excessive offset/jitter.
+
+Project 13: Kernel Log (dmesg) Anomaly Scanner
+---------
+Goal: Scan the kernel message buffer (dmesg or /var/log/kern.log) for critical hardware errors, driver issues, or unusual system events that might indicate instability.
+
+Learning Objectives:
+Processing dmesg output (which can be very large).
+Using specific regex patterns to identify common kernel error messages (e.g., "Out of memory", "hardware error", "NMI watchdog", "disk I/O error").
+Filtering by timestamp (if dmesg -T or journalctl -k is used).
+Categorizing identified issues.
+
+Key Features:
+
+	Connects to a remote server.
+	Retrieves the kernel message buffer.
+	Scans for predefined patterns indicating:
+	Hardware failures (e.g., CPU, memory, disk controller errors).
+	Driver issues.
+	OOM (Out Of Memory) killer activations.
+	File system errors.
+
+Reports a summary of "Kernel Anomalies Found" with counts and snippets of relevant lines.
+
+Resource Efficiency: Again, process remotely with grep -E and awk before returning only the matched lines.
+
+Project 14: Automated Diagnostic Data Collector for Incident Response
+---------
+Goal: Create a single script that, upon execution, quickly gathers a predefined set of diagnostic data (system state, specific logs, process info) from a server, bundles it, and securely transfers it. This is invaluable during incident response.
+
+Learning Objectives:
+	Orchestrating multiple commands to collect diverse data.
+	Using tar or zip for bundling files.
+	Secure file transfer (scp or sftp in script).
+	Implementing a robust, temporary directory management using mktemp.
+	Ensuring cleanup of temporary files regardless of script success/failure using trap.
+
+Key Features:
+
+Takes a remote server and an output directory as input.
+
+Remotely collects:
+	uptime, df, free.
+	Top 10 CPU/Memory consuming processes.
+	Last 100 lines of critical application logs.
+	netstat -tulnp output.
+	Kernel log (dmesg).
+	Relevant config file snippets (/etc/hosts, /etc/resolv.conf).
+	Bundles all collected data into a single compressed archive on the remote server.
+	Securely transfers the archive back to the local machine.
+Cleans up temporary files on both local and remote servers.
+
+Security Aspect: Ensure the script itself is secure, temporary files are created safely (mktemp), and transfer methods are encrypted.
+
+Project 15: Application Log Health Indicator & Rolling Summary
+---------
+Goal: Continuously (or periodically) monitor a critical application log, extracting specific health indicators (e.g., successful transaction counts, specific error types) and maintaining a rolling summary.
+
+Learning Objectives:
+
+	Stateful awk processing: awk scripts that maintain counts/sums across multiple lines or even multiple invocations (by writing state to a small file).
+	Processing log files as they grow (simulated tail -f behavior for a fixed period or inotifywait if available).
+	Managing a "rolling window" for statistics.
+	Generating periodic summarized reports.
+
+Key Features:
+
+Monitors a specified application log file (check if we can get this from the client).
+	if so we can change the pattern etc.
+
+	Defines patterns for "successful operation," "minor warning," "critical error."
+	Keeps a running count of each indicator within a configurable time window (e.g., last 5 minutes, last 1 hour).
+	Prints a summary every 'X' seconds/minutes: "Last 5 min: 1000 Success, 5 Warnings, 1 Critical Error."
+	Can be adapted to run in a loop with a sleep interval to simulate continuous monitoring (carefully manage resource usage for long-running processes).
+
+Avoiding Infinite Loops/Resource Exhaustion: If running in a continuous loop, ensure appropriate sleep intervals, and manage log file processing to only process new lines (tail -f or awk's getline). Avoid letting the script consume unbounded resources.
+
+
+
+Troubleshooting
+---------------
+16: The "Invisible" Web Server
+The Problem to Create:
+
+Run a spring boot application on 8080. 
+Modify it to run on another port without telling engineers`.
+Ask them to troubleshoot.
+
+17. Bring it back on 8080 
+Block access to it using firewall 
+Ask them to troubleshoot
