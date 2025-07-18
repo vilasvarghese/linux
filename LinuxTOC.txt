@@ -1,0 +1,1425 @@
+https://www.baeldung.com/linux/
+
+
+
+
+Week 1: Linux Basics & Networking Foundations (RHEL 9)
+Objective: Build foundational Linux and networking skills.
+Week 1 can be reduced to 3-day course
+	Day 1: Introduction to Linux
+	•	What is Linux? History and distributions (RHEL 9, Ubuntu 24.04, Fedora)
+	•	Linux vs. Windows, cloud context (AWS EC2)
+	•	Installation: RHEL 9 in VirtualBox or WSL2
+	•	Shell basics: whoami, date, man, clear
+	Lab: Install RHEL 9, navigate terminal.
+
+	Day 2: Filesystem and File Management
+	•	Filesystem hierarchy: /etc, /var, /usr, /home
+	•	Commands: ls, pwd, cd, file, mkdir, touch, cp, mv, rm, find
+	--------------------------------------------------------------------------------
+	find 
+	https://www.geeksforgeeks.org/linux-unix/find-command-in-linux-with-examples/
+	--------------------------------------------------------------------------------
+	
+	•	Wildcards: *, ?, relative vs. absolute paths
+	Lab: Create directories, manage files.
+
+	Day 3: Permissions and Essential Commands
+	•	Permissions: rwx, chmod, chown (RHCSA 4.14)
+	•	Viewing files: cat, less, more, head, tail
+	•	I/O: stdin, stdout, stderr, pipes, redirection (RHCSA 4.7)
+	•	Monitoring: top, htop, vmstat, journalctl
+	--------------------------------------------------------------------------------
+		https://swac.blog/the-essential-guide-to-linux-system-monitoring-with-top-htop-and-vmstat/
+	--------------------------------------------------------------------------------
+	Lab: Set permissions, redirect output.
+
+	Day 4: Networking Foundations
+	•	Network types: LAN, WAN, SD-WAN (Basics Networking 1.1)
+--------------------------------------------------------------------------------
+	https://www.youtube.com/watch?v=NyZWSvSj8ek
+	https://www.youtube.com/watch?v=R5TV6lO3-1M
+	https://www.youtube.com/watch?v=o5uWsnzqr18
+	--------------------------------------------------------------------------------
+	•	OSI vs. TCP/IP models, IPv4/IPv6 (RHCSA 4.6)
+--------------------------------------------------------------------------------
+Refer Notes.txt
+	--------------------------------------------------------------------------------
+	•	Commands: ip, nmcli, ss, ping, traceroute, dig (RHCSA 3.4)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Configure IPv4/IPv6 on RHEL 9.
+
+	Day 5: Hands-on Lab & Quiz
+	•	Scenario: Create user folder structure, set permissions, configure network.
+	•	Quiz: MCQs on Linux commands, filesystem, networking basics.
+	Lab: Practice Week 1 tasks.
+
+Week 2: Advanced Networking, VoIP Troubleshooting, and System Admin
+Objective: Deepen networking skills, troubleshoot VoIP, and introduce system administration.
+	Day 6: Subnetting and Switching
+	•	IPv4 CIDR, subnet masks, IPv6 SLAAC (Basics Networking 1.3)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Ethernet, VLANs, bridge command (Basics Networking 2.1)
+--------------------------------------------------------------------------------
+Let's dive into a detailed tutorial on Ethernet, VLANs, and the bridge command in Linux.
+
+1. Ethernet: The Foundation of Wired Networking
+Ethernet is the most widely used wired networking technology. It defines the physical and data link layers (Layers 1 and 2) of the OSI model, governing how data is formatted for transmission over a network medium and how devices access that medium.
+
+1.1 Key Concepts of Ethernet
+Ethernet Frame: The basic unit of data transferred over an Ethernet network. It includes:
+
+Preamble and Start Frame Delimiter (SFD): Synchronization signals.
+
+Destination MAC Address: The hardware address of the receiving device (6 bytes).
+
+Source MAC Address: The hardware address of the sending device (6 bytes).
+
+EtherType (or Length): Indicates the protocol encapsulated in the payload (e.g., IP, ARP, VLAN tag).
+
+Payload (Data): The actual data being transmitted (e.g., an IP packet). Minimum 46 bytes, maximum 1500 bytes (for standard Ethernet, excluding Jumbo Frames).
+
+Frame Check Sequence (FCS): A checksum for error detection.
+
+MAC Address (Media Access Control Address): A unique, hardcoded 48-bit (6-byte) physical address assigned to each network interface controller (NIC) by its manufacturer. It's used for local communication within a network segment.
+
+Example: 00:1A:2B:3C:4D:5E
+
+Collision Domain: A network segment where data packets can "collide" with one another if sent simultaneously. Modern Ethernet (switched Ethernet) largely eliminates collision domains by using switches.
+
+Broadcast Domain: A network segment where a broadcast frame (sent to all devices) will reach all devices. Routers typically define the boundaries of broadcast domains.
+
+Duplex Modes:
+
+Half-Duplex: Devices can send or receive data, but not simultaneously (e.g., old hubs).
+
+Full-Duplex: Devices can send and receive data simultaneously (modern standard with switches).
+
+1.2 Ethernet Devices
+NIC (Network Interface Card): The hardware that connects a computer to an Ethernet network.
+
+Hub (Obsolete): A simple device that connects multiple Ethernet devices. It's a "dumb" repeater, broadcasting all incoming traffic to all other ports, creating a large collision domain.
+
+Switch: A smarter device that connects multiple Ethernet devices. It learns the MAC addresses of devices connected to its ports and forwards frames only to the intended destination port, significantly reducing collisions and improving efficiency. Switches operate at Layer 2 (Data Link Layer).
+
+Router: A device that connects different network segments (broadcast domains) and forwards traffic between them based on IP addresses. Routers operate at Layer 3 (Network Layer).
+
+2. VLANs: Segmenting Networks Logically
+VLAN (Virtual Local Area Network) is a logical grouping of network devices that can communicate with each other as if they were on the same physical LAN, even if they are physically connected to different network switches. VLANs allow network administrators to segment networks without the need for multiple sets of physical infrastructure.
+
+2.1 Why Use VLANs?
+Security: Isolate sensitive data or departments from general network traffic.
+
+Performance: Reduce broadcast traffic within a segment, improving network efficiency.
+
+Flexibility: Easily group users or devices regardless of their physical location.
+
+Simplified Management: Easier to manage network changes (moves, adds, changes).
+
+Cost Reduction: Fewer physical switches and cabling.
+
+2.2 How VLANs Work (802.1Q Tagging)
+The IEEE 802.1Q standard defines how VLAN information is inserted into an Ethernet frame.
+
+VLAN Tag: A 4-byte tag is inserted into the Ethernet frame header, after the Source MAC Address and before the EtherType. This tag contains:
+
+Tag Protocol Identifier (TPID): Always 0x8100, indicating an 802.1Q tagged frame.
+
+Priority Code Point (PCP): 3 bits for QoS (Quality of Service) prioritization.
+
+Drop Eligible Indicator (DEI): 1 bit indicating if the frame can be dropped during congestion.
+
+VLAN ID (VID): 12 bits, supporting 4096 possible VLANs (0 and 4095 are reserved).
+
+Tagged vs. Untagged Ports:
+
+Access Port (Untagged): A switch port assigned to a single VLAN. Traffic leaving this port for an end device (e.g., PC) is untagged. Traffic arriving on this port is automatically assigned to that VLAN.
+
+Trunk Port (Tagged): A switch port configured to carry traffic for multiple VLANs. Frames traveling over a trunk link are tagged with their respective VLAN IDs. This is typically used for switch-to-switch connections or connections to servers/routers that are VLAN-aware.
+
+Native VLAN: On a trunk port, there's often a "native VLAN." Traffic from this VLAN is sent untagged over the trunk, and untagged traffic received on the trunk is assigned to the native VLAN. It's best practice to change the native VLAN from the default (VLAN 1) for security reasons.
+
+2.3 VLANs in Linux
+In Linux, VLANs are implemented as sub-interfaces on a physical network interface. For example, eth0.10 would represent VLAN 10 on the eth0 physical interface.
+
+3. Linux Network Bridging with bridge command
+A Linux bridge is a software device that simulates a hardware network switch. It operates at Layer 2 of the OSI model (data link layer) and connects multiple network segments together, allowing devices on those segments to communicate as if they were on the same physical network.
+
+The bridge command (part of the iproute2 utility, which is standard in modern Linux distributions like RHEL) is used to configure and manage these software bridges. It's the modern way to manage bridges, superseding older tools like brctl.
+
+3.1 Why Use Linux Bridges?
+Virtualization: Essential for connecting virtual machines (VMs) to the physical network. The VMs' virtual NICs are attached to the bridge, and the bridge then connects to a physical NIC.
+
+Container Networking: Used by container runtimes (like Docker, LXC) to provide network connectivity to containers.
+
+Network Segmentation: While VLANs segment broadcast domains, bridges connect them. However, bridges can also interact with VLANs for more complex setups.
+
+Traffic Mirroring/Sniffing: Can be configured to mirror traffic from one port to another.
+
+Learning and Forwarding: Like a hardware switch, a Linux bridge learns MAC addresses and forwards frames only to the correct port.
+
+3.2 Key Concepts of Linux Bridging
+Bridge Device: A logical network interface (e.g., br0) that acts as the virtual switch.
+
+Bridge Ports: The network interfaces (physical NICs, VLAN sub-interfaces, virtual NICs of VMs/containers) that are "attached" to the bridge. Traffic flows between these ports via the bridge.
+
+MAC Address Learning: The bridge dynamically learns the MAC addresses of devices connected to its ports.
+
+Spanning Tree Protocol (STP): Bridges can participate in STP to prevent network loops in more complex topologies.
+
+3.3 Detailed Tutorial: Using the bridge Command
+Let's assume you have a RHEL machine with eth0 as your primary network interface.
+
+3.3.1 Step 1: Create a Linux Bridge
+First, create a bridge interface. Let's call it br0.
+
+Bash
+
+sudo ip link add name br0 type bridge
+ip link add: Command to add a new network device.
+
+name br0: Specifies the name of the new device as br0.
+
+type bridge: Specifies that the device type is a Linux bridge.
+
+You can verify its creation:
+
+Bash
+
+ip link show br0
+It will show br0 but it will be in a DOWN state.
+
+3.3.2 Step 2: Add Physical Interface to the Bridge
+Now, add your physical interface (e.g., eth0) as a port to br0. This effectively makes eth0 a slave of br0.
+Important: When you add a physical interface to a bridge, the physical interface itself should not have an IP address configured. The IP address should be configured on the bridge interface (br0) instead.
+
+First, remove any existing IP configuration from eth0:
+
+Bash
+
+sudo ip address flush dev eth0
+Then, add eth0 to br0:
+
+Bash
+
+sudo ip link set dev eth0 master br0
+ip link set: Command to modify network device properties.
+
+dev eth0: Specifies the device to modify (eth0).
+
+master br0: Assigns eth0 as a master of the br0 bridge.
+
+3.3.3 Step 3: Bring Up the Bridge and Assign IP Address
+Now, bring the bridge interface br0 up and assign an IP address to it. This IP address will be the identity of your machine on the network through the bridge.
+
+Bash
+
+sudo ip link set dev br0 up
+sudo ip address add 192.168.1.100/24 dev br0 # Use your desired IP/subnet
+ip link set dev br0 up: Activates the br0 interface.
+
+ip address add ...: Assigns an IP address to br0.
+
+Verify the configuration:
+
+Bash
+
+ip a show br0
+You should see br0 listed with the assigned IP address and in UP state.
+
+3.3.4 Step 4: Configure Default Route (if necessary)
+If this is your main network connection, you'll need to add a default route.
+
+Bash
+
+sudo ip route add default via 192.168.1.1 # Replace with your gateway IP
+3.3.5 Step 5: Persistence (Making it permanent)
+The ip commands above are temporary and will be lost after a reboot. For RHEL, you typically make these configurations persistent using NetworkManager configuration files or ifcfg files (though ifcfg is being deprecated in favor of NetworkManager profiles).
+
+Using NetworkManager (Recommended for modern RHEL):
+
+Create a connection file for the bridge:
+Create a file like /etc/NetworkManager/system-connections/br0.nmconnection (or use nmcli interactively).
+
+Bash
+
+sudo nmcli connection add type bridge autoconnect yes con-name br0 ifname br0 ipv4.method manual ipv4.addresses 192.168.1.100/24 ipv4.gateway 192.168.1.1 ipv4.dns "8.8.8.8,8.8.4.4"
+Adjust IP address, gateway, and DNS as needed.
+
+Modify the physical interface connection:
+Find the existing connection name for eth0 (e.g., nmcli connection show). It might be named eth0 or something like Wired connection 1.
+
+Bash
+
+sudo nmcli connection modify "Wired connection 1" master br0 slave-type bridge
+sudo nmcli connection modify "Wired connection 1" autoconnect yes
+sudo nmcli connection down "Wired connection 1"
+sudo nmcli connection up "Wired connection 1"
+sudo nmcli connection up br0
+This detaches the physical interface's IP configuration and attaches it to the bridge.
+
+Restart NetworkManager (or reboot):
+
+Bash
+
+sudo systemctl restart NetworkManager
+3.3.6 Step 6: Removing a Bridge
+To remove a bridge and revert:
+
+Remove the physical interface from the bridge:
+
+Bash
+
+sudo ip link set dev eth0 nomaster
+Bring down the bridge:
+
+Bash
+
+sudo ip link set dev br0 down
+Delete the bridge:
+
+Bash
+
+sudo ip link del dev br0
+Reconfigure eth0 (e.g., using nmcli or dhclient if it gets IP via DHCP) for persistence.
+
+3.4 Bridging with VLANs: bridge and VLAN Sub-interfaces
+To create a bridge that carries VLAN-tagged traffic or where you want to associate specific ports with specific VLANs on the bridge:
+
+3.4.1 Scenario 1: Bridge Carrying Multiple VLANs (Trunking)
+If you want your br0 to act as a trunk, and VMs connected to it should receive tagged traffic, you just add the physical interface to the bridge as shown above. The bridge, by default, will pass through tagged frames. Your VMs would then configure their own virtual NICs with VLAN sub-interfaces (e.g., eth0.10, eth0.20) to process the tagged traffic.
+
+3.4.2 Scenario 2: Bridge with VLAN Filtering (VLAN-Aware Bridge)
+This is a more advanced feature that allows the Linux bridge itself to become VLAN-aware, preventing traffic from leaking between VLANs on the bridge. This is commonly used in virtualized environments where you want to enforce VLAN isolation directly on the bridge.
+
+Enable VLAN Filtering on the bridge:
+
+Bash
+
+sudo ip link set dev br0 type bridge vlan_filtering 1
+Add VLANs to the bridge (Bridge VLAN interfaces):
+This tells the bridge to be aware of certain VLANs.
+
+Bash
+
+sudo bridge vlan add vid 10 dev br0
+sudo bridge vlan add vid 20 dev br0
+Add physical port and specify PVID/VLANs:
+You can specify a PVID (Port VLAN ID) for untagged traffic on a port, and also allow it to pass specific tagged VLANs.
+
+Access Port (untagged VLAN 10):
+
+Bash
+
+sudo bridge vlan add vid 10 dev eth0 pvid untagged
+This means untagged traffic entering eth0 is put into VLAN 10. And frames from VLAN 10 leaving eth0 will be untagged.
+
+Trunk Port (allow VLAN 10 and 20):
+
+Bash
+
+sudo bridge vlan add vid 10 dev eth0 master_br0
+sudo bridge vlan add vid 20 dev eth0 master_br0
+This tells the bridge that eth0 can carry traffic for VLANs 10 and 20 (as tagged frames).
+
+Add a VM's virtual interface to the bridge and assign VLAN:
+If you have a VM whose virtual NIC (vnet0) is attached to br0, you can assign it to a specific VLAN:
+
+Bash
+
+sudo bridge vlan add vid 10 dev vnet0 master_br0
+This will ensure vnet0 only sees traffic for VLAN 10 (untagged) and that traffic is passed to/from eth0 with VLAN 10 tags.
+
+Verify VLANs on the bridge:
+
+Bash
+
+sudo bridge vlan show
+This detailed tutorial covers the fundamentals of Ethernet, VLANs, and the practical application of the bridge command for configuring Linux software bridges, including basic VLAN awareness.
+
+
+	--------------------------------------------------------------------------------
+	Lab: Subnet a network, simulate VLANs in GNS3.
+--------------------------------------------------------------------------------
+
+https://www.youtube.com/watch?v=geEjAoFntF8
+https://www.youtube.com/watch?v=2SnAJkwQUnU
+	VPC: Virtual PC Simulator
+	ESW: (Ethernet Switch) labels on the switches
+	Two Ethernet Switches (ESW1 and ESW2):
+
+		ESW1:
+			Connected to PC3 via f1/0.
+			Connected to PC4 via f1/2.
+			Connected to ESW2 via f1/1.
+
+		ESW2:
+			Connected to PC1 via f1/0.
+			Connected to PC2 via e0.
+			Connected to ESW1 via f1/1.
+		Connections: The lines between devices indicate network cables. The interfaces are labeled (e.g., f1/0, e0)
+
+
+1. Understanding Subnetting
+Subnetting is the process of dividing a large network into smaller, more manageable sub-networks or "subnets." It's essential for efficient IP address utilization, improved network performance, and enhanced security.
+
+1.1 IP Addresses and Network Classes (Brief Review)
+An IP address (IPv4) is a 32-bit number, usually represented as four octets (e.g., 192.168.1.1). It consists of two parts: a Network ID and a Host ID.
+
+Network ID: Identifies the specific network the device belongs to.
+
+Host ID: Identifies the specific device within that network.
+
+Historically, IP addresses were categorized into classes:
+
+Class A: First octet 1-126 (e.g., 10.0.0.0/8). Default subnet mask: 255.0.0.0 (or /8).
+Class B: First octet 128-191 (e.g., 172.16.0.0/16). Default subnet mask: 255.255.0.0 (or /16).
+Class C: First octet 192-223 (e.g., 192.168.1.0/24). Default subnet mask: 255.255.255.0 (or /24).
+
+1.2 The Role of the Subnet Mask
+The subnet mask (also a 32-bit number, like 255.255.255.0 or represented as /24) tells a device which part of an IP address is the Network ID and which is the Host ID. It's a series of '1's followed by '0's. The '1's identify the Network ID bits, and the '0's identify the Host ID bits.
+
+Example:
+IP: 192.168.1.10
+Mask: 255.255.255.0 (or /24)
+
+In binary:
+IP: 11000000.10101000.00000001.00001010
+Mask: 11111111.11111111.11111111.00000000
+
+Performing a bitwise AND operation gives the Network Address:
+Network: 11000000.10101000.00000001.00000000 (192.168.1.0)
+
+1.3 Subnetting Process (Borrowing Host Bits)
+Subnetting involves borrowing bits from the Host ID portion of the IP address to create additional subnet IDs. This makes the subnet mask longer than its default.
+
+Scenario: You have a Class C network 192.168.1.0/24 and need 4 subnets.
+
+Original Network: 192.168.1.0/24
+
+Network bits: 24 (11111111.11111111.11111111.00000000)
+
+Host bits: 8
+
+Total hosts: 2 
+8
+ −2=254 (minus network and broadcast addresses)
+
+Determine Borrowed Bits: To get 4 subnets, you need 2 
+n
+ 
+ge4. So, n=2 bits. You borrow 2 bits from the host portion.
+
+New Subnet Mask: Your new subnet mask will be /24+2=/26.
+
+Binary: 11111111.11111111.11111111.11000000
+
+Decimal: 255.255.255.192
+
+Calculate Subnets and Hosts per Subnet:
+
+Number of subnets: 2 
+textborrowedbits
+ =2 
+2
+ =4 subnets.
+
+Number of host bits remaining: 8−2=6 bits.
+
+Number of usable hosts per subnet: 2 
+textremaininghostbits
+ −2=2 
+6
+ −2=64−2=62 hosts.
+
+Block Size (or Magic Number): 256−
+textlastoctetofsubnetmask=256−192=64. This is the increment for network addresses.
+
+List the Subnets:
+
+Subnet #
+
+Network Address
+
+First Usable Host
+
+Last Usable Host
+
+Broadcast Address
+
+CIDR
+
+1
+
+192.168.1.0
+192.168.1.1
+192.168.1.62
+192.168.1.63
+
+/26
+
+2
+
+192.168.1.64
+
+192.168.1.65
+
+192.168.1.126
+
+192.168.1.127
+
+/26
+
+3
+
+192.168.1.128
+
+192.168.1.129
+
+192.168.1.190
+
+192.168.1.191
+
+/26
+
+4
+
+192.168.1.192
+
+192.168.1.193
+
+192.168.1.254
+
+192.168.1.255
+
+/26
+
+
+Export to Sheets
+You can use online subnet calculators (e.g., subnet-calculator.com) to verify your calculations.
+
+2. VLANs: Logical Network Segmentation 🏷️
+As explained in the previous response, VLANs (Virtual Local Area Networks) allow you to logically segment a network using a single physical switch, creating multiple broadcast domains. Devices in different VLANs cannot communicate directly without a Layer 3 device (router or Layer 3 switch).
+
+2.1 Key VLAN Concepts (Refresher)
+VLAN ID (VID): A numerical identifier (1-4094) for a specific VLAN.
+
+Access Port: A switch port assigned to a single VLAN. Traffic sent to/from an end device (PC, server) is untagged.
+
+Trunk Port: A switch port configured to carry traffic for multiple VLANs. Frames are tagged (802.1Q) with their VLAN ID when traversing this link. Used for switch-to-switch connections or connections to VLAN-aware routers/servers.
+
+Native VLAN: The VLAN whose traffic is sent untagged over a trunk port. By default, it's VLAN 1. It's a security best practice to change it or not use it for user traffic.
+
+3. Simulating VLANs and Subnetting in GNS3 (Hands-on) 🧪
+GNS3 (Graphical Network Simulator-3) is a powerful tool for network simulation. For simulating VLANs, we'll use a Cisco IOSvL2 (Layer 2) switch appliance, as it supports VLAN configuration.
+
+3.1 GNS3 Setup Prerequisites
+GNS3 Installation: Ensure you have GNS3 installed (both the GNS3 GUI and the GNS3 VM if using complex topologies or a local server).
+
+Cisco IOSvL2 Image: You need to import a Cisco IOSvL2 image into GNS3. This typically requires a Cisco CCO account and legitimate access to these images (they are not freely available from GNS3).
+
+If you don't have IOSvL2: You can use a generic "Ethernet Switch" and multiple "Cloud" nodes connected to different virtual network adapters on your host (each adapter bridged to a different virtual machine running a Linux OS). This is more complex and less realistic for pure VLANs, so acquiring an IOSvL2 image is highly recommended for this tutorial.
+
+VPCS (Virtual PC Simulator): GNS3 comes with VPCS, a lightweight command-line virtual PC that's perfect for testing connectivity.
+
+Loopback Adapter (Windows/Linux): For connecting GNS3 to your host machine's network or for advanced scenarios. (Not strictly needed for this basic VLAN tutorial, but good to know).
+
+3.2 Our Scenario: Subnetting and VLANs for a Small Company
+Let's design a network for a small company with two departments: Sales and IT.
+
+Main Network: 192.168.1.0/24
+
+Subnetting Goal: Create two subnets from 192.168.1.0/24, one for Sales and one for IT.
+
+VLAN Goal: Isolate Sales and IT traffic using VLANs on a single switch.
+
+Subnetting Calculation (borrow 1 bit for 2 subnets):
+
+Borrowed bits: 1
+
+New Subnet Mask: /25 (255.255.255.128)
+
+Number of subnets: 2 
+1
+ =2
+
+Hosts per subnet: 2 
+7
+ −2=126 usable hosts.
+
+Block Size: 256−128=128
+
+Department
+
+Network Address
+
+First Usable Host
+
+Last Usable Host
+
+Broadcast Address
+
+VLAN ID
+
+Sales
+
+192.168.1.0
+
+192.168.1.1
+
+192.168.1.126
+
+192.168.1.127
+
+10
+
+IT
+
+192.168.1.128
+
+192.168.1.129
+
+192.168.1.254
+
+192.168.1.255
+
+20
+
+
+Export to Sheets
+Network Diagram Goal:
+
+          +-----------------+
+          |    Router (R1)  |  (Acts as Inter-VLAN Router)
+          | Fa0/0.10: 192.168.1.1/25  |
+          | Fa0/0.20: 192.168.1.129/25 |
+          +--------+--------+
+                   | (Trunk Port)
+                   |
+          +--------+--------+
+          |    Layer 2 Switch (S1)    |
+          |  Fa0/1: Access VLAN 10 (Sales)   |
+          |  Fa0/2: Access VLAN 10 (Sales)   |
+          |  Fa0/3: Access VLAN 20 (IT)      |
+          |  Fa0/4: Access VLAN 20 (IT)      |
+          +--------+--------+
+                   |
+      +------------+-------------+
+      |                          |
++-----+-----+             +-----+-----+
+| PC1 (Sales)|             | PC3 (IT) |
+| 192.168.1.10/25 |             | 192.168.1.130/25 |
++-------------+             +------------+
+3.3.1 GNS3 Project Setup
+Open GNS3: Start the GNS3 GUI and ensure your GNS3 VM (if used) is running.
+
+Create a New Project: Go to File > New blank project. Give it a name like "VLAN_Subnet_Tutorial".
+
+Drag and Drop Devices:
+
+From the "Routers" section, drag one Cisco IOSv (or a similar router image you have). Let's call it R1.
+
+From the "Switches" section, drag one Cisco IOSvL2 (or a similar Layer 2 switch). Let's call it S1.
+
+From the "End devices" section, drag four VPCS instances. Name them PC1, PC2, PC3, PC4.
+
+Connect Devices:
+
+Connect R1's GigabitEthernet0/0 to S1's GigabitEthernet0/0.
+
+Connect PC1 to S1's GigabitEthernet0/1.
+
+Connect PC2 to S1's GigabitEthernet0/2.
+
+Connect PC3 to S1's GigabitEthernet0/3.
+
+Connect PC4 to S1's GigabitEthernet0/4.
+
+Start All Devices: Click the green "Start/Resume all devices" button. Wait for them to boot up (green light on devices).
+
+3.3.2 Configure the Layer 2 Switch (S1)
+Console into S1: Right-click S1 and select "Console".
+
+Enter Global Configuration Mode:
+
+Switch>en
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#
+Create VLANs:
+
+Switch(config)#vlan 10
+Switch(config-vlan)#name Sales
+Switch(config-vlan)#exit
+Switch(config)#vlan 20
+Switch(config-vlan)#name IT
+Switch(config-vlan)#exit
+Verify VLANs:
+
+Switch(config)#do show vlan brief
+You should see VLAN 10 (Sales) and VLAN 20 (IT) listed.
+
+Configure Access Ports: Assign the PC-connected ports to their respective VLANs.
+
+Switch(config)#int gi0/1
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 10
+Switch(config-if)#no shut
+Switch(config-if)#exit
+
+Switch(config)#int gi0/2
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 10
+Switch(config-if)#no shut
+Switch(config-if)#exit
+
+Switch(config)#int gi0/3
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 20
+Switch(config-if)#no shut
+Switch(config-if)#exit
+
+Switch(config)#int gi0/4
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 20
+Switch(config-if)#no shut
+Switch(config-if)#exit
+Configure Trunk Port: The port connecting to the router (Gi0/0) needs to carry traffic for both VLANs.
+
+Switch(config)#int gi0/0
+Switch(config-if)#switchport trunk encapsulation dot1q
+Switch(config-if)#switchport mode trunk
+Switch(config-if)#no shut
+Switch(config-if)#exit
+Save Configuration:
+
+Switch(config)#do wr
+Building configuration...
+[OK]
+Switch(config)#
+3.3.3 Configure the Router (R1) for Inter-VLAN Routing
+The router needs to understand VLAN tags to route traffic between VLANs. This is done using sub-interfaces.
+
+Console into R1: Right-click R1 and select "Console".
+
+Enter Global Configuration Mode:
+
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#
+Create Sub-interfaces for each VLAN:
+
+Router(config)#int gi0/0.10
+Router(config-subif)#encapsulation dot1q 10
+Router(config-subif)#ip address 192.168.1.1 255.255.255.128  <-- Sales Gateway
+Router(config-subif)#no shut
+Router(config-subif)#exit
+
+Router(config)#int gi0/0.20
+Router(config-subif)#encapsulation dot1q 20
+Router(config-subif)#ip address 192.168.1.129 255.255.255.128 <-- IT Gateway
+Router(config-subif)#no shut
+Router(config-subif)#exit
+Bring Up the Physical Interface: Ensure the main physical interface Gi0/0 is up.
+
+Router(config)#int gi0/0
+Router(config-if)#no shut
+Router(config-if)#exit
+Save Configuration:
+
+Router(config)#do wr
+Building configuration...
+[OK]
+Router(config)#
+3.3.4 Configure the Virtual PCs (VPCS)
+Now, assign IP addresses to the VPCS according to their subnets. The router's sub-interface IP will be the default gateway.
+
+Console into PC1 (Sales VLAN 10):
+
+PC1> ip 192.168.1.10 255.255.255.128 192.168.1.1
+checking for duplicate address...
+PC1>
+Console into PC2 (Sales VLAN 10):
+
+PC2> ip 192.168.1.11 255.255.255.128 192.168.1.1
+checking for duplicate address...
+PC2>
+Console into PC3 (IT VLAN 20):
+
+PC3> ip 192.168.1.130 255.255.255.128 192.168.1.129
+checking for duplicate address...
+PC3>
+Console into PC4 (IT VLAN 20):
+
+PC4> ip 192.168.1.131 255.255.255.128 192.168.1.129
+checking for duplicate address...
+PC4>
+3.3.5 Test Connectivity and VLAN Isolation
+Now for the fun part: verifying your setup!
+
+Test within the SAME VLAN (Sales to Sales):
+
+From PC1 (192.168.1.10), ping PC2 (192.168.1.11).
+
+PC1> ping 192.168.1.11
+Expected: Pings should be successful. This traffic stays within VLAN 10 on the switch.
+
+Test within the SAME VLAN (IT to IT):
+
+From PC3 (192.168.1.130), ping PC4 (192.168.1.131).
+
+PC3> ping 192.168.1.131
+Expected: Pings should be successful. This traffic stays within VLAN 20 on the switch.
+
+Test DIFFERENT VLANs (Sales to IT) - Should Fail Directly:
+
+From PC1 (192.168.1.10), try to ping PC3 (192.168.1.130).
+
+PC1> ping 192.168.1.130
+Expected: Pings should fail. This demonstrates VLAN isolation at Layer 2. PC1 cannot directly reach PC3 because they are in different broadcast domains (VLANs) on the switch. The traffic needs to go through the router.
+
+Test Inter-VLAN Routing (Sales to IT, via Router):
+
+From PC1 (192.168.1.10), ping R1's Sales sub-interface (192.168.1.1).
+
+PC1> ping 192.168.1.1
+Expected: Successful.
+
+From PC3 (192.168.1.130), ping R1's IT sub-interface (192.168.1.129).
+
+PC3> ping 192.168.1.129
+Expected: Successful.
+
+Now, from PC1 (192.168.1.10), ping PC3 (192.168.1.130) again.
+
+PC1> ping 192.168.1.130
+Expected: Pings should now be successful! This confirms that traffic between VLANs is correctly being routed by R1. PC1 sends traffic to its gateway (R1), R1 routes it to the IT network, and sends it back down the trunk to the switch, which then forwards it to PC3 in VLAN 20.
+
+Observe MAC Address Table and VLANs on Switch (S1):
+
+Switch#show mac address-table
+Switch#show vlan brief
+You should see the MAC addresses of PC1/PC2 associated with Gi0/1, Gi0/2 in VLAN 10, and PC3/PC4 associated with Gi0/3, Gi0/4 in VLAN 20. You'll also see the router's MAC address on Gi0/0 (the trunk port) associated with both VLAN 10 and 20.
+
+	--------------------------------------------------------------------------------
+
+
+	Day 7: Network Services & Firewall
+	•	DHCP, DNS (systemd-resolved) (Basics Networking 3.1)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Firewall: firewalld zones, services (RHCSA 5.4)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Tools: mtr, jnettop for network diagnostics
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Configure DHCP, open ports in firewalld.
+
+	Day 8: User & Group Management
+	•	useradd, usermod, groupadd, sudo (RHCSA 4.7)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	/etc/passwd, /etc/shadow, /etc/sudoers.d/
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Create users, configure sudo privileges.
+
+	Day 9: Package & Storage Management (can be clubbed with Day 8)
+	•	Packages: dnf, rpm, apt (RHCSA 5.1)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Disks: df, du, lsblk, parted (RHCSA 5.5)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Backup: rsync, tar, gzip, bzip2 (RHCSA 3.11)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Install packages, partition disk, schedule rsync.
+
+	Day 10: VoIP Troubleshooting (1 Day)
+	•	VoIP protocols: SIP, WebRTC, RTP, codecs (Opus, G.711)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Issues: Call drops, latency, jitter, packet loss
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Tools: Wireshark, tshark for packet/log analysis (neutral, Avaya-like SIP logs)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Use Wireshark/tshark to troubleshoot a simulated SIP issue (e.g., one-way audio) in GNS3.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+
+	Day 11: Practical and Quiz Lab (1 Day)
+	•	Covering all topics of Week 1 and 2
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Regular expression in Shell scripting 
+	--------------------------------------------------------------------------------
+
+
+Week 3: Security and Containers
+Objective: Learn Linux security practices and container management.
+	Day 11: Security Fundamentals
+	•	SSH: Key authentication, sshd_config, zero-trust (RHCSA 5.20)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	SELinux: Modes, contexts (RHCSA 5.11)
+--------------------------------------------------------------------------------
+
+SELinux (Security-Enhanced Linux) is a security architecture for Linux systems that provides a mechanism for supporting access control security policies. Unlike traditional Discretionary Access Control (DAC) where a user (owner) can set permissions on their files, SELinux implements Mandatory Access Control (MAC). This means the operating system, based on a pre-defined policy, controls all interactions between subjects (processes) and objects (files, devices, ports, etc.), regardless of user ownership or standard file permissions.
+
+1. SELinux Modes
+SELinux can operate in different modes, controlling how strictly it enforces its policies. You can check the current SELinux mode using the sestatus command.
+
+1.1 Enforcing Mode
+Description: This is the default and most secure mode. In enforcing mode, SELinux policies are actively enforced. If an operation violates the policy, SELinux denies the operation and logs the denial.
+
+Behavior: Access is strictly controlled.
+
+Use Case: Production environments where security is paramount.
+
+1.2 Permissive Mode
+Description: In permissive mode, SELinux policies are not enforced, but potential violations are logged. SELinux will allow any operation, but it will record a "denial" message in the audit logs if that operation would have been denied in enforcing mode.
+
+Behavior: Access is allowed, but potential issues are reported.
+
+Use Case: Troubleshooting SELinux issues. By setting to permissive mode, you can identify what operations would be blocked without actually preventing them, helping you refine your policy. It's also useful when first deploying an application to see what it needs.
+
+1.3 Disabled Mode
+Description: In disabled mode, SELinux is completely turned off. No policies are loaded or enforced, and no denials are logged.
+
+Behavior: SELinux is inactive.
+
+Use Case: Generally not recommended for production environments as it disables a significant security layer. Sometimes used as a last resort for troubleshooting if SELinux is suspected to be the root cause and other methods have failed, but it should be re-enabled quickly. A system needs a reboot to switch to or from disabled mode.
+
+How to Change SELinux Mode
+Temporary Change (until reboot):
+
+To set to permissive: sudo setenforce 0
+
+To set to enforcing: sudo setenforce 1
+
+To check: sestatus or getenforce
+
+Permanent Change (persists across reboots):
+
+Edit the SELinux configuration file: sudo nano /etc/selinux/config
+
+Find the line SELINUX=
+
+Change it to:
+
+SELINUX=enforcing
+
+SELINUX=permissive
+
+SELINUX=disabled
+
+Save the file and reboot the system for changes to take effect if moving to or from disabled mode. If changing between enforcing and permissive, setenforce and systemctl restart might suffice, but a reboot is safest for policy reload.
+
+2. SELinux Contexts
+SELinux works by labeling every subject (process) and object (file, directory, port, etc.) with an SELinux context. The policy then defines rules that specify which subjects can access which objects based on their labels.
+
+2.1 Components of an SELinux Context
+An SELinux context is typically represented as a string with four or five colon-separated fields:
+
+user:role:type:level (or user:role:type:sensitivity:category)
+
+user (SELinux User): Maps to Linux user accounts. This is not the same as a Linux user ID. It's an identity defined within the SELinux policy (e.g., system_u, unconfined_u). It helps apply broader policies related to different user types.
+
+role: Defines a role that an SELinux user can assume (e.g., system_r for system processes, staff_r for regular users, sysadm_r for administrators). Roles define what domains (types) a process can transition into.
+
+type (or Domain for processes): This is the most important part of the context for defining access control.
+
+For files/objects, it's called a type (e.g., httpd_sys_content_t for web server content, sshd_exec_t for the SSH daemon executable).
+
+For processes/subjects, it's called a domain (e.g., httpd_t for the Apache web server process, sshd_t for the SSH daemon process).
+
+SELinux policy rules primarily revolve around type to type (or domain to type) access. For example, the httpd_t domain might be allowed to read from files with the httpd_sys_content_t type, but not write to them.
+
+level (Multi-Level Security - MLS / Multi-Category Security - MCS):
+
+Sensitivity: Represents a security clearance level (e.g., s0, s1, s2...). Used in MLS for strict hierarchical security.
+
+Category: Represents a non-hierarchical classification (e.g., c0, c1, c100...). Used in MCS, more common in RHEL/CentOS, for compartmentalizing data. For example, s0:c0.c1023 means sensitivity s0 and access to all categories from c0 to c1023. This is crucial for virtualization (e.g., isolating VMs).
+
+2.2 Viewing SELinux Contexts
+For Files/Directories: Use the -Z option with ls.
+
+Bash
+
+ls -Z /etc/passwd
+# Output: -rw-r--r--. root root system_u:object_r:passwd_file_t:s0 /etc/passwd
+
+ls -Zd /var/www/html/
+# Output: drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/
+Here, /var/www/html/ has the type httpd_sys_content_t, indicating it's designated for web content.
+
+For Processes: Use the -Z option with ps.
+
+Bash
+
+ps auxZ | grep httpd
+# Output will show httpd processes running in the httpd_t domain:
+# system_u:system_r:httpd_t:s0   apache   9999 ... /usr/sbin/httpd
+This shows the httpd process running with the httpd_t domain. The SELinux policy will define what files (types) the httpd_t domain can access.
+
+For Network Ports: Use semanage port -l.
+
+Bash
+
+sudo semanage port -l | grep http
+# Output: http_port_t                  tcp      80, 443, 8080, 8008, 8888, 9000
+This shows that ports 80, 443, etc., are labeled with http_port_t. The httpd_t process is typically allowed to bind to these ports.
+
+3. Detailed Tutorial: Troubleshooting and Managing SELinux
+This section will walk you through common scenarios and commands for managing SELinux on an RHEL-based system.
+
+Scenario: Setting up a Custom Web Server Directory
+Let's say you want to serve web content from /srv/mywebsite/ instead of the default /var/www/html/.
+
+Step 1: Create the Directory and Place Content
+Bash
+
+sudo mkdir -p /srv/mywebsite/
+echo "<h1>Hello from mywebsite!</h1>" | sudo tee /srv/mywebsite/index.html
+Step 2: Configure Apache (httpd) to Use the New Directory
+Edit the Apache configuration file: sudo nano /etc/httpd/conf/httpd.conf
+
+Change the DocumentRoot directive to /srv/mywebsite.
+
+Apache
+
+DocumentRoot "/srv/mywebsite"
+<Directory "/srv/mywebsite">
+    AllowOverride None
+    Require all granted
+</Directory>
+Save and close the file.
+
+Restart Apache: sudo systemctl restart httpd
+
+Step 3: Test Access (and observe SELinux denial)
+Try to access your website from a web browser using your server's IP address (e.g., http://<your_server_ip>/).
+Expected Result: You'll likely get a "Forbidden" error (403). This is a strong indicator of an SELinux denial.
+
+Step 4: Verify SELinux Denial in Logs
+SELinux denials are typically logged to /var/log/audit/audit.log (if auditd service is running) or to /var/log/messages (if auditd is not running, or for more general messages).
+
+Use ausearch to specifically look for AVC (Access Vector Cache) denials.
+
+Bash
+
+sudo ausearch -c 'httpd' --raw | grep 'denied'
+# Or for recent denials:
+sudo tail -f /var/log/audit/audit.log | grep 'denied'
+You'll likely see denial messages similar to this (simplified for clarity):
+type=AVC msg=audit(1678886400.123:123): avc: denied { getattr } for pid=1234 comm="httpd" path="/srv/mywebsite/index.html" dev="dm-0" ino=56789 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=file permissive=0
+
+Key parts of the denial message:
+
+avc: denied: Indicates an SELinux denial.
+
+comm="httpd": The process causing the denial (Apache web server).
+
+path="/srv/mywebsite/index.html": The file it tried to access.
+
+scontext=system_u:system_r:httpd_t:s0: The source context (Apache process domain).
+
+tcontext=unconfined_u:object_r:default_t:s0: The target context (the label of your index.html file). Notice it's default_t or unconfined_t because it inherited the label from /srv, which isn't specifically defined for web content.
+
+tclass=file: The type of object being accessed.
+
+permissive=0: Means SELinux is in enforcing mode (if it was 1, it'd be permissive).
+
+The problem is: httpd_t is not allowed to read files labeled default_t.
+
+Step 5: Correcting File Contexts
+You need to tell SELinux that /srv/mywebsite/ and its contents are legitimate web content. You do this by setting the correct file context type.
+
+Identify the correct type: For web content, it's typically httpd_sys_content_t. You can verify this by checking /var/www/html:
+
+Bash
+
+ls -Zd /var/www/html/
+# drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/
+Add a permanent file context rule: Use semanage fcontext to define how files/directories matching a certain path should be labeled.
+
+Bash
+
+sudo semanage fcontext -a -t httpd_sys_content_t "/srv/mywebsite(/.*)?"
+semanage fcontext: Command to manage file contexts.
+
+-a: Add a new rule.
+
+-t httpd_sys_content_t: Specify the target type.
+
+"/srv/mywebsite(/.*)?": A regular expression matching /srv/mywebsite itself and all its contents (recursively).
+
+Apply the new context: This command updates the file context database, but it doesn't immediately change the labels on existing files. You need restorecon to apply the defined contexts based on the rules.
+
+Bash
+
+sudo restorecon -Rv /srv/mywebsite/
+restorecon: Restores file security contexts.
+
+-R: Recursive (apply to subdirectories and files).
+
+-v: Verbose (show changes being made).
+
+Verify the new context:
+
+Bash
+
+ls -Z /srv/mywebsite/index.html
+# Expected: -rw-r--r--. root root system_u:object_r:httpd_sys_content_t:s0 /srv/mywebsite/index.html
+Step 6: Test Access Again
+Now, try accessing your website (http://<your_server_ip>/) again.
+Expected Result: Your website should now load successfully!
+
+Common SELinux Troubleshooting Workflow
+Observe the Problem: An application or service isn't working as expected.
+
+Check Logs: Look for "denied" messages in sudo ausearch -m AVC,USER_AVC,SELINUX_ERR -ts today or sudo journalctl -xe | grep "denied".
+
+Analyze the Denial: Identify the scontext (source process), tcontext (target object), and tclass (type of access denied).
+
+Is it a Mislabeling?
+
+If the tcontext is default_t, unconfined_t, or something clearly incorrect for the file/port/process, then it's likely a mislabeling.
+
+Solution: Use semanage fcontext -a -t <correct_type> "path" followed by restorecon -Rv path.
+
+Is it a Missing Policy Rule?
+
+If contexts are correct, but a specific operation (e.g., Apache needs to write to a log file in a non-standard location) is denied, the policy might not have a rule for that specific interaction.
+
+Solution:
+
+Check Booleans: Many common operations are controlled by SELinux booleans (on/off switches). Use sudo getsebool -a | grep <service> (e.g., grep httpd). You can enable them with sudo setsebool -P <boolean_name> on.
+
+Generate Custom Policy: If no boolean exists, you might need to generate a custom SELinux policy module. The audit2allow tool can help with this, by analyzing audit log denials and suggesting policy rules.
+
+Bash
+
+sudo grep "denied" /var/log/audit/audit.log | audit2allow -M mycustompolicy
+sudo semodule -i mycustompolicy.pp # Install the policy module
+Caution: Generating custom policies should be done carefully, as incorrect policies can weaken security. Only allow what is strictly necessary.
+
+Set to Permissive (for detailed debugging): If you're unsure, set SELinux to permissive mode, run the problematic operation, then check the logs. This will tell you exactly what would have been denied without stopping your service. Then switch back to enforcing and apply the fix.
+
+	--------------------------------------------------------------------------------
+	•	Log monitoring: journalctl (RHCSA 5.13)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Harden SSH, enable SELinux.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+
+	Day 12: Advanced Security
+	•	Encryption: cryptsetup LUKS (RHCE 5.5.4)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Firewall: Advanced firewalld rules for VoIP
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Log analysis basics
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Encrypt a partition, configure firewalld.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+
+	Day 13: Container Management
+	•	Containers: Docker and Podman (RHEL 9)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Docker Compose for multi-container apps
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Run a sample app in Docker, another in Podman.
+
+	Day 14: Web Server Setup
+	•	Nginx setup, virtual hosts (RHCSA 5.14)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Deploy a containerized web app
+	Lab: Host a simple app in Docker with Nginx.
+
+	Day 15: Hands-on Lab & Quiz
+	•	Scenario: Secure a server, deploy containers, troubleshoot network issues.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Quiz: MCQs on security, containers, networking.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+
+Lab: Practice Week 3 tasks.
+
+Week 4: Bash Scripting Fundamentals
+Objective: Develop automation skills with Bash.
+
+	Day 16: Shell Scripting Basics
+	•	Writing .sh files, shebang, echo, read (RHCSA 4.15)
+--------------------------------------------------------------------------------
+
+https://linuxsimply.com/100-shell-script-examples/
+https://www.geeksforgeeks.org/linux-unix/shell-script-examples/
+
+
+
+https://www.macs.hw.ac.uk/~hwloidl/Courses/LinuxIntro/x864.html
+https://github.com/vilasvarghese/linux/tree/master/ShellScripting
+https://github.com/harinisiriki/shellscripts
+https://github.com/soorepalli/beginners-shell-scripting
+
+https://www.freecodecamp.org/news/shell-scripting-crash-course-how-to-write-bash-scripts-in-linux/
+https://www.tutorialspoint.com/unix/unix-signals-traps.htm
+	
+	
+	--------------------------------------------------------------------------------
+	•	Variables, $PATH, env (RHCSA 4.9)
+--------------------------------------------------------------------------------
+https://www.shellscript.sh/
+https://www.linuxcommand.org/lc3_writing_shell_scripts.php
+
+PATH and ENV 
+------------
+
+PATH and env are fundamental concepts in shell scripting, crucial for how programs are found and how the shell and processes behave.
+
+1. The PATH Environment Variable
+The PATH environment variable is a colon-separated list of directories that the shell searches when you type a command. When you execute a command (like ls, cat, python), the shell doesn't immediately know where the executable file for that command is located. Instead of requiring you to type the full path every time (e.g., /usr/bin/ls), the shell consults the PATH.
+
+How it Works:
+When you type command_name in the terminal and press Enter.
+
+The shell iterates through the directories listed in your PATH variable from left to right.
+
+It looks for an executable file named command_name in each directory.
+
+The first matching executable found is the one that gets executed.
+
+If no executable is found in any of the PATH directories, the shell reports "command not found."
+
+Why it's Important:
+Convenience: You don't have to remember or type full paths for common commands.
+Security: By controlling the PATH, you control which executables can be run and in what order. Placing untrusted directories early in the PATH can lead to security vulnerabilities (e.g., executing a malicious script instead of a legitimate command).
+Flexibility: Allows different versions of commands to be used (e.g., a specific Python version in a virtual environment).
+Software Installation: When you install new software, its executable often needs to be placed in a directory already in the PATH or you need to add its directory to the PATH for easy access.
+
+Viewing and Modifying PATH:
+View PATH:
+
+Bash
+
+echo $PATH
+Example Output: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Add a directory to PATH (Temporarily):
+
+Bash
+
+export PATH=/opt/my_app/bin:$PATH
+This prepends /opt/my_app/bin to the existing PATH. The export command makes the variable available to child processes. This change only lasts for the current shell session.
+
+Add a directory to PATH (Permanently):
+To make a PATH change permanent, you need to add the export command to a shell configuration file.
+
+For your current user: Add to ~/.bashrc, ~/.bash_profile, or ~/.profile (depending on your shell and login type).
+
+For all users (system-wide): Add to /etc/profile or create a new script in /etc/profile.d/.
+After editing the file, either source the file (e.g., source ~/.bashrc) or restart your terminal/login session.
+
+2. The env Command and Environment Variables 
+The env command (short for environment) is used to display or modify the environment variables for the current shell or for a command that you execute. Environment variables are dynamic-named values that can affect the way running processes behave in a computer. They are a crucial way for processes to inherit configuration and state information.
+
+2.1 What are Environment Variables?
+They are key-value pairs (e.g., NAME=value).
+
+They are part of the environment of a process.
+
+When a new process is created (e.g., you run a script or another command from your shell), it inherits a copy of its parent's environment variables. This inheritance is a one-way copy; changes in the child's environment don't affect the parent.
+
+Common environment variables include HOME, USER, LANG, PWD, SHELL, and, of course, PATH.
+
+2.2 Using the env Command:
+Display Current Environment Variables:
+
+Bash
+
+env
+# or
+printenv
+# or
+declare -x # in Bash
+This will list all environment variables and their current values in your shell.
+
+Execute a Command with a Modified Environment:
+You can use env to run a command with a temporary environment, either by adding new variables or modifying existing ones, without affecting your current shell's environment.
+
+Bash
+
+env MY_VAR="Hello World" my_script.sh
+# or to clear almost all variables and run:
+env -i PATH="$PATH" my_script.sh # -i clears the environment, then explicitly sets PATH
+In the first example, my_script.sh will have MY_VAR set to "Hello World", but your current shell won't.
+
+Set an Environment Variable (Temporarily):
+
+Bash
+
+export MY_TEMP_VAR="This is temporary"
+The export command makes the variable available to all subsequent child processes. Like PATH modifications, this is temporary for the current session unless added to a shell configuration file.
+
+Set a Shell Variable (Not Exported):
+
+Bash
+
+local_var="Only for this shell"
+This variable is only available within the current shell instance and will not be passed to child processes.
+
+2.3 Common Environment Variables (Beyond PATH):
+HOME: The path to the user's home directory.
+
+USER: The current logged-in username.
+
+SHELL: The path to the user's default shell.
+
+PWD: The current working directory.
+
+LANG: The default language and locale settings.
+
+LD_LIBRARY_PATH: A colon-separated list of directories where the dynamic linker should search for shared libraries. (Similar to PATH but for libraries).
+
+EDITOR/VISUAL: The default text editor to be used by programs.
+
+2.4 Difference: Environment Variables vs. Shell Variables
+Shell Variables: Exist only within the current shell process. They are not passed to child processes.
+
+Environment Variables: Are shell variables that have been "exported" (using the export command). This makes them part of the process's environment, meaning they are passed to child processes.
+
+Example in Scripting:
+Bash
+
+#!/bin/bash
+
+# A shell variable (not exported)
+MY_SHELL_VAR="I am a shell variable"
+
+# An environment variable (exported)
+export MY_ENV_VAR="I am an environment variable"
+
+echo "Inside main script:"
+echo "MY_SHELL_VAR: $MY_SHELL_VAR"
+echo "MY_ENV_VAR: $MY_ENV_VAR"
+echo "PATH: $PATH" # PATH is typically always exported by the shell
+
+echo -e "\nRunning a sub-script..."
+./sub_script.sh
+sub_script.sh:
+
+Bash
+
+#!/bin/bash
+
+echo "Inside sub_script.sh:"
+echo "MY_SHELL_VAR: $MY_SHELL_VAR" # Will be empty or not set
+echo "MY_ENV_VAR: $MY_ENV_VAR"     # Will have the value from parent
+echo "PATH: $PATH"                 # Will have the PATH from parent
+When you run the main script, MY_SHELL_VAR will only be visible in the main script, while MY_ENV_VAR and PATH will be inherited by sub_script.sh. This inheritance mechanism is fundamental to how programs interact and configure themselves in a Linux environment.
+
+	--------------------------------------------------------------------------------
+	Lab: Script to display system uptime.
+--------------------------------------------------------------------------------
+Bash
+
+#!/bin/bash
+
+# This script displays the current system uptime.
+
+echo "Current System Uptime:"
+
+# The 'uptime' command provides information about how long the system has been running,
+# along with current users and load average.
+uptime
+
+	--------------------------------------------------------------------------------
+
+	Day 17: Conditional Statements & Loops
+	•	if, elif, else, test command
+	•	for, while, one-liners (RHCSA 3.7)
+	Lab: Script to check disk usage.
+
+	Day 18: Functions and Arguments
+	•	Functions, $1, $2, positional parameters (RHCSA 4.15)
+	•	Exit codes, return values
+	Lab: Function to parse VoIP logs.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	
+
+	Day 19: Text Processing & Automation
+	•	grep, sed, awk for log parsing (RHCSA 4.8, 3.12)
+--------------------------------------------------------------------------------
+grep, 
+
+sed, 
+
+
+awk 
+	https://www.geeksforgeeks.org/linux-unix/awk-command-unixlinux-examples/
+	--------------------------------------------------------------------------------
+	•	Piping, tee, xargs, email alerts with mailx (RHCSA 3.8)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Scheduling: crontab, at (RHCSA 4.17)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Parse SIP logs with awk, schedule a job.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+
+	Day 20: Mini-Project & Quiz
+	•	Project: Bash script to monitor system/VoIP logs, send alerts.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Quiz: MCQs on Bash scripting, automation.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	Lab: Test script on RHEL 9 VM.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+
+
+Accessing data from a file
+Check Remote Servers Connectivity (ping)
+Script Scheduling and Notification
+Script to Delete Old Files
+Backup Filesystem
+For loops Scripts for File System - 1
+Copy Files to Remote Hosts
+User Directory Assignment
+List of Users Logged in by Date
+Script for Central Logging (rsyslog)
+Script for User Account Management
+Disable Inactive Users
+Check Process Status and Killing it
+Disk Space Status
+Status on Total Number of Files
+Create System Inventory
+Scripts with Pre-Defined Information
+
+https://medium.com/@sayalishewale12/advanced-linux-shell-scripting-fcfcc62bfd37
+https://rlworkman.net/howtos/rute/node23.html
+https://dev.to/ollie20/advanced-shell-techniques-1e8n
+
+
+D:\PraiseTheLord\HSBGInfotech\Others\vilas\linux\LinuxQuetsions

@@ -99,58 +99,87 @@ Key Characteristics:
 Protected and Supervisor modes are essential components of modern operating systems like Linux, providing different levels of access to system resources to ensure security, stability, and efficient multitasking. Here's a detailed explanation of these concepts in Linux:
 
 1. Protected Mode
-	Protected mode refers to the operational state of the CPU where memory protection and privilege levels are enforced to ensure the stability and security of the system. It was introduced in Intel's x86 processors starting with the 80286 architecture.
+	Protected mode 
+		operational state of the CPU where 
+			memory protection and 
+			privilege levels 
+				are enforced to ensure 
+					stability and 
+					security of the system. 
+		It was introduced in Intel's x86 processors starting with the 80286 architecture.
 
 	Key Features of Protected Mode:
 	Memory Protection:
-
-	Processes are given isolated memory spaces.
-	The system prevents unauthorized access to memory regions.
+		Processes are given isolated memory spaces.
+		prevents unauthorized access to memory regions.
 	Multitasking:
-
-	Allows multiple processes to run simultaneously while isolating them from each other.
-	Process isolation ensures that one process cannot interfere with another.
+		Multiple processes can run simultaneously 
+			while isolating them from each other.
+		Process isolation 
+			process cannot interfere with another.
 	Access Levels:
-
-	Implements privilege rings (from Ring 0 to Ring 3) to restrict resource access based on the mode of operation:
-	Ring 0: Kernel mode (highest privilege).
-	Ring 3: User mode (restricted access).
+		Implements privilege rings (from Ring 0 to Ring 3) to 
+			restrict resource access based on the mode of operation:
+		Ring 0: Kernel mode (highest privilege).
+		Ring 3: User mode (restricted access).
 	Segmentation and Paging:
-
-	Segmentation: Divides memory into segments for better organization.
-	Paging: Enables virtual memory by dividing memory into fixed-size pages.
+		Segmentation: 
+			Divides memory into segments for better organization.
+		Paging: 
+			Enables virtual memory by dividing memory into fixed-size pages.
 	Linux and Protected Mode:
-	Linux runs in protected mode by default on modern CPUs.
-	The kernel operates in Ring 0 (full access to hardware), while user applications run in Ring 3 (limited access).
-	Switching between these rings occurs via system calls and interrupts.
+		Linux: default on modern CPUs.
+		kernel operates in Ring 0 
+			(full access to hardware), 
+		user applications 
+			run in Ring 3 (limited access).
+		Switching between these rings 
+			occurs via system calls and interrupts.
 2. Supervisor Mode (Kernel Mode)
-	Supervisor mode, also known as kernel mode, is a privileged operational state where the operating system kernel has unrestricted access to all hardware and system resources.
+	Supervisor mode or kernel mode
+		privileged operational state 
+		operating system kernel has 
+			unrestricted access to all hardware and system resources.
 
 	Key Characteristics of Supervisor Mode:
 	Full Resource Access:
 
-	The kernel can execute privileged instructions like I/O operations, memory management, and CPU scheduling.
+		The kernel can execute privileged instructions 
+			like 
+				I/O operations, 
+				memory management, and 
+				CPU scheduling.
 	Privileged Instructions:
-
-	Directly manages hardware via privileged CPU instructions.
-	Examples: Enabling/disabling interrupts, accessing hardware registers.
+		Directly manages hardware 
+			via privileged CPU instructions.
+		Examples: 
+			Enabling/disabling interrupts, 
+			accessing hardware registers.
 	Kernel Space:
 
-	In supervisor mode, the CPU operates in kernel space, which is reserved for critical system operations.
-	User applications cannot directly access kernel space to prevent accidental or malicious interference.
+	In supervisor mode
+		CPU operates in kernel space
+		reserved for critical system operations.
+	User applications 
+		cannot directly access kernel space 
+			to prevent accidental or malicious interference.
 	Context Switching:
 
-	The kernel handles context switching between processes, ensuring each process gets CPU time without interfering with others.
-	Linux and Supervisor Mode:
-	When a system call is made (e.g., file I/O, memory allocation), the CPU transitions from user mode to supervisor mode to execute the request.
-	The transition is achieved via trap instructions or interrupts.
+		The kernel handles context switching between processes, ensuring each process gets CPU time without interfering with others.
+		Linux and Supervisor Mode:
+			When a system call is made (e.g., file I/O, memory allocation), the CPU transitions from user mode to supervisor mode to execute the request.
+			The transition is achieved via trap instructions or interrupts.
 3. User Mode vs Supervisor Mode
-	Feature	User Mode	Supervisor Mode
-	Access Level	Limited access to resources.	Full access to hardware and system.
+-----------------------------------------------------------------------------------------------------------------------
+	Feature				User Mode								Supervisor Mode
+-----------------------------------------------------------------------------------------------------------------------	
+	Access Level		Limited access to resources.			Full access to hardware and system.
 	Execution Context	Runs applications and user-level code.	Runs the kernel and system services.
-	Memory Access	Access only to its own memory space.	Access to all memory regions.
-	Privileged Instructions	Not allowed.	Allowed.
-	Stability and Security	Isolated to prevent system crashes.	Full control, but improper use can cause crashes.
+	Memory Access		Access only to its own memory space.	Access to all memory regions.
+	Privileged 			Not allowed.							Allowed.
+		Instructions
+	Stability &Security	Isolated to prevent system crashes.		Full control, but improper use can cause crashes.
+-----------------------------------------------------------------------------------------------------------------------
 4. Transition Between Modes
 	The system alternates between user mode and supervisor mode as needed:
 	User Mode to Supervisor Mode:
@@ -743,7 +772,6 @@ THE LINUX FILE SYSTEM
 					Socket file
 
 
-continue from here jan 24th					
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• The Different Types of Files in the Linux File System
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1186,7 +1214,6 @@ enter password and yes to loging.
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Linux Boot Process – various stages during booting
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
 	
 	
 	1. BIOS/UEFI (Basic Input/Output System / Unified Extensible Firmware Interface)
@@ -1320,46 +1347,45 @@ Runlevel		Description
 Runlevel Descriptions
 Runlevel 0 (Shutdown Mode):
 
-Used to safely shut down the system.
-Halts all processes and powers off the machine (if supported by the hardware).
-Command: init 0
+	Used to safely shut down the system.
+	Halts all processes and powers off the machine (if supported by the hardware).
+	Command: init 0
 Runlevel 1 (Single-User Mode):
 
-Used for system maintenance and troubleshooting.
-Only the root user has access; no network or multi-user capabilities.
-Command: init 1
+	Used for system maintenance and troubleshooting.
+	Only the root user has access; no network or multi-user capabilities.
+	Command: init 1
 Runlevel 2 (Multi-User Mode Without Networking):
 
-Multi-user mode without starting network services.
-Rarely used in modern systems.
-Command: init 2
+	Multi-user mode without starting network services.
+	Rarely used in modern systems.
+	Command: init 2
 Runlevel 3 (Multi-User Mode with Networking):
 
-A full CLI-based mode with networking enabled.
-Suitable for servers or systems without a graphical environment.
-Command: init 3
+	A full CLI-based mode with networking enabled.
+	Suitable for servers or systems without a graphical environment.
+	Command: init 3
 Runlevel 4 (Custom Mode):
 
-Reserved for custom configurations.
-Not defined by default, allowing admins to set specific tasks.
-Command: init 4
+	Reserved for custom configurations.
+	Not defined by default, allowing admins to set specific tasks.
+	Command: init 4
 Runlevel 5 (Multi-User Mode with GUI):
 
-Same as runlevel 3 but with a graphical user interface (e.g., GNOME, KDE).
-Commonly used for desktop environments.
-Command: init 5
+	Same as runlevel 3 but with a graphical user interface (e.g., GNOME, KDE).
+	Commonly used for desktop environments.
+	Command: init 5
 Runlevel 6 (Reboot Mode):
 
-Reboots the system safely.
-All processes are stopped, and the system restarts.
-Command: init 6
+	Reboots the system safely.
+	All processes are stopped, and the system restarts.
+	Command: init 6
 Checking and Changing Runlevels
 1. Viewing Current Runlevel
 Command: runlevel
 Example output:
 mathematica
-Copy
-Edit
+
 N 5
 N: The previous runlevel (if none, N is shown).
 5: The current runlevel.
@@ -1459,13 +1485,10 @@ Target States: systemd uses "target states" instead of traditional runlevels. Th
 Runlevel 3 is often the default runlevel in older systems.
 While the concept of runlevels is still relevant, it's important to understand that the implementation and usage may vary significantly between different Linux distributions.
 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	• Starting the system in Single User mode
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
-=======
 
 
 GRUB and systemd-boot: These are common boot loaders used in Linux systems.
@@ -1480,29 +1503,28 @@ It's crucial to proceed with caution in single-user mode as changes made in this
 I hope this helps! Let me know if you have any other questions.
 1. During Boot Process:
 
-GRUB (Grand Unified Boot Loader):
+	GRUB (Grand Unified Boot Loader):
 
-If you're using GRUB, at the GRUB boot prompt, press the "e" key to edit the boot options.
-Locate the line starting with "linux" or "linuxefi".
-Append the word "single" to the end of that line.
-Press Ctrl+x to save the changes and boot into single-user mode.
-systemd-boot:
+	If you're using GRUB, at the GRUB boot prompt, press the "e" key to edit the boot options.
+	Locate the line starting with "linux" or "linuxefi".
+	Append the word "single" to the end of that line.
+	Press Ctrl+x to save the changes and boot into single-user mode.
+	systemd-boot:
 
-If you're using systemd-boot, press the "e" key at the systemd-boot prompt.
-Locate the line starting with "linux" or "linuxefi".
-Append "single" to the end of that line.
-Press Ctrl+x to save the changes and boot into single-user mode.
+	If you're using systemd-boot, press the "e" key at the systemd-boot prompt.
+	Locate the line starting with "linux" or "linuxefi".
+	Append "single" to the end of that line.
+	Press Ctrl+x to save the changes and boot into single-user mode.
 2. After Boot (if you have access to a console):
 
-If you can already access a running system, you can often reboot into single-user mode by pressing a specific key during the boot process (usually Ctrl+Alt+Del or Ctrl+Alt+F1). The exact key combination varies depending on the system and its configuration.
-Key Points:
+	If you can already access a running system, you can often reboot into single-user mode by pressing a specific key during the boot process (usually Ctrl+Alt+Del or Ctrl+Alt+F1). The exact key combination varies depending on the system and its configuration.
+	Key Points:
 
-Single-user mode provides a way to access and repair the system without the usual graphical interface or network services.
-It's often used for system administration tasks, troubleshooting, and recovering from system failures.
-Be cautious when working in single-user mode, as you have direct access to the system and can potentially cause damage if not done carefully.
+	Single-user mode provides a way to access and repair the system without the usual graphical interface or network services.
+	It's often used for system administration tasks, troubleshooting, and recovering from system failures.
+	Be cautious when working in single-user mode, as you have direct access to the system and can potentially cause damage if not done carefully.
 
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
 	
 	1. During the Boot Process (GRUB)
 
@@ -1536,7 +1558,6 @@ Key Points:
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Accessing help using man, info, what is and -- help.
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
 	
 	1. man (Manual Pages)
 
@@ -1582,40 +1603,39 @@ In Summary:
 
 1. man (Manual Pages)
 
-Purpose: Provides comprehensive, detailed information about commands, system calls, libraries, and other system components.
-Usage: man <command_name>
-Example: man ls (displays the manual page for the ls command)
-Key Features:
-Detailed descriptions of command usage, options, and examples.
-Often includes a SYNOPSIS section summarizing the command's syntax.
-Can be lengthy and may require navigation within the manual page.
+	Purpose: Provides comprehensive, detailed information about commands, system calls, libraries, and other system components.
+	Usage: man <command_name>
+	Example: man ls (displays the manual page for the ls command)
+	Key Features:
+	Detailed descriptions of command usage, options, and examples.
+	Often includes a SYNOPSIS section summarizing the command's syntax.
+	Can be lengthy and may require navigation within the manual page.
 2. info
 
-Purpose: An alternative to man for accessing online documentation.
-Usage: info <command_name>
-Example: info ls
-Key Features:
-Uses a hypertext-like format for easier navigation.
-Often provides more extensive documentation than man for some commands.
-May require the installation of the info package.
+	Purpose: An alternative to man for accessing online documentation.
+	Usage: info <command_name>
+	Example: info ls
+	Key Features:
+	Uses a hypertext-like format for easier navigation.
+	Often provides more extensive documentation than man for some commands.
+	May require the installation of the info package.
 3. whatis
 
-Purpose: Provides a short, one-line description of a command or function.
-Usage: whatis <command_name>
-Example: whatis ls (displays a brief description of the ls command)
+	Purpose: Provides a short, one-line description of a command or function.
+	Usage: whatis <command_name>
+	Example: whatis ls (displays a brief description of the ls command)
 4. --help (Built-in Help)
 
-Purpose: Many commands have a built-in --help option that provides a concise summary of the command's usage and available options.
-Usage: <command_name> --help
-Example: ls --help
-In Summary:
+	Purpose: Many commands have a built-in --help option that provides a concise summary of the command's usage and available options.
+	Usage: <command_name> --help
+	Example: ls --help
+	In Summary:
 
-man: The most comprehensive source for detailed information about commands.
-info: An alternative to man with hypertext-like navigation.
-whatis: Provides a quick overview of a command.
---help: Offers a brief, built-in summary of a command's usage.
+	man: The most comprehensive source for detailed information about commands.
+	info: An alternative to man with hypertext-like navigation.
+	whatis: Provides a quick overview of a command.
+	--help: Offers a brief, built-in summary of a command's usage.
 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	• Basic commands: pwd, date, clear, ls, cal, who
@@ -1630,7 +1650,6 @@ whatis: Provides a quick overview of a command.
 
 		who -H - Show header in 'who' command output
     
-<<<<<<< HEAD
 	
 	
 	date: Displays the current date and time.
@@ -1672,19 +1691,17 @@ clear: Clears the terminal screen.
 reset: Clears the screen and resets terminal settings (colors, attributes, etc.).
 3. ls
 
-ls: Lists files and directories in the current directory.
-ls -l: Lists files with detailed information (permissions, owner, size, etc.).
-ls -a: Lists all files and directories, including hidden files (starting with a dot).
-ls -h: Displays file sizes in a human-readable format (e.g., 1K, 2M, 1G).
-ls -R: Recursively lists files and directories in the current directory and all subdirectories.
-ls -t: Sorts files by modification time (newest first).
+	ls: Lists files and directories in the current directory.
+	ls -l: Lists files with detailed information (permissions, owner, size, etc.).
+	ls -a: Lists all files and directories, including hidden files (starting with a dot).
+	ls -h: Displays file sizes in a human-readable format (e.g., 1K, 2M, 1G).
+	ls -R: Recursively lists files and directories in the current directory and all subdirectories.
+	ls -t: Sorts files by modification time (newest first).
 4. cal
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
 
-cal: Displays the calendar for the current month.
-cal <month> <year>: Displays the calendar for a specific month and year (e.g., cal 7 2024).
-cal <year>: Displays the calendar for the entire year.
-<<<<<<< HEAD
+	cal: Displays the calendar for the current month.
+	cal <month> <year>: Displays the calendar for a specific month and year (e.g., cal 7 2024).
+	cal <year>: Displays the calendar for the entire year.
 
 who
 
@@ -1697,49 +1714,48 @@ who: Displays a list of currently logged-in users.
 who -u: Displays more detailed information about logged-in users, including login time and terminal	
 
 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
 		
 			
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Wild card characters: *,?,[],^,-
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
 	
 	Example:
-ls * : Lists all files and directories in the current directory.
-rm *.txt : Deletes all files ending with ".txt".
-cp * /backup : Copies all files and directories in the current directory to the "backup" directory.
+	ls * : Lists all files and directories in the current directory.
+	rm *.txt : Deletes all files ending with ".txt".
+	cp * /backup : Copies all files and directories in the current directory to the "backup" directory.
+
 2. ? (Question Mark)
 
-Matches any single character.
+	Matches any single character.
 
-Example:
-ls f?.txt : Lists files starting with "f", followed by any single character, and ending with ".txt" (e.g., "f1.txt", "f2.txt", "fa.txt").
-my_file_?.txt : Matches files like "my_file_1.txt", "my_file_a.txt", etc.
+	Example:
+	ls f?.txt : Lists files starting with "f", followed by any single character, and ending with ".txt" (e.g., "f1.txt", "f2.txt", "fa.txt").
+	my_file_?.txt : Matches files like "my_file_1.txt", "my_file_a.txt", etc.
 3. [] (Square Brackets)
 
-Matches any single character within the brackets.
+	Matches any single character within the brackets.
 
-Example:
-ls f[oa]t.txt : Matches "fat.txt" and "fot.txt".
-ls f[0-9].txt : Matches files starting with "f", followed by a single digit (0-9), and ending with ".txt".
-ls f[a-z].txt : Matches files starting with "f", followed by any lowercase letter, and ending with ".txt".
+	Example:
+	ls f[oa]t.txt : Matches "fat.txt" and "fot.txt".
+	ls f[0-9].txt : Matches files starting with "f", followed by a single digit (0-9), and ending with ".txt".
+	ls f[a-z].txt : Matches files starting with "f", followed by any lowercase letter, and ending with ".txt".
 4. ^ (Caret within Square Brackets)
 
-Matches any character not within the brackets.
+	Matches any character not within the brackets.
 
-Example:
-ls f[^a-c].txt : Matches files starting with "f", followed by any character except "a", "b", or "c", and ending with ".txt".
+	Example:
+	ls f[^a-c].txt : Matches files starting with "f", followed by any character except "a", "b", or "c", and ending with ".txt".
 5. - (Hyphen within Square Brackets)
 
-Specifies a range of characters.
+	Specifies a range of characters.
 
-Example:
-ls f[a-z].txt : Matches files starting with "f", followed by any lowercase letter, and ending with ".txt".
-ls [0-9]_file.txt : Matches files starting with a digit (0-9), followed by "_file.txt".
-Important Notes:
+	Example:
+	ls f[a-z].txt : Matches files starting with "f", followed by any lowercase letter, and ending with ".txt".
+	ls [0-9]_file.txt : Matches files starting with a digit (0-9), followed by "_file.txt".
+	Important Notes:
 
-Wildcards are often used with commands like ls, rm, cp, mv, and find.
+	Wildcards are often used with commands like ls, rm, cp, mv, and find.
 
 
 	
@@ -1779,7 +1795,6 @@ These wildcards are often used with commands like ls, rm, cp, mv, and find.
 Be cautious when using wildcards, especially with commands like rm, as they can unintentionally delete or modify multiple files.
 The specific behavior of wildcards may vary slightly depending on the shell you are using (e.g., Bash, Zsh).
 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Managing directories: mkdir, cd, rmdir, $HOME, ~
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1938,7 +1953,6 @@ Advanced Features
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Working modes in vi  or
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
 		already covered 
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Creatinging text files
@@ -2098,7 +2112,7 @@ already covered
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 already covered	
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Text   mode commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2112,7 +2126,7 @@ already covered
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Text deletion commands
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
+
 		dw 
 		dd
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2138,7 +2152,7 @@ already covered
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 already covered		
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Other miscellaneous commands in vi  or
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3314,7 +3328,6 @@ continue from here
 
     
 	zip -r - Create a ZIP archive recursively
-<<<<<<< HEAD
 	---------------------
 		The zip -r 
 			command in Linux/Unix 
@@ -3387,7 +3400,6 @@ continue from here
 	lsof -i - Display information about open internet connections
     killall - Signal processes by name
     top -u username - Monitor resource usage for a specific user
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
     
 	lsof -i - Display information about open internet connections
 	---------------------
@@ -3502,7 +3514,7 @@ MANAGING FILES & DIRECTORIES (cont’d)
 	• File comparing commands: cmp, comm, diff, patch
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<<<<<<< HEAD
+
 1. cmp
 
 	Purpose: Compares two files byte-by-byte.
@@ -3649,12 +3661,12 @@ Common Options:
 
 -pN: Strips N leading components from file paths in the patch file.
 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• File utilities: wc, join
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<<<<<<< HEAD
+
 1. wc (Word Count)
 
 	Purpose: Counts lines, words, and characters in a file or input.
@@ -3740,7 +3752,7 @@ This command will join the lines in file1.txt and file2.txt based on the first f
 2 Jane 30
 3 David 28
 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
+
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Pattern locating command: grep, fgrep, egrep
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3813,7 +3825,7 @@ This command will join the lines in file1.txt and file2.txt based on the first f
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Translate : tr
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
+
 	The tr command 
 		tool for translating or deleting characters from standard input. 
 		It's incredibly useful for text manipulation tasks. 
@@ -3929,8 +3941,6 @@ Squeeze multiple spaces into a single space:
 Bash
 
 echo "hello   world" | tr -s ' ' 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
-
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Lab session
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3939,7 +3949,7 @@ INPUT/OUTPUT REDIRECTION & PIPES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-<<<<<<< HEAD
+
 1. < (Input Redirection)
 
 Purpose: Directs the input of a command to come from a file instead of the keyboard.
@@ -3993,7 +4003,7 @@ echo Testing >> test.txt
 
 
 
->>>>>>> 2be8a02f92b4b012c49f216a0a2235bd6e050fd1
+
 
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	• Concepts of file descriptors: Standard input, output and error files

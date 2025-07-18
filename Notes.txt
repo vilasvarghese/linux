@@ -426,9 +426,11 @@ Why Does The OSI Model Matter?
 		“how the data moves in the network?”. 
 	
 	
-	Difference Between OSI and TCP/IP Model
-	OSI Model											TCP/IP Model
 
+	Difference Between OSI and TCP/IP Model
+-----------------------------------------------------------------------------------------------------------------------
+	OSI Model											TCP/IP Model
+-----------------------------------------------------------------------------------------------------------------------
 	OSI stands for Open Systems Interconnection.		TCP/IP stands for Transmission Control Protocol/Internet Protocol.
 
 	OSI model has 7 layers.								TCP/IP model consists of 4 layers.
@@ -443,7 +445,7 @@ Why Does The OSI Model Matter?
 
 	Conceptual framework, 								Widely used in actual networks like Internet and Communication Systems.
 		less used in practical applications.
-
+-----------------------------------------------------------------------------------------------------------------------
 	
 
 OSI-vs-TCP/IP
@@ -1541,6 +1543,8 @@ Firewall:
 	IPv6: 
 		128-bit, 
 			supports a vastly larger number.
+	
+	
 	8. Network Topologies
 	8.1 
 		Bus, 
@@ -1664,22 +1668,19 @@ Firewall:
 		
 	
 ------------------------------------------------------------------------------------------------------
-Feature			IPv4							IPv6
+Feature					IPv4								IPv6
 ------------------------------------------------------------------------------------------------------
-Address Length	32 bits (4.3 billion addresses)	128 bits (340 undecillion addresses)
-Address Format	Dotted-decimal					Hexadecimal with colons
-Header Complexity	
-				More complex (12 fields)		Simplified (8 fields)
-Address Configuration	
-				Manual or DHCP					Manual, SLAAC, or DHCPv6
-Address Types	Public and private, 			Public, private (Unique Local), no broadcast
-					supports broadcast	
-Security		Optional (IPsec)				Built-in security (IPsec support)
-Fragmentation	Handled by routers				Handled by the source only
-Address Resolution	
-				ARP								Neighbor Discovery Protocol (NDP)
-NAT				Often required					Eliminated
-Adoption		Widely used, limited addresses		Increasing adoption for more addresses
+Address Length			32 bits (4.3 billion addresses)		128 bits (340 undecillion addresses)
+Address Format			Dotted-decimal						Hexadecimal with colons
+Header Complexity		More complex (12 fields)			Simplified (8 fields)
+Address Configuration	Manual or DHCP						Manual, SLAAC, or DHCPv6
+Address Types			Public and private, 				Public, private (Unique Local), no broadcast
+							supports broadcast		
+Security				Optional (IPsec)					Built-in security (IPsec support)
+Fragmentation			Handled by routers					Handled by the source only
+Address Resolution		ARP									Neighbor Discovery Protocol (NDP)
+NAT						Often required						Eliminated
+Adoption				Widely used, limited addresses		Increasing adoption for more addresses
 ------------------------------------------------------------------------------------------------------
 
 
