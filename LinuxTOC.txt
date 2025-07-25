@@ -6,15 +6,365 @@ https://www.baeldung.com/linux/
 Week 1: Linux Basics & Networking Foundations (RHEL 9)
 Objective: Build foundational Linux and networking skills.
 Week 1 can be reduced to 3-day course
+
+
+
+Start with Notes-old.txt 
+------------------------
+
+
 	Day 1: Introduction to Linux
 	•	What is Linux? History and distributions (RHEL 9, Ubuntu 24.04, Fedora)
-	•	Linux vs. Windows, cloud context (AWS EC2)
-	•	Installation: RHEL 9 in VirtualBox or WSL2
-	•	Shell basics: whoami, date, man, clear
-	Lab: Install RHEL 9, navigate terminal.
+	--------------------------------------------------------------------------------
+	Linux 
+		free and 
+		open-source 
+			operating system 
+		based on the Unix operating system. 
+		Powerful, 
+		secure, and 
+		flexible OS 
+			widely used for 
+				servers, 
+				desktops, 
+				mobile devices, and 
+				embedded systems. 
+		At its core is the Linux kernel, originally created by Linus Torvalds in 1991.
 
+History of Linux
+----------------
+1969–1980s: Unix Origins
+Unix was developed at Bell Labs and became popular for its portability, multitasking, and multi-user capabilities. However, it was proprietary.
+
+1983: GNU Project
+-----------------
+Richard Stallman started the GNU Project to create a free Unix-like OS. Many components were developed (like compilers and shells), but a kernel was missing.
+
+1991: Linux Kernel Released
+---------------------------
+Linus Torvalds, a Finnish student, wrote a new kernel and released it under the GNU General Public License (GPL). The combination of the Linux kernel and GNU tools formed a full operating system.
+
+1990s–2000s: Rapid Growth
+-------------------------
+Linux gained traction among developers, hobbyists, and eventually enterprise users due to its reliability and cost-effectiveness.
+
+What is a Linux Distribution?
+----------------------------- 
+A Linux distribution (distro) 
+	complete operating system 
+		built around the Linux kernel, 
+	may include 
+		package managers, 
+		graphical interfaces, 
+		utilities, and 
+		applications. 
+	Each distro may focus on different goals: 
+		user-friendliness, 
+		performance, 
+		stability, or 
+		cutting-edge features.
+
+Popular Linux Distributions
+---------------------------
+1. Red Hat Enterprise Linux (RHEL 9)
+	Developer: 
+		Red Hat (now part of IBM)
+	Release: 
+		RHEL 9 launched in May 2022
+	Use case: 
+		Enterprise environments, 
+		servers, 
+		cloud infrastructure
+
+Key features:
+	Stable and secure
+	Long-term support (10+ years)
+	Subscription-based with professional support
+	SELinux integration (advanced security)
+	Uses dnf for package management (RPM packages)
+	Certified for enterprise software (Oracle, SAP, etc.)
+
+2. Ubuntu 24.04 LTS ("Noble Numbat")
+	Developer: Canonical Ltd.
+		Release: 
+			April 2024
+		Use case: 
+			Desktops, 
+			servers, 
+			cloud, 
+			IoT
+	Key features:
+		Long-Term Support (LTS): 
+			5 years of updates
+		Based on Debian
+		Uses apt for package management (DEB packages)
+		User-friendly with GUI options like GNOME
+		Widely used in education, web hosting, and development
+
+3. Fedora (e.g., Fedora 40)
+	Developer: 
+		Fedora Project (sponsored by Red Hat)
+	Use case: 
+		Developers, open-source enthusiasts, desktop users
+	Key features:
+		Cutting-edge features and software
+		Community-driven and freely available
+		Shorter lifecycle (about 13 months)
+		Often a testing ground for RHEL features
+		Uses dnf (RPM-based like RHEL)
+
+
+Comparison Table
+-------------------------------------------------------------------------------
+Feature			RHEL 9						Ubuntu 24.04 LTS		Fedora (e.g., 40)
+-------------------------------------------------------------------------------
+Based on		Red Hat (RPM)				Debian (DEB)			Red Hat (RPM)
+Release Type	Stable, enterprise-grade	Stable (LTS)			Bleeding-edge
+Package Manager	dnf (RPM)					apt (DEB)				dnf (RPM)
+GUI Option		GNOME (default)				GNOME (default), 		others	GNOME (default), others
+Target Users	Enterprises	General users, 	devs	Developers, 	enthusiasts
+Support Cycle	~10 years (with support)	5 years (LTS)			~13 months
+License			Subscription-based			Free and open-source	Free and open-source
+-------------------------------------------------------------------------------
+
+
+
+	--------------------------------------------------------------------------------
+	
+	•	Linux vs. Windows, cloud context (AWS EC2)
+	--------------------------------------------------------------------------------
+	
+	 Linux vs. Windows in a cloud context, especially for AWS EC2 (Elastic Compute Cloud):
+
+☁️ Linux vs. Windows on AWS EC2
+Feature/Aspect	Linux	Windows
+Cost	Free or low cost (license-free)	Higher cost (Windows license fees apply)
+Boot Time	Fast	Slower
+Resource Usage	Low memory and CPU overhead	Higher system resource consumption
+Instance Availability	Widely available (Amazon Linux, Ubuntu, RHEL, etc.)	Available but limited to certain AMIs
+Security	Strong, customizable (SELinux, iptables, etc.)	Secure but closed-source; patch management is critical
+SSH Access	Native, easy setup	Requires RDP setup
+File System	ext4, XFS, etc.	NTFS
+Customization	Highly customizable	More rigid, registry-based configuration
+CLI (Command Line)	Powerful Bash and scripting	PowerShell (advanced but different syntax)
+Use Cases	Web servers, containers, big data, dev/test	Windows-native apps (.NET, IIS, Active Directory)
+Software Ecosystem	Open-source, flexible (Nginx, Apache, MySQL, etc.)	Microsoft ecosystem (IIS, SQL Server, Exchange)
+Automation Tools	Ansible, Terraform, Bash, cloud-init	PowerShell DSC, Chocolatey, AWS Systems Manager
+Market Share (AWS)	~70–75% of EC2 workloads run on Linux-based AMIs	~25–30% run on Windows-based AMIs
+
+🧭 When to Use Linux on AWS
+✅ Best for:
+
+Web apps (Nginx, Apache)
+
+Containers (Docker, Kubernetes)
+
+DevOps and automation
+
+Python, Node.js, Java apps
+
+High-performance computing (HPC)
+
+Cost-sensitive workloads
+
+ Popular Linux AMIs:
+
+Amazon Linux 2023
+
+Ubuntu 24.04 LTS
+
+RHEL 9
+
+SUSE Linux Enterprise Server
+
+Debian 12
+
+
+
+When to Use Windows on AWS
+Best for:
+
+Applications built on .NET or ASP.NET
+
+Microsoft SQL Server
+top apps (RDP use)
+
+Active Directory domain controllers
+
+Legacy Windows workloads
+
+ Common Windows AMIs:
+
+Windows Server 2019/2022 Base
+
+Windows Server with SQL Server
+
+Windows Server with Containers
+
+Cost Example (as of 2025)
+t3.micro Linux EC2 (Amazon Linux):
+~$0.0104/hour (on-demand) – no OS license fee
+
+t3.micro Windows EC2:
+~$0.0200/hour (on-demand) – includes Windows license
+
+Summary
+Use Case					Best Choice
+Cost-effective, open-source stack	Linux
+Microsoft-based enterprise stack	Windows
+DevOps automation, containers	Linux
+RDP access to desktop apps	Windows
+SQL Server + IIS hosting	Windows
+
+Would you like help launching an EC2 instance with a specific OS, or automating setup with a tool like Terraform or Ansible?
+
+
+
+
+
+
+	
+	--------------------------------------------------------------------------------	
+	•	Installation: RHEL 9 in VirtualBox or WSL2
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	•	Shell basics: whoami, date, man, clear
+	--------------------------------------------------------------------------------
+	
+	 1. whoami — "Who am I?"
+📌 Description:
+The whoami command shows the username of the current user.
+
+🧠 Why is it useful?
+When working on a system (especially remote servers), you might want to verify which user account you're currently using.
+
+✅ Syntax:
+bash
+Copy
+Edit
+whoami
+📤 Example Output:
+bash
+Copy
+Edit
+john
+🔍 Related Commands:
+id – Shows more details like UID, GID, and groups.
+
+who – Shows who is logged into the system.
+
+🔹 2. date — Show the current date and time
+📌 Description:
+Displays the current date, time, and timezone information. Can also be used to format or set system time (admin privileges required for setting).
+
+✅ Basic Usage:
+bash
+Copy
+Edit
+date
+📤 Example Output:
+bash
+Copy
+Edit
+Thu Jul 24 22:12:08 IST 2025
+🛠️ Formatting Examples:
+Display only the date:
+
+bash
+Copy
+Edit
+date +"%Y-%m-%d"
+# Output: 2025-07-24
+Display only the time:
+
+bash
+Copy
+Edit
+date +"%H:%M:%S"
+# Output: 22:12:08
+Custom format with day:
+
+bash
+Copy
+Edit
+date +"%A, %d %B %Y"
+# Output: Thursday, 24 July 2025
+🔧 Set the system date (admin only):
+bash
+Copy
+Edit
+sudo date --set="25 July 2025 10:00:00"
+📖 Full formatting options:
+GNU date format specifiers
+
+🔹 3. man — Manual pages
+📌 Description:
+The man command lets you view the manual (help documentation) for any Linux command.
+
+✅ Basic Usage:
+bash
+Copy
+Edit
+man command_name
+📤 Example:
+bash
+Copy
+Edit
+man ls
+This opens the manual for the ls command.
+
+🔎 Navigation:
+Space – Scroll down
+
+b – Scroll up
+
+/pattern – Search for "pattern"
+
+n – Next search result
+
+q – Quit
+
+📘 Sections of man:
+Manuals are divided into sections like:
+
+Section	Content
+1	User commands
+5	File formats and configuration
+8	System administration
+
+For example:
+
+
+man 5 passwd
+Shows the config file format of /etc/passwd.
+
+4. clear — Clear the terminal
+ Description:
+This command clears the terminal screen, making it clean and readable.
+
+ Usage:
+
+Same as pressing Ctrl+L in most terminals.
+ Technical Note:
+It just moves the terminal content up by sending ANSI escape sequences; it does not delete the command history.
+
+ Summary Table
+Command	Purpose	Example
+whoami	Show current user	whoami
+date	Show or set system date/time	date +"%d/%m/%Y"
+man	View command manuals	man ls, man 5 passwd
+clear	Clear terminal screen	clear
+
+
+	--------------------------------------------------------------------------------
+	Lab: Install RHEL 9, navigate terminal.
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	Day 2: Filesystem and File Management
-	•	Filesystem hierarchy: /etc, /var, /usr, /home
+	•	Filesystem hierarchy: /etc, /var, /usr, /home	
+	--------------------------------------------------------------------------------
+Refer "The Hierarchy of the File System" section in LinuxTOC
+	--------------------------------------------------------------------------------
 	•	Commands: ls, pwd, cd, file, mkdir, touch, cp, mv, rm, find
 	--------------------------------------------------------------------------------
 	find 
@@ -23,15 +373,434 @@ Week 1 can be reduced to 3-day course
 	
 	•	Wildcards: *, ?, relative vs. absolute paths
 	Lab: Create directories, manage files.
-
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	Day 3: Permissions and Essential Commands
+		--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	•	Permissions: rwx, chmod, chown (RHCSA 4.14)
+		--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	•	Viewing files: cat, less, more, head, tail
+		--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	•	I/O: stdin, stdout, stderr, pipes, redirection (RHCSA 4.7)
+		--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	•	Monitoring: top, htop, vmstat, journalctl
+		--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 		https://swac.blog/the-essential-guide-to-linux-system-monitoring-with-top-htop-and-vmstat/
-	--------------------------------------------------------------------------------
+		
+		
+1. top: The Classic Process Monitor 
+
+	top (table of processes) is a traditional, powerful, and real-time command-line utility that provides a dynamic view of running processes. It displays information about CPU and memory usage, process ID (PID), user, and much more.
+
+	1.1 Basic Usage and Output Explained
+	Just type top in your terminal and press Enter.
+
+	top - 09:30:01 up 2 days, 16:30,  1 user,  load average: 0.00, 0.01, 0.05
+	Tasks: 200 total,   1 running, 199 sleeping,   0 stopped,   0 zombie
+	%Cpu(s):  0.1 us,  0.1 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+	MiB Mem :   7987.9 total,   7000.0 free,    500.0 used,    487.9 buff/cache
+	MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.   7200.0 avail Mem
+
+		PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+		  1 root      20   0  169420   9980   6720 S   0.0   0.1   0:15.23 systemd
+		  2 root      20   0       0      0      0 S   0.0   0.0   0:00.04 kthreadd
+		... (more processes)
+	Understanding the Output Sections:
+
+	Header (First 5 lines):
+
+	Line 1 (System Summary):
+
+	top - HH:MM:SS: Current system time.
+
+	up X days, Y hours/minutes: System uptime.
+
+	Z users: Number of users currently logged in.
+
+	load average: L1, L5, L15: Average number of processes waiting to run over the last 1, 5, and 15 minutes. High numbers indicate a busy system.
+
+	Line 2 (Tasks/Processes):
+
+	total: Total number of processes.
+
+	running: Number of processes currently executing.
+
+	sleeping: Processes waiting for an event (e.g., I/O).
+
+	stopped: Processes that have been stopped (e.g., by Ctrl+Z).
+
+	zombie: Zombie processes (terminated but parent hasn't reaped them; indicates a problem).
+
+	Line 3 (CPU Usage): Percentages of CPU time spent in various states.
+
+	us: User CPU time (processes running in user space).
+
+	sy: System CPU time (kernel operations).
+
+	ni: Nice CPU time (user processes with modified priority).
+
+	id: Idle CPU time.
+
+	wa: I/O Wait time (CPU waiting for disk or network I/O).
+
+	hi: Hardware Interrupts.
+
+	si: Software Interrupts.
+
+	st: Steal time (relevant in virtualized environments where CPU is "stolen" by the hypervisor).
+
+	Line 4 (Memory Usage - Physical RAM):
+
+	total: Total physical memory.
+
+	free: Unused memory.
+
+	used: Memory actively used by processes.
+
+	buff/cache: Memory used by kernel buffers and page cache (can be freed if needed).
+
+	Line 5 (Swap Usage):
+
+	total: Total swap space.
+
+	free: Unused swap space.
+
+	used: Used swap space.
+
+	avail Mem: Estimated available memory for new applications (free + reclaimable buff/cache).
+
+	Process List (Table):
+
+	PID: Process ID.
+
+	USER: User who owns the process.
+
+	PR: Priority (kernel-assigned).
+
+	NI: Nice value (user-assigned priority; lower is higher priority).
+
+	VIRT: Virtual memory used by the process (including swap and shared libraries).
+
+	RES: Resident Set Size (physical memory actually used by the process, not swapped out). This is a key metric for memory usage.
+
+	SHR: Shared memory (memory shared with other processes).
+
+	S: Process Status (S=sleeping, R=running, Z=zombie, T=stopped).
+
+	%CPU: Percentage of CPU time used since the last update.
+
+	%MEM: Percentage of total physical memory used.
+
+	TIME+: Total CPU time used by the task since it started.
+
+	COMMAND: The command name or command line of the process.
+
+	1.2 Interactive Commands within top
+	While top is running, you can press several keys to interact with it:
+
+	q: Quit top.
+
+	k: Kill a process (prompts for PID, then signal, e.g., 9 for KILL).
+
+	r: Renice a process (change its nice value/priority).
+
+	d or s: Change the update delay (in seconds).
+
+	z: Toggle color/bold mode.
+
+	b: Toggle bold highlighting of running processes.
+
+	x: Highlight sort column.
+
+	y: Highlight running tasks.
+
+	1: Toggle display of individual CPU cores.
+
+	m: Toggle memory display modes (percent, absolute, etc.).
+
+	P: Sort by %CPU (default).
+
+	M: Sort by %MEM.
+
+	T: Sort by TIME+.
+
+	u: Filter by user (prompts for username).
+
+	h or ?: Display help screen.
+
+	1.3 Running top with Options
+	You can also start top with command-line options:
+
+	top -d 2: Update every 2 seconds.
+
+	top -u username: Show processes for a specific user.
+
+	top -p PID: Monitor a specific process by PID.
+
+	top -n 1: Run once and exit (useful in scripts).
+
+	Example: Monitor the httpd process (assuming its PID is 12345):
+
+
+
+	top -p 12345
+2. htop: The Enhanced Interactive Process Viewer 
+	htop is an interactive, real-time process viewer that is an enhancement over top. It offers a more user-friendly interface, easier navigation, and more features. It's not usually installed by default on RHEL, but it's highly recommended.
+
+	2.1 Installation
+
+
+	sudo dnf install htop -y
+	2.2 Basic Usage and Output Explained
+	Just type htop in your terminal and press Enter.
+
+	  CPU[|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||50.0%]
+	  Mem[|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||600M/7.94G]
+	  Swp[|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||0K/4.00G]
+	  Tasks: 60, 0 thr; 1 running
+	  Load average: 0.00 0.01 0.05
+	  Uptime: 2 days, 16:30:01
+
+		PID USER      PRI NI VIRT  RES  SHR S CPU% MEM%  TIME+ Command
+	  1 root       20  0 169M 9.9M 6.7M S  0.0  0.1 0:15.23 /sbin/init
+	  ...
+	Key Improvements over top:
+
+	Visual CPU/Memory Meters: Clear, colored bar graphs for CPU, Memory, and Swap usage at the top.
+
+	Scrollable Process List: You can scroll up and down the process list using arrow keys.
+
+	Tree View: Press F5 to toggle a tree view, showing parent-child relationships between processes. This is incredibly useful for understanding process hierarchies.
+
+	Function Keys (F1-F10): Common actions are mapped to function keys at the bottom of the screen, making it much more intuitive.
+
+	Mouse Support: You can click on columns to sort, or on processes to select them.
+
+	2.3 Interactive Commands within htop
+	F1 or h: Help screen.
+
+	F2: Setup (customize what's displayed, meters, columns, colors).
+
+	F3: Search for a process.
+
+	F4: Filter processes by text.
+
+	F5: Tree view / flat view toggle.
+
+	F6: Sort by a different column.
+
+	F7: Nice - (increase priority, make it less nice).
+
+	F8: Nice + (decrease priority, make it nicer).
+
+	F9: Kill process (select process, then choose signal).
+
+	F10 or q: Quit htop.
+
+	Spacebar: Tag (select) multiple processes for batch operations.
+
+	u: Filter by user.
+
+	K: Toggle kernel threads.
+
+	H: Toggle user threads.
+
+	Example: Find all httpd processes, view them in a tree, and then kill one:
+
+	Type htop.
+
+	Press F3, type httpd, and press Enter.
+
+	Press F5 to see the hierarchy.
+
+	Navigate to the process you want to kill using arrow keys.
+
+	Press F9, select 9 SIGKILL, and press Enter.
+
+3. vmstat: Virtual Memory Statistics 
+	vmstat (virtual memory statistics) is a versatile command-line utility used to report information about processes, memory, paging, block I/O, traps, and CPU activity. It's particularly useful for diagnosing memory bottlenecks and overall system activity.
+
+	3.1 Basic Usage and Output Explained
+	vmstat without any options gives a single snapshot of average statistics since boot.
+
+
+
+	vmstat
+	Output:
+
+	procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+	 r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+	 1  0      0 7000000 4879000 5000000    0    0     0     0  100  200  0  0 99  0  0
+	Understanding the Columns:
+
+	procs (Processes):
+
+	r: Number of processes waiting for CPU time (running or runnable). High r values indicate a CPU bottleneck.
+
+	b: Number of processes in uninterruptible sleep (waiting for I/O, often disk). High b values indicate an I/O bottleneck.
+
+	memory:
+
+	swpd: Amount of virtual memory used (swap space).
+
+	free: Amount of idle memory.
+
+	buff: Amount of memory used as buffers (for block devices).
+
+	cache: Amount of memory used as cache (for file system reads).
+
+	swap:
+
+	si: Amount of memory swapped in from disk (kb/s).
+
+	so: Amount of memory swapped out to disk (kb/s). High values here indicate heavy swapping, which points to a memory shortage.
+
+	io (Input/Output):
+
+	bi: Blocks received from a block device (e.g., disk reads) (blocks/s).
+
+	bo: Blocks sent to a block device (e.g., disk writes) (blocks/s).
+
+	system:
+
+	in: Number of interrupts per second.
+
+	cs: Number of context switches per second. High values can indicate high process activity.
+
+	cpu: (Similar to top's CPU line)
+
+	us: User time.
+
+	sy: System time.
+
+	id: Idle time.
+
+	wa: I/O Wait time.
+
+	st: Steal time.
+
+	3.2 Running vmstat with Options
+	vmstat is most useful when run in a continuous monitoring mode.
+
+	vmstat 1: Update every 1 second (continuous).
+
+	vmstat 1 5: Update every 1 second, but only 5 times.
+
+	vmstat -s: Display a table of event counters and memory statistics.
+
+	vmstat -a: Display active/inactive memory.
+
+	vmstat -d: Display disk statistics.
+
+	vmstat -p /dev/sda1: Display detailed partition statistics for /dev/sda1.
+
+	Example: Continuous monitoring of CPU and Memory every 2 seconds:
+
+
+
+	vmstat 2
+	Look for:
+
+	High r (processes waiting for CPU)
+
+	High b (processes waiting for I/O)
+
+	Significant si and so (swapping)
+
+	High wa in CPU (I/O wait)
+
+	These patterns can quickly point you to CPU, memory, or disk bottlenecks.
+
+4. journalctl: Systemd Journal Logs 
+	journalctl is the command-line utility used to query and display messages from the systemd journal. The journal is a centralized logging system introduced with systemd in modern Linux distributions like RHEL, replacing fragmented log files (like /var/log/messages, syslog, auth.log, etc.).
+
+	4.1 Basic Usage and Output Explained
+	Just type journalctl in your terminal.
+
+
+
+	journalctl
+	This will display all log messages from the oldest to the newest, which can be a very long output. It uses a pager (like less), so you can scroll, search, and navigate.
+
+	4.2 Important journalctl Options
+	journalctl -b: Show logs from the current boot. This is one of the most frequently used options.
+
+	journalctl -b -1: Show logs from the previous boot. (-b -2 for the boot before that, etc.).
+
+	journalctl -f: Follow the journal in real-time (like tail -f). This is excellent for live debugging.
+
+	journalctl -u <unit_name>: Show logs for a specific systemd unit (service).
+
+	Example: journalctl -u httpd.service (for Apache web server)
+
+	Example: journalctl -u sshd.service (for SSH daemon)
+
+	journalctl --since "YYYY-MM-DD HH:MM:SS": Show logs since a specific date/time.
+
+	journalctl --until "YYYY-MM-DD HH:MM:SS": Show logs up to a specific date/time.
+
+	journalctl --since "today" --until "now": Show today's logs.
+
+	journalctl --since "1 hour ago": Show logs from the last hour.
+
+	journalctl -p <priority>: Filter by message priority (e.g., emerg, alert, crit, err, warning, notice, info, debug).
+
+	Example: journalctl -p err -b (Show errors from current boot).
+
+	Example: journalctl -p warning -f (Follow warnings in real-time).
+
+	journalctl -k: Show only kernel messages.
+
+	journalctl -x: Add explanations to some log messages.
+
+	journalctl -n <num>: Show only the last num log entries. (Default is 10).
+
+	journalctl --disk-usage: Show how much disk space the journal logs are consuming.
+
+	4.3 Combining Options and Filtering
+	You can combine journalctl options for powerful filtering.
+
+	Examples:
+
+	Monitor Apache errors in real-time:
+
+
+
+	journalctl -u httpd.service -p err -f
+	See all warnings and errors from the previous boot:
+
+
+
+	journalctl -b -1 -p warning..err
+	(Note: warning..err means priority warning and higher, i.e., warning, err, crit, alert, emerg)
+
+	View kernel messages from the last 24 hours related to USB:
+
+
+
+	journalctl -k --since "24 hours ago" | grep -i usb
+	Check audit log denials (often redirected to journal):
+
+
+
+	journalctl -p err | grep "denied"
+	# Or specifically for SELinux (if auditd is sending to journal):
+	journalctl _COMM=auditd -g "AVC denied"
+	4.4 Journal Persistence
+	By default, the systemd journal might be volatile (stored in /run/log/journal/) and lost on reboot. To make it persistent (store logs across reboots in /var/log/journal/), you need to create the directory:
+
+
+
+	sudo mkdir -p /var/log/journal
+	sudo systemctl restart systemd-journald
+	The journal will then automatically start saving logs to this persistent location.
+--------------------------------------------------------------------------------
 	Lab: Set permissions, redirect output.
 
 	Day 4: Networking Foundations
@@ -40,6 +809,161 @@ Week 1 can be reduced to 3-day course
 	https://www.youtube.com/watch?v=NyZWSvSj8ek
 	https://www.youtube.com/watch?v=R5TV6lO3-1M
 	https://www.youtube.com/watch?v=o5uWsnzqr18
+	
+	
+-------------------------------------------------------------------------------------------------------------------------------
+Comparison Table: LAN vs. WAN vs. SD-WAN
+-------------------------------------------------------------------------------------------------------------------------------
+Feature			|LAN (Local Area Network)		|WAN (Wide Area Network)				|SD-WAN (Software-Defined WAN)
+-------------------------------------------------------------------------------------------------------------------------------
+Geographic 		|Small (single building, campus)|	Large (cities, countries, global)	|Large (global, connects distributed LANs)
+	Scope       |                               |                                       |
+Ownership		|Typically private 				|Private (devices/routers), 			|Private (management), uses mix of 
+				|	(single organization)		|	but relies on 						|private/public infrastructure
+				|								|	public/leased infrastructure        |
+Data Rates		|Very High 						|Moderate to High (varies, 				|High (optimizes utilization 
+				|	(1Gbps, 10Gbps, 100Gbps 	|	historically slower than LAN)		|	of available links)
+				|		typical)                |                                       |
+Latency/Errors	|Low latency, very 				|Higher latency, higher error rates		|Optimized for lower latency, 
+				|	low error rates				|										|	robust against errors/loss
+Primary Devices	|Switches, Access Points, 		|Routers, Modems, Firewalls				|SD-WAN Edge Appliances, 
+				|	End Devices					|										|	Centralized Orchestrator
+Core Concept	|Interconnects devices in 		|Connects geographically 				|Centralized, software-driven management 
+				|	a confined area				|	dispersed LANs						|	& optimization of WAN links
+Technology 		|Ethernet, Wi-Fi				|	MPLS, Leased Lines, Internet VPNs	|Policy-based routing, VPNs, Application-aware 
+	Focus		|								|										|routing, Orchestration
+Management		|Device-by-device configuration |	Router-by-router configuration, 	|Centralized, automated, single pane of glass
+				|	(switches, APs)				|	complex to manage at scale          |
+Cost 			|Relatively low hardware cost 	|High cost for dedicated lines 			|Potential cost savings by leveraging broadband,
+				|	for high speed				|	(MPLS); variable for 				|	operational efficiency
+				|								|	Internet VPNs                       |
+Security		|Managed internally, 			|Edge firewalls, VPNs for tunnels		|Integrated security, automated VPNs, 
+				|	firewalls at perimeter		|										|	segmentation
+----------------|-------------------------------|---------------------------------------|----------------------------------------
+
+
+
+1. LAN (Local Area Network) 
+	A Local Area Network (LAN) is a computer network that interconnects computers within a limited geographical area, such as a home, school, laboratory, university campus, or office building. LANs are characterized by their high data transfer rates and their relatively small geographic footprint.
+
+	1.1 Key Characteristics
+		Limited Geographic Scope: Typically covers a single building or a small cluster of buildings.
+
+		High Data Transfer Rates: Data transfer speeds are generally high, ranging from 10 Mbps (older) to 1 Gbps, 10 Gbps, or even 100 Gbps (modern enterprise LANs).
+
+		Private Ownership: Usually owned and managed by a single organization or individual.
+
+		Fewer Errors: Lower error rates due to shorter distances and controlled environments.
+
+		Technologies: Primarily uses Ethernet (wired) and Wi-Fi (wireless).
+
+		Devices: Computers, servers, printers, smartphones, IoT devices.
+
+		Networking Hardware: Switches, hubs (obsolete), wireless access points (APs).
+
+	1.2 How a LAN Works
+		At its core, a LAN allows devices to communicate with each other.
+		Physical Medium: Devices are connected via Ethernet cables (e.g., Cat5e, Cat6) or wirelessly via Wi-Fi signals.
+		Switches: In a modern LAN, an Ethernet switch is the central device.
+		It learns the MAC addresses of devices connected to its ports.
+		When a device sends a frame, the switch forwards it only to the specific port where the destination device is connected, minimizing unnecessary traffic.
+		Switches create separate collision domains for each port, eliminating collisions common in older hub-based networks.
+		Switches operate at Layer 2 (Data Link Layer) of the OSI model.
+		IP Addressing: Devices in a LAN are typically assigned IP addresses within the same subnet (e.g., 192.168.1.x). This allows them to communicate using IP.
+		Routers (for Internet Access): While a router is not strictly part of the LAN for internal communication, it is essential for connecting the LAN to the wider internet (a WAN). The router acts as the default gateway for all devices in the LAN.
+		Broadcast Domains: A LAN is typically a single broadcast domain by default. However, VLANs (Virtual LANs) can be used on switches to logically segment a single physical LAN into multiple smaller broadcast domains, improving security and manageability.
+
+	1.3 Components of a LAN
+		End Devices: Computers, laptops, servers, printers, VoIP phones, security cameras, smart TVs, etc.
+		Network Interface Cards (NICs): Hardware in each device to connect to the network (Ethernet ports or Wi-Fi adapters).
+		Cabling: Ethernet cables (twisted pair, fiber optic for backbone).
+		Switches: Connect devices within the LAN and forward data frames.
+		Wireless Access Points (APs): Allow wireless devices to connect to the wired LAN.
+		Routers: Connect the LAN to other networks (e.g., the Internet, other WANs).
+
+	1.4 Advantages of LANs
+		Resource Sharing: Share files, printers, internet connections, and applications among users.
+
+		Centralized Data: Easier to manage data centrally on servers.
+		Security: Easier to secure data within a confined network.
+		Cost-Effective: Sharing resources reduces overall hardware and software costs.
+		High Speed: Fast data transfer for local operations.
+
+2. WAN (Wide Area Network) 
+	A Wide Area Network (WAN) is a telecommunications network that extends over a large geographical area, such as across cities, states, or even countries. WANs are used to connect multiple LANs together, allowing organizations to link their distributed branches, or for individuals to connect to the internet.
+
+	2.1 Key Characteristics
+		Broad Geographic Scope: Covers vast distances, connecting geographically separated LANs.
+		Lower Data Transfer Rates (Historically): Traditionally slower than LANs, though modern WAN technologies (like fiber optics, high-speed leased lines) offer very high speeds.
+		Public/Leased Infrastructure: Typically relies on public telecommunication carriers (ISPs, telcos) for infrastructure (e.g., leased lines, MPLS, Internet VPNs).
+		Higher Latency & Error Rates: Due to longer distances and reliance on public infrastructure.
+		Technologies: MPLS, Fibre Channel over Ethernet (FCoE), various types of leased lines (T1/E1, OC-3, DS3), broadband internet, VPNs.
+		Networking Hardware: Routers are primary devices, along with modems, firewalls, and specialized WAN equipment (e.g., CSU/DSU for T1 lines).
+
+	2.2 How a WAN Works
+		WANs function by using different technologies to transmit data over long distances.
+		Routers: Routers are the fundamental building blocks of WANs. They connect different LANs to the WAN and are responsible for forwarding IP packets between networks based on IP addresses. Routers operate at Layer 3 (Network Layer) of the OSI model.
+		Service Providers: Organizations typically lease connectivity from telecommunication service providers (ISPs). These providers own the extensive infrastructure (fiber optic cables, satellites, microwave links, etc.) that spans large areas.
+		Connection Types:
+		Leased Lines: Dedicated, point-to-point connections (e.g., T1/E1, DS3). Provide guaranteed bandwidth but can be expensive.
+		MPLS (Multiprotocol Label Switching): A high-performance WAN technology that directs data from one network node to the next based on short path labels rather than long network addresses, improving speed and flexibility.
+		Broadband Internet (DSL, Cable, Fiber): Cost-effective for smaller branches, but offers variable performance and security requires VPNs.
+		VPNs (Virtual Private Networks): Create secure, encrypted tunnels over a public network (like the internet) to connect remote sites or users. This is a very common way to build a cost-effective WAN.
+		Satellite/Cellular: Used for remote locations where other options are unavailable.
+	2.3 Components of a WAN
+		Routers: Connect LANs to the WAN and route traffic.
+		Modems/CSU/DSU: Interface devices to connect to the service provider's network.
+		Firewalls: Essential for security at the WAN edge.
+		Service Provider Network: The underlying infrastructure owned by telcos/ISPs.
+
+	2.4 Advantages of WANs
+		Global Connectivity: Connects users and resources across vast distances.
+		Business Operations: Enables geographically dispersed businesses to operate as a single entity.
+		Data Exchange: Facilitates sharing of data and applications among different locations.
+		Centralized Resources: Allows users in remote offices to access centralized servers and databases.
+
+3. SD-WAN (Software-Defined Wide Area Network) 
+	SD-WAN (Software-Defined Wide Area Network) is a relatively new approach to managing and optimizing WAN connectivity. It virtualizes WAN connections, allowing organizations to use a mix of connection types (broadband, MPLS, 4G/5G) and intelligently route traffic over the most efficient path based on application requirements and network conditions.
+
+	Traditionally, WANs were hardware-centric and complex to manage, especially with multiple branch offices. SD-WAN abstracts the underlying network hardware, allowing central control and automation through software.
+
+	3.1 Key Characteristics
+		Centralized Control Plane: Network intelligence is moved from individual routers to a centralized controller. This allows for unified management and policy enforcement across the entire WAN.
+		Application-Aware Routing: SD-WAN can identify applications (e.g., VoIP, video conferencing, SaaS apps like Salesforce) and route them over the best available link based on real-time network conditions (latency, jitter, packet loss) and pre-defined business policies.
+		Network Abstraction: It abstracts the underlying transport services (broadband, MPLS, LTE) into a single logical "overlay" network.
+		Transport Independence: Can use any mix of WAN links.
+		Enhanced Security: Often includes integrated security features like VPNs, firewalls, and segmentation.
+		Cost Savings: By intelligently using cheaper broadband links for non-critical traffic, organizations can reduce reliance on expensive MPLS circuits.
+		Simplified Management: Centralized management console simplifies provisioning, configuration, and troubleshooting.
+
+	3.2 How SD-WAN Works
+		SD-WAN architecture typically involves three main components:
+		SD-WAN Edge Devices (CPEs - Customer Premises Equipment): These are physical or virtual appliances deployed at branch offices or data centers. They connect to the various WAN links (broadband, MPLS) and create encrypted tunnels (often IPSec VPNs) back to other SD-WAN edge devices or data centers. They perform application identification and policy enforcement.
+		SD-WAN Orchestrator/Controller: This is the centralized brain of the SD-WAN. It is a software component (often cloud-based) that:
+		Provides a single pane of glass for management.
+		Pushes policies to the edge devices.
+		Collects telemetry data from the network.
+		Determines the optimal path for different applications based on real-time network conditions and policies.
+		Automates configuration and deployment.
+		Optional: SD-WAN Gateway: Some SD-WAN solutions use cloud gateways to optimize connectivity to SaaS applications or cloud services.
+
+	3.3 Key Features and Benefits
+		Dynamic Path Selection: Automatically selects the best WAN link for each application's traffic in real-time. For example, VoIP traffic might be prioritized over a stable MPLS link, while web Browse might use a cheaper broadband link.
+		Load Balancing & Link Aggregation: Uses multiple WAN links concurrently, increasing total bandwidth and providing redundancy.
+		Failover: If one link fails, traffic is automatically rerouted over an active link without manual intervention.
+		Zero-Touch Provisioning (ZTP): New branch devices can be deployed easily with minimal on-site configuration, as the orchestrator handles most of the setup.
+		Improved Application Performance: Prioritization and intelligent routing ensure critical applications perform optimally.
+		Reduced Costs: Leverages cheaper internet links, reducing reliance on expensive private circuits.
+		Increased Agility: Faster deployment of new sites and easier policy changes.
+
+	3.4 SD-WAN Use Cases
+		Multi-Branch Enterprises: Connecting numerous branch offices efficiently and cost-effectively.
+		Cloud Connectivity: Optimizing access to cloud-based applications (SaaS, IaaS).
+		Digital Transformation: Supporting new bandwidth-intensive applications and distributed workforces.
+		Security Integration: Consolidating security functions (firewall, IDS/IPS) at the WAN edge.
+
+
+	
 	--------------------------------------------------------------------------------
 	•	OSI vs. TCP/IP models, IPv4/IPv6 (RHCSA 4.6)
 --------------------------------------------------------------------------------
@@ -47,297 +971,1820 @@ Refer Notes.txt
 	--------------------------------------------------------------------------------
 	•	Commands: ip, nmcli, ss, ping, traceroute, dig (RHCSA 3.4)
 --------------------------------------------------------------------------------
+
+Let's explore six essential Linux networking commands: ip, nmcli, ss, ping, traceroute, and dig. These tools are fundamental for configuring, monitoring, and troubleshooting network connectivity on Linux systems.
+
+1. ip: The Modern Network Configuration Tool 
+The ip command is the modern replacement for older tools like ifconfig, route, and arp. It's a powerful and versatile utility for showing and manipulating routing, network devices, interfaces, and tunnels.
+
+1.1 Basic Structure
+The ip command follows a general structure:
+ip [OPTIONS] OBJECT { COMMAND | help }
+
+OBJECT: The type of object you want to manage. Common objects include:
+
+link: Network device/interface (e.g., Ethernet, Wi-Fi).
+
+addr (or address): IP addresses.
+
+route: Routing table entries.
+
+neigh (or neighbour): ARP/NDP cache entries.
+
+rule: Routing policy database rules.
+
+COMMAND: The action you want to perform on the object (e.g., show, add, del, set).
+
+1.2 Common ip Commands
+Display Network Interfaces and Their Status (ip link show):
+
+
+
+ip link show
+This shows physical interfaces (eth0, wlan0), loopback (lo), and their states (UP/DOWN), MAC addresses, etc.
+
+Display IP Addresses (ip addr show or ip a):
+
+
+
+ip addr show
+# or
+ip a
+This displays all configured IP addresses, subnet masks (CIDR notation), broadcast addresses, and interface names.
+
+To show specific interface: ip a show eth0
+
+To show only IPv4 addresses: ip -4 a
+
+To show only IPv6 addresses: ip -6 a
+
+Bring an Interface Up/Down (ip link set):
+
+
+
+sudo ip link set eth0 down   # Take interface down
+sudo ip link set eth0 up     # Bring interface up
+Note: Use with caution, as this can disconnect you from the network.
+
+Add/Remove IP Addresses (ip addr add/del):
+
+
+
+sudo ip addr add 192.168.1.100/24 dev eth0   # Add an IP
+sudo ip addr del 192.168.1.100/24 dev eth0   # Remove an IP
+These changes are temporary and won't survive a reboot without network configuration files.
+
+Display Routing Table (ip route show or ip r):
+
+
+
+ip route show
+# or
+ip r
+This shows the kernel's IP routing table, including default routes, network routes, and their associated interfaces and gateways.
+
+default via 192.168.1.1 dev eth0: Indicates the default gateway.
+
+Add/Remove Default Gateway (ip route add/del):
+
+
+
+sudo ip route add default via 192.168.1.1 dev eth0    # Add default gateway
+sudo ip route del default via 192.168.1.1 dev eth0    # Delete default gateway
+Again, temporary changes.
+
+Display ARP/NDP Cache (ip neigh show):
+
+
+
+ip neigh show
+Shows the Address Resolution Protocol (ARP) cache (for IPv4) or Neighbor Discovery Protocol (NDP) cache (for IPv6), mapping IP addresses to MAC addresses on the local network.
+
+Monitor Network Events (ip monitor):
+
+
+
+ip monitor all
+This continuously displays real-time updates on network link, address, and route changes. Useful for debugging network configuration scripts.
+
+1.3 ip vs. ifconfig (Legacy)
+ip is preferred because:
+
+It's part of the iproute2 suite, designed for modern Linux kernels.
+
+It handles IPv6 natively and more comprehensively.
+
+It combines functionalities of multiple older tools.
+
+It provides more detailed and consistent output.
+
+2. nmcli: NetworkManager Command-Line Interface 
+nmcli is a command-line client for NetworkManager, a daemon that handles network connections on many Linux distributions (especially Red Hat/CentOS/Fedora, Ubuntu, Debian). nmcli allows you to create, display, edit, delete, activate, and deactivate network connections, and to control and monitor the NetworkManager daemon.
+
+2.1 Basic Structure and Concepts
+NetworkManager operates on the concept of connections (profiles) and devices (physical interfaces). A connection defines how a device should be configured when it's activated (e.g., IP address, gateway, DNS, Wi-Fi SSID, password).
+
+2.2 Common nmcli Commands
+List Network Devices and Their Status (nmcli device status or nmcli d):
+
+
+
+nmcli device status
+# or
+nmcli d
+This shows all network interfaces and their current state (connected, disconnected, unavailable).
+
+List Network Connections (nmcli connection show or nmcli c):
+
+
+
+nmcli connection show
+# or
+nmcli c
+This lists all defined connection profiles, whether active or not.
+
+Show Active Connections (nmcli connection show --active):
+
+
+
+nmcli connection show --active
+Shows only currently active network connections.
+
+Activate/Deactivate a Connection (nmcli connection up/down):
+
+
+
+sudo nmcli connection up my_ethernet_connection  # Activate a named connection
+sudo nmcli connection down my_wifi_connection    # Deactivate a named connection
+Connect/Disconnect a Device (nmcli device connect/disconnect):
+
+
+
+sudo nmcli device connect eth0  # Connects the device using its active connection profile
+sudo nmcli device disconnect eth0 # Disconnects the device
+Create a New Ethernet Connection:
+
+
+
+sudo nmcli connection add type ethernet con-name my_static_eth ifname eth0 ip4 192.168.1.100/24 gw4 192.168.1.1
+sudo nmcli connection modify my_static_eth ipv4.dns "8.8.8.8 8.8.4.4"
+sudo nmcli connection modify my_static_eth ipv4.method manual
+sudo nmcli connection up my_static_eth
+type ethernet: Specifies connection type.
+
+con-name: Connection profile name.
+
+ifname: Interface to associate with.
+
+ip4: IPv4 address/CIDR.
+
+gw4: IPv4 gateway.
+
+ipv4.dns: DNS servers.
+
+ipv4.method manual: Sets static IP (default is auto for DHCP).
+
+Create a New Wi-Fi Connection:
+
+
+
+sudo nmcli device wifi connect "My_SSID" password "my_wifi_password"
+# or if the SSID is already known to NM from previous scans:
+sudo nmcli connection add type wifi con-name my_home_wifi ifname wlan0 ssid "My_SSID" -- wifi-sec.key-mgmt wpa-psk wifi-sec.psk "my_wifi_password"
+sudo nmcli connection up my_home_wifi
+Delete a Connection:
+
+
+
+sudo nmcli connection delete my_ethernet_connection
+Monitor NetworkManager (nmcli monitor):
+
+
+
+nmcli monitor
+Provides real-time notifications about NetworkManager events (device state changes, connection activations/deactivations).
+
+nmcli is the preferred way to manage network configurations on systems using NetworkManager, as it ensures changes are persistent and handled correctly by the daemon.
+
+3. ss: Socket Statistics 
+ss is a utility to investigate sockets (network connections). It can display more TCP/IP and network statistics than netstat and is much faster for systems with many connections.
+
+3.1 Basic Usage and Output Explained
+ss without any options lists all open TCP, UDP, and Unix domain sockets. This can be overwhelming.
+
+
+
+ss -ltn
+Output (example):
+
+State       Recv-Q Send-Q Local Address:Port                 Peer Address:Port
+LISTEN      0      128    0.0.0.0:22                     0.0.0.0:*
+LISTEN      0      128    0.0.0.0:80                     0.0.0.0:*
+LISTEN      0      128       [::]:22                        [::]:*
+LISTEN      0      128       [::]:80                        [::]:*
+Common ss Options:
+
+-t: Show TCP sockets.
+
+-u: Show UDP sockets.
+
+-x: Show Unix domain sockets.
+
+-l: Show listening sockets.
+
+-n: Do not resolve service names (e.g., show 22 instead of ssh, 80 instead of http). This is faster.
+
+-p: Show the process (PID/name) using the socket. Requires sudo.
+
+-a: Show all sockets (listening and non-listening).
+
+-e: Show more detailed socket information.
+
+-o: Show timer information.
+
+-m: Show memory usage of the socket.
+
+-s: Display summary statistics of sockets.
+
+-r: Resolve host names and port numbers (opposite of -n, can be slow).
+
+3.2 Practical ss Examples
+List all listening TCP ports and the processes using them:
+
+
+
+sudo ss -ltnp
+This is extremely useful for checking which services are running and on what ports.
+
+List all established TCP connections:
+
+
+
+ss -ant state established
+established: Filters for connections in the ESTABLISHED state.
+
+List all UDP sockets:
+
+
+
+ss -uan
+Find connections to a specific port (e.g., port 80):
+
+
+
+ss -ant '( sport = :80 or dport = :80 )'
+sport: source port, dport: destination port.
+
+Get a summary of socket types:
+
+
+
+ss -s
+Check for connections from a specific IP address:
+
+
+
+ss -nt 'src 192.168.1.100'
+ss -nt 'dst 192.168.1.10'
+ss is invaluable for quickly inspecting network connections, diagnosing port conflicts, and checking if services are listening correctly.
+
+4. ping: Test Network Reachability 
+ping is a fundamental network utility used to test the reachability of a host on an Internet Protocol (IP) network and to measure the round-trip time for messages sent from the originating host to a destination computer. It uses ICMP (Internet Control Message Protocol) echo requests.
+
+4.1 Basic Usage and Output
+
+
+ping google.com
+# or
+ping 8.8.8.8
+Output:
+
+PING google.com (142.250.193.110) 56(84) bytes of data.
+64 bytes from maa05s05-in-f14.1e100.net (142.250.193.110): icmp_seq=1 ttl=117 time=10.2 ms
+64 bytes from maa05s05-in-f14.1e100.net (142.250.193.110): icmp_seq=2 ttl=117 time=10.0 ms
+^C
+--- google.com ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 10.038/10.158/10.278/0.120 ms
+icmp_seq: Sequence number of the packet.
+
+ttl: Time To Live (number of hops allowed before discarding).
+
+time: Round-trip time (latency) in milliseconds.
+
+4.2 Common ping Options
+-c <count>: Stop after sending <count> ECHO_REQUEST packets.
+
+Example: ping -c 4 google.com (send 4 pings).
+
+-i <interval>: Wait <interval> seconds between sending packets. (Default is 1 second).
+
+Example: ping -i 0.5 google.com (ping every 0.5 seconds).
+
+-s <packet_size>: Specify the number of data bytes to be sent. (Default is 56, resulting in 84 total bytes).
+
+-t <ttl>: Set the IP TTL.
+
+-W <timeout>: Time to wait for a response (in seconds).
+
+-w <deadline>: Stop after deadline seconds, regardless of how many packets have been sent or received.
+
+-v: Verbose output.
+
+-4: Force IPv4.
+
+-6: Force IPv6.
+
+4.3 Practical ping Examples
+Test basic connectivity to a local gateway:
+
+
+
+ping 192.168.1.1
+Test internet connectivity (ping a public DNS server):
+
+
+
+ping 8.8.8.8
+Test hostname resolution and connectivity:
+
+
+
+ping example.com
+If this fails but ping 8.8.8.8 works, it suggests a DNS resolution problem.
+
+Send 10 pings and exit:
+
+
+
+ping -c 10 your_server_ip
+This is good for quick checks without manually stopping.
+
+Continuous ping for monitoring (Ctrl+C to stop):
+
+
+
+ping <hostname_or_ip>
+ping is your first go-to tool for basic network troubleshooting: "Can I even reach that host?"
+
+5. traceroute: Trace the Network Path 
+traceroute is a network diagnostic tool used to display the route (path) and measure transit delays of packets across an Internet Protocol (IP) network. It shows the sequence of routers (hops) that a packet traverses to reach its destination.
+
+5.1 Basic Usage and Output
+
+
+traceroute google.com
+# or
+traceroute 8.8.8.8
+Output (example - truncated):
+
+traceroute to google.com (142.250.193.110), 30 hops max, 60 byte packets
+ 1  _gateway (192.168.1.1)  0.370 ms  0.224 ms  0.187 ms
+ 2  10.0.0.1 (10.0.0.1)  1.758 ms  1.705 ms  1.656 ms
+ 3  10.10.10.1 (10.10.10.1)  2.587 ms  2.560 ms  2.531 ms
+ 4  router.isp.com (X.X.X.X)  10.123 ms  10.100 ms  10.080 ms
+ ... (more hops)
+Hop Number: The number indicates the current hop in the path.
+
+Router Name/IP: The hostname and IP address of the router at that hop.
+
+Round-Trip Times (ms): Three time values for each hop, representing the time it took for three probes to reach that router and return. * indicates a lost probe or a router not responding to ICMP.
+
+5.2 How traceroute Works
+traceroute sends packets (usually UDP on Linux, or ICMP echo requests) with an incrementally increasing TTL (Time To Live) value.
+
+It sends the first packet with TTL=1. The first router receives it, decrements TTL to 0, and sends an ICMP "Time Exceeded" message back. This identifies the first hop.
+
+Then it sends with TTL=2. The second router returns the "Time Exceeded" message. This identifies the second hop.
+
+This process continues until the packet reaches the destination, which then sends an ICMP "Port Unreachable" (for UDP) or "Echo Reply" (for ICMP) message back, indicating the end of the trace.
+
+5.3 Common traceroute Options
+-n: Do not resolve IP addresses to hostnames (faster).
+
+-I: Use ICMP ECHO for probes (default on some systems, useful if UDP is blocked).
+
+-T: Use TCP SYN for probes (useful for tracing through firewalls that block ICMP/UDP). Requires sudo.
+
+-p <port>: Specify destination port for TCP or UDP probes.
+
+-m <max_hops>: Set the maximum number of hops to probe. (Default is 30).
+
+-w <timeout>: Set the time to wait for a probe response.
+
+5.4 Practical traceroute Examples
+Trace the path to a website (faster, no hostname resolution):
+
+
+
+traceroute -n example.com
+Trace using ICMP (good for general network path discovery):
+
+
+
+traceroute -I google.com
+Trace using TCP to port 80 (useful if ICMP/UDP is blocked by firewalls):
+
+
+
+sudo traceroute -T -p 80 example.com
+traceroute helps you identify where network latency or packet loss is occurring along the path to a destination.
+
+6. dig: Domain Information Groper 
+dig is a powerful and flexible command-line tool for querying DNS (Domain Name System) name servers. It's primarily used for troubleshooting DNS issues and obtaining detailed information about DNS records.
+
+6.1 Basic Usage and Output
+
+
+dig google.com
+Output (example - truncated):
+
+; <<>> DiG 9.16.1-Ubuntu <<>> google.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 12345
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;google.com.                    IN      A
+
+;; ANSWER SECTION:
+google.com.             300     IN      A       142.250.193.110
+
+;; Query time: 10 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Fri Jul 18 10:23:30 2025
+;; MSG SIZE  rcvd: 55
+Key Sections of dig Output:
+
+HEADER: Shows query status (e.g., NOERROR, NXDOMAIN - domain not found), flags, etc.
+
+QUESTION SECTION: The query you made (e.g., google.com. IN A asks for an A record for https://www.google.com/url?sa=E&source=gmail&q=google.com).
+
+ANSWER SECTION: The actual DNS records returned (e.g., google.com. 300 IN A 142.250.193.110 means https://www.google.com/url?sa=E&source=gmail&q=google.com's A record is 142.250.193.110 with a TTL of 300 seconds).
+
+Query time: How long the query took.
+
+SERVER: Which DNS server was used to resolve the query.
+
+6.2 Common dig Options
+@<server>: Specify a specific DNS server to query.
+
+Example: dig @8.8.8.8 google.com (query Google's public DNS).
+
+<type>: Specify the type of DNS record to query. Common types:
+
+A: IPv4 address (default).
+
+AAAA: IPv6 address.
+
+MX: Mail Exchanger (mail servers for the domain).
+
+NS: Name Server (authoritative DNS servers for the domain).
+
+TXT: Text records (often used for SPF, DKIM, DMARC for email validation, or arbitrary text).
+
+CNAME: Canonical Name (alias).
+
+PTR: Pointer (for reverse DNS lookups).
+
+ANY: All available records.
+
++short: Display only the answer, in a concise format.
+
++noall +answer: Suppress all output except the answer section.
+
++trace: Trace the delegation path from the root servers.
+
+6.3 Practical dig Examples
+Get MX records for a domain (to find mail servers):
+
+
+
+dig example.com MX
+Get NS records for a domain (to find its authoritative DNS servers):
+
+
+
+dig example.com NS
+Perform a reverse DNS lookup (find hostname from IP):
+
+
+
+dig -x 8.8.8.8
+Query a specific DNS server for a domain's AAAA record:
+
+
+
+dig @4.4.4.4 example.com AAAA
+Trace the DNS resolution path for a domain:
+
+
+
+dig +trace example.com
+Get only the IP address (useful in scripts):
+
+
+
+dig +short google.com
+dig is indispensable for troubleshooting DNS resolution issues, verifying DNS record configurations, and understanding how domain names are translated into IP addresses.
+
+
 	--------------------------------------------------------------------------------
 	Lab: Configure IPv4/IPv6 on RHEL 9.
 
 	Day 5: Hands-on Lab & Quiz
 	•	Scenario: Create user folder structure, set permissions, configure network.
+--------------------------------------------------------------------------------
+
+1. Creating a User Folder Structure 
+When you create a new user on a Linux system, a home directory is typically created automatically for them (e.g., /home/username). This home directory serves as their personal workspace. Within this, you might want to establish a standardized folder structure for better organization, especially in a multi-user or server environment.
+
+1.1 Default Home Directory Creation
+When you create a new user using useradd (low-level) or adduser (higher-level, more user-friendly), a home directory is usually made automatically, populated with files from /etc/skel.
+
+Example: Create a new user devuser1.
+
+
+
+sudo adduser devuser1
+This command will:
+
+Create the user devuser1.
+
+Create a group devuser1.
+
+Create the home directory /home/devuser1/.
+
+Copy default configuration files (like .rc, .profile) from /etc/skel into /home/devuser1/.
+
+Set the correct ownership and permissions for /home/devuser1/ (usually devuser1:devuser1 with rwx------ or rwxr-xr-x).
+
+1.2 Defining a Standard Folder Structure
+Let's assume you want all new users to have a standard set of subdirectories in their home folder, such as Documents, Projects, Downloads, and Public.
+
+Method 1: Modifying /etc/skel (System-Wide Default)
+This is the most common and recommended way to create a consistent folder structure for new users. Any files or directories you place in /etc/skel will be copied to a new user's home directory upon creation.
+
+Create desired directories and files in /etc/skel:
+
+
+
+sudo mkdir -p /etc/skel/Documents
+sudo mkdir -p /etc/skel/Projects
+sudo mkdir -p /etc/skel/Downloads
+sudo mkdir -p /etc/skel/Public
+sudo echo "# My custom startup script" | sudo tee /etc/skel/.custom_script.sh
+Verify content:
+
+
+
+ls -a /etc/skel/
+Create a new user:
+
+
+
+sudo adduser newuser2
+Verify the new user's home directory:
+
+
+
+ls -a /home/newuser2/
+You should see Documents, Projects, Downloads, Public, and .custom_script.sh in their home directory.
+
+Method 2: Scripting for Existing Users or One-Offs
+If you need to apply a structure to existing users or for a specific subset of users, a script can automate the process.
+
+
+
+#!/bin/
+
+# Define the base directory for user homes (usually /home)
+USER_HOME_BASE="/home"
+
+# Define the standard subdirectories
+SUBDIRS=("Documents" "Projects" "Downloads" "Public")
+
+# --- Function to create subdirectories for a single user ---
+create_user_structure() {
+    local username="$1"
+    local user_home="$USER_HOME_BASE/$username"
+
+    if [ ! -d "$user_home" ]; then
+        echo "Error: Home directory $user_home for user $username does not exist."
+        return 1
+    fi
+
+    echo "Creating standard folder structure for user: $username in $user_home"
+    for dir in "${SUBDIRS[@]}"; do
+        if [ ! -d "$user_home/$dir" ]; then
+            sudo mkdir -p "$user_home/$dir"
+            # Ensure correct ownership and permissions
+            sudo chown "$username:$username" "$user_home/$dir"
+            sudo chmod 755 "$user_home/$dir" # Example: rwx r-x r-x
+            echo "  - Created $dir"
+        else
+            echo "  - Directory $dir already exists, skipping."
+        fi
+    done
+    echo "Structure created for $username."
+}
+
+# --- Main script logic ---
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <username> [username2 ...]"
+    echo "       $0 --all"
+    echo "       $0 --group <groupname>"
+    exit 1
+fi
+
+if [ "$1" == "--all" ]; then
+    # Process all regular users (UID >= 1000, usually, but check /etc/login.defs)
+    echo "Processing all users..."
+    # Exclude system users (UID < 1000 or specific user names)
+    # This example excludes common system users and UID below 1000.
+    getent passwd | awk -F: '$3 >= 1000 && $1 != "nobody" && $1 != "root" {print $1}' | while read -r user; do
+        create_user_structure "$user"
+    done
+elif [ "$1" == "--group" ]; then
+    if [ -z "$2" ]; then
+        echo "Error: Please provide a group name after --group."
+        exit 1
+    fi
+    groupname="$2"
+    echo "Processing users in group: $groupname..."
+    getent group "$groupname" | awk -F: '{print $4}' | tr ',' '\n' | while read -r user; do
+        if [ -n "$user" ]; then # Ensure user variable is not empty
+            create_user_structure "$user"
+        fi
+    done
+else
+    # Process specific users provided as arguments
+    for user_to_process in "$@"; do
+        create_user_structure "$user_to_process"
+    done
+fi
+
+echo "Script finished."
+How to Use the Script:
+
+Save it as create_user_folders.sh.
+
+Make it executable: chmod +x create_user_folders.sh.
+
+Run it:
+
+For a single user: ./create_user_folders.sh username
+
+For multiple users: ./create_user_folders.sh user1 user2 user3
+
+For all regular users: ./create_user_folders.sh --all
+
+For users belonging to a specific group: ./create_user_folders.sh --group devgroup
+
+2. Setting File and Directory Permissions 
+Permissions are crucial for securing your Linux system. They determine who can read, write, or execute files and directories. Linux uses three types of permissions for three types of entities:
+
+2.1 Understanding Permissions
+Permissions Types:
+
+r (read): View content (files), list directory contents (directories).
+
+w (write): Modify content (files), create/delete files in a directory (directories).
+
+x (execute): Run an executable (files), enter/traverse a directory (directories).
+
+Entities:
+
+u (user): The owner of the file/directory.
+
+g (group): The group associated with the file/directory.
+
+o (others): Everyone else on the system.
+
+a (all): Refers to user, group, and others.
+
+Permissions are typically viewed using ls -l.
+
+Example ls -l output:
+
+-rw-r--r--. 1 user1 group1  1234 May 15 10:00 myfile.txt
+drwxr-xr-x. 2 user1 group1  4096 May 15 10:00 mydirectory/
+The first character (- for file, d for directory)
+
+Next three: User permissions (rw-)
+
+Next three: Group permissions (r--)
+
+Last three: Others permissions (r--)
+
+2.2 Changing Permissions with chmod
+chmod (change mode) is used to modify file and directory permissions.
+
+Symbolic Mode
+Uses u, g, o, a combined with + (add), - (remove), = (set exactly).
+
+Give owner execute permission:
+
+
+
+chmod u+x myfile.sh
+Remove write permission from group and others:
+
+
+
+chmod go-w myfile.txt
+Set permissions exactly for everyone: Owner can read/write/execute, group can read/execute, others can only read.
+
+
+
+chmod u=rwx,g=rx,o=r mydirectory/
+Give everyone read/write access to a file:
+
+
+
+chmod a+rw somefile.txt
+Octal (Numeric) Mode
+Each permission (r, w, x) has a numeric value:
+
+r = 4
+
+w = 2
+
+x = 1
+
+- = 0
+
+You sum the values for each entity (user, group, others) to get an octal digit.
+
+Permission	r (4)	w (2)	x (1)	Total
+rwx	4	2	1	7
+rw-	4	2	0	6
+r-x	4	0	1	5
+r--	4	0	0	4
+---	0	0	0	0
+
+Export to Sheets
+Common Octal Permissions:
+
+755 (rwxr-xr-x): Common for directories and executable scripts. Owner has full control, group and others can read and execute (traverse directories).
+
+644 (rw-r--r--): Common for files. Owner can read/write, group and others can only read.
+
+700 (rwx------): Highly restrictive. Only the owner has full control. Good for sensitive files/directories.
+
+Set permissions to rwxr-xr-x for a directory:
+
+
+
+chmod 755 mydirectory/
+Set permissions to rw-r--r-- for a file:
+
+
+
+chmod 644 myfile.txt
+Recursively change permissions for files and directories (use with caution!):
+
+
+
+chmod -R 755 /path/to/directory  # Generally for directories and their contents
+chmod -R 644 /path/to/directory  # If you want to make all files readable by others, but not executable
+Best Practice: Often use find with chmod for more granular recursive control:
+
+
+
+find /path/to/directory -type d -exec chmod 755 {} \; # Directories to 755
+find /path/to/directory -type f -exec chmod 644 {} \; # Files to 644
+2.3 Changing Ownership with chown and chgrp
+chown (change owner): Changes the owner and/or group of a file/directory.
+
+Change owner only:
+
+
+
+sudo chown newowner myfile.txt
+Change group only:
+
+
+
+sudo chown :newgroup myfile.txt
+# or using chgrp:
+sudo chgrp newgroup myfile.txt
+Change owner and group:
+
+
+
+sudo chown newowner:newgroup myfile.txt
+Recursively change ownership:
+
+
+
+sudo chown -R newowner:newgroup /path/to/directory
+Use Cases:
+
+After copying files as root, set them back to the user/service owner.
+
+Assign files to a shared group for collaborative access.
+
+3. Configuring Network Settings 
+Linux offers several ways to configure network settings, from command-line tools to graphical interfaces and configuration files. We'll focus on common command-line methods.
+
+3.1 Key Network Configuration Concepts
+Network Interface Name: (e.g., eth0, enp0s3, wlan0).
+
+IP Address: Uniquely identifies a device on a network.
+
+Subnet Mask (Netmask): Defines the network portion of an IP address. Often expressed in CIDR notation (e.g., /24).
+
+Gateway: The router's IP address that connects your local network to other networks (like the internet).
+
+DNS Servers: IP addresses of servers that translate domain names (like google.com) into IP addresses.
+
+DHCP (Dynamic Host Configuration Protocol): Automatically assigns IP addresses and other network configurations.
+
+Static IP: Manually assigned IP address.
+
+3.2 Command-Line Tools for Network Configuration
+a. ip Command (Temporary Changes)
+We covered ip in detail previously. Changes made with ip are temporary and will be lost after a reboot or network service restart. They are good for quick tests or transient configurations.
+
+Assign Static IP:
+
+
+
+sudo ip addr add 192.168.1.150/24 dev eth0
+sudo ip link set eth0 up
+Add Default Gateway:
+
+
+
+sudo ip route add default via 192.168.1.1 dev eth0
+Add DNS Server (Temporary for resolv.conf):
+
+
+
+echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+Note: /etc/resolv.conf is often managed by NetworkManager or systemd-resolved, so manual changes might be overwritten.
+
+b. nmcli Command (Persistent with NetworkManager)
+As discussed, nmcli is for systems using NetworkManager (common in modern distributions). Changes made with nmcli are persistent across reboots.
+
+Configure a Static IP for an Ethernet interface (eth0):
+
+
+
+sudo nmcli connection add type ethernet con-name "Static_Ethernet" ifname eth0 ip4 192.168.1.150/24 gw4 192.168.1.1
+sudo nmcli connection modify "Static_Ethernet" ipv4.dns "8.8.8.8,8.8.4.4"
+sudo nmcli connection modify "Static_Ethernet" ipv4.method manual
+sudo nmcli connection up "Static_Ethernet"
+Configure DHCP for an Ethernet interface:
+
+
+
+sudo nmcli connection modify "Static_Ethernet" ipv4.method auto
+sudo nmcli connection up "Static_Ethernet"
+Connect to Wi-Fi:
+
+
+
+sudo nmcli device wifi connect "Your_SSID" password "Your_WiFi_Password"
+This creates and activates a connection profile for that Wi-Fi network.
+
+c. Traditional Configuration Files (for network service or if no NetworkManager)
+Some systems (especially older ones or minimal server installations) might use traditional configuration files managed by the network service instead of NetworkManager. The exact location and format vary by distribution.
+
+Debian/Ubuntu (/etc/network/interfaces):
+
+
+
+# /etc/network/interfaces
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface (DHCP)
+auto eth0
+iface eth0 inet dhcp
+
+# The primary network interface (Static IP)
+# auto eth0
+# iface eth0 inet static
+#    address 192.168.1.150
+#    netmask 255.255.255.0
+#    gateway 192.168.1.1
+#    dns-nameservers 8.8.8.8 8.8.4.4
+After editing: sudo systemctl restart networking
+
+RHEL/CentOS/Fedora (/etc/sysconfig/network-scripts/ifcfg-<interface_name>):
+
+
+
+# /etc/sysconfig/network-scripts/ifcfg-eth0 (for DHCP)
+TYPE="Ethernet"
+BOOTPROTO="dhcp"
+DEFROUTE="yes"
+NAME="eth0"
+DEVICE="eth0"
+ONBOOT="yes"
+
+# /etc/sysconfig/network-scripts/ifcfg-eth0 (for Static IP)
+# TYPE="Ethernet"
+# BOOTPROTO="none"
+# IPADDR="192.168.1.150"
+# PREFIX="24"
+# GATEWAY="192.168.1.1"
+# DNS1="8.8.8.8"
+# DNS2="8.8.4.4"
+# NAME="eth0"
+# DEVICE="eth0"
+# ONBOOT="yes"
+After editing: sudo systemctl restart network (or sudo ifup eth0 / sudo ifdown eth0 && sudo ifup eth0)
+
+3.3 Verifying Network Configuration
+Check IP Address and Interface Status:
+
+
+
+ip a show eth0
+Check Routing Table:
+
+
+
+ip r
+Test DNS Resolution:
+
+
+
+dig google.com
+Test Connectivity:
+
+
+
+ping google.com
+ping 8.8.8.8
+Check Active NetworkManager Connections:
+
+
+
+nmcli connection show --active
+By following these steps, you can effectively manage user environments and configure network settings on your Linux system.
+
+	--------------------------------------------------------------------------------
 	•	Quiz: MCQs on Linux commands, filesystem, networking basics.
+--------------------------------------------------------------------------------
+Pending 
+
+	--------------------------------------------------------------------------------
 	Lab: Practice Week 1 tasks.
 
 Week 2: Advanced Networking, VoIP Troubleshooting, and System Admin
 Objective: Deepen networking skills, troubleshoot VoIP, and introduce system administration.
 	Day 6: Subnetting and Switching
+--------------------------------------------------------------------------------
+
+1. Advanced Networking Concepts 
+	Beyond basic IP configuration, understanding these concepts is crucial for designing, troubleshooting, and securing complex networks.
+
+	1.1 Virtual Local Area Networks (VLANs)
+	What they are: VLANs logically segment a single physical Ethernet network into multiple broadcast domains. Devices in the same VLAN can communicate as if they were on the same physical wire, even if they're connected to different physical switches, while devices in different VLANs cannot communicate directly without a router.
+
+	Why they're used:
+
+	Security: Isolates different types of traffic (e.g., guest Wi-Fi from corporate data, VoIP phones from user PCs).
+
+	Performance: Reduces broadcast traffic within a network segment, improving efficiency.
+
+	Flexibility: Easier to manage network changes (moves, adds, changes) without re-cabling.
+
+	Management: Simplifies network administration by grouping devices logically.
+
+	Key Concepts:
+
+	VLAN ID: A numerical identifier (1-4094) assigned to each VLAN.
+
+	Access Port: A switch port configured to belong to a single VLAN. Devices connected to an access port are unaware of VLANs.
+
+	Trunk Port (802.1Q): A switch port configured to carry traffic for multiple VLANs. Trunk ports are used to connect switches to other switches or to routers (for inter-VLAN routing). Data frames on trunk ports are "tagged" with their VLAN ID.
+
+	Inter-VLAN Routing: A Layer 3 device (router or Layer 3 switch) is required for devices in different VLANs to communicate. It routes traffic between the VLAN subnets.
+
+	Example Configuration (Cisco IOS-like syntax):
+
+	# On Switch 1
+	vlan 10
+	 name Sales
+	vlan 20
+	 name IT
+
+	interface FastEthernet0/1
+	 switchport mode access
+	 switchport access vlan 10
+
+	interface FastEthernet0/2
+	 switchport mode access
+	 switchport access vlan 20
+
+	interface GigabitEthernet0/1
+	 switchport mode trunk
+	 switchport trunk encapsulation dot1q
+	 switchport trunk allowed vlan 10,20
+
+	# On Router (for Inter-VLAN Routing)
+	interface GigabitEthernet0/0
+	 no ip address
+	!
+	interface GigabitEthernet0/0.10      # Sub-interface for VLAN 10
+	 encapsulation dot1Q 10
+	 ip address 192.168.10.1 255.255.255.0
+	!
+	interface GigabitEthernet0/0.20      # Sub-interface for VLAN 20
+	 encapsulation dot1Q 20
+	 ip address 192.168.20.1 255.255.255.0
+	1.2 Link Aggregation (LAG / EtherChannel / LACP)
+	What it is: Link Aggregation (also known as EtherChannel, Port Channel, or LACP - Link Aggregation Control Protocol) combines multiple physical network links (Ethernet cables) into a single logical link.
+
+	Why it's used:
+
+	Increased Bandwidth: The aggregated link provides the combined bandwidth of all physical links.
+
+	Redundancy/High Availability: If one of the physical links fails, traffic automatically continues over the remaining active links, preventing service disruption.
+
+	Load Balancing: Traffic is distributed across the physical links within the aggregated channel.
+
+	Key Concepts:
+
+	LACP (802.3ad): An open standard protocol that allows switches to dynamically negotiate and form link aggregation groups. This is the preferred method as it provides negotiation and error detection.
+
+	Static LAG: Manual configuration without a negotiation protocol. Less robust.
+
+	Example Configuration (Cisco IOS-like syntax):
+
+	# On Switch 1
+	interface range GigabitEthernet0/1 - 2
+	 channel-group 1 mode active       # 'active' enables LACP negotiation
+	!
+	interface Port-channel1
+	 switchport mode trunk             # Or 'access', depending on usage
+	1.3 Quality of Service (QoS)
+	What it is: QoS refers to technologies that manage network traffic to reduce packet loss, latency, and jitter on the network. It prioritizes certain types of traffic over others.
+
+	Why it's used:
+
+	Critical Applications: Ensures high-priority applications like VoIP, video conferencing, and mission-critical business applications receive preferential treatment.
+
+	User Experience: Guarantees a good experience for real-time applications.
+
+	Efficient Bandwidth Use: Prevents less important traffic from consuming all available bandwidth.
+
+	Key Concepts:
+
+	Classification: Identifying and marking different types of traffic (e.g., marking VoIP packets).
+
+	Marking: Adding a tag (like DSCP - Differentiated Services Code Point in IP headers, or CoS - Class of Service in Ethernet frames) to classified traffic.
+
+	Queuing: Placing traffic into different queues based on their priority.
+
+	Congestion Management: Algorithms to decide which packets to send next from queues during congestion.
+
+	Congestion Avoidance: Mechanisms to prevent queues from filling up completely (e.g., Weighted Random Early Detection - WRED).
+
+	Shaping/Policing: Limiting traffic rates to ensure they don't exceed a defined threshold.
+
+	Example: Prioritizing VoIP traffic.
+
+	Classify VoIP traffic (e.g., based on source/destination port, protocol).
+
+	Mark these packets with a high DSCP value (e.g., EF - Expedited Forwarding).
+
+	Configure network devices (routers, switches) to prioritize packets with EF marking when forwarding.
+
+	1.4 Network Address Translation (NAT)
+	What it is: NAT is a method of remapping one IP address space into another by modifying network address information in the IP header of packets while they are in transit across a traffic routing device.
+
+	Why it's used:
+
+	IPv4 Address Exhaustion: Allows multiple devices on a private network to share a single public IP address, conserving public IPv4 addresses.
+
+	Security: Hides the internal IP addresses of devices on a private network from the public internet, adding a layer of security.
+
+	Types of NAT:
+
+	Static NAT (One-to-One): Maps a single private IP address to a single public IP address. Useful for servers that need to be accessible from the internet.
+
+	Dynamic NAT: Maps a group of private IP addresses to a pool of public IP addresses.
+
+	PAT (Port Address Translation) / NAT Overload: The most common type. Maps multiple private IP addresses to a single public IP address using different port numbers. This is what your home router typically does.
+
+	Example (Conceptual):
+	Your home router has a public IP (e.g., 203.0.113.10). Your internal devices have private IPs (e.g., 192.168.1.10, 192.168.1.11). When 192.168.1.10 requests a webpage from the internet, the router changes the packet's source IP from 192.168.1.10 to 203.0.113.10 and tracks the connection using port numbers. When the response comes back, it translates the destination IP back to 192.168.1.10.
+
+	1.5 VPNs (Virtual Private Networks)
+	What it is: A VPN creates a secure, encrypted "tunnel" over a less secure network (like the internet) to allow remote users or branch offices to securely access a private network.
+
+	Why it's used:
+
+	Remote Access: Allows employees to securely connect to their corporate network from home, coffee shops, etc.
+
+	Site-to-Site Connectivity: Connects two or more geographically separate office networks securely.
+
+	Data Security: Encrypts all traffic passing through the tunnel, protecting it from eavesdropping.
+
+	Key Concepts:
+
+	Tunneling: Encapsulating one protocol's data packets inside another protocol.
+
+	Encryption: Scrambling data to prevent unauthorized access (e.g., IPSec, SSL/TLS).
+
+	Authentication: Verifying the identity of users or devices trying to connect.
+
+	Types of VPNs:
+
+	IPSec VPN: A suite of protocols used for secure IP communications. Common for site-to-site VPNs.
+
+	SSL/TLS VPN (e.g., OpenVPN, WireGuard): Uses SSL/TLS encryption. Often browser-based or client-based for remote access VPNs.
+
+2. VoIP Troubleshooting 
+	VoIP (Voice over IP) relies on a healthy network. Troubleshooting often involves isolating whether the problem is network-related, VoIP-protocol related, or endpoint-related.
+
+	2.1 Common VoIP Issues
+	One-Way Audio: One party can hear the other, but not vice-versa.
+
+	No Audio: Neither party can hear the other.
+
+	Choppy/Garbled Audio: Packet loss, jitter, or high latency.
+
+	Delay/Echo: High latency.
+
+	Dropped Calls: Signaling issues, network instability.
+
+	Registration Failures: Phone can't connect to the VoIP server (PBX).
+
+	2.2 Troubleshooting Steps & Tools
+	Check Basic Network Connectivity:
+
+	ping: Can the VoIP phone/server ping its gateway? Can it ping the PBX? Can it ping a public DNS server?
+
+	ping <gateway_ip>: Tests local network.
+
+	ping <pbx_ip>: Tests connectivity to the VoIP server.
+
+	ping 8.8.8.8: Tests internet connectivity.
+
+	ip a / nmcli d / nmcli c: Verify the phone/server has a valid IP address, subnet mask, gateway, and DNS servers.
+
+	Physical Layer: Check cables, switch ports. Is the phone powered on (PoE)?
+
+	Verify VoIP Server (PBX) Status:
+
+	Can you access the PBX's web interface?
+
+	Are the PBX services running? (systemctl status asterisk if using Asterisk).
+
+	Are there any alarms or errors on the PBX dashboard?
+
+	Check VoIP Phone/Softphone Registration:
+
+	Look at the phone's display or softphone's status indicator. Is it registered to the PBX?
+
+	Check the PBX's logs for registration attempts/failures.
+
+	Verify SIP account credentials (username, password, domain/IP of PBX) on the phone.
+
+	Analyze Real-Time Protocol (RTP) Issues:
+
+	One-Way/No Audio: This is almost always an RTP stream path issue, often related to:
+
+	NAT Traversal: If phones are behind NAT (especially symmetric NAT) and don't have proper STUN/TURN/ICE configured, the RTP packets might not reach the correct destination.
+
+	Firewall Rules: Firewalls blocking UDP ports for RTP (typically dynamic range, often 10000-20000). Ensure RTP ports are open and allow traffic between the phones and PBX.
+
+	Incorrect SDP (Session Description Protocol): SIP signaling successfully sets up the call, but the SDP in the 200 OK or ACK might contain incorrect IP addresses/ports for media, causing RTP to go to the wrong place.
+
+	ss -tup: Use this on the PBX and endpoints to see if RTP UDP connections are being established and if audio ports are open.
+
+	Look for UDP connections to/from the typical RTP port range.
+
+	Packet Capture (Wireshark/tcpdump): This is the ultimate tool for VoIP troubleshooting.
+
+	Capture on the phone's network interface: Filter for SIP (port 5060) and RTP (udp portrange 10000-20000).
+
+	Analyze SIP Ladder Diagram: See if INVITE, 100 Trying, 180 Ringing, 200 OK, ACK are exchanged correctly.
+
+	Analyze RTP Streams: In Wireshark, go to Telephony > VoIP Calls, select the call, and click Flow Graph and Stream Analysis. Look for:
+
+	Missing RTP streams (one-way audio).
+
+	High packet loss.
+
+	High jitter (delay variation).
+
+	Out-of-order packets.
+
+	Codec mismatches (though this usually prevents call setup).
+
+	Check Via and Contact headers in SIP messages for correct IP addresses. Incorrect public/private IP advertisements can cause NAT issues.
+
+	Check Codec Mismatch:
+
+	Ensure that both the phone and the PBX support a common audio codec (e.g., G.711, G.729, Opus). This is negotiated in the SDP.
+
+	Network Congestion/QoS:
+
+	vmstat, top, htop: Check CPU, memory, and I/O on the PBX server and network devices.
+
+	ping with larger packets (ping -s 1400): Test for packet loss under load.
+
+	traceroute: Identify high-latency hops.
+
+	QoS: If you have QoS configured, verify it's working correctly and prioritizing VoIP traffic. If not, consider implementing it.
+
+	DNS Issues:
+
+	dig: Verify the PBX can resolve its own hostname and that phones can resolve the PBX's hostname.
+
+	dig <pbx_hostname>
+
+	dig @<dns_server_ip> <pbx_hostname> (specify which DNS server is being used by the phone).
+
+	Key Takeaway for VoIP: If the call connects but has no audio, suspect firewalls, NAT, or RTP path issues. If the call doesn't connect, suspect SIP signaling, registration, or basic network connectivity.
+
+3. System Administration Best Practices
+	Effective system administration goes beyond just knowing commands. It involves proactive management, security, and planning.
+
+	3.1 Server Hardening & Security
+	Minimize Attack Surface:
+
+	Disable Unused Services: Stop and disable any services (systemctl disable service_name) that are not essential for the server's function.
+
+	Remove Unnecessary Software: Uninstall packages that aren't needed (sudo dnf remove package_name).
+
+	Firewall Configuration:
+
+	Enable and Configure: Use firewalld (RHEL/CentOS) or ufw (Ubuntu/Debian) to restrict incoming and outgoing connections.
+
+	sudo systemctl enable --now firewalld
+
+	sudo firewall-cmd --add-service=http --permanent
+
+	sudo firewall-cmd --reload
+
+	Principle of Least Privilege: Only open ports that are absolutely necessary.
+
+	SSH Security:
+
+	Disable Password Authentication: Use SSH keys instead.
+
+	Edit /etc/ssh/sshd_config: PasswordAuthentication no
+
+	Disable Root Login:
+
+	Edit /etc/ssh/sshd_config: PermitRootLogin no
+
+	Change Default SSH Port: Use a non-standard port (e.g., 2222) to deter automated scans.
+
+	Edit /etc/ssh/sshd_config: Port 2222 (remember to open this in firewall).
+
+	Use fail2ban: Automatically blocks IP addresses that make repeated failed login attempts.
+
+	SELinux/AppArmor:
+
+	Enable and Configure: Keep SELinux (RHEL/CentOS/Fedora) or AppArmor (Ubuntu) in enforcing mode. Understand its policies and troubleshoot denials using audit2allow or ausearch.
+
+	Regular Updates:
+
+	Keep Software Patched: Regularly update the operating system and all installed software to patch security vulnerabilities.
+
+	sudo dnf update (RHEL/CentOS) or sudo apt update && sudo apt upgrade (Debian/Ubuntu).
+
+	User Management & Permissions:
+
+	Strong Passwords: Enforce strong password policies.
+
+	Least Privilege: Grant users and service accounts only the permissions they need to perform their tasks. Avoid giving sudo access unnecessarily.
+
+	Monitor Privileged Users: Regularly review who has sudo access.
+
+	Audit Logging:
+
+	Configure Auditd: Ensure the auditd service is running and configured to log critical security events.
+
+	Review Logs: Regularly review system logs (journalctl, /var/log/audit/audit.log) for suspicious activity.
+
+	3.2 Monitoring and Logging
+	System Resource Monitoring:
+
+	top/htop: For real-time process, CPU, and memory usage.
+
+	vmstat: For detailed memory, CPU, and I/O statistics.
+
+	iostat: For disk I/O statistics (sudo dnf install sysstat).
+
+	netstat / ss: For network connection and socket statistics.
+
+	Monitoring Tools: Implement agents for tools like Prometheus, Grafana, Zabbix, Nagios, or cloud-native monitoring (AWS CloudWatch, Azure Monitor) for long-term data collection, alerting, and visualization.
+
+	Log Management:
+
+	journalctl: Centralized log viewing for systemd systems.
+
+	Log Rotation: Ensure logrotate is configured to prevent log files from filling up disk space.
+
+	Centralized Logging: For multiple servers, use a centralized log management solution (e.g., ELK Stack - Elasticsearch, Logstash, Kibana; Splunk; cloud-based services) for aggregation, analysis, and alerting.
+
+	3.3 Backup and Recovery
+	Backup Strategy:
+
+	Define RPO (Recovery Point Objective): How much data loss is acceptable?
+
+	Define RTO (Recovery Time Objective): How quickly must systems be restored?
+
+	Identify Critical Data: What data absolutely must be backed up?
+
+	Choose Backup Method:
+
+	File-level: rsync, tar, dump/restore.
+
+	Block-level: LVM snapshots, cloud snapshots.
+
+	Application-aware: Database backups (e.g., mysqldump).
+
+	Storage Location: Off-site, cloud storage, separate network segment.
+
+	Backup Frequency: Daily, hourly, continuous.
+
+	Regular Testing: Periodically test your backup and recovery procedures to ensure they work as expected. A backup isn't a backup until it's been restored.
+
+	Automation: Automate backup processes using cron jobs or dedicated backup software.
+
+3.4 Automation
+	Scripting (Bash/Python): Automate repetitive tasks like log cleanup, system updates, user management, and service restarts.
+
+	Configuration Management Tools:
+
+	Ansible, Puppet, Chef, SaltStack: Automate provisioning, configuration, and deployment across many servers.
+
+	Benefits: Consistency, speed, reduced human error, enforce desired state.
+
+	Orchestration:
+
+	Docker, Kubernetes: Automate the deployment, scaling, and management of containerized applications.
+
+3.5 Documentation
+	Keep Everything Documented: Network diagrams, IP address schemes, server configurations, backup procedures, troubleshooting guides, emergency contacts.
+
+	Version Control: Use version control (e.g., Git) for configuration files and scripts.
+
+	Accessibility: Ensure documentation is accessible to relevant team members.
+
+	By mastering advanced networking concepts, being proficient in VoIP troubleshooting, and rigorously applying system administration best practices, you can build and maintain robust, secure, and highly available Linux environments.
+	--------------------------------------------------------------------------------
 	•	IPv4 CIDR, subnet masks, IPv6 SLAAC (Basics Networking 1.3)
 --------------------------------------------------------------------------------
+
+1. IPv4 Subnet Masks
+	In IPv4, an IP address identifies a device on a network (e.g., 192.168.1.10). A subnet mask is used in conjunction with an IP address to determine which portion of the IP address identifies the network and which portion identifies the host (the specific device) within that network.
+
+	It's a 32-bit number, just like an IPv4 address, and is represented in dotted-decimal notation (e.g., 255.255.255.0).
+
+	1.1 How Subnet Masks Work
+	The subnet mask works by applying a bitwise AND operation with the IP address.
+
+	1s in the subnet mask define the network portion of the IP address.
+
+	0s in the subnet mask define the host portion of the IP address.
+
+	Example: IP: 192.168.1.10, Subnet Mask: 255.255.255.0
+
+	Component	Decimal	Binary (32 bits)
+	IP	192.168.1.10	11000000.10101000.00000001.00001010
+	Mask	255.255.255.0	11111111.11111111.11111111.00000000
+	Result (Network ID)	192.168.1.0	11000000.10101000.00000001.00000000 (Network)
+
+	Export to Sheets
+	In this example:
+
+	The first 24 bits (three octets) are the network portion, meaning 192.168.1.0 is the Network ID.
+
+	The last 8 bits are the host portion, meaning there are 2 
+	8
+	 −2=254 usable host addresses in this network (subtracting the network address itself and the broadcast address).
+
+	1.2 Common Subnet Masks
+	Subnet Mask			Binary (1s)	#of Host Bits(0s)	Total Hosts(2 N)	Usable Hosts (2 N−2)	CIDR Notation
+	255.255.255.252		30			2					4					2						/30
+	255.255.255.248		29			3					8					6						/29
+	255.255.255.240		28			4					16					14						/28
+	255.255.255.224		27			5					32					30						/27
+	255.255.255.192		26			6					64					62						/26
+	255.255.255.128		25			7					128					126						/25
+	255.255.255.0		24			8					256					254						/24
+	255.255.0.0			16			16					65,536				65,534					/16
+	255.0.0.0			8			24					16,777,216			16,777,214				/8
+
+2. IPv4 CIDR (Classless Inter-Domain Routing) 📏
+CIDR (pronounced "cider") is a method for allocating IP addresses and for IP routing. It was introduced to slow the exhaustion of IPv4 addresses and to reduce the size of routing tables.
+
+Instead of relying on the old class-based system (Class A, B, C) that rigidly defined network and host portions, CIDR uses a prefix length (or network prefix) to explicitly state how many bits of the IP address are used for the network part.
+
+2.1 CIDR Notation
+CIDR notation is written as an IP address followed by a forward slash (/) and the number of bits in the network portion (the number of consecutive 1s in the subnet mask).
+
+Example: 192.168.1.0/24
+
+This means:
+
+The IP address range starts at 192.168.1.0.
+
+The /24 indicates that the first 24 bits are the network ID, which is equivalent to a subnet mask of 255.255.255.0.
+
+2.2 Relationship between CIDR and Subnet Masks
+CIDR notation is just a more concise way of expressing the subnet mask. They convey the same information about the network boundary.
+
+Conversion Examples:
+
+/8 = 255.0.0.0
+
+/16 = 255.255.0.0
+
+/24 = 255.255.255.0
+
+/27 = 255.255.255.224 (27 ones, leaving 5 zeros for hosts)
+
+2.3 Subnetting with CIDR
+CIDR allows for variable-length subnet masks (VLSM), which enables more efficient use of IP address space by creating subnets of varying sizes.
+
+Example: Given the network 192.168.1.0/24
+
+This network has 254 usable hosts.
+
+If you need a smaller subnet for 30 hosts, you could use a /27 subnet mask.
+
+A /27 uses 27 network bits, leaving 32−27=5 host bits.
+
+2 
+5
+ =32 total addresses (30 usable hosts, 1 network address, 1 broadcast address).
+
+You could then divide 192.168.1.0/24 into multiple /27 subnets:
+
+192.168.1.0/27 (Hosts: 192.168.1.1 - 192.168.1.30)
+
+192.168.1.32/27 (Hosts: 192.168.1.33 - 192.168.1.62)
+
+...and so on.
+
+This allows for more granular network design and conservation of IP addresses compared to the rigid class-based system.
+
+3. IPv6 SLAAC (Stateless Address Autoconfiguration) 
+IPv6 (Internet Protocol version 6) is the successor to IPv4, designed to provide a vast address space and improved features. Unlike IPv4 which often relies on DHCP for automatic address assignment, IPv6 introduces Stateless Address Autoconfiguration (SLAAC).
+
+SLAAC allows an IPv6-enabled device to automatically configure its own IPv6 address and default gateway without the need for a DHCPv6 server. It's "stateless" because the network devices (routers) don't maintain a record of which IP addresses have been assigned to which devices.
+
+3.1 How SLAAC Works (The Process)
+Link-Local Address Generation:
+
+When an IPv6 device powers on, its first action is to generate a link-local address. This address starts with fe80::/10 and includes a 64-bit interface identifier (typically derived from the device's MAC address using a method called EUI-64 or randomly generated for privacy).
+
+Link-local addresses are only valid for communication on the local link (same subnet) and are not routable.
+
+Router Solicitation (RS):
+
+The device sends a Router Solicitation (RS) message to the all-routers multicast address (ff02::2). This is a request to discover any routers on the local segment.
+
+Router Advertisement (RA):
+
+Any IPv6 router on the segment that receives the RS message will respond with a Router Advertisement (RA) message.
+
+The RA message contains crucial information:
+
+Network Prefix(es): The 64-bit network portion of the IPv6 address (e.g., 2001:db8:acad:1::/64).
+
+Default Gateway: The router's own link-local address.
+
+Other Flags:
+
+Managed (M) Flag: If set to 1, indicates that DHCPv6 is available and should be used for address assignment (stateful configuration).
+
+Other (O) Flag: If set to 1, indicates that DHCPv6 is available for other configuration information (like DNS server addresses) even if SLAAC handles the IP address.
+
+Autonomous (A) Flag: If set to 1 (default), indicates that addresses can be autoconfigured using SLAAC.
+
+Router Lifetime: How long the router should be considered the default router.
+
+Global Unicast Address (GUA) Generation:
+
+Upon receiving the RA, the device combines the network prefix (64 bits) from the RA with its own 64-bit interface identifier (derived from MAC/EUI-64 or random).
+
+This forms its complete Global Unicast Address (GUA) (e.g., 2001:db8:acad:1:abcd:1234:5678:efgh/64).
+
+This GUA is routable on the internet.
+
+Duplicate Address Detection (DAD):
+
+Before actively using the new GUA, the device performs DAD. It sends a Neighbor Solicitation message for its newly formed GUA.
+
+If another device on the link responds (meaning the address is already in use), the device knows there's a conflict and won't use that address. (This is rare with EUI-64 or random IDs, but good for robustness).
+
+3.2 Advantages of SLAAC
+	Simplicity: No need for a DHCPv6 server for basic connectivity. Devices can join a network and get an address automatically.
+
+	Decentralization: Each host can manage its own address assignment.
+
+	Resilience: Less susceptible to single points of failure, as there's no central server required for basic IP assignment.
+
+	Scalability: Well-suited for large networks with many devices, as the router doesn't need to track individual assignments.
+
+3.3 Combining SLAAC with DHCPv6
+	While SLAAC provides an IP address and default gateway, it doesn't inherently provide other configuration details like DNS server addresses or NTP server addresses. For this, IPv6 networks can use:
+
+	SLAAC with Stateless DHCPv6: The router's RA has the A-flag set (SLAAC enabled) and the O-flag set (DHCPv6 for Other information). Devices use SLAAC for their IP address but query a DHCPv6 server for DNS, NTP, etc.
+
+	Stateful DHCPv6: The router's RA has the M-flag set (Managed). Devices rely entirely on DHCPv6 for their IP address, default gateway, and other configuration, similar to IPv4 DHCP.
+
+	SLAAC is a powerful and efficient mechanism that streamlines IPv6 network deployment, especially for hosts that just need basic internet connectivity.
+
 	--------------------------------------------------------------------------------
 	•	Ethernet, VLANs, bridge command (Basics Networking 2.1)
 --------------------------------------------------------------------------------
 Let's dive into a detailed tutorial on Ethernet, VLANs, and the bridge command in Linux.
 
 1. Ethernet: The Foundation of Wired Networking
-Ethernet is the most widely used wired networking technology. It defines the physical and data link layers (Layers 1 and 2) of the OSI model, governing how data is formatted for transmission over a network medium and how devices access that medium.
+	Ethernet is the most widely used wired networking technology. It defines the physical and data link layers (Layers 1 and 2) of the OSI model, governing how data is formatted for transmission over a network medium and how devices access that medium.
 
-1.1 Key Concepts of Ethernet
-Ethernet Frame: The basic unit of data transferred over an Ethernet network. It includes:
+	1.1 Key Concepts of Ethernet
+	Ethernet Frame: The basic unit of data transferred over an Ethernet network. It includes:
 
-Preamble and Start Frame Delimiter (SFD): Synchronization signals.
+	Preamble and Start Frame Delimiter (SFD): Synchronization signals.
 
-Destination MAC Address: The hardware address of the receiving device (6 bytes).
+	Destination MAC Address: The hardware address of the receiving device (6 bytes).
 
-Source MAC Address: The hardware address of the sending device (6 bytes).
+	Source MAC Address: The hardware address of the sending device (6 bytes).
 
-EtherType (or Length): Indicates the protocol encapsulated in the payload (e.g., IP, ARP, VLAN tag).
+	EtherType (or Length): Indicates the protocol encapsulated in the payload (e.g., IP, ARP, VLAN tag).
 
-Payload (Data): The actual data being transmitted (e.g., an IP packet). Minimum 46 bytes, maximum 1500 bytes (for standard Ethernet, excluding Jumbo Frames).
+	Payload (Data): The actual data being transmitted (e.g., an IP packet). Minimum 46 bytes, maximum 1500 bytes (for standard Ethernet, excluding Jumbo Frames).
 
-Frame Check Sequence (FCS): A checksum for error detection.
+	Frame Check Sequence (FCS): A checksum for error detection.
 
-MAC Address (Media Access Control Address): A unique, hardcoded 48-bit (6-byte) physical address assigned to each network interface controller (NIC) by its manufacturer. It's used for local communication within a network segment.
+	MAC Address (Media Access Control Address): A unique, hardcoded 48-bit (6-byte) physical address assigned to each network interface controller (NIC) by its manufacturer. It's used for local communication within a network segment.
 
-Example: 00:1A:2B:3C:4D:5E
+	Example: 00:1A:2B:3C:4D:5E
 
-Collision Domain: A network segment where data packets can "collide" with one another if sent simultaneously. Modern Ethernet (switched Ethernet) largely eliminates collision domains by using switches.
+	Collision Domain: A network segment where data packets can "collide" with one another if sent simultaneously. Modern Ethernet (switched Ethernet) largely eliminates collision domains by using switches.
 
-Broadcast Domain: A network segment where a broadcast frame (sent to all devices) will reach all devices. Routers typically define the boundaries of broadcast domains.
+	Broadcast Domain: A network segment where a broadcast frame (sent to all devices) will reach all devices. Routers typically define the boundaries of broadcast domains.
 
-Duplex Modes:
+	Duplex Modes:
 
-Half-Duplex: Devices can send or receive data, but not simultaneously (e.g., old hubs).
+	Half-Duplex: Devices can send or receive data, but not simultaneously (e.g., old hubs).
 
-Full-Duplex: Devices can send and receive data simultaneously (modern standard with switches).
+	Full-Duplex: Devices can send and receive data simultaneously (modern standard with switches).
 
-1.2 Ethernet Devices
-NIC (Network Interface Card): The hardware that connects a computer to an Ethernet network.
+	1.2 Ethernet Devices
+	NIC (Network Interface Card): The hardware that connects a computer to an Ethernet network.
 
-Hub (Obsolete): A simple device that connects multiple Ethernet devices. It's a "dumb" repeater, broadcasting all incoming traffic to all other ports, creating a large collision domain.
+	Hub (Obsolete): A simple device that connects multiple Ethernet devices. It's a "dumb" repeater, broadcasting all incoming traffic to all other ports, creating a large collision domain.
 
-Switch: A smarter device that connects multiple Ethernet devices. It learns the MAC addresses of devices connected to its ports and forwards frames only to the intended destination port, significantly reducing collisions and improving efficiency. Switches operate at Layer 2 (Data Link Layer).
+	Switch: A smarter device that connects multiple Ethernet devices. It learns the MAC addresses of devices connected to its ports and forwards frames only to the intended destination port, significantly reducing collisions and improving efficiency. Switches operate at Layer 2 (Data Link Layer).
 
-Router: A device that connects different network segments (broadcast domains) and forwards traffic between them based on IP addresses. Routers operate at Layer 3 (Network Layer).
+	Router: A device that connects different network segments (broadcast domains) and forwards traffic between them based on IP addresses. Routers operate at Layer 3 (Network Layer).
 
 2. VLANs: Segmenting Networks Logically
-VLAN (Virtual Local Area Network) is a logical grouping of network devices that can communicate with each other as if they were on the same physical LAN, even if they are physically connected to different network switches. VLANs allow network administrators to segment networks without the need for multiple sets of physical infrastructure.
+	VLAN (Virtual Local Area Network) is a logical grouping of network devices that can communicate with each other as if they were on the same physical LAN, even if they are physically connected to different network switches. VLANs allow network administrators to segment networks without the need for multiple sets of physical infrastructure.
 
-2.1 Why Use VLANs?
-Security: Isolate sensitive data or departments from general network traffic.
+	2.1 Why Use VLANs?
+	Security: Isolate sensitive data or departments from general network traffic.
 
-Performance: Reduce broadcast traffic within a segment, improving network efficiency.
+	Performance: Reduce broadcast traffic within a segment, improving network efficiency.
 
-Flexibility: Easily group users or devices regardless of their physical location.
+	Flexibility: Easily group users or devices regardless of their physical location.
 
-Simplified Management: Easier to manage network changes (moves, adds, changes).
+	Simplified Management: Easier to manage network changes (moves, adds, changes).
 
-Cost Reduction: Fewer physical switches and cabling.
+	Cost Reduction: Fewer physical switches and cabling.
 
-2.2 How VLANs Work (802.1Q Tagging)
-The IEEE 802.1Q standard defines how VLAN information is inserted into an Ethernet frame.
+	2.2 How VLANs Work (802.1Q Tagging)
+	The IEEE 802.1Q standard defines how VLAN information is inserted into an Ethernet frame.
 
-VLAN Tag: A 4-byte tag is inserted into the Ethernet frame header, after the Source MAC Address and before the EtherType. This tag contains:
+	VLAN Tag: A 4-byte tag is inserted into the Ethernet frame header, after the Source MAC Address and before the EtherType. This tag contains:
 
-Tag Protocol Identifier (TPID): Always 0x8100, indicating an 802.1Q tagged frame.
+	Tag Protocol Identifier (TPID): Always 0x8100, indicating an 802.1Q tagged frame.
 
-Priority Code Point (PCP): 3 bits for QoS (Quality of Service) prioritization.
+	Priority Code Point (PCP): 3 bits for QoS (Quality of Service) prioritization.
 
-Drop Eligible Indicator (DEI): 1 bit indicating if the frame can be dropped during congestion.
+	Drop Eligible Indicator (DEI): 1 bit indicating if the frame can be dropped during congestion.
 
-VLAN ID (VID): 12 bits, supporting 4096 possible VLANs (0 and 4095 are reserved).
+	VLAN ID (VID): 12 bits, supporting 4096 possible VLANs (0 and 4095 are reserved).
 
-Tagged vs. Untagged Ports:
+	Tagged vs. Untagged Ports:
 
-Access Port (Untagged): A switch port assigned to a single VLAN. Traffic leaving this port for an end device (e.g., PC) is untagged. Traffic arriving on this port is automatically assigned to that VLAN.
+	Access Port (Untagged): A switch port assigned to a single VLAN. Traffic leaving this port for an end device (e.g., PC) is untagged. Traffic arriving on this port is automatically assigned to that VLAN.
 
-Trunk Port (Tagged): A switch port configured to carry traffic for multiple VLANs. Frames traveling over a trunk link are tagged with their respective VLAN IDs. This is typically used for switch-to-switch connections or connections to servers/routers that are VLAN-aware.
+	Trunk Port (Tagged): A switch port configured to carry traffic for multiple VLANs. Frames traveling over a trunk link are tagged with their respective VLAN IDs. This is typically used for switch-to-switch connections or connections to servers/routers that are VLAN-aware.
 
-Native VLAN: On a trunk port, there's often a "native VLAN." Traffic from this VLAN is sent untagged over the trunk, and untagged traffic received on the trunk is assigned to the native VLAN. It's best practice to change the native VLAN from the default (VLAN 1) for security reasons.
+	Native VLAN: On a trunk port, there's often a "native VLAN." Traffic from this VLAN is sent untagged over the trunk, and untagged traffic received on the trunk is assigned to the native VLAN. It's best practice to change the native VLAN from the default (VLAN 1) for security reasons.
 
-2.3 VLANs in Linux
-In Linux, VLANs are implemented as sub-interfaces on a physical network interface. For example, eth0.10 would represent VLAN 10 on the eth0 physical interface.
+	2.3 VLANs in Linux
+	In Linux, VLANs are implemented as sub-interfaces on a physical network interface. For example, eth0.10 would represent VLAN 10 on the eth0 physical interface.
 
 3. Linux Network Bridging with bridge command
-A Linux bridge is a software device that simulates a hardware network switch. It operates at Layer 2 of the OSI model (data link layer) and connects multiple network segments together, allowing devices on those segments to communicate as if they were on the same physical network.
+	A Linux bridge is a software device that simulates a hardware network switch. It operates at Layer 2 of the OSI model (data link layer) and connects multiple network segments together, allowing devices on those segments to communicate as if they were on the same physical network.
 
-The bridge command (part of the iproute2 utility, which is standard in modern Linux distributions like RHEL) is used to configure and manage these software bridges. It's the modern way to manage bridges, superseding older tools like brctl.
+	The bridge command (part of the iproute2 utility, which is standard in modern Linux distributions like RHEL) is used to configure and manage these software bridges. It's the modern way to manage bridges, superseding older tools like brctl.
 
-3.1 Why Use Linux Bridges?
-Virtualization: Essential for connecting virtual machines (VMs) to the physical network. The VMs' virtual NICs are attached to the bridge, and the bridge then connects to a physical NIC.
+	3.1 Why Use Linux Bridges?
+	Virtualization: Essential for connecting virtual machines (VMs) to the physical network. The VMs' virtual NICs are attached to the bridge, and the bridge then connects to a physical NIC.
 
-Container Networking: Used by container runtimes (like Docker, LXC) to provide network connectivity to containers.
+	Container Networking: Used by container runtimes (like Docker, LXC) to provide network connectivity to containers.
 
-Network Segmentation: While VLANs segment broadcast domains, bridges connect them. However, bridges can also interact with VLANs for more complex setups.
+	Network Segmentation: While VLANs segment broadcast domains, bridges connect them. However, bridges can also interact with VLANs for more complex setups.
 
-Traffic Mirroring/Sniffing: Can be configured to mirror traffic from one port to another.
+	Traffic Mirroring/Sniffing: Can be configured to mirror traffic from one port to another.
 
-Learning and Forwarding: Like a hardware switch, a Linux bridge learns MAC addresses and forwards frames only to the correct port.
+	Learning and Forwarding: Like a hardware switch, a Linux bridge learns MAC addresses and forwards frames only to the correct port.
 
-3.2 Key Concepts of Linux Bridging
-Bridge Device: A logical network interface (e.g., br0) that acts as the virtual switch.
+	3.2 Key Concepts of Linux Bridging
+	Bridge Device: A logical network interface (e.g., br0) that acts as the virtual switch.
 
-Bridge Ports: The network interfaces (physical NICs, VLAN sub-interfaces, virtual NICs of VMs/containers) that are "attached" to the bridge. Traffic flows between these ports via the bridge.
+	Bridge Ports: The network interfaces (physical NICs, VLAN sub-interfaces, virtual NICs of VMs/containers) that are "attached" to the bridge. Traffic flows between these ports via the bridge.
 
-MAC Address Learning: The bridge dynamically learns the MAC addresses of devices connected to its ports.
+	MAC Address Learning: The bridge dynamically learns the MAC addresses of devices connected to its ports.
 
-Spanning Tree Protocol (STP): Bridges can participate in STP to prevent network loops in more complex topologies.
+	Spanning Tree Protocol (STP): Bridges can participate in STP to prevent network loops in more complex topologies.
 
-3.3 Detailed Tutorial: Using the bridge Command
-Let's assume you have a RHEL machine with eth0 as your primary network interface.
+	3.3 Detailed Tutorial: Using the bridge Command
+	Let's assume you have a RHEL machine with eth0 as your primary network interface.
 
-3.3.1 Step 1: Create a Linux Bridge
-First, create a bridge interface. Let's call it br0.
+	3.3.1 Step 1: Create a Linux Bridge
+	First, create a bridge interface. Let's call it br0.
 
-Bash
 
-sudo ip link add name br0 type bridge
-ip link add: Command to add a new network device.
 
-name br0: Specifies the name of the new device as br0.
+	sudo ip link add name br0 type bridge
+	ip link add: Command to add a new network device.
 
-type bridge: Specifies that the device type is a Linux bridge.
+	name br0: Specifies the name of the new device as br0.
 
-You can verify its creation:
+	type bridge: Specifies that the device type is a Linux bridge.
 
-Bash
+	You can verify its creation:
 
-ip link show br0
-It will show br0 but it will be in a DOWN state.
 
-3.3.2 Step 2: Add Physical Interface to the Bridge
-Now, add your physical interface (e.g., eth0) as a port to br0. This effectively makes eth0 a slave of br0.
-Important: When you add a physical interface to a bridge, the physical interface itself should not have an IP address configured. The IP address should be configured on the bridge interface (br0) instead.
 
-First, remove any existing IP configuration from eth0:
+	ip link show br0
+	It will show br0 but it will be in a DOWN state.
 
-Bash
+	3.3.2 Step 2: Add Physical Interface to the Bridge
+	Now, add your physical interface (e.g., eth0) as a port to br0. This effectively makes eth0 a slave of br0.
+	Important: When you add a physical interface to a bridge, the physical interface itself should not have an IP address configured. The IP address should be configured on the bridge interface (br0) instead.
 
-sudo ip address flush dev eth0
-Then, add eth0 to br0:
+	First, remove any existing IP configuration from eth0:
 
-Bash
 
-sudo ip link set dev eth0 master br0
-ip link set: Command to modify network device properties.
 
-dev eth0: Specifies the device to modify (eth0).
+	sudo ip address flush dev eth0
+	Then, add eth0 to br0:
 
-master br0: Assigns eth0 as a master of the br0 bridge.
 
-3.3.3 Step 3: Bring Up the Bridge and Assign IP Address
-Now, bring the bridge interface br0 up and assign an IP address to it. This IP address will be the identity of your machine on the network through the bridge.
 
-Bash
+	sudo ip link set dev eth0 master br0
+	ip link set: Command to modify network device properties.
 
-sudo ip link set dev br0 up
-sudo ip address add 192.168.1.100/24 dev br0 # Use your desired IP/subnet
-ip link set dev br0 up: Activates the br0 interface.
+	dev eth0: Specifies the device to modify (eth0).
 
-ip address add ...: Assigns an IP address to br0.
+	master br0: Assigns eth0 as a master of the br0 bridge.
 
-Verify the configuration:
+	3.3.3 Step 3: Bring Up the Bridge and Assign IP Address
+	Now, bring the bridge interface br0 up and assign an IP address to it. This IP address will be the identity of your machine on the network through the bridge.
 
-Bash
 
-ip a show br0
-You should see br0 listed with the assigned IP address and in UP state.
 
-3.3.4 Step 4: Configure Default Route (if necessary)
-If this is your main network connection, you'll need to add a default route.
+	sudo ip link set dev br0 up
+	sudo ip address add 192.168.1.100/24 dev br0 # Use your desired IP/subnet
+	ip link set dev br0 up: Activates the br0 interface.
 
-Bash
+	ip address add ...: Assigns an IP address to br0.
 
-sudo ip route add default via 192.168.1.1 # Replace with your gateway IP
-3.3.5 Step 5: Persistence (Making it permanent)
-The ip commands above are temporary and will be lost after a reboot. For RHEL, you typically make these configurations persistent using NetworkManager configuration files or ifcfg files (though ifcfg is being deprecated in favor of NetworkManager profiles).
+	Verify the configuration:
 
-Using NetworkManager (Recommended for modern RHEL):
 
-Create a connection file for the bridge:
-Create a file like /etc/NetworkManager/system-connections/br0.nmconnection (or use nmcli interactively).
 
-Bash
+	ip a show br0
+	You should see br0 listed with the assigned IP address and in UP state.
 
-sudo nmcli connection add type bridge autoconnect yes con-name br0 ifname br0 ipv4.method manual ipv4.addresses 192.168.1.100/24 ipv4.gateway 192.168.1.1 ipv4.dns "8.8.8.8,8.8.4.4"
-Adjust IP address, gateway, and DNS as needed.
+	3.3.4 Step 4: Configure Default Route (if necessary)
+	If this is your main network connection, you'll need to add a default route.
 
-Modify the physical interface connection:
-Find the existing connection name for eth0 (e.g., nmcli connection show). It might be named eth0 or something like Wired connection 1.
 
-Bash
 
-sudo nmcli connection modify "Wired connection 1" master br0 slave-type bridge
-sudo nmcli connection modify "Wired connection 1" autoconnect yes
-sudo nmcli connection down "Wired connection 1"
-sudo nmcli connection up "Wired connection 1"
-sudo nmcli connection up br0
-This detaches the physical interface's IP configuration and attaches it to the bridge.
+	sudo ip route add default via 192.168.1.1 # Replace with your gateway IP
+	3.3.5 Step 5: Persistence (Making it permanent)
+	The ip commands above are temporary and will be lost after a reboot. For RHEL, you typically make these configurations persistent using NetworkManager configuration files or ifcfg files (though ifcfg is being deprecated in favor of NetworkManager profiles).
 
-Restart NetworkManager (or reboot):
+	Using NetworkManager (Recommended for modern RHEL):
 
-Bash
+	Create a connection file for the bridge:
+	Create a file like /etc/NetworkManager/system-connections/br0.nmconnection (or use nmcli interactively).
 
-sudo systemctl restart NetworkManager
-3.3.6 Step 6: Removing a Bridge
-To remove a bridge and revert:
 
-Remove the physical interface from the bridge:
 
-Bash
+	sudo nmcli connection add type bridge autoconnect yes con-name br0 ifname br0 ipv4.method manual ipv4.addresses 192.168.1.100/24 ipv4.gateway 192.168.1.1 ipv4.dns "8.8.8.8,8.8.4.4"
+	Adjust IP address, gateway, and DNS as needed.
 
-sudo ip link set dev eth0 nomaster
-Bring down the bridge:
+	Modify the physical interface connection:
+	Find the existing connection name for eth0 (e.g., nmcli connection show). It might be named eth0 or something like Wired connection 1.
 
-Bash
 
-sudo ip link set dev br0 down
-Delete the bridge:
 
-Bash
+	sudo nmcli connection modify "Wired connection 1" master br0 slave-type bridge
+	sudo nmcli connection modify "Wired connection 1" autoconnect yes
+	sudo nmcli connection down "Wired connection 1"
+	sudo nmcli connection up "Wired connection 1"
+	sudo nmcli connection up br0
+	This detaches the physical interface's IP configuration and attaches it to the bridge.
 
-sudo ip link del dev br0
-Reconfigure eth0 (e.g., using nmcli or dhclient if it gets IP via DHCP) for persistence.
+	Restart NetworkManager (or reboot):
 
-3.4 Bridging with VLANs: bridge and VLAN Sub-interfaces
-To create a bridge that carries VLAN-tagged traffic or where you want to associate specific ports with specific VLANs on the bridge:
 
-3.4.1 Scenario 1: Bridge Carrying Multiple VLANs (Trunking)
-If you want your br0 to act as a trunk, and VMs connected to it should receive tagged traffic, you just add the physical interface to the bridge as shown above. The bridge, by default, will pass through tagged frames. Your VMs would then configure their own virtual NICs with VLAN sub-interfaces (e.g., eth0.10, eth0.20) to process the tagged traffic.
 
-3.4.2 Scenario 2: Bridge with VLAN Filtering (VLAN-Aware Bridge)
-This is a more advanced feature that allows the Linux bridge itself to become VLAN-aware, preventing traffic from leaking between VLANs on the bridge. This is commonly used in virtualized environments where you want to enforce VLAN isolation directly on the bridge.
+	sudo systemctl restart NetworkManager
+	3.3.6 Step 6: Removing a Bridge
+	To remove a bridge and revert:
 
-Enable VLAN Filtering on the bridge:
+	Remove the physical interface from the bridge:
 
-Bash
 
-sudo ip link set dev br0 type bridge vlan_filtering 1
-Add VLANs to the bridge (Bridge VLAN interfaces):
-This tells the bridge to be aware of certain VLANs.
 
-Bash
+	sudo ip link set dev eth0 nomaster
+	Bring down the bridge:
 
-sudo bridge vlan add vid 10 dev br0
-sudo bridge vlan add vid 20 dev br0
-Add physical port and specify PVID/VLANs:
-You can specify a PVID (Port VLAN ID) for untagged traffic on a port, and also allow it to pass specific tagged VLANs.
 
-Access Port (untagged VLAN 10):
 
-Bash
+	sudo ip link set dev br0 down
+	Delete the bridge:
 
-sudo bridge vlan add vid 10 dev eth0 pvid untagged
-This means untagged traffic entering eth0 is put into VLAN 10. And frames from VLAN 10 leaving eth0 will be untagged.
 
-Trunk Port (allow VLAN 10 and 20):
 
-Bash
+	sudo ip link del dev br0
+	Reconfigure eth0 (e.g., using nmcli or dhclient if it gets IP via DHCP) for persistence.
 
-sudo bridge vlan add vid 10 dev eth0 master_br0
-sudo bridge vlan add vid 20 dev eth0 master_br0
-This tells the bridge that eth0 can carry traffic for VLANs 10 and 20 (as tagged frames).
+	3.4 Bridging with VLANs: bridge and VLAN Sub-interfaces
+	To create a bridge that carries VLAN-tagged traffic or where you want to associate specific ports with specific VLANs on the bridge:
 
-Add a VM's virtual interface to the bridge and assign VLAN:
-If you have a VM whose virtual NIC (vnet0) is attached to br0, you can assign it to a specific VLAN:
+	3.4.1 Scenario 1: Bridge Carrying Multiple VLANs (Trunking)
+	If you want your br0 to act as a trunk, and VMs connected to it should receive tagged traffic, you just add the physical interface to the bridge as shown above. The bridge, by default, will pass through tagged frames. Your VMs would then configure their own virtual NICs with VLAN sub-interfaces (e.g., eth0.10, eth0.20) to process the tagged traffic.
 
-Bash
+	3.4.2 Scenario 2: Bridge with VLAN Filtering (VLAN-Aware Bridge)
+	This is a more advanced feature that allows the Linux bridge itself to become VLAN-aware, preventing traffic from leaking between VLANs on the bridge. This is commonly used in virtualized environments where you want to enforce VLAN isolation directly on the bridge.
 
-sudo bridge vlan add vid 10 dev vnet0 master_br0
-This will ensure vnet0 only sees traffic for VLAN 10 (untagged) and that traffic is passed to/from eth0 with VLAN 10 tags.
+	Enable VLAN Filtering on the bridge:
 
-Verify VLANs on the bridge:
 
-Bash
 
-sudo bridge vlan show
-This detailed tutorial covers the fundamentals of Ethernet, VLANs, and the practical application of the bridge command for configuring Linux software bridges, including basic VLAN awareness.
+	sudo ip link set dev br0 type bridge vlan_filtering 1
+	Add VLANs to the bridge (Bridge VLAN interfaces):
+	This tells the bridge to be aware of certain VLANs.
+
+
+
+	sudo bridge vlan add vid 10 dev br0
+	sudo bridge vlan add vid 20 dev br0
+	Add physical port and specify PVID/VLANs:
+	You can specify a PVID (Port VLAN ID) for untagged traffic on a port, and also allow it to pass specific tagged VLANs.
+
+	Access Port (untagged VLAN 10):
+
+
+
+	sudo bridge vlan add vid 10 dev eth0 pvid untagged
+	This means untagged traffic entering eth0 is put into VLAN 10. And frames from VLAN 10 leaving eth0 will be untagged.
+
+	Trunk Port (allow VLAN 10 and 20):
+
+
+
+	sudo bridge vlan add vid 10 dev eth0 master_br0
+	sudo bridge vlan add vid 20 dev eth0 master_br0
+	This tells the bridge that eth0 can carry traffic for VLANs 10 and 20 (as tagged frames).
+
+	Add a VM's virtual interface to the bridge and assign VLAN:
+	If you have a VM whose virtual NIC (vnet0) is attached to br0, you can assign it to a specific VLAN:
+
+
+
+	sudo bridge vlan add vid 10 dev vnet0 master_br0
+	This will ensure vnet0 only sees traffic for VLAN 10 (untagged) and that traffic is passed to/from eth0 with VLAN 10 tags.
+
+	Verify VLANs on the bridge:
+
+
+
+	sudo bridge vlan show
+	This detailed tutorial covers the fundamentals of Ethernet, VLANs, and the practical application of the bridge command for configuring Linux software bridges, including basic VLAN awareness.
 
 
 	--------------------------------------------------------------------------------
@@ -500,7 +2947,7 @@ CIDR
 Export to Sheets
 You can use online subnet calculators (e.g., subnet-calculator.com) to verify your calculations.
 
-2. VLANs: Logical Network Segmentation 🏷️
+2. VLANs: Logical Network Segmentation ️
 As explained in the previous response, VLANs (Virtual Local Area Networks) allow you to logically segment a network using a single physical switch, creating multiple broadcast domains. Devices in different VLANs cannot communicate directly without a Layer 3 device (router or Layer 3 switch).
 
 2.1 Key VLAN Concepts (Refresher)
@@ -512,7 +2959,7 @@ Trunk Port: A switch port configured to carry traffic for multiple VLANs. Frames
 
 Native VLAN: The VLAN whose traffic is sent untagged over a trunk port. By default, it's VLAN 1. It's a security best practice to change it or not use it for user traffic.
 
-3. Simulating VLANs and Subnetting in GNS3 (Hands-on) 🧪
+3. Simulating VLANs and Subnetting in GNS3 (Hands-on) 
 GNS3 (Graphical Network Simulator-3) is a powerful tool for network simulation. For simulating VLANs, we'll use a Cisco IOSvL2 (Layer 2) switch appliance, as it supports VLAN configuration.
 
 3.1 GNS3 Setup Prerequisites
@@ -953,7 +3400,7 @@ Category: Represents a non-hierarchical classification (e.g., c0, c1, c100...). 
 2.2 Viewing SELinux Contexts
 For Files/Directories: Use the -Z option with ls.
 
-Bash
+
 
 ls -Z /etc/passwd
 # Output: -rw-r--r--. root root system_u:object_r:passwd_file_t:s0 /etc/passwd
@@ -964,7 +3411,7 @@ Here, /var/www/html/ has the type httpd_sys_content_t, indicating it's designate
 
 For Processes: Use the -Z option with ps.
 
-Bash
+
 
 ps auxZ | grep httpd
 # Output will show httpd processes running in the httpd_t domain:
@@ -973,7 +3420,7 @@ This shows the httpd process running with the httpd_t domain. The SELinux policy
 
 For Network Ports: Use semanage port -l.
 
-Bash
+
 
 sudo semanage port -l | grep http
 # Output: http_port_t                  tcp      80, 443, 8080, 8008, 8888, 9000
@@ -986,7 +3433,7 @@ Scenario: Setting up a Custom Web Server Directory
 Let's say you want to serve web content from /srv/mywebsite/ instead of the default /var/www/html/.
 
 Step 1: Create the Directory and Place Content
-Bash
+
 
 sudo mkdir -p /srv/mywebsite/
 echo "<h1>Hello from mywebsite!</h1>" | sudo tee /srv/mywebsite/index.html
@@ -1015,7 +3462,7 @@ SELinux denials are typically logged to /var/log/audit/audit.log (if auditd serv
 
 Use ausearch to specifically look for AVC (Access Vector Cache) denials.
 
-Bash
+
 
 sudo ausearch -c 'httpd' --raw | grep 'denied'
 # Or for recent denials:
@@ -1046,13 +3493,13 @@ You need to tell SELinux that /srv/mywebsite/ and its contents are legitimate we
 
 Identify the correct type: For web content, it's typically httpd_sys_content_t. You can verify this by checking /var/www/html:
 
-Bash
+
 
 ls -Zd /var/www/html/
 # drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/
 Add a permanent file context rule: Use semanage fcontext to define how files/directories matching a certain path should be labeled.
 
-Bash
+
 
 sudo semanage fcontext -a -t httpd_sys_content_t "/srv/mywebsite(/.*)?"
 semanage fcontext: Command to manage file contexts.
@@ -1065,7 +3512,7 @@ semanage fcontext: Command to manage file contexts.
 
 Apply the new context: This command updates the file context database, but it doesn't immediately change the labels on existing files. You need restorecon to apply the defined contexts based on the rules.
 
-Bash
+
 
 sudo restorecon -Rv /srv/mywebsite/
 restorecon: Restores file security contexts.
@@ -1076,7 +3523,7 @@ restorecon: Restores file security contexts.
 
 Verify the new context:
 
-Bash
+
 
 ls -Z /srv/mywebsite/index.html
 # Expected: -rw-r--r--. root root system_u:object_r:httpd_sys_content_t:s0 /srv/mywebsite/index.html
@@ -1107,7 +3554,7 @@ Check Booleans: Many common operations are controlled by SELinux booleans (on/of
 
 Generate Custom Policy: If no boolean exists, you might need to generate a custom SELinux policy module. The audit2allow tool can help with this, by analyzing audit log denials and suggesting policy rules.
 
-Bash
+
 
 sudo grep "denied" /var/log/audit/audit.log | audit2allow -M mycustompolicy
 sudo semodule -i mycustompolicy.pp # Install the policy module
@@ -1163,8 +3610,8 @@ Set to Permissive (for detailed debugging): If you're unsure, set SELinux to per
 
 Lab: Practice Week 3 tasks.
 
-Week 4: Bash Scripting Fundamentals
-Objective: Develop automation skills with Bash.
+Week 4:  Scripting Fundamentals
+Objective: Develop automation skills with .
 
 	Day 16: Shell Scripting Basics
 	•	Writing .sh files, shebang, echo, read (RHCSA 4.15)
@@ -1180,7 +3627,7 @@ https://github.com/vilasvarghese/linux/tree/master/ShellScripting
 https://github.com/harinisiriki/shellscripts
 https://github.com/soorepalli/beginners-shell-scripting
 
-https://www.freecodecamp.org/news/shell-scripting-crash-course-how-to-write-bash-scripts-in-linux/
+https://www.freecodecamp.org/news/shell-scripting-crash-course-how-to-write--scripts-in-linux/
 https://www.tutorialspoint.com/unix/unix-signals-traps.htm
 	
 	
@@ -1218,14 +3665,14 @@ Software Installation: When you install new software, its executable often needs
 Viewing and Modifying PATH:
 View PATH:
 
-Bash
+
 
 echo $PATH
 Example Output: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 Add a directory to PATH (Temporarily):
 
-Bash
+
 
 export PATH=/opt/my_app/bin:$PATH
 This prepends /opt/my_app/bin to the existing PATH. The export command makes the variable available to child processes. This change only lasts for the current shell session.
@@ -1233,10 +3680,10 @@ This prepends /opt/my_app/bin to the existing PATH. The export command makes the
 Add a directory to PATH (Permanently):
 To make a PATH change permanent, you need to add the export command to a shell configuration file.
 
-For your current user: Add to ~/.bashrc, ~/.bash_profile, or ~/.profile (depending on your shell and login type).
+For your current user: Add to ~/.rc, ~/._profile, or ~/.profile (depending on your shell and login type).
 
 For all users (system-wide): Add to /etc/profile or create a new script in /etc/profile.d/.
-After editing the file, either source the file (e.g., source ~/.bashrc) or restart your terminal/login session.
+After editing the file, either source the file (e.g., source ~/.rc) or restart your terminal/login session.
 
 2. The env Command and Environment Variables 
 The env command (short for environment) is used to display or modify the environment variables for the current shell or for a command that you execute. Environment variables are dynamic-named values that can affect the way running processes behave in a computer. They are a crucial way for processes to inherit configuration and state information.
@@ -1253,19 +3700,19 @@ Common environment variables include HOME, USER, LANG, PWD, SHELL, and, of cours
 2.2 Using the env Command:
 Display Current Environment Variables:
 
-Bash
+
 
 env
 # or
 printenv
 # or
-declare -x # in Bash
+declare -x # in 
 This will list all environment variables and their current values in your shell.
 
 Execute a Command with a Modified Environment:
 You can use env to run a command with a temporary environment, either by adding new variables or modifying existing ones, without affecting your current shell's environment.
 
-Bash
+
 
 env MY_VAR="Hello World" my_script.sh
 # or to clear almost all variables and run:
@@ -1274,14 +3721,14 @@ In the first example, my_script.sh will have MY_VAR set to "Hello World", but yo
 
 Set an Environment Variable (Temporarily):
 
-Bash
+
 
 export MY_TEMP_VAR="This is temporary"
 The export command makes the variable available to all subsequent child processes. Like PATH modifications, this is temporary for the current session unless added to a shell configuration file.
 
 Set a Shell Variable (Not Exported):
 
-Bash
+
 
 local_var="Only for this shell"
 This variable is only available within the current shell instance and will not be passed to child processes.
@@ -1307,9 +3754,9 @@ Shell Variables: Exist only within the current shell process. They are not passe
 Environment Variables: Are shell variables that have been "exported" (using the export command). This makes them part of the process's environment, meaning they are passed to child processes.
 
 Example in Scripting:
-Bash
 
-#!/bin/bash
+
+#!/bin/
 
 # A shell variable (not exported)
 MY_SHELL_VAR="I am a shell variable"
@@ -1326,9 +3773,9 @@ echo -e "\nRunning a sub-script..."
 ./sub_script.sh
 sub_script.sh:
 
-Bash
 
-#!/bin/bash
+
+#!/bin/
 
 echo "Inside sub_script.sh:"
 echo "MY_SHELL_VAR: $MY_SHELL_VAR" # Will be empty or not set
@@ -1339,9 +3786,9 @@ When you run the main script, MY_SHELL_VAR will only be visible in the main scri
 	--------------------------------------------------------------------------------
 	Lab: Script to display system uptime.
 --------------------------------------------------------------------------------
-Bash
 
-#!/bin/bash
+
+#!/bin/
 
 # This script displays the current system uptime.
 
@@ -1354,13 +3801,24 @@ uptime
 	--------------------------------------------------------------------------------
 
 	Day 17: Conditional Statements & Loops
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	•	if, elif, else, test command
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	•	for, while, one-liners (RHCSA 3.7)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	Lab: Script to check disk usage.
-
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	Day 18: Functions and Arguments
-	•	Functions, $1, $2, positional parameters (RHCSA 4.15)
+	•	Functions, $1, $2, positional parameters (RHCSA 4.15)--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	
 	•	Exit codes, return values
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	Lab: Function to parse VoIP logs.
 --------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
@@ -1370,11 +3828,15 @@ uptime
 	•	grep, sed, awk for log parsing (RHCSA 4.8, 3.12)
 --------------------------------------------------------------------------------
 grep, 
-
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 sed, 
-
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 
 awk 
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	https://www.geeksforgeeks.org/linux-unix/awk-command-unixlinux-examples/
 	--------------------------------------------------------------------------------
 	•	Piping, tee, xargs, email alerts with mailx (RHCSA 3.8)
@@ -1388,10 +3850,10 @@ awk
 	--------------------------------------------------------------------------------
 
 	Day 20: Mini-Project & Quiz
-	•	Project: Bash script to monitor system/VoIP logs, send alerts.
+	•	Project:  script to monitor system/VoIP logs, send alerts.
 --------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-	•	Quiz: MCQs on Bash scripting, automation.
+	•	Quiz: MCQs on  scripting, automation.
 --------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	Lab: Test script on RHEL 9 VM.
@@ -1400,22 +3862,56 @@ awk
 
 
 Accessing data from a file
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Check Remote Servers Connectivity (ping)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Script Scheduling and Notification
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Script to Delete Old Files
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Backup Filesystem
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 For loops Scripts for File System - 1
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Copy Files to Remote Hosts
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 User Directory Assignment
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 List of Users Logged in by Date
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Script for Central Logging (rsyslog)
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Script for User Account Management
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Disable Inactive Users
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Check Process Status and Killing it
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Disk Space Status
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Status on Total Number of Files
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Create System Inventory
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 Scripts with Pre-Defined Information
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 
 https://medium.com/@sayalishewale12/advanced-linux-shell-scripting-fcfcc62bfd37
 https://rlworkman.net/howtos/rute/node23.html
