@@ -281,40 +281,15 @@ Here's a comparison of Linux vs. Windows in a cloud context, especially for AWS 
 
 ---
 
-## Day 2: Filesystem and File Management
 
-### Filesystem Hierarchy: `/etc`, `/var`, `/usr`, `/home`
+## Day 2: Linux Basic File Management Commands Tutorial
 
-Refer to "The Hierarchy of the File System" section in a comprehensive Linux basics resource for detailed understanding of these directories:
-* `/etc`: Configuration files for the system and applications.
-* `/var`: Variable data, such as logs (`/var/log`), mail queues, and temporary files.
-* `/usr`: User programs and data, often considered "Unix System Resources."
-* `/home`: Home directories for regular users.
 
----
+# Linux Basic File Management Commands Tutorial
 
-### Commands: `ls`, `pwd`, `cd`, `file`, `mkdir`, `touch`, `cp`, `mv`, `rm`, `find`
+This tutorial covers essential Linux commands for navigating the filesystem and managing files and directories.
 
----
-
-#### `ls` (List) - Seeing What's There 📄
-
-The `ls` command is used to **list the contents of a directory**. It's like opening a folder to see its files and subfolders.
-
-* **Purpose:** To display files and directories.
-* **Syntax:** `ls [OPTIONS] [FILE...]`
-
-**Examples:**
-1.  **List contents of the current directory:** `ls`
-2.  **List contents of a specific directory:** `ls /home/your_username/Documents` or `ls Documents`
-* **Common Options:**
-    * `-l` (long format): Detailed list (permissions, owner, size, date).
-    * `-a` (all): Shows all files, including hidden files (starting with `.`).
-    * `-h` (human-readable): Use with `-l` to show file sizes (KB, MB, GB).
-    * `-R` (recursive): Lists contents of subdirectories.
-    * **Combining options:** `ls -lah`
-
-#### `pwd` (Print Working Directory) - Where Am I? 
+## 1. `pwd` (Print Working Directory) - Where Am I? 📍
 
 The `pwd` command tells you your **current location** in the file system hierarchy.
 
@@ -322,10 +297,89 @@ The `pwd` command tells you your **current location** in the file system hierarc
 * **Syntax:** `pwd`
 
 **Example:**
+
 ```
 pwd
 # Output Example: /home/your_username/Documents
-cd (Change Directory) - Moving Around 
+2. ls (List) - Seeing What's There 📄
+The ls command is used to list the contents of a directory. It's like opening a folder to see its files and subfolders.
+
+Purpose: To display files and directories.
+
+Syntax: ls [OPTIONS] [FILE...]
+
+Basic Examples:
+
+List contents of the current directory:
+
+
+
+ls
+Example Output:
+
+Documents  Downloads  Music  Public  Templates  Videos
+List contents of a specific directory:
+
+
+
+ls /home/your_username/Documents
+# Or, if you are already in your home directory:
+ls Documents
+Example Output:
+
+report.txt  presentation.pptx  notes/  project_plan.docx
+Common Options & Advanced Examples:
+
+-l (long format): Displays a detailed list including file permissions, number of hard links, owner, group, size, and last modification date.
+
+
+
+ls -l
+Example Output:
+
+total 20
+drwxr-xr-x 2 user user 4096 Jul 23 10:00 notes/
+-rw-r--r-- 1 user user 1500 Jul 22 14:30 presentation.pptx
+-rw-r--r-- 1 user user  250 Jul 24 11:15 report.txt
+-rw-r--r-- 1 user user 3000 Jul 20 09:00 project_plan.docx
+-a (all): Shows all files, including hidden files (those starting with a .).
+
+
+
+ls -a
+Example Output:
+
+.   ..  .rc  Documents  Downloads  .hidden_file.txt  Music
+-h (human-readable): Use with -l to show file sizes in a more readable format (e.g., K for kilobytes, M for megabytes, G for gigabytes).
+
+
+
+ls -lh
+Example Output:
+
+total 20K
+drwxr-xr-x 2 user user 4.0K Jul 23 10:00 notes/
+-rw-r--r-- 1 user user 1.5K Jul 22 14:30 presentation.pptx
+-rw-r--r-- 1 user user  250 Jul 24 11:15 report.txt
+-rw-r--r-- 1 user user 3.0K Jul 20 09:00 project_plan.docx
+-R (recursive): Lists contents of subdirectories recursively.
+
+
+
+ls -R
+Example Output:
+
+.:
+notes  presentation.pptx  report.txt  project_plan.docx
+
+./notes:
+meeting_minutes.txt  todo.txt
+Combining options: You can combine multiple options.
+
+
+
+ls -lah # Long format, all files, human-readable sizes
+3. cd (Change Directory) - Moving Around 🚶‍♂️
 The cd command is used to change your current working directory.
 
 Purpose: To navigate between directories.
@@ -334,19 +388,45 @@ Syntax: cd [DIRECTORY]
 
 Examples:
 
-Change to your home directory: cd or cd ~
+Change to your home directory:
 
-Change to a subdirectory: cd Documents
 
-Change to a parent directory: cd ..
 
-Change to the root directory: cd /
+cd
+# Or explicitly:
+cd ~
+This is very useful for quickly returning to your starting point.
 
-Change to the previous directory: cd -
+Change to a subdirectory (relative path):
 
-Change to an absolute path: cd /var/log
 
-file - What Kind of File Is It? 
+
+cd Documents
+Change to a parent directory:
+
+
+
+cd ..
+If you are in /home/user/Documents, cd .. will take you to /home/user.
+
+Change to the root directory:
+
+
+
+cd /
+Change to the previous directory you were in:
+
+
+
+cd -
+If you were in /var/log and then went to /home/user, cd - will take you back to /var/log.
+
+Change to an absolute path:
+
+
+
+cd /var/log
+4. file - What Kind of File Is It? ❓
 The file command helps you determine the type of a file. It inspects the file's content, not just its extension.
 
 Purpose: To identify the type of a file.
@@ -355,13 +435,25 @@ Syntax: file [OPTIONS] FILE...
 
 Examples:
 
-Check the type of a text file: file my_document.txt
+Check the type of a text file:
 
-Check the type of a directory: file my_folder
 
-Check the type of an executable program: file /bin/ls
 
-mkdir (Make Directory) - Creating Folders 
+file my_document.txt
+# Output Example: my_document.txt: ASCII text
+Check the type of a directory:
+
+
+
+file my_folder
+# Output Example: my_folder: directory
+Check the type of an executable program:
+
+
+
+file /bin/ls
+# Output Example: /bin/ls: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=..., stripped
+5. mkdir (Make Directory) - Creating Folders 📁
 The mkdir command is used to create new directories (folders).
 
 Purpose: To create one or more new directories.
@@ -370,15 +462,25 @@ Syntax: mkdir [OPTIONS] DIRECTORY...
 
 Examples:
 
-Create a single directory: mkdir new_project
+Create a single directory:
 
-Create multiple directories at once: mkdir dir1 dir2 dir3
 
-Create a directory with parent directories (if they don't exist): mkdir -p /home/your_username/projects/my_app/src/main/java
 
-The -p (parents) option is very useful.
+mkdir new_project
+Create multiple directories at once:
 
-touch - Creating Empty Files or Updating Timestamps 
+
+
+mkdir dir1 dir2 dir3
+Create a directory with parent directories (if they don't exist):
+The -p (parents) option is very useful for creating nested directory structures in one go.
+
+
+
+mkdir -p my_app/src/main/java
+This will create my_app, then my_app/src, then my_app/src/main, and finally my_app/src/main/java.
+
+6. touch - Creating Empty Files or Updating Timestamps 📝
 The touch command is primarily used to create empty new files or to update the access and modification times of existing files.
 
 Purpose: To create empty files or change file timestamps.
@@ -387,12 +489,22 @@ Syntax: touch [OPTIONS] FILE...
 
 Examples:
 
-Create an empty new file: touch my_new_file.txt
+Create an empty new file:
 
-Update the timestamp of an existing file: touch existing_document.txt
 
-cp (Copy) - Duplicating Files and Directories 
-The cp command is used to copy files and directories.
+
+touch my_new_file.txt
+If my_new_file.txt doesn't exist, it will be created empty.
+
+Update the timestamp of an existing file:
+
+
+
+touch existing_document.txt
+If existing_document.txt exists, its "last modified" and "last accessed" timestamps will be updated to the current time, without changing its content.
+
+7. cp () - Duplicating Files and Directories 📋
+The cp command is used to  files and directories.
 
 Purpose: To make copies of files or directories.
 
@@ -400,23 +512,40 @@ Syntax: cp [OPTIONS] SOURCE DESTINATION
 
 Examples:
 
-Copy a file to the same directory with a new name: cp report.txt report_backup.txt
+ a file to the same directory with a new name (effectively renaming a ):
 
-Copy a file to a different directory: cp document.pdf /home/your_username/Documents/archives/
 
-Copy a directory (and its contents): cp -r my_folder new_folder_copy
 
-The -r (recursive) option is mandatory when copying directories.
+cp report.txt report_backup.txt
+ a file to a different directory:
 
+
+
+cp document.pdf /home/your_username/Documents/archives/
+# Or to a relative path:
+cp document.pdf ../backups/
+ a directory (and its contents):
+The -r (recursive) option is mandatory when ing directories, as cp by default only copies files.
+
+
+
+cp -r my_folder new_folder_
 Common Options:
 
--r (recursive): Required for copying directories.
+-r (recursive): Required for ing directories.
 
--i (interactive): Prompts you before overwriting.
+-i (interactive): Prompts you before overwriting an existing file. Highly recommended for safety.
 
+
+
+cp -i file1.txt file1_.txt
 -v (verbose): Shows what's being copied.
 
-mv (Move / Rename) - Moving or Renaming Files and Directories 
+
+
+cp -v file1.txt /tmp/
+# Output: 'file1.txt' -> '/tmp/file1.txt'
+8. mv (Move / Rename) - Moving or Renaming Files and Directories ➡️
 The mv command is used to move files or directories from one location to another, or to rename them.
 
 Purpose: To move or rename files and directories.
@@ -425,20 +554,33 @@ Syntax: mv [OPTIONS] SOURCE DESTINATION
 
 Examples:
 
-Rename a file: mv old_name.txt new_name.txt
+Rename a file (same directory, new name):
 
-Move a file to a different directory: mv document.odt /home/your_username/Downloads/
 
-Move a directory: mv project_old project_archive/
+
+mv old_name.txt new_name.txt
+Move a file to a different directory:
+
+
+
+mv document.odt /home/your_username/Downloads/
+# Or to a relative path:
+mv my_image.jpg ../archive/images/
+Move a directory:
+
+
+
+mv project_old project_archive/
+This moves the entire project_old directory and its contents into the project_archive directory.
 
 Common Options:
 
--i (interactive): Prompts before overwriting.
+-i (interactive): Prompts before overwriting an existing file. Recommended.
 
 -v (verbose): Shows what's being moved/renamed.
 
-rm (Remove) - Deleting Files and Directories 
-The rm command is used to remove (delete) files or directories. Use rm with extreme caution, as deleted files are generally not recoverable.
+9. rm (Remove) - Deleting Files and Directories 🗑️
+The rm command is used to remove (delete) files or directories. Use rm with extreme caution, as deleted files are generally not recoverable, especially on Linux where there's no "Recycle Bin" equivalent for command-line deletions.
 
 Purpose: To delete files or directories.
 
@@ -446,210 +588,920 @@ Syntax: rm [OPTIONS] FILE...
 
 Examples:
 
-Remove a single file: rm unwanted_file.txt
+Remove a single file:
 
-Remove a directory and its contents (recursive): rm -r old_project_files/
 
-The -r (recursive) option is mandatory for deleting non-empty directories. Be very careful!
 
+rm unwanted_file.txt
+Remove multiple files:
+
+
+
+rm file1.txt file2.txt temp_data.csv
+Remove a directory and its contents (recursive):
+*The -r (recursive) option is mandatory for deleting non-empty directories. Be very, very careful with this!
+
+
+
+rm -r old_project_files/
 Common Options (Use with Caution!):
 
--i (interactive): Prompts before every deletion. Highly recommended.
+-i (interactive): Prompts before every deletion. Highly recommended to prevent accidental deletion.
 
--f (force): Forces deletion, ignoring non-existent files and never prompting. Extremely dangerous!
 
-find - Locating Files and Directories 
-The find command is a powerful tool for searching for files and directories based on various criteria.
+
+rm -i my_file_to_delete.txt
+# Output: rm: remove regular file 'my_file_to_delete.txt'? (y/n)
+-f (force): Forces deletion, ignoring non-existent files and never prompting. Extremely dangerous! Only use if you are absolutely sure. Often combined with -r as rm -rf.
+
+
+
+rm -rf /path/to/directory_to_delete # AVOID THIS UNLESS YOU ARE 100% CERTAIN
+10. find - Locating Files and Directories 🔍
+The find command is a powerful tool for searching for files and directories based on various criteria (name, type, size, modification time, permissions, etc.).
 
 Purpose: To search for files and directories in a directory hierarchy.
 
 Syntax: find [PATH...] [EXPRESSION]
 
+PATH: The starting directory for the search (e.g., . for current, / for root).
+
+EXPRESSION: Consists of options, tests, actions, and operators.
+
 Examples:
 
-Find a file by name: find . -name "report.txt"
-
-Find a file by name (case-insensitive): find . -iname "Report.txt"
-
-Find all .log files in /var/log: find /var/log -name "*.log"
-
-Find directories only: find . -type d -name "my_project*"
-
-Find files larger than 1 Megabyte: find . -type f -size +1M
-
-Find files modified in the last 7 days: find . -type f -mtime -7
-
-Find and delete files: find . -name "*.bak" -exec rm {} \; (Use with extreme caution!)
-
-Wildcards: *, ?, Relative vs. Absolute Paths
-Wildcards:
-
-*: Matches any sequence of zero or more characters. (e.g., ls *.txt lists all .txt files).
-
-?: Matches any single character. (e.g., ls file?.txt matches file1.txt, fileA.txt, etc.).
-
-Relative Paths: Paths that start from your current working directory. (e.g., Documents/reports/report.pdf)
-
-Absolute Paths: Paths that start from the root directory (/) of the filesystem. They always start with /. (e.g., /home/your_username/Documents/reports/report.pdf)
-
-Lab: Create directories, manage files.
-Day 3: Permissions and Essential Commands
-Permissions: rwx, chmod, chown (RHCSA 4.14)
-rwx (Read, Write, Execute):
-
-r: Read permission (view contents of a file, list contents of a directory).
-
-w: Write permission (modify contents of a file, create/delete files in a directory).
-
-x: Execute permission (run a file as a program, enter a directory).
-
-Users/Groups: Permissions are assigned to three categories:
-
-User (u): The owner of the file/directory.
-
-Group (g): The group that owns the file/directory.
-
-Others (o): Everyone else.
-
-chmod (Change Mode): Changes file/directory permissions.
-
-Symbolic Mode: chmod u+x file.sh, chmod go-rw file.txt
-
-Octal Mode: chmod 755 script.sh (owner rwx, group rx, others rx)
-
-chown (Change Owner): Changes the owner and/or group of a file/directory.
-
-chown user file.txt
-
-chown user:group file.txt
-
-Viewing Files: cat, less, more, head, tail
-cat (Catenate): Displays the entire content of a file to the screen.
+Find a file by name (case-sensitive) in the current directory and its subdirectories:
 
 
 
-cat filename.txt
-less: A pager that allows you to view file content page by page, scroll forward/backward, and search. Excellent for large files.
+find . -name "report.txt"
+Find a file by name (case-insensitive):
 
 
 
-less large_log_file.log
-# Inside less: Space to scroll down, 'b' to scroll up, '/' to search, 'q' to quit.
-more: Similar to less but with fewer features, primarily allows forward scrolling.
+find . -iname "Report.txt"
+Find all .log files in /var/log:
 
 
 
-more another_log.log
-head: Displays the first few lines (default 10) of a file.
+find /var/log -name "*.log"
+Find directories only:
 
 
 
-head filename.txt
-head -n 5 filename.txt # Show first 5 lines
-tail: Displays the last few lines (default 10) of a file. Essential for monitoring logs.
+find . -type d -name "my_project*"
+Find files only:
 
 
 
-tail access.log
-tail -n 20 access.log # Show last 20 lines
-tail -f access.log # Follows the file in real-time as new lines are added
-I/O: stdin, stdout, stderr, Pipes, Redirection (RHCSA 4.7)
-stdin (Standard Input): Default input stream (usually keyboard).
-
-stdout (Standard Output): Default output stream (usually terminal screen).
-
-stderr (Standard Error): Default error output stream (usually terminal screen).
-
-Redirection (>, >>, <):
-
->: Redirects stdout to a file, overwriting the file if it exists.
+find . -type f -name "config.*"
+Find files larger than 1 Megabyte:
 
 
 
-ls -l > file_list.txt # Saves ls output to file_list.txt
->>: Redirects stdout to a file, appending to it if it exists.
+find . -type f -size +1M
+Size units: b (512-byte blocks), c (bytes), k (kilobytes), M (megabytes), G (gigabytes).
+
+Find files modified in the last 7 days:
 
 
 
-echo "New line" >> file_list.txt
-<: Redirects stdin from a file.
+find . -type f -mtime -7
++7 for older than 7 days, 7 for exactly 7 days old.
+
+Find files by owner:
 
 
 
-grep "error" < log.txt # Greps 'error' from log.txt
-2>: Redirects stderr to a file.
+find . -user john -name "*.log"
+Find and execute a command on found files (e.g., delete backup files):
+
+The -exec option runs a command for each found item.
+
+{} is a placeholder for the found filename.
+
+\; marks the end of the -exec command.
 
 
 
-command_that_might_fail 2> error.log # Only errors go to error.log
-&> or >&: Redirects both stdout and stderr to a file.
+find . -name "*.bak" -exec rm {} \;
+Use -exec rm {} \; with extreme caution! Always test find without -exec first to ensure it's selecting the correct files.
+
+Find files and pipe them to another command (using xargs for efficiency):
 
 
 
-command &> output_and_error.log
-Pipes (|): Connects the stdout of one command to the stdin of another command.
+find . -name "*.tmp" -print0 | xargs -0 rm
+-print0 and xargs -0 handle filenames with spaces or special characters correctly.
+
+
+---
+
+### Tutorial 2: Wildcards (`*`, `?`), Relative vs. Absolute Paths
+
+Here's a detailed tutorial on wildcards and paths.
+
+```markdown
+# Linux Wildcards and Paths Tutorial
+
+This tutorial explains the use of wildcards for pattern matching and the fundamental concepts of relative and absolute paths in the Linux filesystem.
+
+## 1. Wildcards (Globbing) - Pattern Matching for Files
+
+Wildcards are special characters that allow you to specify patterns to match multiple filenames with a single expression. This is incredibly useful for selecting groups of files for commands like `ls`, `cp`, `mv`, `rm`, etc.
+
+### a. The `*` Wildcard (Asterisk) - Matches Any Sequence of Characters
+
+* **Meaning:** Matches any sequence of zero or more characters.
+* **Use Case:** Ideal for matching parts of filenames.
+
+**Examples:**
+
+1.  **Match all files ending with `.txt`:**
+    ```
+    ls *.txt
+    ```
+    *If you have `document.txt`, `notes.txt`, `report.pdf`, `image.png`*
+    *Output:*
+    ```
+    document.txt  notes.txt
+    ```
+
+2.  **Match all files starting with `report`:**
+    ```
+    ls report*
+    ```
+    *If you have `report.txt`, `report_final.pdf`, `archive_report.zip`*
+    *Output:*
+    ```
+    report.txt  report_final.pdf
+    ```
+
+3.  **Match all files containing `data`:**
+    ```
+    ls *data*
+    ```
+    *If you have `raw_data.csv`, `processed_data.json`, `my_document.txt`*
+    *Output:*
+    ```
+    processed_data.json  raw_data.csv
+    ```
+
+4.  **Match all files (effectively `ls -a` if no other options are used):**
+    ```
+    ls *
+    ```
+    *This will list all non-hidden files and directories.*
+
+### b. The `?` Wildcard (Question Mark) - Matches Any Single Character
+
+* **Meaning:** Matches any single character.
+* **Use Case:** Useful when you know the number of characters but not their exact value.
+
+**Examples:**
+
+1.  **Match `file1.txt`, `file2.txt`, but not `file10.txt`:**
+    ```
+    ls file?.txt
+    ```
+    *If you have `file1.txt`, `fileA.txt`, `file_new.txt`, `file10.txt`*
+    *Output:*
+    ```
+    file1.txt  fileA.txt
+    ```
+
+2.  **Match files like `doc-A.txt`, `doc-B.txt`:**
+    ```
+    ls doc-?.txt
+    ```
+
+3.  **Match files with exactly 3 characters before the extension:**
+    ```
+    ls ???.log
+    ```
+    *Matches `abc.log`, `123.log`, but not `abcd.log` or `ab.log`.*
+
+### c. Character Sets `[ ]` - Matches Any Character Within the Brackets
+
+* **Meaning:** Matches any single character that is part of the specified set.
+* **Use Case:** When you need to match specific characters at a position.
+
+**Examples:**
+
+1.  **Match files ending in `.txt` or `.log`:**
+    ```
+    ls *.[tl]xt
+    ```
+    *This is a bit simplified; better to use `ls *.txt *.log` for OR conditions across extensions.*
+
+2.  **Match `file1.txt` or `file2.txt` (but not `file3.txt`):**
+    ```
+    ls file[12].txt
+    ```
+
+3.  **Match filenames with a digit (0-9):**
+    ```
+    ls *[0-9]*
+    ```
+
+## 2. Paths: Relative vs. Absolute
+
+Understanding how to refer to files and directories using paths is fundamental to navigating and managing your Linux system.
+
+### a. Absolute Paths (Full Paths)
+
+* **Definition:** An absolute path is the **complete path from the root directory (`/`)** to the file or directory you are referencing.
+* **Characteristics:**
+    * Always start with a forward slash (`/`).
+    * Uniquely identifies the location of a file or directory regardless of your current working directory.
+* **Analogy:** Like giving someone full directions from a well-known landmark (e.g., "From the Empire State Building, go north 5 blocks...").
+
+**Examples:**
+
+* `/home/your_username/Documents/report.txt`
+    * Starts from the root (`/`), goes into `home`, then `your_username`, then `Documents`, then `report.txt`.
+* `/etc/passwd`
+* `/var/log/syslog`
+* `/usr/bin/ls`
+
+**When to use Absolute Paths:**
+
+* When you need to refer to a file or directory from *any* location in the filesystem.
+* In scripts, configuration files, or cron jobs where the current working directory is unpredictable.
+* When you want to be explicit and avoid ambiguity.
+
+### b. Relative Paths
+
+* **Definition:** A relative path specifies the location of a file or directory **in relation to your current working directory**.
+* **Characteristics:**
+    * Does *not* start with a forward slash (`/`).
+    * Depends on where you currently are in the filesystem.
+* **Analogy:** Like giving directions from your current location ("Go left, then straight two blocks").
+
+**Key Relative Path Notations:**
+
+* `.` (single dot): Represents the **current directory**.
+* `..` (double dot): Represents the **parent directory** (one level up).
+
+**Examples:**
+
+Let's assume your current working directory is `/home/your_username/Documents/`:
+
+1.  **Referring to a file in the current directory:**
+    ```
+    ls report.txt      # Lists report.txt within /home/your_username/Documents/
+    ls ./report.txt    # Same as above, explicitly using '.'
+    ```
+
+2.  **Referring to a directory in the current directory:**
+    ```
+    cd notes/          # Changes to /home/your_username/Documents/notes/
+    ```
+
+3.  **Referring to a file in a subdirectory:**
+    ```
+    cat notes/meeting_minutes.txt # Displays content of file in the 'notes' subdirectory
+    ```
+
+4.  **Referring to a file in the parent directory:**
+    ```
+    ls ../Downloads/my_download.zip # Lists a file in /home/your_username/Downloads/
+    ```
+
+5.  **Referring to a file two directories up:**
+    ```
+    cp ../../another_file.txt . # Copies another_file.txt from /home/your_username/ to current directory
+    ```
+
+**When to use Relative Paths:**
+
+* When navigating within a specific project structure.
+* When the exact absolute path might change (e.g., if you move a project folder).
+* For shorter, more convenient typing in the command line.
+
+**Comparison:**
+
+| Feature            | Absolute Path                       | Relative Path                                |
+| :----------------- | :---------------------------------- | :------------------------------------------- |
+| **Starting Point** | Always from the root (`/`)          | From the current working directory           |
+| **Ambiguity** | No ambiguity, always the same path  | Can be ambiguous if current directory changes |
+| **Typing Effort** | Generally longer                    | Generally shorter                            |
+| **Use Case** | Scripts, configuration, cross-system | Interactive shell, within project structures |
+
+**Practice:**
+Navigate to `/var/log`. Now, try to `ls` the contents of `/home/your_username/Documents` using both an absolute path and a relative path. (Hint for relative: you'll need `../` multiple times to get up to the root or `home` from `/var/log`).
+
+```
+# From /var/log:
+ls /home/your_username/Documents # Absolute path
+ls ../../home/your_username/Documents # Relative path (assuming typical Linux structure)
+
+---
+
+### Tutorial 3: Lab - Create Directories, Manage Files
+
+This tutorial walks you through practical exercises using the commands learned above.
+
+```markdown
+# Lab: Create Directories, Manage Files
+
+This hands-on lab will guide you through practical scenarios using the Linux commands for filesystem navigation and file management.
+
+**Objective:** Practice using `pwd`, `ls`, `cd`, `mkdir`, `touch`, `cp`, `mv`, `rm`, `file`, and `find` with relative and absolute paths and wildcards.
+
+---
+
+### Setup (Run these commands first)
+
+Open your terminal (Git , WSL, or Linux terminal). We'll create a dedicated workspace for this lab.
+
+```
+# 1. Go to your home directory
+cd ~
+
+# 2. Create a new directory for this lab
+mkdir -p linux_lab/projects/reports
+
+# 3. Navigate into the main lab directory
+cd linux_lab
+
+# 4. Create some initial files
+touch README.md
+touch notes.txt
+touch expenses.csv
+echo "My important data" > data.txt
+echo "A quick memo" > memo.log
+touch report_2024.txt
+touch report_2025.txt
+touch final_draft.txt
+
+# 5. Create some files in the 'projects' subdirectory
+touch projects/project_alpha.md
+touch projects/project_beta.js
+
+# 6. Create a hidden file
+touch .hidden_config
+Exercises
+Perform each task, observing the output of each command.
+
+Task 1: Navigation and Listing
+Check your current location.
 
 
 
-ls -l | less # Pipe ls output to less for paging
-cat access.log | grep "ERROR" | wc -l # Count lines with "ERROR"
+pwd
+(Expected: /home/your_username/linux_lab or similar)
+
+List all files and directories in the current folder.
+
+
+
+ls
+(Observe: data.txt, expenses.csv, final_draft.txt, etc., and the projects directory.)
+
+List all files, including hidden ones.
+
+
+
+ls -a
+(Observe: ., .., .hidden_config in addition to others.)
+
+List files in long format, showing details and human-readable sizes.
+
+
+
+ls -lh
+(Observe: Permissions, owner, group, size like 4.0K, 10M, etc.)
+
+Navigate into the projects directory.
+
+
+
+cd projects
+List the contents of the reports subdirectory using a relative path from your current location.
+
+
+
+ls reports
+(Expected: Empty output initially, as no files are there yet.)
+
+Navigate back to the linux_lab directory using a relative path.
+
+
+
+cd ..
+List the contents of the /home/your_username/linux_lab/projects directory using its absolute path.
+
+
+
+ls /home/your_username/linux_lab/projects
+(Replace /home/your_username with your actual home directory path.)
+
+Task 2: Creating and Identifying Files/Directories
+Create a new directory named backups in your linux_lab folder.
+
+
+
+mkdir backups
+Verify creation:
+
+
+
+ls
+Create a nested directory structure temp/data/raw inside linux_lab in one go.
+
+
+
+mkdir -p temp/data/raw
+Verify creation (recursive listing):
+
+
+
+ls -R temp
+Create an empty file named todo.txt in the current directory.
+
+
+
+touch todo.txt
+Verify creation:
+
+
+
+ls todo.txt
+Create an empty file named log_archive.txt inside the temp/data/raw directory.
+
+
+
+touch temp/data/raw/log_archive.txt
+Determine the file type of data.txt.
+
+
+
+file data.txt
+(Expected: data.txt: ASCII text)
+
+Determine the file type of the projects directory.
+
+
+
+file projects
+(Expected: projects: directory)
+
+Task 3: ing and Moving Files/Directories
+ README.md to README.backup in the same directory.
+
+
+
+cp README.md README.backup
+Verify:
+
+
+
+ls
+ expenses.csv into the backups directory.
+
+
+
+cp expenses.csv backups/
+Verify:
+
+
+
+ls backups/
+ both report_2024.txt and report_2025.txt into the projects/reports directory.
+
+
+
+cp report_2024.txt report_2025.txt projects/reports/
+Verify:
+
+
+
+ls projects/reports/
+Move notes.txt into the projects directory.
+
+
+
+mv notes.txt projects/
+Verify (check both locations):
+
+
+
+ls # Should no longer see notes.txt here
+ls projects/ # Should see notes.txt here
+Rename final_draft.txt to final_report.txt in the current directory.
+
+
+
+mv final_draft.txt final_report.txt
+Verify:
+
+
+
+ls
+ the entire temp directory (and its contents) to temp_.
+
+
+
+cp -r temp temp_
+Verify:
+
+
+
+ls -R temp_
+Move the entire temp_ directory into the backups directory.
+
+
+
+mv temp_ backups/
+Verify:
+
+
+
+ls backups/
+Task 4: Using Wildcards and find
+List all files in the current directory that end with .txt.
+
+
+
+ls *.txt
+List all files that start with report and have exactly one character after it, followed by .txt. (e.g., report1.txt, reportA.txt)
+
+
+
+ls report?.txt
+(If you only created report_2024.txt etc., you might not see any output for this exact pattern unless you create files that match.)
+
+Find all .md files within the linux_lab directory and its subdirectories.
+
+
+
+find . -name "*.md"
+(Expected: README.md, projects/project_alpha.md)
+
+Find all directories named data within linux_lab.
+
+
+
+find . -type d -name "data"
+(Expected: ./temp/data)
+
+Find all files in linux_lab that are larger than 100 bytes. (We made data.txt with "My important data" - it should be small, but let's test a larger limit.)
+
+
+
+find . -type f -size +1c # Find files larger than 1 byte
+# Or for a more realistic size:
+# find . -type f -size +1k # Larger than 1 kilobyte
+Task 5: Deleting Files and Directories (Carefully!)
+Remove the empty todo.txt file.
+
+
+
+rm todo.txt
+Verify:
+
+
+
+ls todo.txt 2>/dev/null # This should give an error indicating file not found
+Remove the temp/data/raw directory (which contains log_archive.txt).
+You'll need the recursive option for a non-empty directory.
+
+
+
+rm -r temp/data/raw
+Verify:
+
+
+
+ls -R temp # Should no longer see 'raw'
+Remove the empty temp/data directory.
+
+
+
+rmdir temp/data # rmdir only works on empty directories
+Verify:
+
+
+
+ls -R temp # Should no longer see 'data'
+Remove the remaining empty temp directory.
+
+
+
+rmdir temp
+Verify:
+
+
+
+ls
+Remove the .hidden_config file.
+
+
+
+rm .hidden_config
+Cleanup
+To remove the entire linux_lab directory created for this lab:
+
+
+
+cd ~
+rm -r linux_lab
+Be careful with rm -r! Double-check your path.
+
+```
+
+
+# Day 3: Permissions and Essential Commands
+
+---
+
+## Permissions: `rwx`, `chmod`, `chown` (RHCSA 4.14)
+
+### File Permission Basics (`rwx`)
+
+Linux file permissions are displayed as:
+-rwxr-xr--
+
+
+
+
+
+| Symbol | Meaning       |
+|--------|----------------|
+| `r`    | Read           |
+| `w`    | Write          |
+| `x`    | Execute        |
+| `-`    | No permission  |
+
+### Permission Sections:
+
+| Section     | Who it applies to |
+|-------------|-------------------|
+| First char  | File type (`-`=file, `d`=directory) |
+| 1–3         | Owner permissions |
+| 4–6         | Group permissions |
+| 7–9         | Others' permissions |
+
+---
+
+### `chmod` – Change permissions
+
+```
+chmod [permissions] filename
+Symbolic mode:
+
+
+
+chmod u+x script.sh   # Add execute to user
+chmod g-w file.txt    # Remove write from group
+chmod o=r file.txt    # Set read-only for others
+Numeric mode:
+Value	Meaning
+1	execute
+2	write
+4	read
+
+Combine values:
+
+
+
+
+chmod 755 script.sh
+# u=rwx (7), g=rx (5), o=rx (5)
+chown – Change owner
+
+
+
+chown user:group filename
+Examples:
+
+
+
+
+chown alice file.txt        # Change owner to 'alice'
+chown alice:staff file.txt  # Change owner and group
+📄 Viewing Files: cat, less, more, head, tail
+cat – Concatenate and view
+
+
+
+cat file.txt
+Combine files: cat file1 file2 > combined.txt
+
+less – Scrollable viewer (best for large files)
+
+
+
+less file.txt
+Scroll with arrows, / to search, q to quit
+
+more – View page by page
+
+
+
+more file.txt
+Press SPACE for next page, q to quit
+
+head – Show first lines
+
+
+
+head file.txt          # First 10 lines
+head -n 5 file.txt     # First 5 lines
+tail – Show last lines
+
+
+
+tail file.txt          # Last 10 lines
+tail -n 20 file.txt    # Last 20 lines
+tail -f log.txt        # Follow file updates (live logs)
+ I/O: stdin, stdout, stderr, Pipes, Redirection (RHCSA 4.7)
+Streams:
+stdin (0) – Input
+
+stdout (1) – Output
+
+stderr (2) – Error
+
+Redirection:
+Operator	Meaning
+>	Redirect stdout (overwrite)
+>>	Redirect stdout (append)
+2>	Redirect stderr
+&>	Redirect both stdout + stderr
+
+Examples:
+
+
+
+
+ls > out.txt           # Save output
+ls nonexistent 2> err.txt  # Save errors
+command &> all.log     # Save both
+Pipes (|) – Pass output of one command as input to another
+
+
+
+ps aux | grep apache
+Chaining:
+
+
+
+
+cat file.txt | grep "error" | sort | uniq
 Monitoring: top, htop, vmstat, journalctl
-1. top: The Classic Process Monitor
-top (table of processes) is a traditional, powerful, and real-time command-line utility that provides a dynamic view of running processes. It displays information about CPU and memory usage, process ID (PID), user, and much more.
+top – Task Manager
 
-1.1 Basic Usage and Output Explained
-Just type top in your terminal and press Enter.
+
+
+top
+Press q to quit
+
+Press P to sort by CPU, M for memory
+
+htop – Enhanced top (install via sudo apt install htop)
+
+
+
+htop
+Colored display, mouse support
+
+Use F-keys for filtering, killing processes
+
+vmstat – Virtual memory stats
+
+
+
+vmstat 1
+procs – Processes
+
+memory – RAM/swap
+
+cpu – Usage stats
+
+journalctl – View logs (systemd)
+
+
+
+journalctl                 # View all logs
+journalctl -b             # Logs since last boot
+journalctl -u nginx       # Logs for a unit
+journalctl -f             # Live log (like `tail -f`)
+```
+
+
+
+
+
+
+
+
+Markdown
+
+## 1. top: The Classic Process Monitor 
+
+`top` (table of processes) is a traditional, powerful, and real-time command-line utility that provides a dynamic view of running processes. It displays information about CPU and memory usage, process ID (PID), user, and much more.
+
+### 1.1 Basic Usage and Output Explained
+Just type `top` in your terminal and press Enter.
 
 top - 09:30:01 up 2 days, 16:30,  1 user,  load average: 0.00, 0.01, 0.05
 Tasks: 200 total,    1 running, 199 sleeping,    0 stopped,    0 zombie
 %Cpu(s):  0.1 us,  0.1 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
-MiB Mem :    7987.9 total,    7000.0 free,     500.0 used,     487.9 buff/cache
-MiB Swap:    4096.0 total,    4096.0 free,       0.0 used.    7200.0 avail Mem
+MiB Mem :   7987.9 total,   7000.0 free,    500.0 used,    487.9 buff/cache
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.   7200.0 avail Mem
 
-    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
-      1 root      20   0  169420   9980   6720 S   0.0   0.1   0:15.23 systemd
-      2 root      20   0       0      0      0 S   0.0   0.0   0:00.04 kthreadd
-    ... (more processes)
+PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM    TIME+ COMMAND
+  1 root      20   0  169420   9980   6720 S   0.0   0.1   0:15.23 systemd
+  2 root      20   0       0      0      0 S   0.0   0.0   0:00.04 kthreadd
+... (more processes)
+
 Understanding the Output Sections:
 
-Header (First 5 lines): System summary (time, uptime, users, load average), task summary (total, running, sleeping, etc.), CPU usage percentages (us, sy, id, wa etc.), Physical Memory (total, free, used, buff/cache), and Swap Usage.
+Header (First 5 lines):
 
-Process List (Table): Details for each process (PID, USER, PR (priority), NI (nice value), VIRT (virtual memory), RES (resident memory), SHR (shared memory), S (status), %CPU, %MEM, TIME+, COMMAND).
+* **Line 1 (System Summary):**
+    * `top - HH:MM:SS`: Current system time.
+    * `up X days, Y hours/minutes`: System uptime.
+    * `Z users`: Number of users currently logged in.
+    * `load average: L1, L5, L15`: Average number of processes waiting to run over the last 1, 5, and 15 minutes. High numbers indicate a busy system.
 
-1.2 Interactive Commands within top
-While top is running, you can press several keys to interact with it:
+* **Line 2 (Tasks/Processes):**
+    * `total`: Total number of processes.
+    * `running`: Number of processes currently executing.
+    * `sleeping`: Processes waiting for an event (e.g., I/O).
+    * `stopped`: Processes that have been stopped (e.g., by Ctrl+Z).
+    * `zombie`: Zombie processes (terminated but parent hasn't reaped them; indicates a problem).
 
-q: Quit top.
+* **Line 3 (CPU Usage):** Percentages of CPU time spent in various states.
+    * `us`: User CPU time (processes running in user space).
+    * `sy`: System CPU time (kernel operations).
+    * `ni`: Nice CPU time (user processes with modified priority).
+    * `id`: Idle CPU time.
+    * `wa`: I/O Wait time (CPU waiting for disk or network I/O).
+    * `hi`: Hardware Interrupts.
+    * `si`: Software Interrupts.
+    * `st`: Steal time (relevant in virtualized environments where CPU is "stolen" by the hypervisor).
 
-k: Kill a process (prompts for PID, then signal, e.g., 9 for KILL).
+* **Line 4 (Memory Usage - Physical RAM):**
+    * `total`: Total physical memory.
+    * `free`: Unused memory.
+    * `used`: Memory actively used by processes.
+    * `buff/cache`: Memory used by kernel buffers and page cache (can be freed if needed).
 
-r: Renice a process (change its nice value/priority).
+* **Line 5 (Swap Usage):**
+    * `total`: Total swap space.
+    * `free`: Unused swap space.
+    * `used`: Used swap space.
+    * `avail Mem`: Estimated available memory for new applications (free + reclaimable buff/cache).
 
-d or s: Change the update delay (in seconds).
+**Process List (Table):**
 
-1: Toggle display of individual CPU cores.
+* `PID`: Process ID.
+* `USER`: User who owns the process.
+* `PR`: Priority (kernel-assigned).
+* `NI`: Nice value (user-assigned priority; lower is higher priority).
+* `VIRT`: Virtual memory used by the process (including swap and shared libraries).
+* `RES`: Resident Set Size (physical memory actually used by the process, not swapped out). This is a key metric for memory usage.
+* `SHR`: Shared memory (memory shared with other processes).
+* `S`: Process Status (S=sleeping, R=running, Z=zombie, T=stopped).
+* `%CPU`: Percentage of CPU time used since the last update.
+* `%MEM`: Percentage of total physical memory used.
+* `TIME+`: Total CPU time used by the task since it started.
+* `COMMAND`: The command name or command line of the process.
 
-P: Sort by %CPU (default).
+### 1.2 Interactive Commands within top
+While `top` is running, you can press several keys to interact with it:
 
-M: Sort by %MEM.
+* `q`: Quit `top`.
+* `k`: Kill a process (prompts for PID, then signal, e.g., 9 for KILL).
+* `r`: Renice a process (change its nice value/priority).
+* `d` or `s`: Change the update delay (in seconds).
+* `z`: Toggle color/bold mode.
+* `b`: Toggle bold highlighting of running processes.
+* `x`: Highlight sort column.
+* `y`: Highlight running tasks.
+* `1`: Toggle display of individual CPU cores.
+* `m`: Toggle memory display modes (percent, absolute, etc.).
+* `P`: Sort by %CPU (default).
+* `M`: Sort by %MEM.
+* `T`: Sort by TIME+.
+* `u`: Filter by user (prompts for username).
+* `h` or `?`: Display help screen.
 
-T: Sort by TIME+.
+### 1.3 Running top with Options
+You can also start `top` with command-line options:
 
-u: Filter by user (prompts for username).
+* `top -d 2`: Update every 2 seconds.
+* `top -u username`: Show processes for a specific user.
+* `top -p PID`: Monitor a specific process by PID.
+* `top -n 1`: Run once and exit (useful in scripts).
 
-h or ?: Display help screen.
+**Example: Monitor the httpd process (assuming its PID is 12345):**
 
-1.3 Running top with Options
-You can also start top with command-line options:
-
-top -d 2: Update every 2 seconds.
-
-top -u username: Show processes for a specific user.
-
-top -p PID: Monitor a specific process by PID.
-
-top -n 1: Run once and exit (useful in scripts).
-
+```
+top -p 12345
 2. htop: The Enhanced Interactive Process Viewer
 htop is an interactive, real-time process viewer that is an enhancement over top. It offers a more user-friendly interface, easier navigation, and more features. It's not usually installed by default on RHEL, but it's highly recommended.
 
@@ -657,6 +1509,7 @@ htop is an interactive, real-time process viewer that is an enhancement over top
 
 
 sudo dnf install htop -y
+sudo apt install htop.
 2.2 Basic Usage and Output Explained
 Just type htop in your terminal and press Enter.
 
@@ -672,20 +1525,20 @@ Just type htop in your terminal and press Enter.
   ...
 Key Improvements over top:
 
-Visual CPU/Memory Meters: Clear, colored bar graphs at the top.
+Visual CPU/Memory Meters: Clear, colored bar graphs for CPU, Memory, and Swap usage at the top.
 
-Scrollable Process List: Use arrow keys to scroll.
+Scrollable Process List: You can scroll up and down the process list using arrow keys.
 
-Tree View: Press F5 to toggle a tree view, showing parent-child relationships.
+Tree View: Press F5 to toggle a tree view, showing parent-child relationships between processes. This is incredibly useful for understanding process hierarchies.
 
-Function Keys (F1-F10): Common actions mapped to function keys at the bottom.
+Function Keys (F1-F10): Common actions are mapped to function keys at the bottom of the screen, making it much more intuitive.
 
-Mouse Support: Click on columns to sort, or on processes to select them.
+Mouse Support: You can click on columns to sort, or on processes to select them.
 
 2.3 Interactive Commands within htop
 F1 or h: Help screen.
 
-F2: Setup (customize display).
+F2: Setup (customize what's displayed, meters, columns, colors).
 
 F3: Search for a process.
 
@@ -695,17 +1548,33 @@ F5: Tree view / flat view toggle.
 
 F6: Sort by a different column.
 
-F7: Nice - (increase priority).
+F7: Nice - (increase priority, make it less nice).
 
-F8: Nice + (decrease priority).
+F8: Nice + (decrease priority, make it nicer).
 
 F9: Kill process (select process, then choose signal).
 
 F10 or q: Quit htop.
 
-Spacebar: Tag (select) multiple processes.
+Spacebar: Tag (select) multiple processes for batch operations.
 
 u: Filter by user.
+
+K: Toggle kernel threads.
+
+H: Toggle user threads.
+
+Example: Find all httpd processes, view them in a tree, and then kill one:
+
+Type htop.
+
+Press F3, type httpd, and press Enter.
+
+Press F5 to see the hierarchy.
+
+Navigate to the process you want to kill using arrow keys.
+
+Press F9, select 9 SIGKILL, and press Enter.
 
 3. vmstat: Virtual Memory Statistics
 vmstat (virtual memory statistics) is a versatile command-line utility used to report information about processes, memory, paging, block I/O, traps, and CPU activity. It's particularly useful for diagnosing memory bottlenecks and overall system activity.
@@ -719,21 +1588,55 @@ vmstat
 Output:
 
 procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
- r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
- 1  0      0 7000000 4879000 5000000    0    0     0     0  100  200  0  0 99  0  0
+ r  b    swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 1  0       0 7000000 4879000 5000000    0    0     0     0  100  200  0  0 99  0  0
 Understanding the Columns:
 
-procs (Processes): r (runnable/running), b (uninterruptible sleep/I/O wait).
+procs (Processes):
 
-memory: swpd (swap used), free, buff (buffers), cache (page cache).
+r: Number of processes waiting for CPU time (running or runnable). High r values indicate a CPU bottleneck.
 
-swap: si (swap in), so (swap out). High values here indicate memory shortage.
+b: Number of processes in uninterruptible sleep (waiting for I/O, often disk). High b values indicate an I/O bottleneck.
 
-io (Input/Output): bi (blocks in/read), bo (blocks out/write).
+memory:
 
-system: in (interrupts), cs (context switches).
+swpd: Amount of virtual memory used (swap space).
 
-cpu: us (user), sy (system), id (idle), wa (I/O wait), st (steal time).
+free: Amount of idle memory.
+
+buff: Amount of memory used as buffers (for block devices).
+
+cache: Amount of memory used as cache (for file system reads).
+
+swap:
+
+si: Amount of memory swapped in from disk (kb/s).
+
+so: Amount of memory swapped out to disk (kb/s). High values here indicate heavy swapping, which points to a memory shortage.
+
+io (Input/Output):
+
+bi: Blocks received from a block device (e.g., disk reads) (blocks/s).
+
+bo: Blocks sent to a block device (e.g., disk writes) (blocks/s).
+
+system:
+
+in: Number of interrupts per second.
+
+cs: Number of context switches per second. High values can indicate high process activity.
+
+cpu: (Similar to top's CPU line)
+
+us: User time.
+
+sy: System time.
+
+id: Idle time.
+
+wa: I/O Wait time.
+
+st: Steal time.
 
 3.2 Running vmstat with Options
 vmstat is most useful when run in a continuous monitoring mode.
@@ -744,7 +1647,11 @@ vmstat 1 5: Update every 1 second, but only 5 times.
 
 vmstat -s: Display a table of event counters and memory statistics.
 
+vmstat -a: Display active/inactive memory.
+
 vmstat -d: Display disk statistics.
+
+vmstat -p /dev/sda1: Display detailed partition statistics for /dev/sda1.
 
 Example: Continuous monitoring of CPU and Memory every 2 seconds:
 
@@ -761,8 +1668,10 @@ Significant si and so (swapping)
 
 High wa in CPU (I/O wait)
 
+These patterns can quickly point you to CPU, memory, or disk bottlenecks.
+
 4. journalctl: Systemd Journal Logs
-journalctl is the command-line utility used to query and display messages from the systemd journal. The journal is a centralized logging system introduced with systemd in modern Linux distributions like RHEL, replacing fragmented log files.
+journalctl is the command-line utility used to query and display messages from the systemd journal. The journal is a centralized logging system introduced with systemd in modern Linux distributions like RHEL, replacing fragmented log files (like /var/log/messages, syslog, auth.log, etc.).
 
 4.1 Basic Usage and Output Explained
 Just type journalctl in your terminal.
@@ -770,14 +1679,14 @@ Just type journalctl in your terminal.
 
 
 journalctl
-This displays all log messages from the oldest to the newest. It uses a pager (like less), so you can scroll, search, and navigate.
+This will display all log messages from the oldest to the newest, which can be a very long output. It uses a pager (like less), so you can scroll, search, and navigate.
 
 4.2 Important journalctl Options
-journalctl -b: Show logs from the current boot. (Most frequently used).
+journalctl -b: Show logs from the current boot. This is one of the most frequently used options.
 
-journalctl -b -1: Show logs from the previous boot.
+journalctl -b -1: Show logs from the previous boot. (-b -2 for the boot before that, etc.).
 
-journalctl -f: Follow the journal in real-time (like tail -f). Excellent for live debugging.
+journalctl -f: Follow the journal in real-time (like tail -f). This is excellent for live debugging.
 
 journalctl -u <unit_name>: Show logs for a specific systemd unit (service).
 
@@ -787,22 +1696,30 @@ Example: journalctl -u sshd.service (for SSH daemon)
 
 journalctl --since "YYYY-MM-DD HH:MM:SS": Show logs since a specific date/time.
 
-journalctl --since "today": Show today's logs.
+journalctl --until "YYYY-MM-DD HH:MM:SS": Show logs up to a specific date/time.
+
+journalctl --since "today" --until "now": Show today's logs.
 
 journalctl --since "1 hour ago": Show logs from the last hour.
 
-journalctl -p <priority>: Filter by message priority (e.g., err, warning, info).
+journalctl -p <priority>: Filter by message priority (e.g., emerg, alert, crit, err, warning, notice, info, debug).
 
 Example: journalctl -p err -b (Show errors from current boot).
+
+Example: journalctl -p warning -f (Follow warnings in real-time).
 
 journalctl -k: Show only kernel messages.
 
 journalctl -x: Add explanations to some log messages.
 
+journalctl -n <num>: Show only the last num log entries. (Default is 10).
+
 journalctl --disk-usage: Show how much disk space the journal logs are consuming.
 
 4.3 Combining Options and Filtering
 You can combine journalctl options for powerful filtering.
+
+Examples:
 
 Monitor Apache errors in real-time:
 
@@ -816,11 +1733,26 @@ See all warnings and errors from the previous boot:
 journalctl -b -1 -p warning..err
 (Note: warning..err means priority warning and higher, i.e., warning, err, crit, alert, emerg)
 
+View kernel messages from the last 24 hours related to USB:
+
+
+
+journalctl -k --since "24 hours ago" | grep -i usb
+Check audit log denials (often redirected to journal):
+
+
+
+journalctl -p err | grep "denied"
+# Or specifically for SELinux (if auditd is sending to journal):
+journalctl _COMM=auditd -g "AVC denied"
 4.4 Journal Persistence
-By default, the systemd journal might be volatile and lost on reboot. To make it persistent (store logs across reboots in /var/log/journal/), create the directory:
+By default, the systemd journal might be volatile (stored in /run/log/journal/) and lost on reboot. To make it persistent (store logs across reboots in /var/log/journal/), you need to create the directory:
 
 
 
 sudo mkdir -p /var/log/journal
 sudo systemctl restart systemd-journald
 The journal will then automatically start saving logs to this persistent location.
+```
+
+#Day 4
