@@ -104,6 +104,48 @@
     grep -rli "pattern" . - Search for a pattern in files and display matching filenames only
 
 
+====================
+    less - View file content page by page
+		pager that allows you to view the contents of a text file or the output of another command
+		less /var/log/syslog
+		ls -lR /etc | less
+			pipe the output of any command to less
+		dmesg | less
+			 kernel ring buffer messages in less
+		less file1.txt file2.txt file3.txt
+			use n to move to the next file and p to move to the previous file.
+		less my_log_file.log
+		/error
+			search forward (downwards) for a pattern
+		less my_log_file.log
+		?warning
+			search backward (upwards) for a pattern
+		less +100 my_large_file.txt
+			Going to a Specific Line Number
+		less +F /var/log/auth.log
+			Opening a File and Jumping to the End
+			
+		Common Navigation Keys within less:
+
+			Once you are inside the less pager, you can use these keys:
+			Spacebar or f: Scroll forward one screen.
+			b: Scroll backward one screen.
+
+				Enter or j: Scroll forward one line.
+
+					k: Scroll backward one line.
+					d: Scroll forward half a screen.
+					u: Scroll backward half a screen.
+					g: Go to the beginning of the file.
+					G: Go to the end of the file.
+					/pattern: Search forward for pattern.
+					?pattern: Search backward for pattern.
+					n: Go to the next search match.
+					N: Go to the previous search match.
+					q: Quit less.
+					h: Display the help screen with all commands.
+
+	
 -----------------------------------------------------------------------
 • File Permission Management
 -----------------------------------------------------------------------
