@@ -146,14 +146,14 @@ Security	Strong, customizable (SELinux, iptables, etc.)	Secure but closed-source
 SSH Access	Native, easy setup	Requires RDP setup
 File System	ext4, XFS, etc.	NTFS
 Customization	Highly customizable	More rigid, registry-based configuration
-CLI (Command Line)	Powerful Bash and scripting	PowerShell (advanced but different syntax)
+CLI (Command Line)	Powerful  and scripting	PowerShell (advanced but different syntax)
 Use Cases	Web servers, containers, big data, dev/test	Windows-native apps (.NET, IIS, Active Directory)
 Software Ecosystem	Open-source, flexible (Nginx, Apache, MySQL, etc.)	Microsoft ecosystem (IIS, SQL Server, Exchange)
-Automation Tools	Ansible, Terraform, Bash, cloud-init	PowerShell DSC, Chocolatey, AWS Systems Manager
+Automation Tools	Ansible, Terraform, , cloud-init	PowerShell DSC, Chocolatey, AWS Systems Manager
 Market Share (AWS)	~70–75% of EC2 workloads run on Linux-based AMIs	~25–30% run on Windows-based AMIs
 
-🧭 When to Use Linux on AWS
-✅ Best for:
+When to Use Linux on AWS
+Best for:
 
 Web apps (Nginx, Apache)
 
@@ -227,26 +227,25 @@ Would you like help launching an EC2 instance with a specific OS, or automating 
 	--------------------------------------------------------------------------------	
 	•	Installation: RHEL 9 in VirtualBox or WSL2
 	--------------------------------------------------------------------------------
+	
+	
 	--------------------------------------------------------------------------------
 	•	Shell basics: whoami, date, man, clear
 	--------------------------------------------------------------------------------
 	
 	 1. whoami — "Who am I?"
-📌 Description:
+Description:
 The whoami command shows the username of the current user.
 
-🧠 Why is it useful?
+Why is it useful?
 When working on a system (especially remote servers), you might want to verify which user account you're currently using.
 
-✅ Syntax:
-bash
-Copy
-Edit
+Syntax:
 whoami
 📤 Example Output:
-bash
-Copy
-Edit
+
+
+
 john
 🔍 Related Commands:
 id – Shows more details like UID, GID, and groups.
@@ -258,41 +257,41 @@ who – Shows who is logged into the system.
 Displays the current date, time, and timezone information. Can also be used to format or set system time (admin privileges required for setting).
 
 ✅ Basic Usage:
-bash
-Copy
-Edit
+
+
+
 date
 📤 Example Output:
-bash
-Copy
-Edit
+
+
+
 Thu Jul 24 22:12:08 IST 2025
 🛠️ Formatting Examples:
 Display only the date:
 
-bash
-Copy
-Edit
+
+
+
 date +"%Y-%m-%d"
 # Output: 2025-07-24
 Display only the time:
 
-bash
-Copy
-Edit
+
+
+
 date +"%H:%M:%S"
 # Output: 22:12:08
 Custom format with day:
 
-bash
-Copy
-Edit
+
+
+
 date +"%A, %d %B %Y"
 # Output: Thursday, 24 July 2025
 🔧 Set the system date (admin only):
-bash
-Copy
-Edit
+
+
+
 sudo date --set="25 July 2025 10:00:00"
 📖 Full formatting options:
 GNU date format specifiers
@@ -302,14 +301,14 @@ GNU date format specifiers
 The man command lets you view the manual (help documentation) for any Linux command.
 
 ✅ Basic Usage:
-bash
-Copy
-Edit
+
+
+
 man command_name
 📤 Example:
-bash
-Copy
-Edit
+
+
+
 man ls
 This opens the manual for the ls command.
 
@@ -363,32 +362,52 @@ clear	Clear terminal screen	clear
 	Day 2: Filesystem and File Management
 	•	Filesystem hierarchy: /etc, /var, /usr, /home	
 	--------------------------------------------------------------------------------
-Refer "The Hierarchy of the File System" section in LinuxTOC
+Refer "The Hierarchy of the File System" section in Notes-old
 	--------------------------------------------------------------------------------
 	•	Commands: ls, pwd, cd, file, mkdir, touch, cp, mv, rm, find
 	--------------------------------------------------------------------------------
 	find 
 	https://www.geeksforgeeks.org/linux-unix/find-command-in-linux-with-examples/
+	
+	Please share a detailed tutorial on ls, pwd, cd, file, mkdir, touch, cp, mv, rm, find in .md format so that it can be copied 
+	
 	--------------------------------------------------------------------------------
 	
 	•	Wildcards: *, ?, relative vs. absolute paths
 	Lab: Create directories, manage files.
 	--------------------------------------------------------------------------------
+	
+	Please share a detailed tutorial on *, ?, relative vs. absolute paths in .md format so that it can be copied 
+	
+	
+	Please share a detailed tutorial on Create directories, manage files in .md format so that it can be copied 
+	
+	
 	--------------------------------------------------------------------------------
 	Day 3: Permissions and Essential Commands
 		--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	•	Permissions: rwx, chmod, chown (RHCSA 4.14)
 		--------------------------------------------------------------------------------
+		Please share a detailed tutorial on Permissions: rwx, chmod, chown in .md format so that it can be copied 
+	
 	--------------------------------------------------------------------------------
 	•	Viewing files: cat, less, more, head, tail
 		--------------------------------------------------------------------------------
+		
+		Please share a detailed tutorial on cat, less, more, head, tail in .md format so that it can be copied 
+	
 	--------------------------------------------------------------------------------
 	•	I/O: stdin, stdout, stderr, pipes, redirection (RHCSA 4.7)
 		--------------------------------------------------------------------------------
+		Please share a detailed tutorial on I/O: stdin, stdout, stderr, pipes, redirection in .md format so that it can be copied 
+	
 	--------------------------------------------------------------------------------
 	•	Monitoring: top, htop, vmstat, journalctl
 		--------------------------------------------------------------------------------
+		Please share a detailed tutorial on I/O: stdin, stdout, stderr, pipes, redirection in .md format so that it can be copied 
+	
+
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 		https://swac.blog/the-essential-guide-to-linux-system-monitoring-with-top-htop-and-vmstat/
@@ -1079,7 +1098,7 @@ It combines functionalities of multiple older tools.
 It provides more detailed and consistent output.
 
 2. nmcli: NetworkManager Command-Line Interface 
-nmcli is a command-line client for NetworkManager, a daemon that handles network connections on many Linux distributions (especially Red Hat/CentOS/Fedora, Ubuntu, Debian). nmcli allows you to create, display, edit, delete, activate, and deactivate network connections, and to control and monitor the NetworkManager daemon.
+nmcli is a command-line client for NetworkManager, a daemon that handles network connections on many Linux distributions (especially Red Hat/CentOS/Fedora, Ubuntu, Debian). nmcli allows you to create, display, , delete, activate, and deactivate network connections, and to control and monitor the NetworkManager daemon.
 
 2.1 Basic Structure and Concepts
 NetworkManager operates on the concept of connections (profiles) and devices (physical interfaces). A connection defines how a device should be configured when it's activated (e.g., IP address, gateway, DNS, Wi-Fi SSID, password).
@@ -1494,10 +1513,16 @@ dig is indispensable for troubleshooting DNS resolution issues, verifying DNS re
 
 	--------------------------------------------------------------------------------
 	Lab: Configure IPv4/IPv6 on RHEL 9.
+--------------------------------------------------------------------------------
+https://pro.tecmint.com/setup-network-services-rhel/
+https://www.tecmint.com/linux-ip-address/
+--------------------------------------------------------------------------------
 
 	Day 5: Hands-on Lab & Quiz
 	•	Scenario: Create user folder structure, set permissions, configure network.
 --------------------------------------------------------------------------------
+
+
 
 1. Creating a User Folder Structure 
 When you create a new user on a Linux system, a home directory is typically created automatically for them (e.g., /home/username). This home directory serves as their personal workspace. Within this, you might want to establish a standardized folder structure for better organization, especially in a multi-user or server environment.
@@ -1518,7 +1543,7 @@ Create a group devuser1.
 
 Create the home directory /home/devuser1/.
 
-Copy default configuration files (like .rc, .profile) from /etc/skel into /home/devuser1/.
+ default configuration files (like .rc, .profile) from /etc/skel into /home/devuser1/.
 
 Set the correct ownership and permissions for /home/devuser1/ (usually devuser1:devuser1 with rwx------ or rwxr-xr-x).
 
@@ -1785,7 +1810,7 @@ Recursively change ownership:
 sudo chown -R newowner:newgroup /path/to/directory
 Use Cases:
 
-After copying files as root, set them back to the user/service owner.
+After ing files as root, set them back to the user/service owner.
 
 Assign files to a shared group for collaborative access.
 
@@ -1877,7 +1902,7 @@ iface eth0 inet dhcp
 #    netmask 255.255.255.0
 #    gateway 192.168.1.1
 #    dns-nameservers 8.8.8.8 8.8.4.4
-After editing: sudo systemctl restart networking
+After ing: sudo systemctl restart networking
 
 RHEL/CentOS/Fedora (/etc/sysconfig/network-scripts/ifcfg-<interface_name>):
 
@@ -1902,7 +1927,7 @@ ONBOOT="yes"
 # NAME="eth0"
 # DEVICE="eth0"
 # ONBOOT="yes"
-After editing: sudo systemctl restart network (or sudo ifup eth0 / sudo ifdown eth0 && sudo ifup eth0)
+After ing: sudo systemctl restart network (or sudo ifup eth0 / sudo ifdown eth0 && sudo ifup eth0)
 
 3.3 Verifying Network Configuration
 Check IP Address and Interface Status:
@@ -1936,7 +1961,7 @@ By following these steps, you can effectively manage user environments and confi
 	--------------------------------------------------------------------------------
 	•	Quiz: MCQs on Linux commands, filesystem, networking basics.
 --------------------------------------------------------------------------------
-Pending 
+Done
 
 	--------------------------------------------------------------------------------
 	Lab: Practice Week 1 tasks.
@@ -2058,7 +2083,7 @@ Objective: Deepen networking skills, troubleshoot VoIP, and introduce system adm
 
 	Classify VoIP traffic (e.g., based on source/destination port, protocol).
 
-	Mark these packets with a high DSCP value (e.g., EF - Expedited Forwarding).
+	Mark these packets with a high DSCP value (e.g., EF - Exped Forwarding).
 
 	Configure network devices (routers, switches) to prioritize packets with EF marking when forwarding.
 
@@ -2238,15 +2263,15 @@ Objective: Deepen networking skills, troubleshoot VoIP, and introduce system adm
 
 	Disable Password Authentication: Use SSH keys instead.
 
-	Edit /etc/ssh/sshd_config: PasswordAuthentication no
+	 /etc/ssh/sshd_config: PasswordAuthentication no
 
 	Disable Root Login:
 
-	Edit /etc/ssh/sshd_config: PermitRootLogin no
+	 /etc/ssh/sshd_config: PermitRootLogin no
 
 	Change Default SSH Port: Use a non-standard port (e.g., 2222) to deter automated scans.
 
-	Edit /etc/ssh/sshd_config: Port 2222 (remember to open this in firewall).
+	 /etc/ssh/sshd_config: Port 2222 (remember to open this in firewall).
 
 	Use fail2ban: Automatically blocks IP addresses that make repeated failed login attempts.
 
@@ -2321,7 +2346,7 @@ Objective: Deepen networking skills, troubleshoot VoIP, and introduce system adm
 	Automation: Automate backup processes using cron jobs or dedicated backup software.
 
 3.4 Automation
-	Scripting (Bash/Python): Automate repetitive tasks like log cleanup, system updates, user management, and service restarts.
+	Scripting (/Python): Automate repetitive tasks like log cleanup, system updates, user management, and service restarts.
 
 	Configuration Management Tools:
 
@@ -3265,6 +3290,8 @@ You should see the MAC addresses of PC1/PC2 associated with Gi0/1, Gi0/2 in VLAN
 --------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	Lab: Configure DHCP, open ports in firewalld.
+--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 
 	Day 8: User & Group Management
 	•	useradd, usermod, groupadd, sudo (RHCSA 4.7)
@@ -3278,6 +3305,7 @@ You should see the MAC addresses of PC1/PC2 associated with Gi0/1, Gi0/2 in VLAN
 	Day 9: Package & Storage Management (can be clubbed with Day 8)
 	•	Packages: dnf, rpm, apt (RHCSA 5.1)
 --------------------------------------------------------------------------------
+	
 	--------------------------------------------------------------------------------
 	•	Disks: df, du, lsblk, parted (RHCSA 5.5)
 --------------------------------------------------------------------------------
@@ -3290,6 +3318,261 @@ You should see the MAC addresses of PC1/PC2 associated with Gi0/1, Gi0/2 in VLAN
 	Day 10: VoIP Troubleshooting (1 Day)
 	•	VoIP protocols: SIP, WebRTC, RTP, codecs (Opus, G.711)
 --------------------------------------------------------------------------------
+
+Voice over IP (VoIP) is a revolutionary technology that allows voice and multimedia communications to be transmitted over the internet rather than traditional telephone lines. This is made possible by a suite of protocols that work together to set up, manage, and transmit the actual audio/video data. Let's dive into some of the most crucial VoIP protocols: SIP, WebRTC, RTP, and Codecs.
+
+1. SIP (Session Initiation Protocol)
+What it is: SIP is an application-layer signaling protocol that initiates, modifies, and terminates real-time multimedia sessions, including voice and video calls, over IP networks. Think of SIP as the "control panel" for your call – it doesn't carry the actual audio or video, but it manages everything needed to set up and tear down the connection.
+
+Key Functions:
+
+User Location: Determines the recipient's current IP address.
+
+User Availability: Checks if the recipient is available and willing to communicate.
+
+User Capabilities: Negotiates media capabilities between endpoints (e.g., what codecs they support) using another protocol called Session Description Protocol (SDP).
+
+Session Setup and Management: Establishes the communication path, invites participants, and handles modifications to the session (e.g., adding participants, changing media types).
+
+Session Termination: Ends the call cleanly.
+
+How SIP Works (Simplified Call Flow):
+
+Registration: When a SIP client (e.g., an IP phone, softphone) comes online, it registers its location (IP address) with a SIP Registrar Server. This allows the server to know where to find the client.
+
+Call Initiation (INVITE): The caller's SIP client sends an INVITE request to its SIP Proxy Server. This request contains information about the caller, the intended recipient, and the media capabilities (via SDP).
+
+Routing: The Proxy Server uses information from the Registrar Server to locate the callee's SIP Proxy Server and forwards the INVITE.
+
+Ringing (180 Ringing): The callee's SIP client receives the INVITE and, if available, sends a 180 Ringing response back to the caller, indicating the phone is ringing.
+
+Session Negotiation (SDP Exchange): The INVITE and subsequent responses (like 200 OK) include SDP messages. SDP describes the media streams that will be used (e.g., audio, video), the types of codecs supported, the IP addresses, and the ports for media traffic. Both parties exchange SDP to agree on a common set of parameters for the call.
+
+Call Acceptance (200 OK): When the callee answers, their SIP client sends a 200 OK response. This completes the signaling handshake.
+
+Media Session Establishment: At this point, the SIP signaling is complete, and the actual media (voice/video) traffic can flow directly between the endpoints using RTP.
+
+Call Termination (BYE): When either party hangs up, a BYE request is sent, terminating the session.
+
+SIP Components:
+
+User Agent (UA): The endpoint device (e.g., IP phone, softphone on a computer/mobile) that acts as both a User Agent Client (UAC) when initiating a call and a User Agent Server (UAS) when receiving a call.
+
+Proxy Server: Routes SIP messages between user agents, applying routing policies and handling authentication.
+
+Registrar Server: Processes REGISTER requests and stores the current location of user agents.
+
+Redirect Server: Informs the caller's UA about the callee's alternative locations.
+
+2. WebRTC (Web Real-Time Communication)
+What it is: WebRTC is an open-source project that provides web browsers and mobile applications with real-time communication (RTC) capabilities directly, without the need for plugins or additional software. While SIP focuses on signaling for general VoIP, WebRTC is specifically designed for real-time communication directly within web browsers, offering a more integrated and often peer-to-peer approach.
+
+Key APIs/Components of WebRTC:
+
+getUserMedia(): Accesses the user's camera and microphone to capture audio and video media streams.
+
+RTCPeerConnection: The core API that handles the direct peer-to-peer connection. It's responsible for:
+
+Signaling: While WebRTC doesn't define its own signaling protocol, it needs a way for peers to exchange metadata (like SDP offers/answers, and ICE candidates) to establish the connection. This "signaling" typically uses existing web technologies like WebSockets, XMLHttpRequest, or custom server-side solutions (which can involve SIP, XMPP, or proprietary protocols).
+
+NAT Traversal (STUN/TURN/ICE): Crucial for establishing connections between devices behind Network Address Translators (NATs) and firewalls.
+
+STUN (Session Traversal Utilities for NAT): Helps discover the public IP address and port that a peer is using.
+
+TURN (Traversal Using Relays around NAT): If STUN fails (e.g., strict firewalls), TURN servers relay the media traffic, acting as a go-between.
+
+ICE (Interactive Connectivity Establishment): A framework that uses STUN and TURN to find the best possible connection path between peers.
+
+Codec Handling: Negotiates and applies appropriate codecs for audio and video.
+
+Security (DTLS/SRTP): All WebRTC media streams are encrypted by default using DTLS (Datagram Transport Layer Security) for signaling and SRTP (Secure Real-time Transport Protocol) for media.
+
+Bandwidth Management: Adapts to network conditions (e.g., adjusting bitrate) to maintain quality.
+
+RTCDataChannel: Enables bidirectional, low-latency, peer-to-peer communication of arbitrary data (e.g., text chat, file sharing) alongside audio/video.
+
+How WebRTC Works (Simplified):
+
+Media Access: User's browser uses getUserMedia() to get access to camera/microphone.
+
+Signaling (Out-of-Band):
+
+Browser A creates an RTCPeerConnection and generates an SDP Offer (describing its media capabilities).
+
+Browser A sends this SDP Offer to a signaling server.
+
+The signaling server relays the SDP Offer to Browser B.
+
+Browser B receives the Offer, creates its own RTCPeerConnection, and generates an SDP Answer (accepting/modifying the capabilities).
+
+Browser B sends its SDP Answer back to the signaling server, which relays it to Browser A.
+
+During this process, both browsers also exchange ICE Candidates (potential network addresses and ports) through the signaling server.
+
+Connection Establishment (ICE):
+
+Once both browsers have exchanged SDP and ICE candidates, the ICE framework tries to establish the most direct peer-to-peer connection. It will first try direct UDP, then STUN, and finally TURN if necessary.
+
+Secure Media Stream (SRTP): Once a connection is established, the actual audio/video (and data channel) traffic flows directly between the peers, encrypted with SRTP over DTLS. No central server is typically involved in the media flow itself (unless a TURN relay is used).
+
+WebRTC vs. SIP:
+
+Scope: WebRTC is a broader set of APIs and protocols for direct real-time communication in browsers, encompassing media capture, peer connection, and data channels. SIP is primarily a signaling protocol for session management.
+
+Server Involvement: WebRTC aims for peer-to-peer media flow, minimizing server involvement after connection setup. SIP often relies on proxy servers to route calls and manage sessions.
+
+Integration: WebRTC is built into web browsers, requiring no plugins. SIP typically requires dedicated clients (softphones or IP phones). WebRTC can use SIP for its signaling, but it's not a requirement.
+
+3. RTP (Real-Time Transport Protocol)
+What it is: RTP is the media transport protocol responsible for delivering the actual real-time audio and video streams over IP networks. While SIP sets up the call, RTP is what carries your voice from one person to another during the conversation. It typically runs over UDP (User Datagram Protocol), which offers low latency but no guarantee of delivery or order.
+
+Key Features of RTP:
+
+Payload Type Identification: Specifies the type of data (e.g., G.711 audio, H.264 video) so the receiver knows how to decode it.
+
+Sequence Numbering: Each RTP packet has a sequence number. This allows the receiver to detect packet loss and reorder out-of-order packets for smooth playback.
+
+Timestamping: Each packet is timestamped, indicating when the first byte of data in the packet was sampled. This is crucial for synchronizing different media streams (e.g., audio and video) and for compensating for network jitter (variations in packet arrival times).
+
+Synchronization Source Identifier (SSRC): A unique identifier for the source of an RTP stream. This helps in mixing multiple streams (e.g., in a conference call).
+
+Contribution Source Identifier (CSRC): Identifies contributing sources when multiple sources are mixed into a single stream.
+
+RTP Control Protocol (RTCP):
+
+RTP is almost always used in conjunction with RTCP. While RTP carries the media, RTCP provides out-of-band control information and statistics about the RTP stream.
+
+Quality of Service (QoS) Feedback: RTCP packets provide feedback on transmission quality, such as packet loss, jitter, and round-trip delay. This information can be used by the sending application to adapt its sending rate or codec choice.
+
+Inter-media Synchronization: Helps synchronize different media streams (e.g., ensuring audio and video play at the same time).
+
+Participant Identification: Carries information about the participants in the session.
+
+RTP in Action:
+
+During a VoIP call, once SIP has set up the connection and negotiated the codecs, the audio is digitized, compressed by a codec, broken into small packets, and then encapsulated within RTP packets. These RTP packets are then sent over UDP (and IP) to the receiving endpoint. The receiver collects these packets, uses the sequence numbers and timestamps to reorder them and manage jitter, and then passes the data to the codec for decompression and playback.
+
+4. Codecs (Coder-Decoders)
+What they are: Codecs are algorithms (software or hardware) that compress (encode) analog audio and video signals into digital data for transmission over the network, and then decompress (decode) that digital data back into analog signals for playback.
+
+Why Codecs are Essential:
+
+Bandwidth Efficiency: Raw audio/video data is very large. Codecs drastically reduce the amount of data that needs to be transmitted, making real-time communication feasible over typical internet connections.
+
+Quality vs. Bandwidth Trade-off: Different codecs offer varying balances between audio/video quality and the bandwidth they consume.
+
+Interoperability: Endpoints need to agree on a common codec to communicate. This negotiation happens during the SIP/SDP or WebRTC signaling phase.
+
+Key Characteristics of Codecs:
+
+Bitrate: The amount of data per second the codec produces (e.g., kbps for audio, Mbps for video). Lower bitrates mean less bandwidth but potentially lower quality.
+
+Sampling Rate: How many "snapshots" of the analog signal are taken per second. Higher sampling rates generally mean higher fidelity.
+
+Frequency Response: The range of audio frequencies the codec can capture.
+
+Narrowband (300-3400 Hz): Traditional telephone quality, optimized for speech.
+
+Wideband (50-7000 Hz): "HD Voice," clearer and more natural sounding.
+
+Super Wideband/Fullband (up to 20,000 Hz): Near CD-quality, suitable for music.
+
+Latency: The delay introduced by the encoding/decoding process.
+
+Common VoIP Codecs:
+
+Audio Codecs:
+
+G.711 (µ-law and A-law):
+
+Type: Uncompressed PCM (Pulse Code Modulation).
+
+Bitrate: 64 kbps (uncompressed voice).
+
+Pros: High quality, extremely low latency, universal compatibility (standard for PSTN).
+
+Cons: High bandwidth consumption.
+
+Use Case: Often used in internal networks with ample bandwidth or for connecting to the PSTN.
+
+G.729:
+
+Type: Compressed (CS-ACELP).
+
+Bitrate: 8 kbps.
+
+Pros: Very low bandwidth, good voice quality for its bitrate.
+
+Cons: Higher computational requirements, higher latency than G.711, requires licensing (often paid).
+
+Use Case: Ideal for networks with limited bandwidth, widely used in enterprise VoIP.
+
+G.722:
+
+Type: Wideband (ADPCM).
+
+Bitrate: 48, 56, 64 kbps.
+
+Pros: "HD Voice" quality, significantly better than G.711/G.729 for speech.
+
+Cons: Higher bandwidth than G.729.
+
+Use Case: Popular for improving voice quality in modern VoIP systems.
+
+Opus:
+
+Type: Highly versatile, open-source (Hybrid SILK and CELT).
+
+Bitrate: Very flexible, from 6 kbps to 510 kbps (audio) and up to 20 kHz frequency response.
+
+Pros: Excellent quality across a wide range of bitrates, highly adaptive to network conditions, royalty-free, low latency.
+
+Cons: More computationally intensive than older codecs.
+
+Use Case: The gold standard for WebRTC audio, increasingly popular in general VoIP due to its flexibility and quality.
+
+Video Codecs (primarily for WebRTC/Video Conferencing):
+
+VP8:
+
+Type: Open-source video compression format.
+
+Pros: Royalty-free, good performance for real-time video.
+
+Cons: Less efficient than newer codecs at very low bitrates.
+
+Use Case: Common in WebRTC.
+
+VP9:
+
+Type: Open-source, successor to VP8.
+
+Pros: More efficient than VP8 (better quality at lower bitrates), royalty-free.
+
+Cons: More computationally demanding than VP8.
+
+Use Case: Gaining traction in WebRTC, especially for higher resolutions or limited bandwidth.
+
+H.264 (AVC - Advanced Video Coding):
+
+Type: Widely used video compression standard.
+
+Pros: Excellent compression efficiency, widespread hardware support, mature standard.
+
+Cons: Can involve licensing fees (though often waived for browser-to-browser WebRTC).
+
+Use Case: Extremely common in video conferencing, streaming, and many WebRTC implementations.
+
+AV1 (AOMedia Video 1):
+
+Type: Royalty-free, next-generation video codec.
+
+Pros: Superior compression efficiency compared to H.264/VP9 (can deliver same quality at significantly lower bitrates).
+
+Cons: Very computationally intensive (especially for encoding), adoption is still growing.
+
+Use Case: Future-proof codec for high-quality, low-bandwidth video, emerging in WebRTC.
+
 	--------------------------------------------------------------------------------
 	•	Issues: Call drops, latency, jitter, packet loss
 --------------------------------------------------------------------------------
@@ -3309,38 +3592,312 @@ You should see the MAC addresses of PC1/PC2 associated with Gi0/1, Gi0/2 in VLAN
 --------------------------------------------------------------------------------
 	Regular expression in Shell scripting 
 	--------------------------------------------------------------------------------
+Regular expressions (regex) are a fundamental tool for any shell scripter, enabling powerful and flexible text processing. Instead of searching for an exact string, you define a pattern that can match a wide variety of text.
 
+In shell scripting, regular expressions are primarily used with commands like grep, sed, awk, and within Bash itself using the [[ ... ]] conditional construct.
 
+1. Basic Regular Expression Syntax
+Before diving into commands, it's essential to understand the basic building blocks of regex:
+
+Character	Description	Example	Matches
+.	Matches any single character (except a newline).	a.c	abc, a#c, a1c
+*	Matches the preceding character zero or more times.	ab*c	ac, abc, abbc
++	Matches the preceding character one or more times.	ab+c	abc, abbc (but not ac)
+?	Matches the preceding character zero or one time.	ab?c	ac, abc (but not abbc)
+^	Matches the beginning of a line.	^abc	A line starting with abc
+$	Matches the end of a line.	abc$	A line ending with abc
+[]	Matches any single character within the brackets.	[abc]	a, b, or c
+[-]	Matches a range of characters.	[a-z]	Any lowercase letter
+[^]	Matches any single character NOT in the brackets.	[^0-9]	Any character that is not a digit
+()	Groups expressions together.	(ab)+c	abc, ababc
+|	The OR operator.	(cat|dog)	cat or dog
+\	Escapes a special character.	\$	The literal dollar sign character
+
+Export to Sheets
+Note on Extended Regex: The +, ?, |, and () characters are part of extended regular expressions (ERE). By default, some tools like grep use basic regular expressions (BRE). To use ERE, you often need to use a flag, such as -E with grep or sed.
+
+2. Using Regex with Common Shell Commands
+grep (Global Regular Expression Print)
+grep is the primary command for searching text files for lines that match a given regex pattern.
+
+Find lines containing a pattern:
+
+Bash
+
+grep "error" /var/log/messages
+Find lines containing "Start" or "Stop":
+
+Bash
+
+grep -E "(Start|Stop)" /var/log/messages
+The -E flag is crucial here to enable extended regex.
+
+Find lines that begin with "Aug" and are followed by one or more spaces:
+
+Bash
+
+grep "^Aug[[:space:]]+" /var/log/messages
+[[:space:]] is a POSIX character class that is more robust than a literal space.
+
+sed (Stream Editor)
+sed is a powerful tool for finding and replacing text using regular expressions. The common syntax is sed 's/pattern/replacement/g'.
+
+Replace all occurrences of "error" with "warning" in a file:
+
+Bash
+
+sed 's/error/warning/g' /var/log/messages
+The g flag at the end means "global" (replace all occurrences on each line).
+
+Extract a specific part of a line:
+Suppose a log line looks like Aug 1 07:30:00 server sshd[1234]: Accepted publickey for user from 192.168.1.100. To extract just the IP address, you can use capture groups.
+
+Bash
+
+echo "Accepted publickey for user from 192.168.1.100" | sed -E 's/.*from ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*/\1/'
+The parentheses () create a "capture group". \1 refers to the content matched by the first capture group.
+
+awk
+awk is a programming language designed for text processing. It uses regex patterns to match lines and then performs actions.
+
+Print lines that contain a specific pattern:
+
+Bash
+
+awk '/error/ { print }' /var/log/messages
+Extract fields from a line based on a pattern:
+To get the username and IP address from the SSH log line example:
+
+Bash
+
+echo "Accepted publickey for user from 192.168.1.100" | awk '{print $5, $7}'
+awk uses whitespace as a default field separator, so $5 is the 5th field (user) and $7 is the 7th field (192.168.1.100).
+
+3. Bash Native Regex Matching
+Modern versions of Bash (3.2 and later) have a built-in regex operator ~= within the [[ ... ]] conditional construct. This is often the most direct way to use regex in scripts without needing to fork an external process.
+
+Check if a string contains a number:
+
+Bash
+
+string="file_123.txt"
+if [[ $string =~ [0-9]+ ]]; then
+    echo "The string contains a number."
+else
+    echo "No number found."
+fi
+Using Capture Groups with Bash:
+When using =~, Bash automatically populates an array called BASH_REMATCH with the results of the match.
+
+BASH_REMATCH[0] contains the entire matched string.
+
+BASH_REMATCH[1] contains the content of the first capture group.
+
+BASH_REMATCH[2] contains the content of the second capture group, and so on.
+
+Example: Extracting a domain from a URL
+
+Bash
+
+url="https://www.example.com/page/index.html"
+if [[ $url =~ ^https?://([a-zA-Z0-9\.-]+) ]]; then
+    echo "Domain: ${BASH_REMATCH[1]}"
+else
+    echo "Invalid URL."
+fi
+In this example, the capture group ([a-zA-Z0-9\.-]+) matches one or more alphanumeric characters, dots, or hyphens, which is then stored in ${BASH_REMATCH[1]}.
+
+Summary
+Command	Primary Use	Regex Syntax	Key Features
+grep	Searching for lines in files.	BRE/ERE (-E)	Fast, efficient for simple pattern searching.
+sed	Stream-editing and substitution.	BRE/ERE (-E)	Ideal for search and replace operations.
+awk	Advanced text processing and field extraction.	ERE (default)	Powerful for structured data and complex logic.
+[[ ... ]]	Conditional checks in Bash scripts.	ERE (default)	Built-in, no external process, supports capture groups.
+--------------------------------------------------------------------------------
 Week 3: Security and Containers
 Objective: Learn Linux security practices and container management.
 	Day 11: Security Fundamentals
 	•	SSH: Key authentication, sshd_config, zero-trust (RHCSA 5.20)
 --------------------------------------------------------------------------------
+
+1. SSH Key Authentication
+	SSH key authentication is a secure alternative to password-based authentication. Instead of a single password, it uses a pair of cryptographically generated keys:
+
+	Private Key: 
+		This key is a secret file that you keep on your local machine. It should be protected with a strong passphrase and file permissions (e.g., chmod 600 ~/.ssh/id_rsa). You should never share your private key.
+
+	Public Key: 
+		This key is generated from the private key and can be shared freely. It is copied to the remote server you want to connect to. The public key is stored in a file named ~/.ssh/authorized_keys in the user's home directory on the server.
+
+How it works:
+
+	When an SSH client attempts to connect to a server, it announces that it wants to use key-based authentication.
+
+	The server checks the ~/.ssh/authorized_keys file for a public key that matches the client's.
+
+If a match is found, the server generates a random string and encrypts it using the public key.
+
+The server sends this encrypted message back to the client.
+
+The client, using its private key, decrypts the message.
+
+The client sends the decrypted, original string back to the server.
+
+The server compares the received string with the original. If they match, the client has proven that it possesses the corresponding private key, and authentication is successful.
+
+Advantages of Key Authentication:
+
+Enhanced Security: SSH keys are extremely difficult to brute-force compared to passwords.
+
+Automation: Allows for passwordless logins, which is essential for scripting and automated tasks.
+
+Convenience: With a proper SSH agent, you only need to enter your passphrase once per session, even when connecting to multiple servers.
+
+2. sshd_config
+The /etc/ssh/sshd_config file is the primary configuration file for the OpenSSH server (sshd). It controls all aspects of the server's behavior, including which authentication methods are allowed. For secure access, particularly in a zero-trust environment, this file is critical.
+
+Here are some key directives in sshd_config related to key authentication and security:
+
+	PasswordAuthentication no: 
+		This is one of the most important settings. It completely disables password-based authentication, forcing users to use more secure methods like key authentication. This is a common requirement in security-conscious environments.
+
+	PubkeyAuthentication yes: 
+		This is the default and should be explicitly set to yes to enable public key authentication.
+
+	PermitRootLogin no: 
+		Disabling direct root login is a best practice. Instead, a regular user should log in via SSH and then use su or sudo to gain root privileges.
+
+	AllowUsers, AllowGroups, DenyUsers, DenyGroups: 
+		These directives can be used to control which users or groups are permitted or denied SSH access. This provides granular control over who can connect to the server.
+
+	AuthenticationMethods: 
+		This directive specifies the authentication methods that must be successfully completed. For example, AuthenticationMethods "publickey,keyboard-interactive" would require both a public key and a two-factor authentication (if configured) to log in.
+
+3. Zero-Trust and SSH
+	The Zero-Trust security model 
+		"never trust, always verify." 
+	No user or device, whether inside or outside the network, should be trusted by default. 
+		Every connection and request must be authenticated and authorized.
+
+Traditional SSH key authentication, while a significant improvement over passwords, has some limitations in a strict zero-trust model:
+
+	Static Credentials: 
+		SSH keys are permanent credentials. 
+		If a private key is stolen or a public key is not revoked, 
+			it can grant persistent access.
+
+	Lack of Centralized Control: 
+		Managing SSH keys across a large number of users and servers can be difficult. 
+		It's challenging to ensure that keys are rotated regularly, and access is revoked promptly.
+
+	Limited Context: 
+		Standard SSH key authentication doesn't factor in contextual information like the user's location, the time of day, or the security posture of the client device.
+
+How Zero-Trust is applied to SSH:
+
+	To align SSH with a zero-trust model, organizations are moving beyond traditional key authentication to more dynamic and centrally managed solutions. Key strategies include:
+
+	SSH Certificates: 
+		Instead of relying on a static public key, 
+			SSH certificates 
+				short-lived, 
+				cryptographically signed credentials. 
+			A central Certificate Authority (CA) 
+				signs a user's public key, 
+				create a certificate with an expiration date and other policy information 
+				(e.g., allowed principals, hosts). 
+				The SSH server is configured to trust the 
+					CA's public key, not individual user keys. 
+		This allows for:
+
+			Automatic Key Rotation: 
+				Certificates are valid for a short time (e.g., hours or a day), forcing frequent re-authentication.
+
+			Centralized Policy Enforcement: 
+				All access rules are defined and managed at the CA level, making it easier to enforce policies and revoke access.
+
+			Just-in-Time (JIT) Access: 
+				Users don't have permanent access. They must request access to a specific resource, and a temporary, short-lived certificate is issued. This minimizes the time an attacker has to exploit a compromised credential.
+
+			Integration with Identity Providers (IdP): 
+				Zero-trust solutions often integrate SSH with existing identity providers (like LDAP, Active Directory, or cloud-based SSO). This allows for multi-factor authentication (MFA) and provides a unified audit trail.
+
+			Session Recording and Monitoring: 
+				Zero-trust solutions often include session recording and real-time monitoring capabilities to provide a full audit trail of all actions performed during an SSH session.
+
 	--------------------------------------------------------------------------------
 	•	SELinux: Modes, contexts (RHCSA 5.11)
 --------------------------------------------------------------------------------
 
-SELinux (Security-Enhanced Linux) is a security architecture for Linux systems that provides a mechanism for supporting access control security policies. Unlike traditional Discretionary Access Control (DAC) where a user (owner) can set permissions on their files, SELinux implements Mandatory Access Control (MAC). This means the operating system, based on a pre-defined policy, controls all interactions between subjects (processes) and objects (files, devices, ports, etc.), regardless of user ownership or standard file permissions.
+	SELinux (Security-Enhanced Linux) 
+		security architecture for Linux systems 
+		provides a mechanism for supporting access control security policies. 
+		Unlike traditional Discretionary Access Control (DAC) 
+			user (owner) can set permissions on their 
+				files, 
+				SELinux implements Mandatory Access Control (MAC). 
+		This means the operating system, based on a pre-defined policy, controls all interactions between subjects (processes) and objects (files, devices, ports, etc.), regardless of user ownership or standard file permissions.
 
 1. SELinux Modes
-SELinux can operate in different modes, controlling how strictly it enforces its policies. You can check the current SELinux mode using the sestatus command.
+	SELinux can operate in different modes
+	control how strictly it enforces its policies. 
+	You can check the current SELinux mode using the 
+		sestatus 
+		getenforce 
+	command.
+	
+	to change the mode (Not permanent)
+		setenforce 0 
+			Permissive/Disable 
+		setenforce 1 
+			Enforcing/Enable 
+	for permanent change 
+		cat /etc/selinux/config 
+		changing this can corrupt as selinux puts label 
+		
+		fixfiles -F onboot 
+			System will relable on next reboot 
+		cd /
+			file - .autorelabel 
+			
 
 1.1 Enforcing Mode
-Description: This is the default and most secure mode. In enforcing mode, SELinux policies are actively enforced. If an operation violates the policy, SELinux denies the operation and logs the denial.
+	Description: 
+		default and most secure mode. 
+		In enforcing mode, 
+			SELinux policies are actively enforced. 
+	If an operation violates the policy, 
+		SELinux denies the operation and 
+		logs the denial.
 
-Behavior: Access is strictly controlled.
+	Behavior: Access is strictly controlled.
 
-Use Case: Production environments where security is paramount.
+	Use Case: Production environments where security is paramount.
 
 1.2 Permissive Mode
-Description: In permissive mode, SELinux policies are not enforced, but potential violations are logged. SELinux will allow any operation, but it will record a "denial" message in the audit logs if that operation would have been denied in enforcing mode.
+	Description: 
+		In permissive mode, 
+		SELinux policies are not enforced, 
+			but potential violations are logged. 
+		SELinux will allow any operation, 
+			but it will record a "denial" message in the audit logs 
+				if that operation would have been denied in enforcing mode.
 
-Behavior: Access is allowed, but potential issues are reported.
+	Behavior: Access is allowed, but potential issues are reported.
 
-Use Case: Troubleshooting SELinux issues. By setting to permissive mode, you can identify what operations would be blocked without actually preventing them, helping you refine your policy. It's also useful when first deploying an application to see what it needs.
+	Use Case: 
+		Troubleshooting SELinux issues. 
+		By setting to permissive mode, 
+			you can identify what operations 
+			would be blocked without actually preventing them, 
+			helping you refine your policy. 
+		It's also useful when first deploying an application to see what it needs.
 
 1.3 Disabled Mode
-Description: In disabled mode, SELinux is completely turned off. No policies are loaded or enforced, and no denials are logged.
+	Description: 
+		In disabled mode, 
+			SELinux is completely turned off. 
+		No policies are loaded or enforced, and no denials are logged.
 
 Behavior: SELinux is inactive.
 
@@ -3349,45 +3906,58 @@ Use Case: Generally not recommended for production environments as it disables a
 How to Change SELinux Mode
 Temporary Change (until reboot):
 
-To set to permissive: sudo setenforce 0
+To set to permissive: 
+	sudo setenforce 0
 
-To set to enforcing: sudo setenforce 1
+To set to enforcing: 
+	sudo setenforce 1
 
-To check: sestatus or getenforce
+To check: 
+	sestatus or getenforce
 
 Permanent Change (persists across reboots):
 
-Edit the SELinux configuration file: sudo nano /etc/selinux/config
+ the SELinux configuration file: 
+	sudo nano /etc/selinux/config
 
 Find the line SELINUX=
 
 Change it to:
 
 SELINUX=enforcing
-
 SELINUX=permissive
-
 SELINUX=disabled
 
 Save the file and reboot the system for changes to take effect if moving to or from disabled mode. If changing between enforcing and permissive, setenforce and systemctl restart might suffice, but a reboot is safest for policy reload.
 
 2. SELinux Contexts
-SELinux works by labeling every subject (process) and object (file, directory, port, etc.) with an SELinux context. The policy then defines rules that specify which subjects can access which objects based on their labels.
+	SELinux works by labeling every subject (process) and object (file, directory, port, etc.) with an SELinux context. The policy then defines rules that specify which subjects can access which objects based on their labels.
 
 2.1 Components of an SELinux Context
-An SELinux context is typically represented as a string with four or five colon-separated fields:
+	An SELinux context is typically represented as a string with four or five colon-separated fields:
 
 user:role:type:level (or user:role:type:sensitivity:category)
 
-user (SELinux User): Maps to Linux user accounts. This is not the same as a Linux user ID. It's an identity defined within the SELinux policy (e.g., system_u, unconfined_u). It helps apply broader policies related to different user types.
+	user (SELinux User): 
+		Maps to Linux user accounts. 
+		This is not the same as a Linux user ID. 
+		It's an identity defined within the SELinux policy (e.g., system_u, unconfined_u). It helps apply broader policies related to different user types.
 
-role: Defines a role that an SELinux user can assume (e.g., system_r for system processes, staff_r for regular users, sysadm_r for administrators). Roles define what domains (types) a process can transition into.
+	role: 
+		Defines a role that an SELinux user can assume 
+			(e.g., system_r for system processes, staff_r for regular users, sysadm_r for administrators). 
+			Roles define what domains (types) a process can transition into.
 
-type (or Domain for processes): This is the most important part of the context for defining access control.
+	type (or Domain for processes): 
+		This is the most important part of the context for defining access control.
 
-For files/objects, it's called a type (e.g., httpd_sys_content_t for web server content, sshd_exec_t for the SSH daemon executable).
+For 
+	files/objects, it's called a type 
+		(e.g., httpd_sys_content_t for web server content, sshd_exec_t for the SSH daemon executable).
 
-For processes/subjects, it's called a domain (e.g., httpd_t for the Apache web server process, sshd_t for the SSH daemon process).
+For 
+	processes/subjects, 
+		it's called a domain (e.g., httpd_t for the Apache web server process, sshd_t for the SSH daemon process).
 
 SELinux policy rules primarily revolve around type to type (or domain to type) access. For example, the httpd_t domain might be allowed to read from files with the httpd_sys_content_t type, but not write to them.
 
@@ -3404,6 +3974,20 @@ For Files/Directories: Use the -Z option with ls.
 
 ls -Z /etc/passwd
 # Output: -rw-r--r--. root root system_u:object_r:passwd_file_t:s0 /etc/passwd
+
+	system_u (SELinux User): 
+		This component represents the SELinux user identity. It is a specific user account for SELinux purposes. In this case, system_u is a default user for system processes and files, which is a common assignment for most system-level files. It's distinct from a Linux user account (like root or user1).
+
+	object_r (SELinux Role): 
+		The _r suffix denotes a "role." In SELinux, a role defines what types of actions a subject (like a user or process) can perform on an object (like a file). The object_r role is a special role used for objects (files, directories, etc.) and is a placeholder to signify that the context belongs to an object, not a process or a user.
+
+	passwd_file_t (SELinux Type): 
+		This is the most crucial part of the security context. The _t suffix indicates a "type." The type is the core of SELinux's Type Enforcement policy. It defines the identity and purpose of an object. In this case, passwd_file_t is a type that specifically labels files that should be handled as the system's password file. The SELinux policy contains rules that govern which subjects (processes) are allowed to read, write, or execute files labeled with passwd_file_t. For example, a standard shell process might have read access to this file, but only a process running with the appropriate privileges (like the passwd command) would have write access.
+
+	s0 (SELinux Level): 
+		This component represents the sensitivity level. SELinux can enforce a Multi-Level Security (MLS) or Multi-Category Security (MCS) policy. The s0 is the default sensitivity level. Most files on a standard Red Hat Enterprise Linux system will have s0. For highly secure systems, this could be a more specific level, such as s1, or a range like s1-s2.
+
+
 
 ls -Zd /var/www/html/
 # Output: drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/
@@ -3438,7 +4022,7 @@ Step 1: Create the Directory and Place Content
 sudo mkdir -p /srv/mywebsite/
 echo "<h1>Hello from mywebsite!</h1>" | sudo tee /srv/mywebsite/index.html
 Step 2: Configure Apache (httpd) to Use the New Directory
-Edit the Apache configuration file: sudo nano /etc/httpd/conf/httpd.conf
+ the Apache configuration file: sudo nano /etc/httpd/conf/httpd.conf
 
 Change the DocumentRoot directive to /srv/mywebsite.
 
@@ -3568,20 +4152,1287 @@ Set to Permissive (for detailed debugging): If you're unsure, set SELinux to per
 	--------------------------------------------------------------------------------
 	Lab: Harden SSH, enable SELinux.
 --------------------------------------------------------------------------------
+
+
+Lab: Hardening SSH and Enabling SELinux on CentOS and Ubuntu
+
+This lab provides detailed, step-by-step instructions to enhance the security of your SSH service and enable/enforce SELinux on both CentOS (using a RHEL-based approach) and Ubuntu (which uses AppArmor by default, but we'll cover SELinux for completeness and its educational value, as well as basic AppArmor concepts).
+
+Prerequisites:
+
+Two virtual machines or cloud instances:
+
+One running CentOS 7/8/9 (Stream) (or any RHEL-based distribution like Rocky Linux or AlmaLinux).
+
+One running Ubuntu Server 20.04/22.04 LTS.
+
+Root or sudo access on both machines.
+
+Basic understanding of Linux command line.
+
+Crucially: Ensure you have console/hypervisor access to your VMs. If you lock yourself out via SSH, you'll need this to regain access.
+
+Part 1: SSH Hardening (Both CentOS and Ubuntu)
+SSH is a critical service, and securing it is paramount. We'll implement several best practices.
+
+Recommended Order of Operations:
+
+Create a new user for SSH access.
+
+Configure SSH to disallow root login.
+
+Configure SSH to use key-based authentication.
+
+Disable password authentication.
+
+Change the default SSH port (optional but recommended for obscurity).
+
+Limit user/group access (optional but good for specific scenarios).
+
+Implement rate limiting with firewalld (CentOS) or ufw (fail2ban for advanced).
+
+Step 1: Create a New User and Grant Sudo Privileges
+
+It's a best practice to never log in directly as root via SSH.
+
+On Both CentOS and Ubuntu:
+
+Create a new user:
+
+
+
+sudo adduser your_new_user
+sudo passwd your_new_user
+# Enter and confirm a strong password
+(Replace your_new_user with your desired username, e.g., sysadmin).
+
+Grant sudo privileges:
+
+CentOS: Add the user to the wheel group.
+
+
+
+sudo usermod -aG wheel your_new_user
+Ubuntu: Add the user to the sudo group.
+
+
+
+sudo usermod -aG sudo your_new_user
+Test the new user (important!):
+Open a new terminal window and try to log in with the new user:
+
+
+
+ssh your_new_user@your_server_ip
+Once logged in, try to use sudo:
+
+
+
+sudo ls /root
+If it asks for your your_new_user password and executes the command, you're good. DO NOT PROCEED UNTIL YOU CAN LOG IN AS THE NEW USER AND USE SUDO.
+
+Step 2: Configure Key-Based Authentication
+
+This is far more secure than passwords.
+
+Generate SSH keys on your local machine (your client PC):
+If you don't have them, run:
+
+
+
+ssh-keygen -t ed25519 -b 4096 -C "your_email@example.com"
+ed25519 is a modern, strong, and fast algorithm. You can also use rsa -b 4096.
+
+You'll be prompted for a passphrase. Always use a strong passphrase for your private key.
+
+This will typically create ~/.ssh/id_ed25519 (private key) and ~/.ssh/id_ed25519.pub (public key).
+
+ the public key to your server:
+Use ssh--id:
+
+
+
+ssh--id your_new_user@your_server_ip
+You'll be asked for your_new_user's password. It will automatically place your public key in ~/.ssh/authorized_keys on the server.
+
+Alternative (manual) if ssh--id isn't available:
+
+
+
+# On your local machine:
+cat ~/.ssh/id_ed25519.pub
+
+#  the output (starting with ssh-ed25519...)
+#
+# On the server, logged in as your_new_user:
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+echo "PASTE_YOUR_PUBLIC_KEY_HERE" >> ~/.ssh/authorized_keys
+Test key-based login:
+From a new terminal window on your local machine:
+
+
+
+ssh your_new_user@your_server_ip
+You should now be prompted only for your SSH private key passphrase (if you set one), not the user's password. DO NOT PROCEED UNTIL KEY-BASED LOGIN WORKS.
+
+Step 3:  the SSH Daemon Configuration (sshd_config)
+
+This is the central configuration file for the SSH server.
+
+On Both CentOS and Ubuntu:
+
+Open the configuration file:
+
+
+
+sudo nano /etc/ssh/sshd_config
+(Use vi if you prefer: sudo vi /etc/ssh/sshd_config)
+
+Make the following changes/additions:
+
+Disable root login:
+Find #PermitRootLogin yes (or prohibit-password) and change it to:
+
+PermitRootLogin no
+Disable password authentication (after confirming key-based login works!):
+Find #PasswordAuthentication yes and change it to:
+
+PasswordAuthentication no
+Use only Public Key Authentication:
+Ensure this line is present and uncommented:
+
+PubkeyAuthentication yes
+Change the default SSH port (optional but recommended for obscurity):
+Find #Port 22 and change it to a non-standard port (e.g., 2222, 22222). Choose something between 1024 and 65535, but avoid commonly used ports.
+
+Port 22222
+Remember this new port! You'll need it for future connections: ssh -p 22222 your_new_user@your_server_ip.
+
+Disable X11 Forwarding (unless needed):
+
+X11Forwarding no
+Set LoginGraceTime (seconds before connection timeout):
+
+LoginGraceTime 30
+Disable Empty Passwords:
+
+PermitEmptyPasswords no
+Limit Max Auth Tries:
+
+MaxAuthTries 3
+Disable host-based authentication (unless explicitly needed):
+
+HostbasedAuthentication no
+Use Protocol 2 only (modern SSH):
+
+Protocol 2
+Allow only specific users/groups (optional, but highly recommended for stricter control):
+Add these lines at the end of the file, replacing your_new_user with your actual username.
+
+AllowUsers your_new_user
+# Or to allow users in a specific group:
+# AllowGroups sshusers
+If you use AllowGroups, ensure your_new_user is part of that group: sudo usermod -aG sshusers your_new_user && sudo groupadd sshusers (if group doesn't exist).
+
+Save and exit the or.
+
+Step 4: Restart SSH Service and Adjust Firewall
+
+On Both CentOS and Ubuntu:
+
+Validate SSH configuration (important!):
+
+
+
+sudo sshd -t
+If it returns nothing, the syntax is good. If it shows errors, fix them before restarting.
+
+Adjust the Firewall (CRITICAL if you changed the port!):
+
+CentOS (using firewalld):
+
+
+
+sudo firewall-cmd --permanent --add-port=22222/tcp  # Replace 22222 with your new port
+sudo firewall-cmd --reload
+# If you were previously using port 22, you might want to remove it after confirming the new port works
+# sudo firewall-cmd --permanent --remove-port=22/tcp
+# sudo firewall-cmd --reload
+Ubuntu (using ufw):
+
+
+
+sudo ufw allow 22222/tcp # Replace 22222 with your new port
+sudo ufw enable         # If not already enabled
+sudo ufw reload         # To apply changes
+# If you were previously using port 22, you might want to remove it after confirming the new port works
+# sudo ufw delete allow 22
+Restart the SSH service:
+
+
+
+sudo systemctl restart sshd
+Step 5: Final Testing (Crucial!)
+
+From your local machine:
+
+Open a NEW terminal window.
+
+Try to log in using the new port and your key:
+
+
+
+ssh -p 22222 your_new_user@your_server_ip
+You should be able to log in using your private key's passphrase.
+
+Try to log in as root (should fail):
+
+
+
+ssh -p 22222 root@your_server_ip
+You should get "Permission denied" or similar.
+
+Try to log in as your_new_user using a password (should fail):
+
+
+
+ssh -p 22222 your_new_user@your_server_ip -o PreferredAuthentications=password
+You should get "Permission denied" or similar.
+
+If all tests pass, your SSH is significantly hardened! You can now close the old terminal window where you might have been connected as root or on port 22.
+
+Part 2: SELinux on CentOS
+SELinux (Security-Enhanced Linux) is a mandatory access control (MAC) security mechanism that provides fine-grained control over what processes and users can access files, directories, ports, and other system resources. It operates on the principle of least privilege.
+
+Step 1: Check SELinux Status
+
+Check current status:
+
+
+
+sestatus
+You'll typically see one of these modes:
+
+Enforcing: SELinux is active and enforcing policies.
+
+Permissive: SELinux is active but only logs warnings (doesn't block actions). Good for troubleshooting.
+
+Disabled: SELinux is turned off.
+
+Check the current mode:
+
+
+
+getenforce
+This will output Enforcing, Permissive, or Disabled.
+
+Step 2: Install SELinux Utilities (if not already installed)
+
+
+
+sudo yum install policycoreutils policycoreutils-python-utils setools-console selinux-permissive -y
+Step 3: Enable and Enforce SELinux
+
+If SELinux is disabled, you must reboot to enable it. If it's permissive, you can change it on the fly.
+
+If sestatus shows Disabled:
+
+ the SELinux configuration file:
+
+
+
+sudo nano /etc/selinux/config
+Change SELINUX=disabled to SELINUX=enforcing:
+
+SELINUX=enforcing
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUXTYPE=targeted
+Save and exit.
+
+Reboot the system:
+
+
+
+sudo reboot
+After reboot, log in and verify: sestatus should show enabled and getenforce should show Enforcing. If it shows Permissive after reboot, that's fine too (it indicates a relabeling might be in progress or a policy conflict).
+
+If sestatus shows Permissive (or after rebooting from Disabled):
+
+To switch from Permissive to Enforcing immediately:
+
+
+
+sudo setenforce 1
+Verify:
+
+
+
+getenforce
+It should now show Enforcing. This change is immediate but not persistent across reboots unless /etc/selinux/config is set to enforcing.
+
+Step 4: Common SELinux Commands and Contexts
+
+Viewing SELinux Contexts:
+Every file, process, and port has an SELinux context.
+
+For files/directories:
+
+
+To check label on files 
+ls -lZ /etc/ssh/sshd_config
+	ps -efZ | grep sshd
+Example output: -rw-------. root root unconfined_u:object_r:sshd_config_t:s0 /etc/ssh/sshd_config
+sshd_config_t is the type context.
+
+For processes:
+
+
+
+	ps auxZ | grep sshd
+Example output: system_u:system_r:sshd_t:s0-s0:c0.c1023 root 1000 ? Ss 09:00 0:00 /usr/sbin/sshd
+sshd_t is the type context for the SSH daemon.
+
+
+For sockets:
+	netstat -taZ | grep sshd 
+	
+For network ports:
+
+
+
+	sudo semanage port -l | grep ssh
+This shows standard SSH ports. If you changed your SSH port, you need to tell SELinux about it.
+
+Changing SSH Port in SELinux:
+If you changed your SSH port (e.g., to 22222) in sshd_config, SELinux won't allow sshd to listen on it by default. You need to add a new SELinux port context:
+
+
+
+sudo semanage port -a -t ssh_port_t -p tcp 22222
+# Verify it was added:
+sudo semanage port -l | grep ssh
+This command tells SELinux that TCP port 22222 is also designated for SSH traffic.
+
+Troubleshooting with SELinux:
+If you encounter "Permission denied" errors or services failing after enabling SELinux, check the audit log for denial messages.
+
+
+
+sudo tail -f /var/log/audit/audit.log | grep AVC
+# Or for a more human-readable output:
+sudo ausearch -c sshd | audit2allow -w -a
+audit2allow can generate SELinux policy rules from denial messages, but use it with caution as it can weaken your security if you blindly apply rules without understanding them. For most common services, existing SELinux policies are robust.
+
+Conclusion for CentOS SELinux:
+
+Enabling SELinux significantly enhances the security of your CentOS system by enforcing granular access control policies. It requires understanding its concepts and how to manage contexts and booleans, especially when running non-standard configurations.
+
+
+
+install httpd 
+	add a file in /var/www/html/index.html 
+	create  a new file somewhere elese and move it here
+	chmod 777 to the file 
+	
+	journalctl -b 0
+	/sbin/restorecon -v /var/www/html/index.html 
+	or 
+	chcon -t <type> filename 
+		contexts are stored in 
+	less /etc/selinux/targeted/contexts/files/file_contexts
+
+	to check boolean 
+		getsebool -a | grep httpd | more 
+	to set 
+		setsebool -P bool_name on/off 
+		
+		 
+
+Part 3: SELinux/AppArmor on Ubuntu
+Ubuntu uses AppArmor as its default Mandatory Access Control (MAC) system, not SELinux. AppArmor is generally simpler to use than SELinux, focusing on confining programs to a limited set of resources.
+
+While SELinux can be installed on Ubuntu, it's not natively supported or maintained to the same extent as AppArmor. For a production Ubuntu system, you would typically focus on AppArmor. However, for educational purposes and to show how SELinux could be set up, we'll cover both.
+
+Part 3a: AppArmor on Ubuntu (Recommended for Production)
+Step 1: Check AppArmor Status
+
+Check if AppArmor is running:
+
+
+
+sudo systemctl status apparmor
+It should be active and running.
+
+Check loaded profiles:
+
+
+
+sudo aa-status
+This will list profiles for various applications (e.g., usr.sbin.sshd, usr.bin.man, usr.bin.lxc-start). Profiles can be in enforce or complain mode.
+
+Step 2: Basic AppArmor Management
+
+Reload all profiles:
+
+
+
+sudo systemctl reload apparmor
+Set a profile to enforce mode (default):
+
+
+
+sudo aa-enforce /etc/apparmor.d/usr.sbin.sshd
+Set a profile to complain mode (logs violations but doesn't block):
+
+
+
+sudo aa-complain /etc/apparmor.d/usr.sbin.sshd
+This is useful for troubleshooting. After troubleshooting, set it back to enforce.
+
+Disable a profile:
+
+
+
+sudo aa-disable /etc/apparmor.d/usr.sbin.sshd
+# To re-enable:
+sudo aa-enforce /etc/apparmor.d/usr.sbin.sshd
+Step 3: AppArmor and SSH (Ubuntu-Specific)
+
+AppArmor typically has a profile for usr.sbin.sshd by default. If you changed the SSH port, AppArmor might not require explicit configuration like SELinux, as its profiles are often more generalized. However, if you experience issues, you might need to modify the SSH profile.
+
+Inspect the SSH profile:
+
+
+
+sudo nano /etc/apparmor.d/usr.sbin.sshd
+Look for port definitions or rules related to network binding. You might see something like:
+
+# Allow opensshd to bind to any port it might like.
+network tcp bind 0.0.0.0/0 port *
+network tcp bind ::/0 port *
+This generic rule (port *) would allow SSH to bind to any port, including your new one. If it's more restrictive, you might need to add your specific port.
+
+Modifying a profile (advanced):
+If you needed to add a specific port, you would add a line like:
+
+# Allow SSH to bind to port 22222
+network tcp bind 0.0.0.0/0 port 22222,
+network tcp bind ::/0 port 22222,
+Then reload the profile:
+
+
+
+sudo apparmor_parser -r /etc/apparmor.d/usr.sbin.sshd
+Caution: Modifying AppArmor profiles requires care. Always test thoroughly.
+
+Part 3b: Installing SELinux on Ubuntu (Advanced/Educational)
+Warning: Installing SELinux on Ubuntu is generally not recommended for production environments as AppArmor is the native MAC system and has better integration and community support. This section is for educational purposes or specific migration scenarios.
+
+Step 1: Install SELinux packages
+
+
+
+sudo apt update
+sudo apt install selinux selinux-utils auditd
+Step 2: Modify GRUB to enable SELinux
+
+ GRUB configuration:
+
+
+
+sudo nano /etc/default/grub
+Find the line starting with GRUB_CMDLINE_LINUX_DEFAULT= and add security=selinux selinux=1 inside the quotes.
+Example:
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash security=selinux selinux=1"
+Update GRUB:
+
+
+
+sudo update-grub
+Step 3: Configure SELinux Mode (Ubuntu specific)
+
+On Ubuntu, SELinux policy is typically configured through /etc/selinux/config (similar to CentOS), but its primary control might also be via a symlink.
+
+Create the SELinux config file (if it doesn't exist):
+
+
+
+sudo nano /etc/selinux/config
+Add or ensure these lines:
+
+SELINUX=enforcing
+SELINUXTYPE=targeted
+Reboot:
+
+
+
+sudo reboot
+The system will likely go through a relabeling process on the first boot with SELinux enabled, which can take some time.
+
+Step 4: Verify and Manage SELinux on Ubuntu
+
+After reboot, you can use the same commands as CentOS:
+
+sestatus
+
+getenforce
+
+sudo semanage port -a -t ssh_port_t -p tcp 22222 (if you changed the SSH port)
+
+sudo tail -f /var/log/audit/audit.log | grep AVC for troubleshooting.
+
+Troubleshooting SELinux on Ubuntu:
+
+Because SELinux is not natively integrated as deeply as AppArmor on Ubuntu, you might encounter more issues with applications being denied access.
+
+You might need to install selinux-policy-default or other policy packages.
+
+The audit2allow tool is essential for identifying and creating custom policies if default ones are missing for your specific services.
+
+Conclusion for Ubuntu SELinux/AppArmor:
+
+For Ubuntu, sticking with AppArmor is generally the pragmatic and recommended approach for production systems due to its native integration and simplicity. While SELinux can be installed, it requires more effort to manage and might lead to more unexpected access denials.
+
+Summary of Hardening Steps:
+
+Security Measure					Benefit
+New User with Sudo					No direct root access via SSH
+Key-Based Authentication			Eliminates password brute-force attacks
+Disable Password Authentication		Forces use of keys, no dictionary attacks
+Disable Root Login					Prevents direct attacks on the highest privilege user
+Change Default SSH Port				Obscurity, reduces automated scanning noise
+Limit MaxAuthTries					Slows down brute-force attempts
+Disable X11 Forwarding				Reduces attack surface (unless X11 is needed)
+AllowUsers/AllowGroups				Restricts who can even attempt to log in
+SELinux (CentOS/RHEL)				Mandatory Access Control, fine-grained process/file isolation
+AppArmor (Ubuntu/Debian)			Mandatory Access Control, application confinement
+
+
+
 	--------------------------------------------------------------------------------
 
 	Day 12: Advanced Security
 	•	Encryption: cryptsetup LUKS (RHCE 5.5.4)
 --------------------------------------------------------------------------------
+
+Encryption: cryptsetup LUKS (RHCE 5.5.4)
+
+
+You've specified "RHCE 5.5.4" which refers to the Red Hat Certified Engineer exam for Red Hat Enterprise Linux 5. This is a very old version of the exam and the operating system. The cryptsetup command and LUKS (Linux Unified Key Setup) have evolved significantly since then. The core principles remain the same, but the syntax, options, and best practices have changed.
+
+For the purposes of a detailed lab based on that era, we'll focus on the commands and procedures that would have been relevant for a RHEL 5 system.
+
+Lab: Encrypting a Partition with LUKS using cryptsetup (RHCE 5 Era)
+This lab will guide you through the process of creating a LUKS-encrypted partition, formatting it with a filesystem, and configuring it for persistent mounting.
+
+Prerequisites:
+
+A RHEL 5 virtual machine.
+
+Root access.
+
+An unformatted block device or a new partition. For this lab, we'll assume we are working with a new partition, for example, /dev/sdb1. WARNING: This process is destructive and will erase all data on the specified partition. Back up any important data before proceeding.
+
+The cryptsetup-luks package installed. You can verify this with rpm -q cryptsetup-luks. If it's not installed, use yum install cryptsetup-luks.
+
+Step 1: Partitioning the Disk (if necessary)
+If you are using a whole disk, you can skip this step. If you have a new disk that needs to be partitioned, use fdisk.
+
+Start fdisk on the disk device.
+
+
+
+fdisk /dev/sdb
+Follow the prompts to create a new primary partition.
+
+Press n to create a new partition.
+
+Press p for a primary partition.
+
+Enter the partition number (e.g., 1).
+
+Accept the default start and end sectors to use the entire disk.
+
+Press t to change the partition type.
+
+Enter the hex code for "Linux LVM" which is 8e or for "Linux" which is 83. The RHCE 5 exam often focused on LVM, so using 8e is a good practice, but for a simple partition, 83 is fine.
+
+Press w to write the changes and exit fdisk.
+
+Step 2: Creating the LUKS Encrypted Volume
+This is the core of the process. We will use the cryptsetup command to format the partition as a LUKS container.
+
+Format the partition with LUKS:
+The --verbose (-v) and --verify-passphrase (-y) options are good practice.
+
+
+
+cryptsetup --verbose --verify-passphrase luksFormat /dev/sdb1
+You will see a WARNING that this action will irreversibly overwrite data. Type YES (in all caps) and press Enter.
+
+You will be prompted to enter a LUKS passphrase. Choose a strong, memorable passphrase. You will be asked to enter it a second time to verify.
+
+The command will report Command successful upon completion.
+
+Verify the LUKS header:
+You can use the luksDump command to inspect the LUKS header and confirm that the device is now a LUKS volume.
+
+
+
+cryptsetup luksDump /dev/sdb1
+This will display information about the LUKS version, cipher, key slots, and other parameters. The presence of this output confirms that the device is now a LUKS container.
+
+Step 3: Opening the LUKS Encrypted Volume
+To access the encrypted partition, you must "open" it. This creates a virtual block device (a "device mapper" device) under /dev/mapper/.
+
+Open the LUKS volume:
+We need to give the device a name. This name will appear under /dev/mapper/. Let's use luks_data as the name.
+
+
+
+cryptsetup luksOpen /dev/sdb1 luks_data
+You will be prompted to enter the passphrase you created in the previous step.
+
+If successful, the command will report Key slot 0 unlocked.
+
+Verify the new device mapper entry:
+You can now see the decrypted block device.
+
+
+
+ls -l /dev/mapper/luks_data
+This will show a symlink to a device mapper device, e.g., ../dm-0. This is the decrypted, unformatted device you will work with from now on.
+
+Step 4: Formatting the Decrypted Volume with a Filesystem
+Now that the encrypted container is open, you can treat the /dev/mapper/luks_data device just like any other block device.
+
+Create a filesystem (e.g., ext4):
+
+
+
+mkfs.ext4 /dev/mapper/luks_data
+You can also use other filesystems like ext3, xfs, etc.
+
+Step 5: Mounting the Filesystem
+Create a mount point:
+
+
+
+mkdir /mnt/secure_data
+Mount the decrypted device:
+
+
+
+mount /dev/mapper/luks_data /mnt/secure_data
+Verify it's mounted:
+
+
+
+df -h /mnt/secure_data
+You should see the filesystem mounted at /mnt/secure_data. You can now store files in this directory, and they will be encrypted on the underlying /dev/sdb1 device.
+
+Step 6: Closing the Encrypted Volume
+When you are finished using the encrypted volume, you should unmount it and close the device mapper.
+
+Unmount the filesystem:
+
+
+
+umount /mnt/secure_data
+Close the LUKS device:
+
+
+
+cryptsetup luksClose luks_data
+The luksClose command takes the device mapper name, not the physical device path.
+
+The ls -l /dev/mapper/luks_data command will now fail, confirming the device is closed.
+
+Persistent Mounting on Boot
+For the RHCE exam, you needed to know how to configure this to mount automatically at boot time. This is done with two files: /etc/crypttab and /etc/fstab.
+
+Get the UUID of the LUKS volume:
+The /etc/crypttab file needs the UUID of the LUKS partition.
+
+
+
+blkid /dev/sdb1
+Look for the UUID entry in the output. The output will look something like this:
+... /dev/sdb1: UUID="<a-long-uuid>" TYPE="crypto_LUKS"
+
+ /etc/crypttab:
+This file tells the system which encrypted volumes to open at boot.
+
+
+
+nano /etc/crypttab
+Add a line in the following format: device_mapper_name   physical_device_path   none
+
+luks_data   UUID=<a-long-uuid>   none
+luks_data: The name you want the device mapper to have.
+
+UUID=<a-long-uuid>: The UUID of your LUKS partition. Using the UUID is safer than using /dev/sdb1.
+
+none: This tells the system to prompt for the passphrase at boot. You can also specify a keyfile path here, but for the basic exam, none was common.
+
+ /etc/fstab:
+This file tells the system which filesystems to mount.
+
+
+
+nano /etc/fstab
+Add a line to mount the decrypted device. The device name is the one you specified in crypttab.
+
+/dev/mapper/luks_data   /mnt/secure_data   ext4   defaults   0 2
+/dev/mapper/luks_data: The decrypted device.
+
+/mnt/secure_data: The mount point.
+
+ext4: The filesystem type.
+
+defaults: Standard mount options.
+
+0 2: Dump and fsck options.
+
+Reboot and Test:
+	Save your changes and reboot the system. During boot, you will be prompted for the passphrase for luks_data. If you enter the correct passphrase, the system will continue to boot, and the /mnt/secure_data directory will be automatically mounted. If you enter the wrong passphrase, the boot process will fail, and you will be dropped to a recovery shell.
+
 	--------------------------------------------------------------------------------
 	•	Firewall: Advanced firewalld rules for VoIP
 --------------------------------------------------------------------------------
+
+Setting up a firewall for VoIP can be more complex than for standard web services because VoIP uses multiple protocols and dynamic ports. firewalld provides flexible tools, including rich rules, to manage this. The goal is to allow the necessary traffic for signaling (e.g., SIP) and media (e.g., RTP) while keeping the system secure.
+
+Here is a detailed guide on advanced firewalld rules for a typical VoIP setup.
+
+Understanding VoIP Traffic
+Before writing rules, let's recap the types of traffic involved:
+
+Signaling: This is the "call setup" traffic. The primary protocol is SIP (Session Initiation Protocol), which typically uses TCP or UDP port 5060 (unencrypted) and TCP port 5061 (TLS-encrypted).
+
+Media: This is the actual audio and video data. The protocol used is RTP (Real-time Transport Protocol), which almost always runs over UDP. RTP uses a wide, dynamic range of ports, often in the range of 10000-20000 or higher.
+
+NAT and SIP ALG: Network Address Translation (NAT) can be a major challenge for VoIP. Many firewalls have a built-in SIP ALG (Application Layer Gateway) that attempts to rewrite SIP packet headers to help with NAT, but this often causes more problems than it solves (e.g., one-way audio, failed calls). For this reason, it's generally recommended to disable SIP ALG on the firewall and handle NAT traversal with other methods (like STUN/TURN, or a properly configured VoIP proxy). firewalld does not have a built-in SIP ALG, which is a good thing for advanced configurations.
+
+Lab: Advanced firewalld Rules for a VoIP Server
+Let's assume a typical scenario where you have a VoIP server (e.g., Asterisk, FreePBX) that needs to communicate with external VoIP clients.
+
+Prerequisites:
+
+A Linux server with firewalld installed and running.
+
+Root or sudo access.
+
+Knowledge of your VoIP provider's or clients' IP addresses (if you want to restrict access).
+
+Knowledge of the RTP port range used by your VoIP server (e.g., 10000-20000).
+
+Step 1: Create a Dedicated firewalld Zone for VoIP
+Using a custom zone is an advanced and clean approach. It allows you to separate VoIP rules from other services running on the same server (like SSH, web server, etc.) and apply them to specific network interfaces.
+
+
+
+# Create a new zone named 'voip'
+	sudo firewall-cmd --permanent --new-zone=voip
+
+# Reload the firewall to make the new zone available
+	sudo firewall-cmd --reload
+
+# List all zones to verify the new zone exists
+	sudo firewall-cmd --get-zones
+Step 2: Add Standard VoIP Ports to the voip Zone
+This is the basic step of opening ports for signaling and media. We'll use the public zone as a fallback, but the best practice is to put all VoIP rules in the dedicated voip zone.
+
+Option A: Add ports to the default public zone
+
+
+
+# Allow SIP (UDP/TCP) - unencrypted
+	sudo firewall-cmd --permanent --add-port=5060/udp --zone=public
+	sudo firewall-cmd --permanent --add-port=5060/tcp --zone=public
+
+# Allow SIPS (TCP) - encrypted
+	sudo firewall-cmd --permanent --add-port=5061/tcp --zone=public
+
+# Allow RTP (UDP) - a common port range
+	sudo firewall-cmd --permanent --add-port=10000-20000/udp --zone=public
+
+# Reload firewalld to apply the changes
+	sudo firewall-cmd --reload
+Option B: Add ports to the dedicated voip zone (Recommended)
+
+
+
+# Allow SIP (UDP/TCP)
+	sudo firewall-cmd --permanent --add-port=5060/udp --zone=voip
+	sudo firewall-cmd --permanent --add-port=5060/tcp --zone=voip
+
+# Allow SIPS (TCP)
+sudo firewall-cmd --permanent --add-port=5061/tcp --zone=voip
+
+# Allow RTP (UDP)
+	sudo firewall-cmd --permanent --add-port=10000-20000/udp --zone=voip
+
+# Reload firewalld
+sudo firewall-cmd --reload
+Step 3: Advanced Rules with Rich Rules
+Rich rules provide powerful, expressive syntax to create more fine-grained and secure firewall policies.
+
+Scenario 1: Restrict VoIP traffic to a specific source IP address
+
+This is a critical security measure if you have a known VoIP provider or a set of remote offices. You should not leave your SIP port open to the entire internet.
+
+Let's assume your VoIP provider's IP address is 198.51.100.10.
+
+
+
+# Clear any previous, generic rules for port 5060 (if you added them in Step 2)
+# sudo firewall-cmd --permanent --remove-port=5060/udp --zone=voip
+# sudo firewall-cmd --permanent --remove-port=5060/tcp --zone=voip
+
+# Use a rich rule to allow SIP signaling from a specific source IP
+	sudo firewall-cmd --permanent --zone=voip --add-rich-rule='rule family="ipv4" source address="198.51.100.10" port protocol="udp" port="5060" accept'
+	sudo firewall-cmd --permanent --zone=voip --add-rich-rule='rule family="ipv4" source address="198.51.100.10" port protocol="tcp" port="5060" accept'
+
+# Reload to apply changes
+sudo firewall-cmd --reload
+You can repeat this for SIPS and the RTP port range if your provider uses a consistent range from the same IP.
+
+Scenario 2: Allow VoIP from a specific source subnet
+
+If you have multiple remote offices or a trusted network range, you can use CIDR notation.
+
+Let's assume your trusted subnet is 203.0.113.0/24.
+
+
+
+# Allow SIP signaling from a specific subnet
+	sudo firewall-cmd --permanent --zone=voip --add-rich-rule='rule family="ipv4" source address="203.0.113.0/24" port protocol="udp" port="5060" accept'
+	sudo firewall-cmd --permanent --zone=voip --add-rich-rule='rule family="ipv4" source address="203.0.113.0/24" port protocol="tcp" port="5060" accept'
+
+# Allow RTP traffic from the same subnet
+	sudo firewall-cmd --permanent --zone=voip --add-rich-rule='rule family="ipv4" source address="203.0.113.0/24" port protocol="udp" port="10000-20000" accept'
+
+# Reload
+	sudo firewall-cmd --reload
+Scenario 3: Restricting all other traffic to specific ports and sources
+
+A good security practice is to explicitly accept what you need and let the default zone policy (usually REJECT) handle the rest.
+
+If you have a trusted internal network (10.0.0.0/8) and a public internet-facing interface, you can apply rules differently.
+
+
+
+# First, ensure your public interface is in a restrictive zone (e.g., 'public')
+	sudo firewall-cmd --set-default-zone=public
+
+# Add the VoIP server's internal network interface to your new 'voip' zone
+# (Assuming your internal interface is 'eth1')
+	sudo firewall-cmd --permanent --zone=voip --change-interface=eth1
+
+# Now, any traffic coming in on eth1 will be subject to the 'voip' zone rules.
+# You can define a separate, stricter set of rules for the public interface.
+# ... add rich rules to the 'public' zone to only allow specific, non-VoIP traffic.
+Step 4: Managing Masquerading (NAT)
+If your VoIP server is also acting as a gateway or is providing NAT for internal clients, you need to enable masquerading.
+
+
+
+# Enable masquerading on the 'voip' zone
+	sudo firewall-cmd --permanent --zone=voip --add-masquerade
+
+# Reload firewalld
+sudo firewall-cmd --reload
+Step 5: Inspecting Your Final Rules
+After making changes, always inspect your firewalld configuration to ensure the rules are applied correctly.
+
+
+
+# List all rules for your dedicated voip zone
+	sudo firewall-cmd --list-all --zone=voip
+
+# List all rich rules for your public zone (to see any other services you're allowing)
+	sudo firewall-cmd --list-rich-rules --zone=public
+
+# List all permanent rules (this is what will load on reboot)
+	sudo firewall-cmd --list-all --zone=voip --permanent
+	sudo firewall-cmd --list-rich-rules --zone=public --permanent
+Common Pitfalls and Troubleshooting
+Forgetting --permanent: If you don't use the --permanent flag, your rules will be lost on the next firewalld reload or server reboot. A good workflow is to add the permanent rules, then run sudo firewall-cmd --reload.
+
+SIP ALG: This is a recurring issue. If you are experiencing one-way audio, dropped calls, or failed registrations, the problem is often not your firewalld rules but a SIP ALG feature on a different device (like your ISP's router). It's best to disable it wherever you find it.
+
+Testing: Always test your changes after applying them. Making a test call, checking registrations, and using tools like sngrep or tcpdump to capture network traffic can help you diagnose issues.
+
+SELinux: If you are running SELinux in enforcing mode, it can also block services from binding to non-standard ports. If you changed your SSH port, for example, you would need to create a new SELinux port context for it (sudo semanage port -a -t ssh_port_t -p tcp 22222). While not directly a firewalld issue, it's a common configuration conflict on RHEL-based systems.
+
+
 	--------------------------------------------------------------------------------
 	•	Log analysis basics
 --------------------------------------------------------------------------------
+
+Log analysis is a fundamental skill for anyone in IT, security, or DevOps. It's the process of reviewing and interpreting computer-generated log files to gain insights into a system's behavior, performance, and security. Logs are essentially the digital footprints of everything that happens on a system.
+
+Here's a breakdown of the basics of log analysis:
+
+1. What Are Logs and Where to Find Them?
+	Logs are time-stamped records of events that occur on a system. They are generated by a variety of sources:
+
+Operating Systems: Linux, Windows, macOS all generate system logs.
+
+On Linux, the primary log directory is /var/log. You'll find a wealth of information here:
+
+	/var/log/messages or /var/log/syslog: 
+		General system messages and activity.
+
+	/var/log/secure or /var/log/auth.log: Authentication and security-related events (e.g., failed logins, sudo usage).
+
+/var/log/dmesg: Kernel messages from boot time.
+
+/var/log/cron: Records of scheduled jobs run by cron.
+
+Applications: Web servers (Apache, Nginx), databases (MySQL, PostgreSQL), and custom applications all have their own log files, often found in /var/log/ or a custom directory.
+
+Network Devices: Firewalls, routers, and switches generate logs that can be sent to a central log server.
+
+2. Why Analyze Logs?
+Log analysis is crucial for several reasons:
+
+Troubleshooting: When something breaks, logs are often the first place to look. They can pinpoint the root cause of an issue, whether it's a failed service, a software bug, or a configuration error.
+
+Security Monitoring: Logs are a primary source for detecting security threats. You can look for unusual login attempts, unauthorized access, or anomalous user behavior.
+
+Performance Optimization: Logs can provide insights into system performance, such as resource utilization, response times, and transaction volumes.
+
+Compliance and Auditing: Many regulations (like HIPAA or PCI DSS) require organizations to maintain detailed logs to demonstrate compliance.
+
+3. The Basics of a Log Entry
+While log formats can vary, a typical log entry contains a few key pieces of information:
+
+Timestamp: The date and time the event occurred. This is critical for creating a chronological timeline of events.
+
+Hostname: The name of the machine that generated the log.
+
+Service/Process: The name of the application or service that logged the event (e.g., sshd, httpd).
+
+Log Level/Severity: A tag indicating the importance of the message (e.g., INFO, WARN, ERROR, CRITICAL).
+
+Message: The actual text describing the event.
+
+4. Basic Log Analysis Techniques (Manual)
+For a single server, you can perform basic log analysis using standard command-line tools.
+
+Viewing Logs:
+
+tail -f /var/log/syslog: To view logs in real-time as they are written. The -f (follow) flag is a lifesaver for troubleshooting live issues.
+
+cat /var/log/messages: To display the entire contents of a log file.
+
+less /var/log/secure: To view a log file page by page, which is useful for large files. You can use / to search and n to jump to the next match.
+
+Searching Logs:
+
+grep "error" /var/log/httpd/error_log: To search for a specific keyword like "error" within a log file.
+
+grep -i "failed password" /var/log/auth.log: The -i flag makes the search case-insensitive.
+
+grep "Jan 1" /var/log/secure: To search for logs from a specific date.
+
+Combining Tools (Piping):
+You can combine commands using the pipe (|) character to perform more complex analysis.
+
+	cat /var/log/auth.log | grep "Failed password" | cut -d' ' -f11 | sort | uniq -c: This is a classic example. It counts the number of failed login attempts per source IP address.
+
+	cat: Displays the log file.
+
+	grep: Filters for lines containing "Failed password".
+
+	cut: Extracts the 11th field (the IP address), using a space as the delimiter.
+
+	sort: Sorts the list of IP addresses.
+
+	uniq -c: Counts the unique occurrences of each IP address.
+
+5. Advanced Log Analysis Concepts
+As your systems grow, manual analysis becomes impractical. This is where advanced concepts and tools come in.
+
+Centralized Logging: Instead of manually logging into each server, logs are collected from all sources and sent to a central logging server or a managed service (e.g., ELK Stack, Splunk, Graylog). This allows you to search and analyze logs from your entire infrastructure in one place.
+
+Log Correlation: The ability to link events from different logs to build a complete picture of an incident. For example, a failed login attempt in the auth.log might correlate with an event in a firewall log showing a dropped connection from the same IP.
+
+Normalization: Log data often comes in various formats. Normalization is the process of converting these different formats into a consistent, structured format (e.g., JSON) so it can be easily searched and analyzed.
+
+Visualization: Using dashboards and charts (like in Grafana or Kibana) to visualize log data. This helps you spot trends, spikes, and anomalies that might not be obvious in raw text logs.
+
+Automated Alerting: Setting up rules to automatically send alerts (via email, Slack, etc.) when specific conditions are met, such as a high number of failed logins, a critical error message, or a service outage.
+
+Summary
+Log analysis starts with understanding what logs are and where they are stored. For simple systems, command-line tools like grep, tail, and cut are invaluable. For more complex, distributed environments, centralized logging and advanced tools become essential for gaining actionable insights, maintaining security, and ensuring system stability.
+
 	--------------------------------------------------------------------------------
 	Lab: Encrypt a partition, configure firewalld.
 --------------------------------------------------------------------------------
+
+Lab Guide: Partitioning, Encryption, and Firewall Configuration
+This lab is designed to be followed step-by-step on a Linux system where you have root access. The commands are suitable for modern, systemd-based distributions like CentOS, Fedora, or RHEL, but the concepts apply universally.
+
+Prerequisites
+Root access to a Linux machine.
+
+An unpartitioned block device (e.g., /dev/sdb, /dev/sdc). WARNING: This lab will format and use a new device. Do not use a device that contains important data. If you don't have a spare device, you can use a virtual machine and add a new virtual disk.
+
+The cryptsetup and parted or fdisk packages should be installed.
+
+Step 1: Create a New Partition
+In this step, we will use the parted utility to create a new partition on a raw disk.
+
+List block devices to identify the target disk.
+Run the following command to see all available storage devices and their partitions. Look for a device without a partition table.
+
+$ lsblk
+
+You should see an output similar to this, where sdb is our target device.
+
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda           8:0    0    50G  0 disk
+├─sda1        8:1    0     1G  0 part /boot
+└─sda2        8:2    0    49G  0 part
+  ├─cl-root 253:0    0    45G  0 lvm  /
+  └─cl-swap 253:1    0     4G  0 lvm  [SWAP]
+sdb           8:16   0    10G  0 disk
+
+Start parted on the target disk.
+Replace /dev/sdb with the name of your target device.
+
+$ sudo parted /dev/sdb
+
+Set the partition table type.
+The most common type is gpt.
+
+(parted) mklabel gpt
+
+Create a new primary partition.
+This command will create a new partition using the entire available space.
+
+(parted) mkpart primary ext4 0% 100%
+
+Verify the new partition.
+You can check if the partition was created successfully.
+
+(parted) print
+
+Quit parted and update the kernel.
+The partprobe command forces the kernel to reread the partition table without a reboot.
+
+(parted) quit
+$ sudo partprobe /dev/sdb
+
+You should now see the new partition (/dev/sdb1) when you run lsblk again.
+
+Step 2: Encrypt the Partition with LUKS
+Now that we have a partition, we will use cryptsetup to encrypt it. LUKS (Linux Unified Key Setup) is the standard for Linux disk encryption.
+
+Format the partition with LUKS.
+This command will securely format the partition and prompt you to create a strong passphrase. Remember this passphrase, as it is required to access the data.
+
+$ sudo cryptsetup luksFormat /dev/sdb1
+
+You will be prompted to confirm the action by typing YES in all caps.
+
+Open the encrypted partition.
+This command will ask for your passphrase and create a device mapper entry (e.g., /dev/mapper/encrypted_volume).
+
+$ sudo cryptsetup luksOpen /dev/sdb1 encrypted_volume
+
+Create a filesystem on the encrypted volume.
+We'll create a standard ext4 filesystem. This step happens after the volume is open, so we are formatting the unencrypted, logical device.
+
+$ sudo mkfs.ext4 /dev/mapper/encrypted_volume
+
+Mount and use the volume.
+Create a mount point and mount the volume to it.
+
+$ sudo mkdir /mnt/secret_data
+$ sudo mount /dev/mapper/encrypted_volume /mnt/secret_data
+$ ls -l /mnt/secret_data
+
+You can now store files in /mnt/secret_data. The data will be transparently encrypted on disk.
+
+Unmount and close the volume.
+When you are done, unmount and close the encrypted volume. You will need to re-open it with luksOpen and your passphrase the next time you want to access the data.
+
+$ sudo umount /mnt/secret_data
+$ sudo cryptsetup luksClose encrypted_volume
+
+Step 3: Configure firewalld
+firewalld is a dynamic firewall management tool that uses "zones" to define trust levels for network connections.
+
+Check firewalld status and default zone.
+First, verify that the firewall service is running and see what the default zone is.
+
+$ sudo systemctl status firewalld
+$ firewall-cmd --get-default-zone
+
+The default zone is typically public.
+
+List current rules for the default zone.
+This command shows all currently active rules for the public zone.
+
+$ sudo firewall-cmd --list-all
+
+Add a new service to the public zone (permanent).
+This example adds the HTTP service to the firewall. The --permanent flag ensures the rule persists after a reboot.
+
+$ sudo firewall-cmd --permanent --add-service=http
+
+Add a custom port to the public zone (permanent).
+This example opens port 8080 for TCP traffic. This is useful for custom applications that don't have a pre-defined service.
+
+$ sudo firewall-cmd --permanent --add-port=8080/tcp
+
+Reload the firewall.
+After making permanent changes, you must reload the firewall to apply them.
+
+$ sudo firewall-cmd --reload
+
+Verify the new rules.
+Run the list-all command again to see the new http service and 8080/tcp port listed.
+
+$ sudo firewall-cmd --list-all
+
+You have now successfully configured a new disk partition, encrypted it for security, and configured your system's firewall to manage network traffic.
+
+-----------------------
+Here’s a complete Linux lab exercise where you’ll:
+
+Create a partition
+
+Encrypt the partition using LUKS
+
+Configure firewalld
+
+ Lab: Partition, Encryption, and Firewalld Configuration
+ 1. Create a Partition
+Assume a secondary disk is available: /dev/sdb
+
+a. List Disks
+
+
+
+lsblk
+b. Use fdisk to create a new partition
+
+
+
+sudo fdisk /dev/sdb
+Inside fdisk:
+
+Press n (new partition)
+
+Choose p for primary
+
+Accept defaults (or specify size like +1G)
+
+Press w to write changes
+
+c. Verify Partition
+
+
+
+lsblk
+# You should now see /dev/sdb1
+ 2. Encrypt the Partition (LUKS)
+We'll use cryptsetup to encrypt the partition.
+
+a. Install cryptsetup if needed
+
+
+
+sudo apt install cryptsetup   # Ubuntu/Debian
+sudo yum install cryptsetup   # RHEL/CentOS
+b. Format the partition with LUKS
+
+
+
+sudo cryptsetup luksFormat /dev/sdb1
+Confirm with YES
+
+Enter a secure passphrase
+
+c. Open the encrypted partition
+
+
+
+sudo cryptsetup luksOpen /dev/sdb1 secure_part
+d. Create a file system on the opened encrypted device
+
+
+
+sudo mkfs.ext4 /dev/mapper/secure_part
+e. Create mount point and mount
+
+
+
+sudo mkdir /secure
+sudo mount /dev/mapper/secure_part /secure
+f. Verify mount
+
+
+
+df -h | grep secure
+ 3. Configure Firewalld
+a. Install firewalld (if not installed)
+
+
+
+sudo apt install firewalld   # Ubuntu
+sudo yum install firewalld   # RHEL
+b. Enable and start the service
+
+
+
+sudo systemctl enable firewalld --now
+c. Check default zone and status
+
+
+
+sudo firewall-cmd --state
+sudo firewall-cmd --get-default-zone
+sudo firewall-cmd --list-all
+d. Allow HTTP and SSH through firewall
+
+
+
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=ssh
+sudo firewall-cmd --reload
+e. Verify Rules
+
+
+
+sudo firewall-cmd --list-all
+To Lock and Unlock Encrypted Partition
+Lock
+
+
+
+sudo umount /secure
+sudo cryptsetup luksClose secure_part
+Unlock
+
+
+
+sudo cryptsetup luksOpen /dev/sdb1 secure_part
+sudo mount /dev/mapper/secure_part /secure
+
 	--------------------------------------------------------------------------------
 
 	Day 13: Container Management
@@ -3683,7 +5534,7 @@ To make a PATH change permanent, you need to add the export command to a shell c
 For your current user: Add to ~/.rc, ~/._profile, or ~/.profile (depending on your shell and login type).
 
 For all users (system-wide): Add to /etc/profile or create a new script in /etc/profile.d/.
-After editing the file, either source the file (e.g., source ~/.rc) or restart your terminal/login session.
+After ing the file, either source the file (e.g., source ~/.rc) or restart your terminal/login session.
 
 2. The env Command and Environment Variables 
 The env command (short for environment) is used to display or modify the environment variables for the current shell or for a command that you execute. Environment variables are dynamic-named values that can affect the way running processes behave in a computer. They are a crucial way for processes to inherit configuration and state information.
@@ -3693,7 +5544,7 @@ They are key-value pairs (e.g., NAME=value).
 
 They are part of the environment of a process.
 
-When a new process is created (e.g., you run a script or another command from your shell), it inherits a copy of its parent's environment variables. This inheritance is a one-way copy; changes in the child's environment don't affect the parent.
+When a new process is created (e.g., you run a script or another command from your shell), it inherits a  of its parent's environment variables. This inheritance is a one-way ; changes in the child's environment don't affect the parent.
 
 Common environment variables include HOME, USER, LANG, PWD, SHELL, and, of course, PATH.
 
@@ -3746,7 +5597,7 @@ LANG: The default language and locale settings.
 
 LD_LIBRARY_PATH: A colon-separated list of directories where the dynamic linker should search for shared libraries. (Similar to PATH but for libraries).
 
-EDITOR/VISUAL: The default text editor to be used by programs.
+OR/VISUAL: The default text or to be used by programs.
 
 2.4 Difference: Environment Variables vs. Shell Variables
 Shell Variables: Exist only within the current shell process. They are not passed to child processes.
@@ -3879,7 +5730,7 @@ Backup Filesystem
 For loops Scripts for File System - 1
 --------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-Copy Files to Remote Hosts
+ Files to Remote Hosts
 --------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 User Directory Assignment

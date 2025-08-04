@@ -169,6 +169,7 @@ Transport Total     IP        IPv6
 * TCP     9         6         3
 * RAW     0         0         0
 * IP FRAG 0         0         0
+
 9. Filtering Output
 You can filter ss output using various criteria.
 
@@ -178,21 +179,25 @@ Bash
 ss -ltn 'sport = :80'        # Listening TCP sockets on source port 80
 ss -ltn 'dport = :443'       # Listening TCP sockets on destination port 443 (less common for listening)
 ss -tn '( sport = :80 or dport = :80 )' # All TCP sockets (both ends) involving port 80
+
 b) Filter by Address and Port
 Bash
 
 ss -tn 'src 192.168.1.100:ssh'     # Connections originating from local IP 192.168.1.100 on SSH port
 ss -tn 'dst 1.2.3.4:https'         # Connections destined for 1.2.3.4 on HTTPS port
+
 c) Filter by State
 Bash
 
 ss -nt 'state time-wait'         # Show all TCP sockets in TIME-WAIT state
 ss -nt 'state ( established or syn-sent )' # Show established or SYN-SENT states
+
 d) Filter by Process User
 Bash
 
 sudo ss -p user root              # Show sockets owned by root (requires root for -p)
 sudo ss -p user apache            # Show sockets owned by user 'apache'
+
 e) Combine Filters
 Bash
 

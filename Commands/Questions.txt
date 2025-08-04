@@ -1,0 +1,225 @@
+	INFINITE COMPUTER SOLUTIONS - LINUX FIRST ASSESSMENT
+	----------------------------------------------------
+
+Question 1 
+A user reports that a new configuration setting in /etc/myapp/config.conf isn't taking effect. 
+You suspect a simple typo in a single line. You just want to quickly see the entire content of this small configuration file (it's rarely more than 20 lines) without any paging.
+
+
+Question 2 
+The apache web server is experiencing intermittent errors. You need to review the very latest entries in the error.log file (/var/log/apache2/error.log) to identify any immediate issues. You only need to see the last 10 lines.
+
+
+Question 3 
+You've just restarted a critical service and want to ensure it's starting up correctly. Its log file (/var/log/critical_service.log) is constantly being updated. You need to watch new entries in real-time.
+
+
+Question 4 
+A background daemon failed to start after a system reboot. Its detailed startup logs are in /var/log/daemon/init.log. You know the crucial initialization sequence happens within the first 30 lines. How would you check it?
+
+
+
+Question 5 
+You've downloaded a CHANGELOG.md file for a new software package. It's about 100 lines long, and you just want to read through it page by page without needing to jump around or search extensively.
+
+
+
+
+
+Scenario: You are a system administrator automating tasks, troubleshooting issues, and managing data flow on a Linux server.
+
+Question 6: You want to list all files in the current directory (including hidden files) and save the complete output to a file named all_files.txt.
+
+Question 7: You need to append the current date to the end of a log file named activity.log without overwriting its existing content.
+
+
+Question 8: You have a long list of users in /etc/passwd. You want to filter this list to only show lines containing "bash" the results alphabetically before displaying them.
+
+Question 9: You want to login to a remote server with ip 10.20.30.40. You can user user vilas and pem file test.pem.
+
+
+Question 10: You need to create an empty file named audit.log. Give at least 2 different ways 
+
+
+Question 11: You want to display the first 5 lines of /var/log/messages and append these lines to a file named quick_messages.txt.
+
+
+
+
+
+Scenario: You are investigating performance, resource utilization, and system events on a Linux server.
+
+Question 12: The server feels sluggish. You want to quickly identify which processes are consuming the most CPU in real-time and kill that process. How do you do that?
+
+
+
+Question 13: You prefer a more visually intuitive process monitor that allows you to easily scroll, sort by different columns (e.g., memory, CPU), and see a tree view of processes.
+
+Question 14: You suspect a disk I/O bottleneck. You want to see a snapshot of disk (block) I/O activity, along with CPU and memory statistics.
+
+
+Question 15: A critical service, apache2, failed unexpectedly a few minutes ago. You need to examine its systemd journal logs to understand what happened.
+
+
+
+
+
+
+Scenario : You are managing file and directory permissions and ownership on a multi-user Linux system to ensure security and proper access control.
+
+Question 16: A new script daily_backup.sh was created. Make root owner of and give full read, write, and execute permissions, but no one else should have any access.
+
+
+Question 17: A shared configuration file app.conf needs to be readable and writable by its owner (admin), readable by members of the devs group, and have no access for others.
+
+Question 18: You've created a new project directory /var/www/myproject. All files and subdirectories within it should be owned by apache user and www-data group.
+
+Question 19: A new temporary directory /tmp/myfiles was created by userA. userB needs to be able to create files in it, but userA should still own the directory.
+
+
+
+
+
+
+Scenario: You are a system administrator monitoring and troubleshooting processes on a Linux server.
+
+Question 20: The server feels sluggish, and you suspect a runaway process. You want to see a comprehensive list of all running processes on the system, including those not associated with a terminal, along with their owner and CPU/memory usage.
+
+Question: You need to find a specific process named "apache2" to check if it's running and get its Process ID (PID). You prefer the System V style output format.
+
+
+Question 21: A user reports that their Python script, my_script.py, is not running. You want to quickly check if any process related to my_script.py is active, regardless of its exact command line arguments.
+
+
+
+
+
+Scenario: You are performing network diagnostics, downloading files, and transferring data between servers.
+
+Question 22: You need to download a file named latest_release.tar.gz from http://example.com/downloads/ to your current directory. You prefer a simple, non-interactive download that shows progress.
+
+Question: You want to test if a web server at example.com is reachable on its default HTTPS port (443) and view the HTTP headers it sends in response.
+
+Question 23: You need to check which network interfaces/devices are active on your system, their assigned IPv4 and IPv6 addresses, and their MAC addresses.
+
+
+
+Question 24: You need to see all established TCP connections on your server, displaying IP addresses and port numbers numerically without resolving hostnames.
+
+
+
+
+Scenario: You need to securely transfer files and execute commands on remote Linux servers.
+
+Question 25: You need to securely copy a local file named my_document.txt to the home directory of user1 on a remote server with IP address 192.168.1.10.
+
+Question 26: You want to log in to a remote server server.example.com as user admin and get an interactive shell.
+
+
+
+
+
+
+Scenario: You are a system administrator managing processes on a busy Linux server.
+
+
+Question 27: A specific application process (e.g., a web server instance) has become unresponsive and is consuming excessive CPU resources. You've identified its PID as 12345. You want to send a graceful termination signal to the process, allowing it to clean up before exiting.
+
+
+
+
+Scenario: You are troubleshooting performance issues and resource utilization on a Linux server.
+
+Question 28: The server feels very slow. You want to quickly identify which processes are consuming the most CPU and memory in real-time, along with their owner and uptime. You need an interactive display that updates regularly.
+
+
+
+
+
+
+
+
+Scenario: You are backing up data, moving files, or packaging software on a Linux system.
+
+Question 29: You need to create a compressed archive of a directory named my_project (located in your current working directory) for backup purposes. The archive should be named my_project_backup.tar.gz.
+
+Question 30: You've received a compressed archive file named data_archive.tar.bz2 and need to extract its contents into the current directory.
+
+
+
+Scenario: You are monitoring disk space on a server to prevent out-of-disk errors and optimize storage.
+
+Question 31: You need a quick overview of disk space usage for all mounted filesystems on your server, displayed in a human-readable format (e.g., GB, MB).
+
+Scenario: You are investigating which files or directories are consuming the most disk space to free up resources.
+
+Question 32: Your /var/log directory seems very large. You want to find out the disk space usage of all subdirectories immediately under /var/log, displayed in a human-readable format.
+
+
+Question 33: You need to find the top 5 largest files or directories within your current working directory and its subdirectories.
+
+
+
+
+
+Scenario: You are analyzing text files or command outputs for statistical purposes.
+
+Question 34: You have a log file named access.log. You want to find out how many lines, words, and characters are in this file.
+
+Question 35: You want to count only the number of files (lines) returned by the ls -l command in the current directory, without saving the output to a file.
+
+
+
+
+
+
+
+Scenario: You are optimizing scripts or commands and need to measure their execution performance.
+
+Question 36: You have a script named data_processing.sh that takes a long time to run. You want to measure the total time it takes to execute the script (./data_processing.sh), including real, user, and sys time, to identify potential bottlenecks. 
+
+
+
+Question 37: You've been working in various directories and now you're unsure of your current location in the file system. You need to quickly display the full path of your current working directory.
+
+
+Question 38: You want to see the names of all files and subdirectories within your home directory. You want to do a long listing to find timestamp, owner etc.
+
+
+Question 39: You suspect there might be hidden configuration files in your home directory that you can't see with a regular ls. You want to list all files, including hidden ones (those starting with a dot . ).
+
+Question 40: You need to go up one level from your current directory (e.g., if you are in /home/user/documents, you want to go to /home/user).
+
+
+Question 41: You were in /etc/nginx/sites-available but then moved to /var/log/apache2. Now you want to quickly jump back to /etc/nginx/sites-available without typing the full path.
+
+
+Question 42: You want to list all files and directories in a specific path, /home/shared/data, without actually changing your current directory. You need to see hidden files and details.
+
+Question 43: You're starting a new project and need to create a new, empty directory named my_new_project in your current working directory.
+
+
+Question 44: You need to create a directory structure for a web application, including a parent directory web_app and nested subdirectories web_app/public and web_app/private, all in one command.
+
+
+Question 45: You need to create an empty file named notes.txt in your current directory to start jotting down some information.
+
+
+Question 46: You have an empty directory named old_temp_files that you no longer need. You want to remove it.
+
+
+Question 47: You tried to remove a directory using rmdir, but it failed because the directory (logs/daily) contains some log files. You need to remove the entire directory and its contents forcefully.
+
+
+
+
+Scenario: You are managing data, making backups, and deploying files on your system.
+
+Question 48: You need to make a backup copy of your config.txt file in the same directory, naming the copy config.txt.bak.
+
+
+
+Question 49: You need to copy an entire directory named images (and all its contents, including subdirectories and files) from your current location to a new directory named website_assets.
+
+
+Question 50: You want to rename a file named infinite.txt to bestcompany.txt. How can you do that?

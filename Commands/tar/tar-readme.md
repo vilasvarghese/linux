@@ -203,6 +203,7 @@ Verifying Archives
 Bash
 
 tar -dvf my_archive.tar
+
 d: Compare archive with filesystem. This will list files that are different, missing, or have different permissions/ownership.
 
 Advanced Topics

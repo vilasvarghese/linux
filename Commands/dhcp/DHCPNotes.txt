@@ -1,0 +1,193 @@
+1. Dynamic Host Configuration Protocol (DHCP)
+What is it?
+DHCP (Dynamic Host Configuration Protocol) is a network management protocol used on Internet Protocol (IP) networks for automatically assigning IP addresses and other communication parameters to devices (clients) connected to the network. It operates on a client-server model.
+
+Why is it needed?
+Imagine a large network (like your home Wi-Fi, an office, or a data center). Without DHCP, every single device (computer, phone, server, printer, IoT device) would need to be manually configured with:
+
+	A unique IP address
+	A subnet mask
+	A default gateway
+	DNS server addresses
+
+This manual process is:
+
+Error-prone: Typos, duplicate IPs.
+Time-consuming: For administrators.
+Inefficient: Especially for mobile devices constantly joining and leaving networks.
+
+Difficult for IP address management: Reclaiming addresses from devices that leave the network would be a nightmare.
+
+DHCP automates all of this, making network management significantly easier and more reliable.
+
+How DHCP Works (The DORA Process):
+
+When a DHCP-enabled client (e.g., your laptop, an EC2 instance) connects to a network, it goes through a four-step process (often remembered as DORA):
+
+D - Discover (DHCP Discover):
+
+The client, which doesn't have an IP address yet, broadcasts a DHCP Discover message on the network. This message asks for a DHCP server.
+
+(Uses UDP port 68 - client side)
+
+O - Offer (DHCP Offer):
+
+Any DHCP server on the network that receives the Discover message checks its pool of available IP addresses.
+
+The server then sends a DHCP Offer message back to the client, proposing an IP address, subnet mask, lease time, and often the default gateway and DNS server addresses.
+
+(Uses UDP port 67 - server side)
+
+R - Request (DHCP Request):
+
+The client receives one or more Offer messages. It chooses one (usually the first one it receives) and broadcasts a DHCP Request message to all servers. This message identifies the chosen server and requests to accept the offered configuration. This broadcast ensures other servers know their offer was not accepted.
+
+A - Acknowledge (DHCP ACK):
+
+The chosen DHCP server receives the Request and sends a DHCP ACK (Acknowledgment) message back to the client. This is the final confirmation, containing the complete, confirmed IP configuration details.
+
+The client then configures its network interface with these details.
+
+Key Components & Concepts:
+
+DHCP Server: A server (or router/firewall acting as one) that manages a pool of IP addresses and network configuration parameters. It's responsible for leasing out IPs.
+
+DHCP Client: Any device that requests and receives IP configuration information from a DHCP server.
+
+IP Address Pool: The range of IP addresses that the DHCP server can assign.
+
+Lease: The amount of time for which an IP address and configuration information are valid. Clients typically try to renew their lease halfway through the lease period to avoid losing connectivity. If a device leaves the network or its lease expires without renewal, the IP address returns to the pool for reallocation.
+
+DHCP Options: Additional parameters beyond the IP address, subnet mask, and default gateway that a DHCP server can provide. Common options include DNS server addresses, domain name, NTP servers, etc.
+
+DHCP Relay Agent (or Helper): If a DHCP server is on a different subnet than the client, a router or switch can act as a relay agent to forward DHCP broadcast messages between the client and server, allowing a single DHCP server to serve multiple subnets.
+
+Benefits of DHCP:
+
+Automated IP Management: Eliminates manual configuration, saving time and reducing errors.
+
+Efficient IP Address Use: Dynamically reclaims unused IPs, minimizing the total number of addresses needed.
+
+Simplified Mobility: Devices can move between subnets and automatically get new configurations.
+
+Centralized Control: All IP settings are managed from a single server.
+
+2. Domain Name System (DNS) and systemd-resolved
+What is DNS?
+DNS (Domain Name System) is often called the "phone book of the Internet." It's a hierarchical and decentralized naming system for computers, services, or other resources connected to the Internet or a private network. Its primary function is to translate human-readable domain names (like www.google.com) into numerical IP addresses (like 142.250.190.100) that computers use to identify each other on the network.
+
+Why is it needed?
+It's much easier for humans to remember names like example.com than IP addresses like 93.184.216.34. DNS bridges this gap. Without DNS, you'd have to type IP addresses directly into your browser or applications, which would be impractical.
+
+How DNS Works (Simplified):
+
+Request: When you type www.example.com into your browser, your computer's operating system (specifically, its "resolver" library) sends a query to a configured DNS server.
+
+Resolution:
+
+If the DNS server has the IP in its cache, it returns it immediately.
+
+If not, it starts a recursive query process:
+
+It queries a Root DNS Server (there are 13 logical root servers globally). The Root server tells it which Top-Level Domain (TLD) server (e.g., for .com) to ask.
+
+It queries the TLD DNS Server. The TLD server tells it which authoritative server for example.com to ask.
+
+It queries the Authoritative DNS Server for example.com. This server holds the actual DNS records for example.com and will provide the IP address for www.example.com.
+
+Response: The IP address is returned to your computer, which then uses it to connect to the web server.
+
+Key Concepts in DNS:
+
+Domain Name: A human-readable name for a resource (e.g., example.com).
+
+IP Address: The numerical address (IPv4 or IPv6) that machines use.
+
+DNS Server (Resolver): A server that receives DNS queries and resolves them.
+
+Authoritative Name Server: A server that holds the master records for a specific domain.
+
+Recursive Query: A query where the DNS server will do all the work to find the answer.
+
+Iterative Query: A query where the DNS server gives the client the address of another server to ask next.
+
+DNS Cache: DNS servers and clients store resolved names and IPs to speed up future lookups.
+
+DNS Records: Different types of information stored in DNS (e.g., A record for IPv4, AAAA record for IPv6, CNAME for aliases, MX for mail servers).
+
+systemd-resolved
+What is systemd-resolved?
+systemd-resolved is a system service that provides network name resolution to local applications on Linux distributions that use systemd (like RHEL 9, Ubuntu, Fedora). It acts as a local DNS stub resolver, cache, and validator. It implements support for:
+
+Traditional DNS (including DNSSEC and DNS over TLS)
+
+Multicast DNS (mDNS)
+
+Link-Local Multicast Name Resolution (LLMNR)
+
+Why was it introduced / What problem does it solve?
+Historically, DNS configuration on Linux was often handled by /etc/resolv.conf, which could be managed directly, or by various network managers, or by other services like dnsmasq. This could lead to inconsistencies and challenges, especially in dynamic networking environments (like laptops moving between networks).
+
+systemd-resolved aims to centralize and standardize name resolution on systemd-based systems, providing a more robust and feature-rich solution.
+
+How systemd-resolved Works:
+
+Local Stub Listener (127.0.0.53):
+
+systemd-resolved typically runs a local DNS server on the loopback address 127.0.0.53 (both IPv4 and IPv6).
+
+Most applications and libraries on the system are configured (often by NetworkManager or systemd-networkd symlinking /etc/resolv.conf to /run/systemd/resolve/stub-resolv.conf) to send their DNS queries to this local address.
+
+This local stub acts as a proxy for all DNS queries.
+
+Upstream DNS Servers:
+
+systemd-resolved learns about actual upstream DNS servers from various sources:
+
+DHCP: The most common way, where DHCP provides DNS server addresses.
+
+NetworkManager/systemd-networkd: These network configuration tools pass DNS server information to systemd-resolved for each active network interface.
+
+Manual Configuration: You can manually specify DNS servers in /etc/systemd/resolved.conf or drop-in files.
+
+Fallback DNS: If no DNS servers are provided by any other means, systemd-resolved has a list of built-in fallback DNS servers (e.g., Google DNS, Cloudflare DNS) to ensure resolution always works.
+
+Caching:
+
+systemd-resolved maintains a DNS cache. When it resolves a domain name, it stores the result. Subsequent queries for the same domain are served directly from the cache, speeding up resolution and reducing network traffic.
+
+Routing DNS Queries:
+
+systemd-resolved has sophisticated logic for routing DNS queries:
+
+Per-link DNS: It can maintain separate DNS server lists for each network interface. Queries are routed to the DNS servers associated with the interface through which the request is expected to leave.
+
+Search Domains: It handles search domains (e.g., if you query server1 and your domain is example.com, it tries server1.example.com).
+
+Split DNS: It can be configured to send queries for specific domains (e.g., internal.company.com) to specific internal DNS servers, while sending all other queries to external public DNS servers.
+
+LLMNR/mDNS: It can resolve single-label hostnames (like myprinter) using local multicast protocols for discovery within a local network segment.
+
+DNSSEC and DNS over TLS/HTTPS:
+
+systemd-resolved can validate DNS responses using DNSSEC (DNS Security Extensions) to ensure their authenticity and integrity.
+
+It supports DNS over TLS (DoT), which encrypts DNS queries to upstream servers, improving privacy. Some versions/configurations might also support DNS over HTTPS (DoH).
+
+Configuration Files:
+
+/etc/resolv.conf: On systemd-based systems, this is often a symlink to /run/systemd/resolve/stub-resolv.conf, which points to 127.0.0.53 as the local DNS server. You should generally not directly edit /etc/resolv.conf on these systems.
+
+/etc/systemd/resolved.conf: The main configuration file for systemd-resolved, where you can set global DNS servers, enable DNSSEC, etc.
+
+/etc/systemd/resolved.conf.d/: Drop-in directory for additional configuration files (e.g., for specific overrides).
+
+NetworkManager connection files: For nmcli, connection profiles in /etc/NetworkManager/system-connections/ (or user-specific ones) define DNS settings per connection, which NetworkManager then passes to systemd-resolved.
+
+Command-line tools:
+
+resolvectl status: Shows the global and per-link DNS settings currently in effect.
+
+resolvectl query <hostname>: Resolves a hostname and shows details about the resolution process.
+
+resolvectl flush-caches: Flushes the DNS cache.

@@ -1,0 +1,160 @@
+Question 1 (Debugging Recent Web Server Errors)
+The Apache web server is experiencing intermittent errors, and you suspect recent activity might be the cause. You need to review the very latest entries in the error log file (/var/log/apache2/error.log) to identify any immediate issues. You only need to see the last 10 lines.
+
+
+
+Question 2 (Real-time Service Log Monitoring)
+You've just restarted a critical system service and want to ensure it's starting up correctly and running without issues. Its log file (/var/log/critical_service.log) is constantly being updated with new information. You need to watch these new entries in real-time as they are appended to the file.
+
+
+
+Question 3 (Investigating Daemon Startup Sequence)
+A background daemon failed to start properly after a recent system reboot. Its detailed startup logs are stored in /var/log/daemon/init.log. You know that the crucial initialization sequence, which often contains configuration errors or dependency issues, typically occurs within the first 30 lines of this log file. How would you quickly check just that initial part?
+
+
+Question 4 (Reviewing a Medium-Sized Document Page by Page)
+You've just downloaded a activity.md file for a new software package to understand the recent changes. The file is moderately sized, around 100 lines, which is too long to fit on a single screen but doesn't require complex searching. You want to read through its content conveniently, one screen at a time.
+
+
+
+Question 5 (Capturing All Directory Contents to a File)
+You need to create a list of all files and directories in your current working directory, including hidden ones, for documentation purposes. This list should be saved to a new file named all_files.txt for later review or sharing.
+
+
+
+Question 6 (Timestamping a Daily Activity Log)
+You have a local log file, debug_info.log, on your Infinite workstation that needs to be transferred to the remote logserver.infinite.com server, into the /var/tmp/ directory, under your username admin.
+
+
+
+Question 7 (Listing Users with a Specific Shell)
+As part of a security audit, you need to identify all user accounts on the system that are configured to use /bin/bash as their default login shell. You know that user shell information is stored in the /etc/passwd file.
+
+
+
+Question 8 (Secure Access to an Infinite Production Server)
+At Infinite, the lead developer, Vilas, needs to securely connect to a critical production web server located at 10.20.30.40 to deploy an urgent hotfix. Due to strict security policies, he must use his dedicated SSH private key file, test.pem, for authentication. How would Vilas establish this secure connection?
+
+
+
+
+Question 9 (Creating a Placeholder File for Infinite's Project)
+A new project at Infinite requires a blank configuration file, project_settings.conf, to be present in a specific directory, even though its content will be added later by an automated script. You need to create this empty file immediately as a placeholder.
+
+
+
+
+Question 10 (Capturing Initial System Boot Messages at Infinite)
+After a recent server restart at Infinite, the support team wants a quick snapshot of the very first few system messages logged during boot-up to check for early warnings. They only need the first 5 lines from /var/log/messages and want to append them to a temporary file named quick_messages.txt for immediate review.
+
+
+
+
+
+Question 11 (Real-time Performance Monitoring on an Infinite Server)
+An Infinite application server is experiencing slow response times. The operations team suspects high resource utilization. You need to quickly identify which processes are consuming the most CPU and memory in real-time, directly from the server's terminal.
+
+
+
+
+Question 12 (Terminating a Stuck Application Process at Infinite)
+An internal utility application at Infinite has become unresponsive and is consuming excessive resources on a development server. You've identified its process ID (PID) as 12345. To free up resources and attempt a clean restart, you need to forcefully terminate this specific process.
+
+
+
+
+
+Question 13 (Reviewing Apache Logs for an Infinite Web Service)
+An Infinite web service running on Apache is misbehaving, and standard error.log isn't showing enough detail. You need to access the comprehensive logs for the apache2 service via the systemd journal to diagnose startup issues or detailed runtime errors.
+
+
+
+
+Question 14 (Securing Infinite's Daily Backup Script Ownership)
+Infinite's new daily_backup.sh script, located in /usr/local/bin, has been created, but its ownership is incorrect. For security and proper execution, it must be owned by the root user and the root group. How would you ensure this correct ownership?
+
+
+
+
+Question 15 (Setting Execute Permissions for Infinite's Backup Script)
+The daily_backup.sh script at Infinite now has the correct ownership, but it's not executable. To allow only the owner (root) to read, write, and execute the script, you need to set its permissions appropriately.
+
+
+
+Question 16 (Renaming a Report for Infinite's Q3 Review)
+The finance department at Infinite has finalized their quarterly report, originally saved as report_draft.docx. For the official Q3 review, it needs to be renamed to infinite_q3_final_report.docx in the same directory.
+
+
+Question 17 (Archiving an Infinite Project Directory)
+Infinite's "Project Alpha" development is complete, and the entire project directory /home/devteam/project_alpha needs to be copied, including all its subdirectories and files, to the archives folder /mnt/infinite_archives/ for long-term storage and future reference.
+
+
+
+Question 18 (Deploying a New Configuration File for Infinite)
+A new configuration file, web_config_v2.conf, has been tested and is ready for deployment. You need to copy this single file from your staging directory (/tmp/staging) to its active location at /etc/infinite_webserver/config.conf.
+
+
+
+
+Question 19 (Diagnosing Issues with Infinite's Database Service)
+The database service crucial for Infinite's main application, named postgresql, seems to be experiencing intermittent connection drops. You need to review its systemd journal logs to understand recent activity, errors, or restarts related specifically to this service.
+
+
+
+Question 20 (Previewing a Large Data File for Infinite's Analytics)
+Infinite's data science team has generated a very large .csv file (sales_data_2024.csv) for analysis. Before importing it into their tools, you want to quickly view just the first few lines to understand its column headers and data format. (Assume "few lines" means default 10).
+
+
+
+Question 21 (Forcefully Deleting an Old Development Build for Infinite)
+An old, corrupted development build directory named /var/tmp/infinite_dev_build_2023 is taking up excessive space on an Infinite development server. It contains numerous subdirectories and files, some with unusual permissions. You need to remove this entire directory and all its contents immediately and forcefully.
+
+
+
+Question 22 (Removing an Empty Project Folder for Infinite)
+A temporary, empty project folder named /home/qa_team/temp_test_results was created on an Infinite QA server but is no longer needed. It contains no files or subdirectories. You want to remove this empty directory.
+
+
+
+
+Question 23 (Stopping a Hung Infinite Application)
+An internal data processing application at Infinite, running with PID 7890, has become unresponsive but is not consuming excessive resources. You want to send a signal to gracefully stop it, allowing it to clean up before exiting.
+
+
+
+Question 24 (Forcefully Terminating a Stuck Infinite Service)
+A critical backend service for Infinite's customer portal, identified with PID 1234, is completely frozen and not responding to regular stop commands. You need to forcefully terminate it to clear resources and prepare for a restart.
+
+
+
+
+Question 25 (Identifying All Running Processes on an Infinite Server)
+As part of routine maintenance at Infinite, you need to get a comprehensive list of all processes currently running on a Linux server to understand what's active, including processes owned by other users or background services.
+
+
+
+Question 26 (Locating a Specific Infinite Background Task)
+A new custom script (infinite_task.sh) was supposed to be running as a background process on a development server. You need to verify if it's currently running and see its full command line, along with its PID and parent PID.
+
+
+
+Question 27 (Downloading a Public Template for Infinite's Project)
+Infinite's marketing team has shared a publicly accessible template file, template.zip, located at http://templates.infinite.com/downloads/template.zip. You need to download this file directly to your current working directory on a Linux server.
+
+
+
+Question 28 (Retrieving an Infinite Software Update with a Custom Name)
+You need to download a new software update package from Infinite's internal repository at http://updates.infinite.local/new_app_release.tar.gz. However, due to versioning, you want to save it as app_v1.2.tar.gz on your local system.
+
+
+
+
+Question 29 (Quick Network Interface Check for Infinite's Server)
+An Infinite server is experiencing connectivity issues. You need to quickly check the IP addresses and status (up/down) of all active network interfaces on the server to see if they are configured correctly.
+
+
+
+
+Question 30 (Detailed Interface Information for Infinite's Production Network)
+The network team at Infinite needs detailed information for the eth0 interface on a production server, specifically its MAC address, assigned IP, netmask, broadcast address, and transmit/receive statistics, for troubleshooting a performance bottleneck.
+

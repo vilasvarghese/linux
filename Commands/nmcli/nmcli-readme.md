@@ -86,6 +86,7 @@ nmcli device set [device_name] up
 nmcli device set [device_name] down
 # Example:
 nmcli device set wlp2s0 down
+
 3.4. Disconnect a Device
 To disconnect a device from its active connection without bringing the device down:
 
@@ -94,19 +95,24 @@ Bash
 nmcli device disconnect [device_name]
 # Example:
 nmcli device disconnect enp0s3
+
 3.5. Rescan Wi-Fi Networks
 Force NetworkManager to rescan for available Wi-Fi networks.
 
 Bash
 
 nmcli device wifi rescan
+
+
 3.6. List Available Wi-Fi Networks
 Show detected Wi-Fi networks and their properties.
 
 Bash
 
 nmcli device wifi list
+
 4. Managing Connections (Profiles)
+
 4.1. List All Connections
 View all defined connection profiles, active or inactive.
 
@@ -120,12 +126,14 @@ Example Output:
 NAME                UUID                                  TYPE      DEVICE
 Wired connection 1  a1b2c3d4-e5f6-7890-1234-567890abcdef  ethernet  enp0s3
 Home_WiFi           fedcba98-7654-3210-fedc-ba9876543210  wifi      --
+
 4.2. Show Active Connections
 Display only the currently active connections.
 
 Bash
 
 nmcli connection show --active
+
 4.3. Show Detailed Connection Information
 Get detailed configuration for a specific connection profile.
 
@@ -136,6 +144,7 @@ nmcli connection show [connection_name_or_uuid]
 nmcli connection show "Wired connection 1"
 # Or using UUID:
 nmcli connection show a1b2c3d4-e5f6-7890-1234-567890abcdef
+
 4.4. Activate/Deactivate a Connection
 Bring a connection profile up (activate) or take it down (deactivate). This will associate/disassociate the connection with its device.
 
@@ -154,6 +163,7 @@ Bash
 nmcli connection delete [connection_name]
 # Example:
 nmcli connection delete Old_Network
+
 4.6. Reload All Connections
 Reload all connection profiles from disk. Useful if you manually edited configuration files.
 
