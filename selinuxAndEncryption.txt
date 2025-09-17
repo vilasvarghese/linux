@@ -1,0 +1,27 @@
+Encryption
+	lsblk
+	fdisk /dev/<drive>
+	cryptsetup luksFormat /dev/<drive>
+	cryptsetup luksOpen /dev/sdb1 luks_data
+	ls -l /dev/mapper/luks_data
+	mkfs.ext4 /dev/mapper/luks_data
+	mkdir /mnt/newvolume
+	mount /dev/mapper/luks_data /mnt/newvolume
+	df -h /mnt/newvolume
+selinux 
+	sestatus
+	setenforce 0 
+	ls -Z /etc/passwd
+	ps auxZ | grep httpd
+	sudo semanage port -l | grep http
+	sudo ausearch -c 'httpd' --raw | grep 'denied'
+	sudo semanage fcontext -a -t httpd_sys_content_t "/srv/mywebsite(/.*)?"
+	sudo restorecon -Rv /srv/mywebsite/
+	sudo systemctl restart httpd
+
+ss
+	refer github 
+traceroute 
+	refer github 
+dig
+	refer github 

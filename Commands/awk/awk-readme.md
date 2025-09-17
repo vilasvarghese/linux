@@ -22,6 +22,33 @@ If no action is specified, awk defaults to printing the entire line ({ print $0 
 
 awk automatically divides each input line into fields (words) and records (lines).
 
+
+Simple examples of awk 
+	ps 
+	ps | awk '{print $1}'
+	ps | awk '{print $2}'
+	ps | awk '{print $0}' #no manupulations
+	cat /etc/passwd 
+	awk -F ":" '{print $1}' /etc/passwd 
+	awk -F ":" '{print $1"\t"$6"\t"$7}' /etc/passwd 
+		print 1, 6, 7 with a tab 
+	awk  'BEGIN{FS=":"; OFS="-"} {print $1"\t"$6"\t"$7}' /etc/passwd 
+		FS - separator (: will be considered as separator)
+		OFS - output separator (in the printed output - would be the separator).
+	cat /etc/shells
+	awk -F "/" '/^\// {print $NF}' /etc/shells 
+		last word - shell only 
+	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq 
+	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq | sort 
+	df | awk '/\/dev\/loop/  {print $1"\t"$2"\t"$3}'
+	
+	
+	
+	
+	
+	
+
+
 3. Basic awk Syntax
 The general syntax for awk is:
 
