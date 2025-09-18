@@ -1,0 +1,52 @@
+1. my cat is cute
+2. hotdog is tasty
+3. hello world from regex
+4. xyzabc123 pattern test
+5. foo and bar are options
+6. regex is about vowels
+7. number 5 is valid
+8. THIS IS UPPERCASE
+9. hello2025 has digits
+10. mixedCaseWord
+11. order id: 1234
+12. not a digit here!
+13. word_char_example
+14. $$$ special chars
+15. space here
+16. no_space_here
+17. aaaa repeated letters
+18. nothing here
+19. optional a character
+20. code 456
+21. number 98765
+22. count 42 items
+23. hello at start
+24. line ends with world
+
+26. abc pattern capture
+27. foo then bar
+28. 2025-09-17 is a date
+29. test@example.com email
+30. 200ms response time
+31. https://openai.com/docs
+32. user.name@mail.co.uk
+33. +91-9876543210 is a phone
+34. background-color: #ffcc00;
+35. server IP 192.168.1.100
+36. foobar is tricky
+37. fooXnotbar
+38. ID:6789
+39. total 500 but not $500
+40. ERROR: connection failed
+41. WARN: low memory
+42. # this is a comment
+43. image.jpg
+44. user_123-name
+45. strongPass123!
+46. CPU: 87%
+47. memory = 512MB
+48. version = 1.2.3
+49. user_id=4567
+50. service_API status=200
+51. aaaaaaabbbbbcccccc
+testusername

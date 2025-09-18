@@ -21,6 +21,7 @@ Doesn’t Match: `dog`
 ### Dot `.`
 - Matches **any single character** (except newline).  
 Example: `c.t` → matches `cat`, `cut`, `c@t`
+	grep 'c.t' test.txt 
 
 ---
 
@@ -31,11 +32,15 @@ Example:
 - `[0-9]` → matches digits 0 to 9  
 - `[A-Z]` → matches uppercase letters  
 
+
 ---
 
 ### Negation `[^ ]`
 - Matches characters **not** in the brackets.  
 Example: `[^0-9]` → matches any non-digit  
+
+grep -E '[^0-9]' test.txt 
+
 
 ---
 
@@ -47,6 +52,8 @@ Example: `[^0-9]` → matches any non-digit
 - `{n}` → exactly n times  
 - `{n,}` → at least n times  
 - `{n,m}` → between n and m times  
+
+
 
  Examples:  
 - `a*` → `""`, `a`, `aa`, `aaa`  
@@ -80,10 +87,22 @@ Example: `[^0-9]` → matches any non-digit
 
 ---
 
+Perl/PCRE shorthand		POSIX equivalent				Meaning
+\d						[0-9] or [[:digit:]]			Digit 0–9
+\D						[^0-9] or [^[:digit:]]			Non-digit
+\w						[A-Za-z0-9_] or [[:alnum:]_]	Word char (letters, digits, underscore)
+\W						[^A-Za-z0-9_] or [^[:alnum:]_]	Non-word char
+\s						[[:space:]]						Whitespace (space, tab, newline, vertical tab, form feed, carriage return)
+\S						[^[:space:]]					Non-whitespace
+
 ## 6. Grouping & Alternation
 
 - `(abc)` → groups characters together  
 - `|` → OR operator  
+
+PCRE construct		POSIX Basic 		Regex (BRE)	POSIX Extended Regex (ERE, grep -E)	Notes
+(abc) – grouping	\(abc\)				(abc)	BRE requires escaping parentheses
+`					` – alternation(OR)	expr1|expr2	`expr1
 
  Examples:  
 - `(cat|dog)` → matches either `cat` or `dog`  
@@ -231,7 +250,7 @@ Example: `(123) 456-7890`
 
 ---
 
-💡 **Tip:** Don’t just copy-paste — tweak regex patterns, break them down, and test edge cases.
+ **Tip:** Don’t just copy-paste — tweak regex patterns, break them down, and test edge cases.
 Would you like me to also add a mini project-style challenge at the end (like parsing a log file or validating CSV rows with regex)? That can help connect the dots between theory and real-world use.
 
 
@@ -341,19 +360,26 @@ Extract all http:// or https:// URLs from text.
 
 Solutions
 --------------
+
+
 Part 1
-\b\w{3}\b
+\b\w{3}\b	or (^|[^[:alnum:]_])[[:alnum:]_]{3}([^[:alnum:]_]|$)
 
-\d
 
-\b[A-Z][a-zA-Z]*\b
+\d	or [0-9]   # or  [[:digit:]]
 
-\b(cat|dog)\b
+
+\b[A-Z][a-zA-Z]*\b	or [0-9]   # or  [[:digit:]]
+
+
+\b(cat|dog)\b	or (^|[^[:alnum:]])(cat|dog)([^[:alnum:]]|$)
+
 
 Part 2
-[\w\.-]+@[\w\.-]+\.\w+
+[\w\.-]+@[\w\.-]+\.\w+	or [[:alnum:]._-]+@[[:alnum:].-]+\.[[:alnum:]]+
 
-\b\d{2}[-/]\d{2}[-/]\d{4}\b
+
+\b\d{2}[-/]\d{2}[-/]\d{4}\b 	
 
 (?:\+91|0)?[0-9]{10}
 
@@ -739,7 +765,7 @@ Used in financial apps, healthcare records, APIs.
 
 
 ----------------------------------------------------------------------
-###Complex regex examples 
+Complex regex examples 
 ----------------------------------------------------------------------
 
 

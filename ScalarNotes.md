@@ -19,6 +19,74 @@
 
 ---
 
+
+##1940s–1950s: Theoretical Foundations
+
+	1943 – Warren McCulloch & Walter Pitts wrote a paper on neural activity and formal logic, which introduced the idea of describing neural networks using mathematical notation.
+
+	1951 – Stephen Kleene (mathematician, MIT) published a paper defining regular sets using operators like * (Kleene star), +, and concatenation.
+	This is the true birth of regular expressions in mathematics.
+
+##1960s: From Theory to Early Programming
+
+Ken Thompson (Bell Labs) applied regular expressions while developing text editors for early Unix systems.
+
+1968 – Thompson’s text editor QED (precursor to ed and vi) allowed searching with regex-like patterns.
+
+##1970s–1980s: Regex in Unix Tools
+
+Regex became mainstream through Unix tools:
+
+ed (line editor, early Unix)
+
+grep (1973, written by Ken Thompson; name comes from g/re/p = “global regular expression print”)
+
+sed (stream editor, 1974)
+
+awk (pattern scanning & processing language, 1977)
+
+	These made regex essential for text processing.
+
+##1980s–1990s: Extended Regex & Languages
+
+1986 – Henry Spencer wrote a widely used regex library in C, spreading regex beyond Unix.
+
+Regex began appearing in programming languages:
+
+Perl (Larry Wall, 1987) integrated regex deeply.
+
+Emacs & vi added regex search.
+
+Extended Regular Expressions (ERE) appeared in POSIX standards, adding operators like +, ?, and |.
+
+##2000s: Modern Regex Engines
+
+Regex became a standard in most programming languages:
+
+Java (1997) added java.util.regex.
+
+.NET (2000) built regex into the framework.
+
+Python, Ruby, PHP, JavaScript all adopted regex with PCRE-style (Perl Compatible Regular Expressions).
+
+PCRE (Perl Compatible Regular Expressions) became the de facto standard for “advanced” regex (lookaheads, backreferences, etc.).
+
+##2010s–Present: Regex Everywhere
+
+Regex is now built into databases (PostgreSQL, MySQL, MongoDB).
+
+Command-line tools (GNU grep, ripgrep, ag) optimize regex for speed.
+
+Regex derivatives:
+
+RE2 (Google) – safe regex library (no catastrophic backtracking).
+
+Rust regex crate – guarantees linear-time performance.
+
+
+
+
+
 ## 2. ️ Basic Building Blocks
 
 ### 2.1 Literal Characters
@@ -572,11 +640,17 @@ For batch renaming files, sed can’t rename directly, but this works:
 
 Nice — here’s a thorough, practical guide to text manipulation with sed focused on real-world DevOps use cases. It’s Markdown so you can paste it into docs or a README.
 
+
+
+
 # `sed` for DevOps — Practical Text Manipulation Guide
 
 `sed` (stream editor) is a tiny, lightning-fast tool for editing text streams and files. In DevOps it’s everywhere: patching configs, templating manifests, redacting logs, quick refactors, CI scripts, and more. This guide walks through fundamentals, useful one-liners, real-world scenarios, portability caveats, and best practices.
 
 ---
+
+
+
 
 ## Quick primer: how `sed` works
 
@@ -984,17 +1058,12 @@ pattern → What to match (regex, expression, condition).
 action → What to do with matching lines (print, compute, transform).
 
 Field References
-$0 → Entire line
-
-$1, $2, $3 → First, second, third fields (by default split on whitespace)
-
-NF → Number of fields in the line
-
-NR → Line number
-
-FS → Input field separator (default is space)
-
-OFS → Output field separator (default is space)
+	$0 → Entire line
+	$1, $2, $3 → First, second, third fields (by default split on whitespace)
+	NF → Number of fields in the line
+	NR → Line number
+	FS → Input field separator (default is space)
+	OFS → Output field separator (default is space)
 
 
 ```
@@ -1002,17 +1071,15 @@ OFS → Output field separator (default is space)
  Example 1: Summarize Nginx access logs
 Get total requests per IP:
 
+	awk '{count[$1]++} END {for (ip in count) print ip, count[ip]}' access.log | sort -k2 -nr
+	$1 → first field (client IP in access logs).
+
+	Useful for traffic analysis & blocking suspicious IPs.
 
 
-awk '{count[$1]++} END {for (ip in count) print ip, count[ip]}' access.log | sort -k2 -nr
-$1 → first field (client IP in access logs).
 
-Useful for traffic analysis & blocking suspicious IPs.
-
- Example 2: Monitor CPU usage from top
+Example 2: Monitor CPU usage from top
 Extract CPU idle percentage:
-
-
 
 top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8"% CPU used"}'
 	$8 → idle CPU percentage.
@@ -1286,6 +1353,12 @@ Identifies heavy API users.
 	Text comparison tools (diff, comm, cmp)
 	
 	---------------------------------------------------------------------------------------------
+	
+
+
+
+	
+	
 	
 	 diff Command
 	-------------
@@ -1738,131 +1811,187 @@ Compare ConfigMap manifests in Git vs cluster:
 
 kubectl get configmap app-config -o yaml > live.yaml
 cmp -
-	
+```	
 	---------------------------------------------------------------------------------------------
 	Advanced text processing techniques
 	
 	---------------------------------------------------------------------------------------------
 	
-	. Advanced Log Analysis with grep, awk, and sed
-
-In a DevOps environment, log files are a primary source of information for debugging, monitoring, and security. A single log file can contain millions of lines, making manual inspection impossible. Advanced text processing provides a way to filter, transform, and summarize this data automatically.
 
 
-The Complex Scenario: Multi-Service Log Analysis
-Imagine a production server with a log file (access.log) that contains entries from multiple microservices, with each line formatted differently. A typical entry might look like this:
+Field manipulation & calculations
 
-2025-09-17T10:30:15Z [service_A] user_id=123 status=200 response_time=25ms
-2025-09-17T10:30:16Z [service_B] user_id=456 status=500 message="Database connection failed"
-
-The task is to:
-
-Filter all lines with a status=500 error from service_A.
-Extract the user_id and the response_time from only the successful service_A requests (status=200).
-
-Calculate the average response_time for all service_A requests.
-
-The Scripted Solution:
-This is a classic use case for a command pipeline.
-
-Step 1: Filtering for service_A errors
-grep 'service_A.*status=500' access.log
-
-Explanation: The grep command searches for lines containing service_A and status=500. The .* is a regular expression that matches any character (.) any number of times (*), linking the two patterns together.
-
-Step 2: Extracting user ID and response time
-
-grep 'service_A.*status=200' access.log | awk -F '[ =]' '{print "User ID:", $7, "Response Time:", $9}'
-
-Explanation:
-
-The output of the first grep command is piped (|) to awk.
-
-awk -F '[ =]' sets the field separator (-F) to be either a space or an equals sign.
-
-'{print "User ID:", $7, "Response Time:", $9}' then prints the 7th field (user_id=123) and the 9th field (response_time=25ms) from each matching line. Because of the field separator, awk sees user_id and 123 as separate fields, allowing for precise extraction.
-
-Step 3: Calculating average response time
-
-grep 'service_A' access.log | grep -o 'response_time=[0-9]*' | awk -F '=' '{sum+=$2; count++} END {print "Average:", sum/count, "ms"}'
-
-Explanation:
-
-The first grep filters for service_A.
-
-grep -o 'response_time=[0-9]*' extracts only the matching part of the line (-o). The regular expression [0-9]* matches one or more digits.
-
-This output is piped to awk. The -F '=' sets the equals sign as the field separator.
-
-The awk script uses a stateful approach: it adds the value of the second field ($2, the number) to a running sum and increments a count for each line.
-
-The END block runs after all lines have been processed, calculating and printing the average.
+awk '{sum += $3} END {print sum}' data.txt  # Sum 3rd column
 
 
+Conditional processing
 
-2. Automating Configuration Management with sed
-DevOps teams need to manage and update configuration files across hundreds of servers. Manually editing each file is inefficient and risky. sed (stream editor) is the perfect tool for non-interactive, in-place editing of files.
-
-
-The Complex Scenario: Updating a Critical API Endpoint
-
-A company needs to update an API endpoint from a testing URL to a new production URL. This change must be applied across multiple services and configuration files (e.g., config.json, app.properties).
-
-Current State: apiUrl = "http://test-api.internal"
-
-Desired State: apiUrl = "http://prod-api.company.com/v1"
-
-A simple sed command can be used, but in a production environment, you must handle different file types, quoted strings, and other variations.
-
-The Scripted Solution:
-
-A more robust solution involves a combination of find, sed, and xargs to perform a search and replace across a directory of configuration files.
-
-find /etc/app_configs/ -type f -name "*.properties" | xargs sed -i.bak 's|apiUrl = "http://test-api.internal"|apiUrl = "http://prod-api.company.com/v1"|g'
-
-Explanation:
-
-find /etc/app_configs/ -type f -name "*.properties": This command searches the /etc/app_configs/ directory for all files (-type f) that end with .properties.
-
-| xargs: The output of find (a list of file paths) is piped to xargs. This takes the list of files and uses them as arguments for the next command, which is sed. xargs is crucial here for handling a large number of files without running into command-line argument limits.
-
-sed -i.bak: This is the core of the command.
-
--i stands for "in-place edit," meaning sed will modify the file directly.
-
-.bak is a crucial safety feature: it creates a backup of the original file (e.g., config.properties.bak) before making the changes.
-
-'s|...|...|g': This is the sed substitution command.
+awk '$3 > 100 {print $1, $3}' data.txt
 
 
+Multi-character field separators
 
-s is for substitute.
+awk -F',' '{print $1, $2}' file.csv
 
-| is used as the delimiter instead of / to avoid escaping the forward slashes in the URL, making the command much more readable.
 
-apiUrl = "http://test-api.internal" is the search pattern.
+Regular expressions in awk
 
-apiUrl = "http://prod-api.company.com/v1" is the replacement string.
+awk '$2 ~ /^error/' logfile.txt  # 2nd column starts with error
 
-g is the flag for "global," which ensures that if the pattern appears multiple times on a single line, all instances are replaced.
 
-This one-line command becomes a repeatable, reliable process that can be incorporated into a CI/CD pipeline.
+Built-in functions
 
-Here is a video that delves into the intricacies of text processing with these tools.
-<br>
-AWK, SED, GREP: Text Wrangling for Experts
-This video is a great resource that provides a detailed walkthrough of using awk, sed, and grep for complex text manipulation.
-	
-	
+toupper(), tolower(), length(), substr(), gsub() for replacements.
+
+2️⃣ Complex sed Usage
+
+Multi-line patterns
+
+sed -n '/START/,/END/p' file.txt  # Print block between markers
+
+
+Insert, append, change lines
+
+sed '/pattern/i\New line before' file.txt
+sed '/pattern/a\New line after' file.txt
+sed '/pattern/c\Replace entire line' file.txt
+
+
+Regex groups and backreferences
+
+sed -E 's/(user)([0-9]+)/\1-\2/' file.txt
+
+
+In-place editing with backup
+
+sed -i.bak 's/old/new/g' file.txt
+
+3️⃣ grep / egrep / fgrep Power
+
+Recursive search
+
+grep -R 'TODO' ./project
+
+
+Context lines
+
+grep -C3 'error' logfile.txt  # 3 lines before and after
+grep -B2 'error' logfile.txt  # Before
+grep -A2 'error' logfile.txt  # After
+
+
+Perl-compatible regex
+
+grep -P '\d{4}-\d{2}-\d{2}' file.txt
+
+
+Color highlighting & counting
+
+grep --color=auto 'pattern' file.txt
+grep -c 'pattern' file.txt  # Count matches
+
+4️⃣ cut, paste, and Column Operations
+
+Extract fields from text files:
+
+cut -d',' -f1,3 file.csv
+
+
+Merge columns from multiple files:
+
+paste file1.txt file2.txt
+
+sort, uniq, and Data Summarization
+
+Sort numerically or alphabetically
+
+sort -n numbers.txt
+sort -k2,2 file.txt  # Sort by 2nd column
+
+
+Remove duplicates
+
+sort file.txt | uniq
+sort file.txt | uniq -c  # Count occurrences
+
+tr / fold / fmt for Text Transformation
+
+Character translation
+
+tr 'a-z' 'A-Z' < file.txt
+tr -d '\r' < windowsfile.txt > unixfile.txt  # Remove CR
+
+
+Wrap lines
+
+fold -w 80 file.txt
+fmt -w 80 file.txt
+
+
+xargs / find / parallel Integration
+
+Process multiple files efficiently:
+
+find . -name '*.log' | xargs grep 'ERROR'
+find . -name '*.txt' -print0 | xargs -0 sed -i 's/foo/bar/g'
+parallel grep 'TODO' ::: *.txt
+
+perl and python for Advanced Regex / Multi-line Edits
+
+Perl inline editing
+
+perl -pe 's/\d{4}-\d{2}-\d{2}/DATE/g' file.txt
+perl -i.bak -pe 's/old/new/g' file.txt
+
+
+Python one-liners
+
+python3 -c "import re; print(re.sub(r'\d{4}-\d{2}-\d{2}','DATE', open('file.txt').read()))"
+
+
+
+
+Log Parsing & Aggregation
+
+Extract IPs
+
+awk '{print $1}' access.log | sort | uniq -c | sort -nr
+
+
+Extract URLs
+
+sed -n 's/.*"GET \([^ ]*\) .*/\1/p' access.log
+
+
+
+
+Anonymize PII
+
+sed -E 's/[0-9]{3}-[0-9]{2}-[0-9]{4}/XXX-XX-XXXX/g' file.txt
+
+
+
+
+
+Combining Tools in Pipelines
+
+Chain multiple tools for powerful workflows:
+
+cat access.log | grep 'GET' | awk '{print $7}' | sort | uniq -c | sort -nr
+
+
+Example: mask IPs and extract URLs:
+
+sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/REDACTED_IP/g' access.log \
+| sed -n 's/.*"GET \([^ ]*\) .*/\1/p'
+
+
+
+
 	---------------------------------------------------------------------------------------------
-	
-	
-	
-	
 	Shell script with grep, sed, awk and diff
-	
 	-----------------------------------------
-	
+```	
 Imagine you have:
 
 A baseline config file (baseline.conf) stored in Git (your “golden” config).
@@ -1900,6 +2029,7 @@ echo "Starting Config Drift Check..."
 # 1. Extract relevant lines (ignore comments & blank lines) using grep
 grep -Ev '^\s*#|^\s*$' "$BASELINE" > "$TMP_BASELINE.raw"
 grep -Ev '^\s*#|^\s*$' "$LIVE" > "$TMP_LIVE.raw"
+
 
 # 2. Normalize formatting (remove extra spaces around =) using sed
 sed -E 's/\s*=\s*/=/' "$TMP_BASELINE.raw" > "$TMP_BASELINE"

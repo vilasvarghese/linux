@@ -1,14 +1,31 @@
-AWK: A Powerful Text Processing Language
-awk is a versatile programming language designed for text processing and data extraction. It's particularly adept at handling structured text files, like logs, CSVs, or command outputs, by breaking them into records (lines) and fields (words). awk is available on virtually all Unix-like systems, including RHEL, Ubuntu, and macOS.
+AWK: 
+	A Powerful Text Processing Language
+
+awk 
+	versatile programming language 
+	designed for text processing and data extraction. 
+	It's particularly adept at handling structured text files, like 
+		logs, 
+		CSVs, or 
+		command outputs, 
+		by breaking them into 
+			records (lines) and 
+			fields (words). 
+	awk is available on virtually all Unix-like systems, including RHEL, Ubuntu, and macOS.
 
 Conclusion
 
 1. What is awk?
-awk is a powerful text-processing programming language that reads input line by line, processes each line based on a set of rules (patterns and actions), and then prints the result. It's a key tool in the Unix philosophy, often used in conjunction with other commands like grep, sed, sort, and cut.
+	awk is a powerful text-processing programming language that reads input line by line, processes each line based on a set of rules (patterns and actions), and then prints the result. It's a key tool in the Unix philosophy, often used in conjunction with other commands like grep, sed, sort, and cut.
 
-The name awk comes from the initials of its developers: Alfred Aho, Peter Weinberger, and Brian Kernighan. gawk (GNU awk) is the most common implementation found on Linux systems.
+	The name awk comes from the initials of its developers: 
+		Alfred Aho, 
+		Peter Weinberger, and 
+		Brian Kernighan. 
+	gawk (GNU awk) is the most common implementation found on Linux systems.
 
 2. How awk Works: The Pattern-Action Paradigm
+
 awk operates on a simple but powerful "pattern-action" model:
 
 'pattern { action }'
@@ -32,22 +49,28 @@ Simple examples of awk
 	awk -F ":" '{print $1}' /etc/passwd 
 	awk -F ":" '{print $1"\t"$6"\t"$7}' /etc/passwd 
 		print 1, 6, 7 with a tab 
-	awk  'BEGIN{FS=":"; OFS="-"} {print $1"\t"$6"\t"$7}' /etc/passwd 
+	awk  'BEGIN{FS=":"} {print $1","$6"\t"$7}' /etc/passwd 
+	echo "user:x:1000:/home/user:/bin/bash" | awk 'BEGIN {FS=":"; OFS="-"} {print $1, $3, $5}'
 		FS - separator (: will be considered as separator)
 		OFS - output separator (in the printed output - would be the separator).
 	cat /etc/shells
 	awk -F "/" '/^\// {print $NF}' /etc/shells 
-		last word - shell only 
+		1. -F "/"
+			input field separator (FS) to /.
+			So each line is split into fields by /.
+		
+		2. /^\//
+			This is a pattern: match lines that start with /.
+			In /etc/shells, valid shells always start with / (like /bin/bash, /usr/bin/zsh).
+
+		3. {print $NF}
+			$NF = last field in the line (number of fields).
+
+
 	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq 
 	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq | sort 
 	df | awk '/\/dev\/loop/  {print $1"\t"$2"\t"$3}'
 	
-	
-	
-	
-	
-	
-
 
 3. Basic awk Syntax
 The general syntax for awk is:
@@ -58,15 +81,14 @@ awk 'script' [input_file(s)]
 The script can be:
 
 A single pattern { action } pair.
-
 Multiple pattern { action } pairs separated by newlines or semicolons.
 
 Example 1: Print every line of a file
 
 Bash
 
-echo -e "Line 1\nLine 2\nLine 3" > test.txt
-awk '{ print }' test.txt
+echo -e "Line 1\nLine 2\nLine 3" | awk '{ print }' 
+
 # Output:
 # Line 1
 # Line 2
@@ -91,20 +113,19 @@ awk '/Line 1/' test.txt
 # Line 1
 If no action is specified, awk defaults to { print $0 }.
 
+
 4. Built-in Variables
 awk provides several useful built-in variables that store information about the current record and processing environment.
 
-4.1 Record and Field Variables
-$0: The entire current input record (line).
 
+4.1 Record and Field Variables
+
+$0: The entire current input record (line).
 $1, $2, $3, ...: Individual fields (columns) of the current record.
 
 NF (Number of Fields): The total number of fields in the current record.
-
 NR (Number of Records): The current record (line) number being processed.
-
 FNR: The current record number in the current file (resets for each new file).
-
 FILENAME: The name of the current input file.
 
 Example:
@@ -113,9 +134,13 @@ Assume data.txt contains:
 Alice 25 Female
 Bob 30 Male
 Charlie 22 Male
+
 Bash
 
+
+
 awk '{ print "Line:", NR, "Fields:", NF, "First Field:", $1, "Last Field:", $NF }' data.txt
+awk '{ print "Line:", NR, "Fields:", NF, "First Field:", $1, "Last Field:", $NF }' /etc/passwd
 # Output:
 # Line: 1 Fields: 3 First Field: Alice Last Field: Female
 # Line: 2 Fields: 3 First Field: Bob Last Field: Male

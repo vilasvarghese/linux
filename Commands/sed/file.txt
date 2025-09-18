@@ -1,0 +1,59 @@
+# Sample configuration file
+# Environment: dev
+port=8080
+version: 1.0.0
+API_KEY=12345-ABCDE
+DB_PASSWORD=supersecret
+path=/old/path/service
+
+# Comments and placeholders
+# TODO: replace image and tag
+__IMAGE__: myapp:__TAG__
+AMI_ID_PLACEHOLDER
+
+# Application logs
+2025-09-15 10:23:45 error error Failed to connect to DB
+2025-09-15 10:23:46 DEBUG Retrying connection
+2025-09-15 10:23:47 INFO Connection established
+2025-09-15 10:23:48 WARNING Low memory
+2025-09-15 10:23:49 error Disk full
+
+# Web server logs with IPs and URLs
+192.168.1.10 - - [2025-09-15] "GET /api/v1/users HTTP/1.1" 200
+10.0.0.5 - - [2025-09-15] "GET /healthz HTTP/1.1" 200
+172.16.0.2 - - [2025-09-15] "POST /login HTTP/1.1" 403
+user1,192.168.0.2
+user2,10.0.0.3
+
+# Kubernetes manifest
+namespace: dev
+replicaCount: 2
+image: myrepo/app:v1.0.0
+
+# Dockerfile snippet
+RUN chmod 777 /app/start.sh
+
+# Systemd service file
+[Service]
+ExecStart=/usr/bin/myapp
+
+# Script snippet
+#!/bin/bash
+echo -e "Line with\tTabs"
+
+# Section to replace
+# START-SECTION
+old line 1
+old line 2
+# END-SECTION
+
+# Emails
+admin@example.com
+user.test@domain.org
+
+# CRLF line (Windows format)
+ 
+# Blank lines below
+
+
+# End of file

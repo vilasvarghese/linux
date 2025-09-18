@@ -1,0 +1,6 @@
+apple
+banana
+coconut
+date
+fig
+grapefruit
