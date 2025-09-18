@@ -1,0 +1,6 @@
+john:1001:developers:/home/john:/bin/bash
+mary:1002:designers:/home/mary:/bin/zsh
+peter:1003:developers:/home/peter:/bin/bash
+alice:1004:testers:/home/alice:/bin/sh
+guest:1005:guests:/home/guest:/sbin/nologin
+

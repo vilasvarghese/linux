@@ -1819,35 +1819,43 @@ cmp -
 	
 
 
-Field manipulation & calculations
+Field manipulation & calculations (excute these in awk folder )
 
-awk '{sum += $3} END {print sum}' data.txt  # Sum 3rd column
+	awk '{sum += $2} END {print sum}' data.txt  # Sum 3rd column
 
 
 Conditional processing
 
-awk '$3 > 100 {print $1, $3}' data.txt
+in awk folder 
+
+	awk '$2 > 24 {print $1, $3}' data.txt
+
 
 
 Multi-character field separators
 
-awk -F',' '{print $1, $2}' file.csv
+	awk -F',' '{print $1, $2}' file.csv
+
 
 
 Regular expressions in awk
 
-awk '$2 ~ /^error/' logfile.txt  # 2nd column starts with error
-
+	awk '$2 ~ /^error/' logfile.txt  # 2nd column starts with error
+	awk '$2 ~ /^2/' data.txt 
 
 Built-in functions
 
-toupper(), tolower(), length(), substr(), gsub() for replacements.
+	toupper(), tolower(), length(), substr(), gsub() for replacements.
 
-2️⃣ Complex sed Usage
+
+
+Complex sed Usage
 
 Multi-line patterns
 
-sed -n '/START/,/END/p' file.txt  # Print block between markers
+
+
+2. sed -n '/START/,/END/p' file.txt  # Print block between markers
 
 
 Insert, append, change lines
@@ -1866,7 +1874,10 @@ In-place editing with backup
 
 sed -i.bak 's/old/new/g' file.txt
 
-3️⃣ grep / egrep / fgrep Power
+
+
+
+3️. grep / egrep / fgrep Power
 
 Recursive search
 

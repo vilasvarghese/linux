@@ -73,46 +73,24 @@ Simple examples of awk
 	
 
 3. Basic awk Syntax
-The general syntax for awk is:
-
-Bash
-
-awk 'script' [input_file(s)]
-The script can be:
-
-A single pattern { action } pair.
-Multiple pattern { action } pairs separated by newlines or semicolons.
-
-Example 1: Print every line of a file
-
-Bash
 
 echo -e "Line 1\nLine 2\nLine 3" | awk '{ print }' 
 
-# Output:
-# Line 1
-# Line 2
-# Line 3
-Here, no pattern is specified, so the action { print } (which defaults to print $0) is performed for every line.
+	# Output:
+	# Line 1
+	# Line 2
+	# Line 3
+	Here, no pattern is specified, 
+		so the action { print } (which defaults to print $0) is performed for every line.
 
-Example 2: Print lines containing "Line 2"
+echo -e "Line 1\nLine 2\nLine 3" | awk '/Line 2/ { print }' 
 
-Bash
 
-awk '/Line 2/ { print }' test.txt
-# Output:
-# Line 2
-Here, /Line 2/ is a regular expression pattern. If a line matches, print is executed.
+	# Output:
+	# Line 2
+	Here, /Line 2/ is a regular expression pattern. If a line matches, print is executed.
 
-Example 3: Print only the pattern (no action specified)
-
-Bash
-
-awk '/Line 1/' test.txt
-# Output:
-# Line 1
-If no action is specified, awk defaults to { print $0 }.
-
+	Example 3: Print only the pattern (no action specified)
 
 4. Built-in Variables
 awk provides several useful built-in variables that store information about the current record and processing environment.
@@ -120,27 +98,28 @@ awk provides several useful built-in variables that store information about the 
 
 4.1 Record and Field Variables
 
-$0: The entire current input record (line).
-$1, $2, $3, ...: Individual fields (columns) of the current record.
+	$0: The entire current input record (line).
+	$1, $2, $3, ...: Individual fields (columns) of the current record.
 
-NF (Number of Fields): The total number of fields in the current record.
-NR (Number of Records): The current record (line) number being processed.
-FNR: The current record number in the current file (resets for each new file).
-FILENAME: The name of the current input file.
+	NF (Number of Fields): The total number of fields in the current record.
+	NR (Number of Records): The current record (line) number being processed.
+	FNR: The current record number in the current file (resets for each new file).
+	FILENAME: The name of the current input file.
 
-Example:
-Assume data.txt contains:
+	Example:
+	Assume data.txt contains:
 
-Alice 25 Female
-Bob 30 Male
-Charlie 22 Male
+	Alice 25 Female
+	Bob 30 Male
+	Charlie 22 Male
 
-Bash
+	Bash
 
 
 
-awk '{ print "Line:", NR, "Fields:", NF, "First Field:", $1, "Last Field:", $NF }' data.txt
-awk '{ print "Line:", NR, "Fields:", NF, "First Field:", $1, "Last Field:", $NF }' /etc/passwd
+	awk '{ print "Line:", NR, "Fields:", NF, "First Field:", $1, "Last Field:", $NF }' data.txt
+
+	awk '{ print "Line:", NR, "Fields:", NF, "First Field:", $1, "Last Field:", $NF }' /etc/passwd
 # Output:
 # Line: 1 Fields: 3 First Field: Alice Last Field: Female
 # Line: 2 Fields: 3 First Field: Bob Last Field: Male
@@ -172,17 +151,17 @@ awk 'BEGIN { OFS="---" } { print $1, $2, $3 }' data.txt
 5. Operators
 awk supports various types of operators:
 
-Arithmetic: +, -, *, /, % (modulo), ^ (exponentiation)
+	Arithmetic: +, -, *, /, % (modulo), ^ (exponentiation)
 
-Relational: == (equal to), != (not equal to), > (greater than), < (less than), >= (greater than or equal to), <= (less than or equal to)
+	Relational: == (equal to), != (not equal to), > (greater than), < (less than), >= (greater than or equal to), <= (less than or equal to)
 
-Logical: && (AND), || (OR), ! (NOT)
+	Logical: && (AND), || (OR), ! (NOT)
 
-Assignment: =, +=, -=, *=, /=, %=, ^=
+	Assignment: =, +=, -=, *=, /=, %=, ^=
 
-Concatenation: Just placing two strings next to each other (e.g., print $1 $2 will concatenate $1 and $2).
+	Concatenation: Just placing two strings next to each other (e.g., print $1 $2 will concatenate $1 and $2).
 
-Regular Expression Matching: ~ (matches), !~ (does not match)
+	Regular Expression Matching: ~ (matches), !~ (does not match)
 
 Example:
 
@@ -389,6 +368,7 @@ END { print "--- End of Report. Total lines:", NR, "---" }' test.txt
 # 2 Line 2
 # 3 Line 3
 # --- End of Report. Total lines: 3 ---
+
 12. Executing awk Scripts from a File (-f)
 For more complex awk programs, it's better to store the script in a separate file and pass it to awk using the -f option.
 
