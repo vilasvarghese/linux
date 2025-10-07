@@ -90,19 +90,19 @@ In YAML files, be cautious about syntax, and use tools like kubectl instead:
 kubectl set image deployment/myapp myapp=myrepo:tag
 
 To anonymize IPs in logs:
-	sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/REDACTED_IP/g' access.log
+	sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/REDACTED_IP/g' file.txt
 		-E - extended regular expression 
 
 
 To extract data, this gets URLs:
-	sed -n 's/.*"GET \([^ ]*\) .*/\1/p' access.log
+	sed -n 's/.*"GET \([^ ]*\) .*/\1/p' file.txt
 		-n: don't print unless mentioned 
 		
 		.*"GET \([^ ]*\) .*
 		.* → match everything up to "GET .
 		"GET → literally match the string GET (with a space).
 		\([^ ]*\) →
-		\( … \) → capture group in basic regex (in ERE you’d use (...)).
+		\( … \) → capture group in basic regex.
 		[^ ]* → match zero or more characters that are NOT a space → so this grabs the requested path/URL.
 		.* → match the rest of the line after the path.
 
@@ -192,7 +192,7 @@ sed -E 's/(v)([0-9]+\.[0-9]+\.[0-9]+)/\1\2-rev/' file
 
 Suppress default output and print only matches:
 
-sed -n 's/.*GET \([^ ]*\) .*/\1/p' access.log   # extract requested URLs
+sed -n 's/.*GET \([^ ]*\) .*/\1/p' file.txt   # extract requested URLs
 
 
 Edit multiple files with find safely:
@@ -237,7 +237,7 @@ rm /etc/myapp/config.ini.bak
 ```
 Anonymize IPv4 addresses:
 
-sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/REDACTED_IP/g' access.log > access.redacted.log
+sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/REDACTED_IP/g' file.txt > access.redacted.log
 
 
 Use Case: Shipping logs to third-party analytics while hiding IPs.
@@ -246,7 +246,7 @@ Use Case: Shipping logs to third-party analytics while hiding IPs.
 ```
 Get request path from Apache-like logs:
 
-sed -n 's/.*"GET \([^ ]*\) .*/\1/p' access.log
+sed -n 's/.*"GET \([^ ]*\) .*/\1/p' file.txt
 
 
 Pipe to sort | uniq -c to produce hit counts.
@@ -407,7 +407,7 @@ Handy examples summary
 sed -E "s|__IMAGE__|${IMAGE}|g" deployment.tpl.yaml > deployment.yaml
 
 # 2. Anonymize IPs before shipping logs
-sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/REDACTED_IP/g' access.log > anon.log
+sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/REDACTED_IP/g' file.txt > anon.log
 
 # 3. Insert a line before pattern (macOS-safe)
 sed -i '' '/^server_name/i\

@@ -1891,6 +1891,8 @@ grep -B2 'error' logfile.txt  # Before
 grep -A2 'error' logfile.txt  # After
 
 
+
+
 Perl-compatible regex
 
 grep -P '\d{4}-\d{2}-\d{2}' file.txt
@@ -1901,7 +1903,10 @@ Color highlighting & counting
 grep --color=auto 'pattern' file.txt
 grep -c 'pattern' file.txt  # Count matches
 
-4️⃣ cut, paste, and Column Operations
+
+
+
+4️. cut, paste, and Column Operations
 
 Extract fields from text files:
 

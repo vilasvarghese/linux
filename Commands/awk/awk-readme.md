@@ -2,18 +2,17 @@ AWK:
 	A Powerful Text Processing Language
 
 awk 
-	versatile programming language 
-	designed for text processing and data extraction. 
-	It's particularly adept at handling structured text files, like 
-		logs, 
-		CSVs, or 
-		command outputs, 
-		by breaking them into 
-			records (lines) and 
-			fields (words). 
-	awk is available on virtually all Unix-like systems, including RHEL, Ubuntu, and macOS.
-
-Conclusion
+	versatile programming language <br>
+	designed for text processing and data extraction. <br>
+	It's particularly adept at handling structured text files, like <br>
+		logs, <br>
+		CSVs, or <br>
+		command outputs, <br>
+		by breaking them into <br>
+			records (lines) and <br>
+			fields (words). <br>
+	awk is available on virtually all Unix-like systems, including RHEL, Ubuntu, and macOS.<br>
+<br>
 
 1. What is awk?
 	awk is a powerful text-processing programming language that reads input line by line, processes each line based on a set of rules (patterns and actions), and then prints the result. It's a key tool in the Unix philosophy, often used in conjunction with other commands like grep, sed, sort, and cut.
@@ -23,10 +22,11 @@ Conclusion
 		Peter Weinberger, and 
 		Brian Kernighan. 
 	gawk (GNU awk) is the most common implementation found on Linux systems.
-
+<br>
 2. How awk Works: The Pattern-Action Paradigm
 
 awk operates on a simple but powerful "pattern-action" model:
+
 
 'pattern { action }'
 For each line of input:
@@ -41,40 +41,40 @@ awk automatically divides each input line into fields (words) and records (lines
 
 
 Simple examples of awk 
-	ps 
-	ps | awk '{print $1}'
-	ps | awk '{print $2}'
-	ps | awk '{print $0}' #no manupulations
-	cat /etc/passwd 
-	awk -F ":" '{print $1}' /etc/passwd 
-	awk -F ":" '{print $1"\t"$6"\t"$7}' /etc/passwd 
-		print 1, 6, 7 with a tab 
-	awk  'BEGIN{FS=":"} {print $1","$6"\t"$7}' /etc/passwd 
-	echo "user:x:1000:/home/user:/bin/bash" | awk 'BEGIN {FS=":"; OFS="-"} {print $1, $3, $5}'
-		FS - separator (: will be considered as separator)
-		OFS - output separator (in the printed output - would be the separator).
-	cat /etc/shells
-	awk -F "/" '/^\// {print $NF}' /etc/shells 
-		1. -F "/"
-			input field separator (FS) to /.
-			So each line is split into fields by /.
+	ps <br>
+	ps | awk '{print $1}' <br>
+	ps | awk '{print $2}' <br>
+	ps | awk '{print $0}' #no manupulations <br>
+	cat /etc/passwd  <br>
+	awk -F ":" '{print $1}' /etc/passwd <br>
+	awk -F ":" '{print $1"\t"$6"\t"$7}' /etc/passwd <br>
+		print 1, 6, 7 with a tab <br>
+	awk  'BEGIN{FS=":"} {print $1","$6"\t"$7}' /etc/passwd <br>
+	echo "user:x:1000:/home/user:/bin/bash" | awk 'BEGIN {FS=":"; OFS="-"} {print $1, $3, $5}' <br>
+		FS - separator (: will be considered as separator) <br>
+		OFS - output separator (in the printed output - would be the separator). <br>
+	cat /etc/shells <br>
+	awk -F "/" '/^\// {print $NF}' /etc/shells <br>
+		1. -F "/" <br>
+			input field separator (FS) to /. <br>
+			So each line is split into fields by /. <br>
 		
-		2. /^\//
-			This is a pattern: match lines that start with /.
-			In /etc/shells, valid shells always start with / (like /bin/bash, /usr/bin/zsh).
+		2. /^\// <br>
+			This is a pattern: match lines that start with /. <br>
+			In /etc/shells, valid shells always start with / (like /bin/bash, /usr/bin/zsh). <br>
 
-		3. {print $NF}
+		3. {print $NF} <br>
 			$NF = last field in the line (number of fields).
 
 
-	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq 
-	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq | sort 
-	df | awk '/\/dev\/loop/  {print $1"\t"$2"\t"$3}'
+	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq <br>
+	awk -F "/" '/^\// {print $NF}' /etc/shells | uniq | sort <br>
+	df | awk '/\/dev\/loop/  {print $1"\t"$2"\t"$3}' <br>
 	
 
 3. Basic awk Syntax
 
-echo -e "Line 1\nLine 2\nLine 3" | awk '{ print }' 
+echo -e "Line 1\nLine 2\nLine 3" | awk '{ print }' <br>
 
 	# Output:
 	# Line 1
@@ -92,11 +92,11 @@ echo -e "Line 1\nLine 2\nLine 3" | awk '/Line 2/ { print }'
 
 	Example 3: Print only the pattern (no action specified)
 
-4. Built-in Variables
+4. Built-in Variables <br>
 awk provides several useful built-in variables that store information about the current record and processing environment.
 
 
-4.1 Record and Field Variables
+4.1 Record and Field Variables <br>
 
 	$0: The entire current input record (line).
 	$1, $2, $3, ...: Individual fields (columns) of the current record.
@@ -127,7 +127,7 @@ awk provides several useful built-in variables that store information about the 
 
 
 
-4.2 Separator Variables
+4.2 Separator Variables <br>
 FS (Field Separator): The input field separator. Defaults to any whitespace (spaces, tabs, newlines). Can be changed using -F option or in BEGIN block.
 
 OFS (Output Field Separator): The output field separator when print is used with commas between fields. Defaults to a single space.
@@ -138,7 +138,7 @@ ORS (Output Record Separator): The output record separator. Defaults to newline 
 
 Example: Changing OFS
 
-Bash
+Bash<br>
 
 awk 'BEGIN { OFS="---" } { print $1, $2, $3 }' data.txt
 # Output:
@@ -148,7 +148,7 @@ awk 'BEGIN { OFS="---" } { print $1, $2, $3 }' data.txt
 
 
 
-5. Operators
+5. Operators <br>
 awk supports various types of operators:
 
 	Arithmetic: +, -, *, /, % (modulo), ^ (exponentiation)
@@ -165,7 +165,7 @@ awk supports various types of operators:
 
 Example:
 
-Bash
+Bash<br>
 
 echo "apple 10" > fruits.txt
 echo "banana 25" >> fruits.txt
@@ -177,9 +177,9 @@ awk '$2 > 15 { print $1, "is expensive!" }' fruits.txt
 
 
 
-6. Conditional Statements (if/else)
+6. Conditional Statements (if/else)<br>
 awk supports if and if-else statements within action blocks for conditional execution.
-
+<br>
 Awk
 
 if (condition) {
@@ -192,7 +192,7 @@ if (condition) {
 Example:
 
 Bash
-
+<br>
 awk '{
     if ($2 > 25) {
         print $1, "is old."
@@ -209,11 +209,11 @@ awk '{
 
 
 
-7. Loops (for, while)
+7. Loops (for, while)<br>
 awk includes for and while loops for iterating.
 
 for loop (C-style):
-
+<br>
 Awk
 
 for (i = 1; i <= NF; i++) {
@@ -238,6 +238,7 @@ while (i <= NF) {
 Example (iterating through fields):
 
 Bash
+<br>
 
 echo "one two three four" | awk '{
     for (i = 1; i <= NF; i++) {
@@ -254,7 +255,7 @@ echo "one two three four" | awk '{
 
 
 
-8. String Functions
+8. String Functions<br>
 awk provides a rich set of string manipulation functions.
 
 length(string): Returns the length of string. If string is omitted, returns length of $0.
@@ -276,7 +277,7 @@ toupper(string): Converts string to uppercase.
 Example:
 
 Bash
-
+<br>
 echo "Hello World" | awk '{
     print "Length:", length($0)
     print "Substring:", substr($0, 7, 5) # "World"
@@ -307,7 +308,7 @@ srand([x]): Seeds the random number generator. If x is omitted, uses the time of
 Example:
 
 Bash
-
+<br>
 awk 'BEGIN {
     print "Random number:", rand()
     srand() # Seed with current time
@@ -332,6 +333,7 @@ array[index] = value
 Example: Counting word frequencies
 
 Bash
+<br>
 
 echo "apple banana apple orange banana apple" | awk '{
     for (i = 1; i <= NF; i++) {
@@ -358,6 +360,7 @@ END { action }: The code inside the END block is executed once after awk has fin
 Example:
 
 Bash
+<br>
 
 awk 'BEGIN { print "--- Start of Report ---" }
 { print NR, $0 }
@@ -375,7 +378,7 @@ For more complex awk programs, it's better to store the script in a separate fil
 Create a script file (e.g., myscript.awk):
 
 Awk
-
+<br>
 # myscript.awk
 BEGIN {
     FS=":" # Example: Process /etc/passwd
@@ -392,8 +395,9 @@ END {
 Execute the script:
 
 Bash
-
+<br>
 awk -f myscript.awk /etc/passwd
+<br>
 13. Examples
 Let's use a sample file users.txt:
 
@@ -406,7 +410,7 @@ guest:1005:guests:/home/guest:/sbin/nologin
 Print username and home directory (assuming colon as separator).
 
 Bash
-
+<br>
 awk -F':' '{ print "Username:", $1, "Home Dir:", $4 }' users.txt
 # Output:
 # Username: john Home Dir: /home/john
@@ -425,9 +429,9 @@ awk '/\/bin\/bash/' users.txt
 # peter:1003:developers:/home/peter:/bin/bash
 13.3 Filtering by Column Value
 Print users whose UID is greater than 1002.
-
+<br>
 Bash
-
+<br>
 awk -F':' '$2 > 1002 { print $1, $2 }' users.txt
 # Output:
 # peter 1003
@@ -442,21 +446,25 @@ awk 'END { print "Total users:", NR }' users.txt
 # Output:
 # Total users: 5
 13.5 Calculating Sums and Averages
+<br>
 Calculate the sum of UIDs (not very meaningful, but demonstrates sum).
 
 Bash
 
+<br>
 awk -F':' '{ sum_uids += $2 } END { print "Sum of UIDs:", sum_uids }' users.txt
 # Output:
 # Sum of UIDs: 5015
 13.6 Changing Field Separator (e.g., CSV)
 Assume grades.csv: Name,Math,Science,English
 
+<br>
 Alice,85,90,78
 Bob,70,65,80
 Charlie,95,92,88
 Print average score for each student.
 
+<br>
 Bash
 
 awk -F',' 'NR==1 { next } {
@@ -468,9 +476,13 @@ awk -F',' 'NR==1 { next } {
 # Alice Average: 84.3333
 # Bob Average: 71.6667
 # Charlie Average: 91.6667
+
+<br>
 13.7 Conditional Formatting
 Highlight users in the 'developers' group.
 
+
+<br>
 Bash
 
 awk -F':' '{
@@ -486,6 +498,10 @@ awk -F':' '{
 # peter (DEVELOPER)
 # alice
 # guest
+
+
+
+
 13.8 Using BEGIN and END for Headers/Footers
 Bash
 
@@ -500,6 +516,9 @@ END { print "--- End of Report. Total users: " NR " ---" }' users.txt
 # alice    /home/alice
 # guest    /home/guest
 # --- End of Report. Total users: 5 ---
+
+
+
 13.9 Using Arrays for Unique Counts or Aggregation
 Count users per group.
 
@@ -518,6 +537,9 @@ END {
 # 	designers: 1
 # 	testers: 1
 # 	guests: 1
+
+
+
 13.10 Regex Matching with ~ and !~
 Find users whose names start with 'p' or 'P'.
 
@@ -535,6 +557,13 @@ awk -F':' '$NF !~ /\/bin\/bash/ { print $1, $NF }' users.txt
 # mary /bin/zsh
 # alice /bin/sh
 # guest /sbin/nologin
+
+
+
+
+
+
+
 13.11 Using next to Skip Records
 Skip the 'guest' user record.
 
@@ -551,6 +580,9 @@ awk -F':' '{
 # mary /home/mary
 # peter /home/peter
 # alice /home/alice
+
+
+
 14. Conclusion
 awk is an incredibly powerful and versatile tool for text manipulation. Its pattern-action model, combined with built-in variables, functions, and control structures, makes it ideal for extracting, filtering, reformatting, and summarizing data from structured text files. While it has a learning curve, the investment pays off significantly for anyone working extensively with text-based data on Linux systems.
 

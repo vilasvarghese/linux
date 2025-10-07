@@ -23,6 +23,7 @@
 	
 	[] - matches any character in the set 
 6. `[aeiou]` → matches any vowel in "regex".
+	grep '[aeiou]' file.txt 
 7. `[0-9]` → matches any digit (same as `\d`).
 8. `[A-Z]` → matches capital letters only.
 9. `[^0-9]` → matches any character that is not a digit.
