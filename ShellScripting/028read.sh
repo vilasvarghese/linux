@@ -2,13 +2,13 @@
 ## Questions
 
 echo "Hi"
-read $REPLY
-echo $REPLY
+read GREET
+echo $GREET
 
 echo "How are you?"
-read $REPLY
-echo $REPLY
+read FEELING
+echo $FEELING
 
 echo "Whats your Name?"
-read $REPLY
-echo $REPLY
+read NAME
+echo $NAME
