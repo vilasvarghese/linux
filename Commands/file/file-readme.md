@@ -48,7 +48,7 @@ Bash
 # Create some dummy files
 echo "Hello, this is plain text." > plaintext.txt
 echo "#!/bin/bash" > myscript.sh
-echo "echo 'This is a shell script.'" >> myscript.sh
+echo "echo 'This is a shell script.'" >> myscript1.sh
 dd if=/dev/urandom of=binaryfile bs=1M count=1 2>/dev/null
 touch emptyfile
 mkdir mydir
@@ -59,6 +59,7 @@ Bash
 
 file plaintext.txt
 file myscript.sh
+file myscript1.sh
 file binaryfile
 file emptyfile
 file mydir
@@ -69,6 +70,8 @@ myscript.sh:    Bourne-Again shell script, ASCII text executable
 binaryfile:     data
 emptyfile:      empty
 mydir:          directory
+
+
 2. Identifying Symbolic Links (-h vs. -L)
 By default, file often follows symlinks. Use -h to explicitly report the link itself.
 
@@ -81,6 +84,8 @@ Example Output:
 
 symlink_to_text.txt: ASCII text             # Default / -L output
 symlink_to_text.txt: symbolic link to plaintext.txt # -h output
+
+
 3. Getting MIME Type (-i)
 This is very useful for web servers or applications that need to determine the content type for HTTP headers.
 
@@ -96,6 +101,8 @@ plaintext.txt:  text/plain; charset=us-ascii
 myscript.sh:    text/x-shellscript; charset=us-ascii
 binaryfile:     application/octet-stream
 /usr/bin/firefox: application/x-executable; charset=binary
+
+
 4. Looking Inside Compressed Files (-z)
 Bash
 
@@ -105,6 +112,8 @@ Example Output:
 
 plaintext.txt.gz: gzip compressed data, was "plaintext.txt", last modified: Fri Jul 26 10:00:00 2025, from Unix, original size 28
 plaintext.txt.gz: ASCII text # Output with -z (it decompressed to check content)
+
+
 5. Brief Output for Scripting (-b)
 This removes the filename from the output, making it cleaner for parsing in scripts.
 
@@ -116,6 +125,8 @@ Example Output:
 
 ASCII text
 text/x-shellscript; charset=us-ascii
+
+
 6. Combining Options
 You can combine multiple options for more specific results.
 
@@ -123,6 +134,8 @@ Bash
 
 file -zib myscript.sh.gz # If you had a compressed script
 file -iL symlink_to_text.txt
+
+
 7. Identifying Device Files (-s)
 If you want to determine the type of block or character devices.
 
@@ -134,6 +147,8 @@ Example Output:
 
 /dev/sda:   block special (0/0) # Or "partition" / "disk image" depending on system setup
 /dev/urandom: character special (1/9)
+
+
 8. Testing Specific Paths
 Bash
 

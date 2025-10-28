@@ -387,3 +387,4 @@ Ask them to troubleshoot.
 17. Bring it back on 8080 
 Block access to it using firewall 
 Ask them to troubleshoot
+comm

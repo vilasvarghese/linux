@@ -1,6 +1,6 @@
 #!/bin/bash
 
-print{
+print(){
 	mymessage=$1
 	echo $mymessage 
 }

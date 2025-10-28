@@ -47,25 +47,25 @@ You'll often see various TCP states in ss output:
 
 LISTEN: The socket is listening for incoming connections.
 
-ESTAB: The socket has an established connection.
+	ESTAB: The socket has an established connection.
 
-SYN-SENT: A connection request has been sent.
+	SYN-SENT: A connection request has been sent.
 
-SYN-RECV: A connection request has been received.
+	SYN-RECV: A connection request has been received.
 
-FIN-WAIT1: The socket is closed, and the connection is half-closed.
+	FIN-WAIT1: The socket is closed, and the connection is half-closed.
 
-FIN-WAIT2: The connection is closed, and the socket is waiting for the remote end to terminate the connection.
+	FIN-WAIT2: The connection is closed, and the socket is waiting for the remote end to terminate the connection.
 
-TIME-WAIT: The socket is waiting for enough time to pass to ensure that the remote host received the acknowledgment of its connection termination request.
+	TIME-WAIT: The socket is waiting for enough time to pass to ensure that the remote host received the acknowledgment of its connection termination request.
 
-CLOSE: The socket is not being used.
+	CLOSE: The socket is not being used.
 
-CLOSE-WAIT: The remote end has shut down, waiting for the socket to close.
+	CLOSE-WAIT: The remote end has shut down, waiting for the socket to close.
 
-LAST-ACK: The remote end has shut down, and the socket is closed, waiting for an acknowledgment.
+	LAST-ACK: The remote end has shut down, and the socket is closed, waiting for an acknowledgment.
 
-UNCONN: Unconnected (for UDP).
+	UNCONN: Unconnected (for UDP).
 
 Examples and Use Cases
 1. Display All TCP Sockets (Listening and Established)

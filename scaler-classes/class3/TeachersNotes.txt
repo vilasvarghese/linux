@@ -1,0 +1,735 @@
+Class 3: Process Management and System Monitoring
+Opening Hook & Problem Statement
+
+The Production Crisis Scenario
+------------------------------
+"It's 3 AM. You're the on-call DevOps engineer for a major e-commerce platform. Your phone explodes with alerts: 'CRITICAL: Server CPU at 100%', 'Website response time > 30 seconds', 'Customer complaints flooding in'. You SSH into the server, and your screen fills with processes you don't recognize.
+Questions racing through your mind:
+	•	Which process is eating all the CPU?
+	•	Is it legitimate traffic or a runaway process?
+	•	How do I kill it without crashing the entire system?
+	•	What if I accidentally kill the database process?
+	•	How do I prevent this from happening again?
+But here's the terrifying part: You have 5 minutes before your CEO calls asking why the company is losing $10,000 per minute in sales."
+
+
+Question to Students: "How many of you would know exactly what commands to run to diagnose and fix this in under 5 minutes?"
+Why This Lecture Changes Everything
+"The skills you're about to learn are the difference between a developer and a DevOps engineer. These aren't just Linux commands - they're the foundation of:
+	•	Container Orchestration: 
+		Every Docker container is just processes. Kubernetes manages millions of them using these exact concepts
+	•	Cloud Infrastructure: AWS EC2, Google Compute, Azure VMs - all running Linux processes that you'll need to monitor and manage
+	•	Monitoring Systems: Datadog, New Relic, Prometheus - they're all built on top of the process monitoring concepts we'll cover today
+	•	Incident Response: When production fails, these commands are your first line of defense. Companies lose millions when engineers can't quickly identify and fix process issues
+	•	CI/CD Pipelines: Jenkins, GitLab CI, GitHub Actions - all manage build processes using these fundamentals
+	•	Database Administration: Understanding why your database is slow often comes down to process and resource management
+Without mastering process management, you're flying blind in production. With it, you become the engineer everyone calls when things go wrong."
+The Reality Check
+
+
+
+
+Agenda
+------
+"By the end of today's class, you'll be able to:
+	1.	Identify any problematic process in seconds
+	2.	Understand exactly what's happening on any Linux system
+	3.	Control processes like a conductor controls an orchestra
+	4.	Handle production emergencies with confidence
+	5.	Prevent zombie apocalypses (yes, that's a real thing in Linux!)"
+Part 1: Understanding Processes - The Foundation
+What is a Process? The Living Programs
+The Restaurant Kitchen Analogy
+"Imagine a busy restaurant kitchen. The recipes are like your programs (code on disk). But a recipe sitting in a cookbook doesn't feed anyone. When a chef starts cooking from that recipe, it becomes an active dish being prepared - that's a process!
+	•	Program (Recipe): Static instructions stored on disk
+	•	Process (Cooking): Active execution of those instructions
+	•	Multiple Processes: Multiple chefs can cook the same recipe simultaneously (multiple instances of Chrome)
+	•	Resources: Each chef needs space, ingredients, tools (CPU, memory, file handles)"
+Process vs Program: The Critical Distinction
+bash
+# Let's see this in action
+ls -la /usr/bin/python3  # This is a program (file on disk)
+python3 &                 # Now it's a process (running in memory)
+python3 &                 # Another process from the same program!
+ps aux | grep python      # See both processes with different PIDs
+Mind-Blowing Fact: "When you open 10 Chrome tabs, you're not running 10 different programs - you're running 10+ processes from ONE program!"
+The Process Lifecycle: Birth to Death
+The Human Life Cycle Analogy
+"A process lifecycle is remarkably similar to human life:
+	•	Birth (Creation): Parent process creates a child
+	•	Youth (Running): Actively doing work
+	•	Sleep: Waiting for something (like waiting for user input)
+	•	Death: Process completes or is terminated
+	•	Zombie: Dead but not buried (parent hasn't acknowledged death)
+	•	Orphan: Parent died, adopted by init process (PID 1)"
+
+
+
+
+Process States: The Complete Picture
+     NEW ──────► READY ◄────────┐
+      │           │              │
+      │           ▼              │
+      │        RUNNING ──────────┤
+      │           │              │
+      │           ▼              │
+      └───► TERMINATED      WAITING
+                 │              │
+                 ▼              │
+              ZOMBIE ◄──────────┘
+State 1: Running (R) - The Active Worker
+"Process is actively using CPU right now. Like a cashier actively scanning items."
+bash
+# Create a running process
+python3 -c "while True: pass" &
+ps aux | grep python  # See the 'R' state
+State 2: Sleeping (S) - The Patient Waiter
+"Process is waiting for something - user input, network response, disk I/O. Like a waiter waiting for the kitchen to prepare food."
+Two Types of Sleep:
+	•	Interruptible Sleep (S): Can be woken by signals
+	•	Uninterruptible Sleep (D): Cannot be interrupted (usually waiting for I/O)
+bash
+# Interruptible sleep example
+sleep 100 &
+ps aux | grep sleep  # See the 'S' state
+
+
+# Uninterruptible sleep (happens during heavy I/O)
+dd if=/dev/zero of=/tmp/bigfile bs=1M count=1000 &
+ps aux | grep dd  # Might catch 'D' state
+State 3: Stopped (T) - The Paused Worker
+"Process is paused, frozen in time. Like pressing pause on a video."
+bash
+
+# Start a process and stop it
+ping google.com &
+
+# Press Ctrl+Z to stop it
+ps aux | grep ping  # See the 'T' state
+State 4: Zombie (Z) - The Walking Dead
+The Zombie Apocalypse Explained
+"A zombie process is dead but still listed in the process table. It's like a student who finished an exam but the teacher hasn't collected the paper yet."
+bash
+
+# Create a zombie (demonstration)
+python3 -c "
+import os
+import time
+pid = os.fork()
+if pid > 0:
+    # Parent sleeps, doesn't collect child
+    time.sleep(60)
+else:
+    # Child exits immediately
+    exit()
+" &
+
+ps aux | grep defunct  # See the zombie!
+Why Zombies Exist:
+	•	Child process dies
+	•	Parent hasn't called wait() to collect exit status
+	•	Process table entry remains (taking up PID)
+	•	Can't be killed (already dead!)
+The Zombie Problem:
+bash
+# Check for zombies on your system
+ps aux | awk '$8 ~ /^Z/ { print }'
+
+# Count zombies
+ps aux | awk '$8 ~ /^Z/ { print }' | wc -l
+State 5: Orphan - The Adopted Process
+"When a parent process dies before its children, those children become orphans. Linux automatically adopts them to init (PID 1) - the grandmother of all processes!"
+bash
+
+
+# Create an orphan
+python3 -c "
+import os
+import time
+pid = os.fork()
+if pid > 0:
+    # Parent dies immediately
+    exit()
+else:
+    # Child continues running
+    time.sleep(30)
+    print('I am an orphan!')
+" &
+
+# Watch the orphan get adopted
+ps -ef | grep python  # Notice PPID becomes 1
+Part 2: Process Monitoring Tools - Your X-Ray Vision
+The ps Command: Process Snapshot
+The Photography Analogy "ps is like taking a photograph of all processes at this exact moment. It's a snapshot, not a video."
+Basic ps Usage
+bash
+# Simple process list
+ps
+
+# All processes with full details
+ps aux
+
+# Process tree view
+ps auxf
+
+# Custom columns
+ps -eo pid,ppid,user,cmd,%cpu,%mem --sort=-%cpu | head -10
+Understanding ps aux Output
+bash
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.4 225584  9432 ?        Ss   08:30   0:01 /sbin/init
+Column Breakdown:
+	•	USER: Process owner
+	•	PID: Process ID (unique identifier)
+	•	%CPU: CPU usage percentage
+	•	%MEM: Memory usage percentage
+	•	VSZ: Virtual memory size
+	•	RSS: Resident Set Size (actual RAM usage)
+	•	TTY: Terminal associated with process
+	•	STAT: Process state (R/S/D/T/Z)
+	•	START: When process started
+	•	TIME: Total CPU time consumed
+	•	COMMAND: The actual command
+
+
+Advanced ps Tricks
+bash
+# Find memory hogs
+ps aux --sort=-%mem | head -5
+
+# Find CPU hogs
+ps aux --sort=-%cpu | head -5
+
+# Processes of specific user
+ps -u username
+
+# Process with specific PID
+ps -p 1234
+
+# All Python processes
+ps aux | grep python
+
+# Process tree for specific process
+ps -auxf | grep -A5 -B5 process_name
+The top Command: Real-Time Monitoring
+The Security Camera Analogy "If ps is a photograph, top is a live security camera feed. You see everything happening in real-time."
+Starting top and Understanding the Display
+bash
+top
+Header Information Explained:
+top - 10:23:45 up 5 days, 3:15, 2 users, load average: 1.52, 1.38, 1.25
+Tasks: 287 total, 2 running, 285 sleeping, 0 stopped, 0 zombie
+%Cpu(s): 15.3 us, 5.2 sy, 0.0 ni, 78.5 id, 0.8 wa, 0.0 hi, 0.2 si
+MiB Mem: 16384.0 total, 1234.5 free, 8765.4 used, 6384.1 buff/cache
+MiB Swap: 8192.0 total, 8192.0 free, 0.0 used. 7234.5 avail Mem
+Line by Line Breakdown:
+	1.	Uptime Line: Current time, system uptime, users logged in, load average (1, 5, 15 min)
+	2.	Tasks: Total processes and their states
+	3.	CPU: us(user), sy(system), ni(nice), id(idle), wa(wait), hi(hardware interrupts), si(software interrupts)
+	4.	Memory: Total, free, used, buffers/cache
+	5.	Swap: Virtual memory statistics
+top Interactive Commands - The Power User's Toolkit
+bash
+
+
+# While top is running:
+h       # Help
+k       # Kill a process (enter PID)
+r       # Renice (change priority)
+u       # Filter by user
+M       # Sort by memory usage
+P       # Sort by CPU usage (default)
+c       # Show full command path
+1       # Show individual CPU cores
+f       # Select fields to display
+q       # Quit
+Real-World top Usage Scenarios
+bash
+# Monitor specific user's processes
+top -u username
+
+# Batch mode for scripts
+top -b -n 1 > system_snapshot.txt
+
+# Monitor specific PIDs
+top -p 1234,5678
+
+# Update every 5 seconds
+top -d 5
+htop: top on Steroids
+"htop is like top after going to the gym - stronger, prettier, and more user-friendly!"
+bash
+# Install if not available
+sudo apt install htop  # Debian/Ubuntu
+sudo yum install htop  # RedHat/CentOS
+
+htop
+htop Advantages:
+	•	Color-coded output
+	•	Mouse support
+	•	Easier process killing (F9)
+	•	Better visualization of CPU/Memory
+	•	Tree view (F5)
+	•	Search functionality (F3)
+	•	Filter processes (F4)
+Process Finding and Filtering Tools
+pgrep: Find Process IDs
+bash
+# Find all Python process IDs
+pgrep python
+
+# Find with full command matching
+pgrep -f "python script.py"
+
+# Find processes by user
+pgrep -u username
+
+# Count matching processes
+pgrep -c nginx
+Real-World Process Hunt Scenarios
+bash
+# Is MySQL running?
+pgrep -x mysqld && echo "MySQL is running" || echo "MySQL is down"
+
+# Find all processes consuming port 8080
+lsof -i :8080
+
+# Find process using most memory
+ps aux | awk '{print $6, $11}' | sort -rn | head -1
+
+# Find all Java processes with their memory usage
+ps aux | grep java | awk '{sum+=$6} END {print "Total RSS:", sum/1024 "MB"}'
+Part 3: Process Control - Conducting the Orchestra
+Job Control: Background and Foreground
+The Theater Stage Analogy "Think of your terminal as a theater stage. Foreground processes are actors currently performing (blocking the stage). Background processes are backstage crew working behind the scenes."
+Foreground vs Background Execution
+bash
+# Foreground - blocks terminal
+sleep 100
+# Can't type anything until it completes
+
+# Background - runs without blocking
+sleep 100 &
+# Terminal is free for other commands
+
+# Check background jobs
+jobs
+
+# Job notation
+# [1]+ Running     sleep 100 &
+# [2]- Running     python script.py &
+Moving Between Foreground and Background
+bash
+# Start in foreground
+ping google.com
+# Press Ctrl+Z to suspend
+
+# Check suspended job
+jobs
+# [1]+ Stopped     ping google.com
+
+# Resume in background
+bg %1
+# Or just: bg
+
+# Bring to foreground
+fg %1
+# Or just: fg
+
+# Multiple jobs management
+sleep 100 &   # Job 1
+sleep 200 &   # Job 2
+sleep 300 &   # Job 3
+jobs          # List all
+fg %2         # Bring job 2 to foreground
+nohup: Surviving Logout
+The Babysitter Analogy "nohup is like hiring a babysitter for your process. Even when you (the parent) leave (logout), the babysitter ensures your process keeps running."
+bash
+# Regular command dies when you logout
+python long_running_script.py &
+# Logout... process dies
+
+# With nohup - survives logout
+nohup python long_running_script.py &
+# Logout... process continues!
+
+# Output goes to nohup.out
+tail -f nohup.out
+
+# Redirect output
+nohup python script.py > output.log 2>&1 &
+
+# Disown running process
+python script.py &
+disown %1
+# Now it survives logout
+screen: Virtual Terminals
+The Multiple Desktop Analogy "screen is like having multiple computer desktops in one terminal. You can switch between them, leave them running, and come back later."
+Basic screen Usage
+bash
+# Start new screen session
+screen
+
+# Start with a name
+screen -S mysession
+
+# Detach from screen
+# Press: Ctrl+A, then D
+
+# List screen sessions
+screen -ls
+
+# Reattach to session
+screen -r mysession
+
+# Kill a session
+screen -X -S mysession quit
+Advanced screen Workflows
+bash
+# Create multiple windows in screen
+screen
+# Ctrl+A, C    # Create new window
+# Ctrl+A, N    # Next window
+# Ctrl+A, P    # Previous window
+# Ctrl+A, "    # List windows
+# Ctrl+A, K    # Kill current window
+
+# Split screen
+# Ctrl+A, S    # Horizontal split
+# Ctrl+A, |    # Vertical split
+# Ctrl+A, Tab  # Switch region
+# Ctrl+A, X    # Close region
+tmux: screen's Modern Cousin
+"tmux is like screen's younger, cooler sibling - more features, better looks, easier to use."
+bash
+# Start tmux
+tmux
+
+# New session with name
+tmux new -s devsession
+
+# Detach
+# Ctrl+B, D
+
+# List sessions
+tmux ls
+
+# Attach to session
+tmux attach -t devsession
+
+# Kill session
+tmux kill-session -t devsession
+tmux Power Features
+bash
+# Split panes
+# Ctrl+B, %    # Vertical split
+# Ctrl+B, "    # Horizontal split
+# Ctrl+B, Arrow # Navigate panes
+
+# Windows
+# Ctrl+B, C    # New window
+# Ctrl+B, N    # Next window
+# Ctrl+B, P    # Previous window
+# Ctrl+B, 0-9  # Switch to window number
+
+# Scrolling
+# Ctrl+B, [    # Enter scroll mode
+# Use arrow keys or Page Up/Down
+# Q to exit scroll mode
+Part 4: Signal Handling and Process Termination
+Understanding Signals: Process Communication
+The Doorbell Analogy "Signals are like different types of doorbells for processes:
+•	Gentle knock (SIGTERM): 'Please finish what you're doing and exit'
+•	Loud banging (SIGKILL): 'Get out NOW!' (can't be ignored)
+•	Doorbell (SIGINT): 'Someone pressed Ctrl+C'
+•	Phone call (SIGHUP): 'Your terminal disconnected'"
+Common Signals Every DevOps Engineer Must Know
+bash
+# List all signals
+kill -l
+
+# The Essential Signals:
+	# 1  SIGHUP   - Hangup (terminal disconnected)
+	# 2  SIGINT   - Interrupt (Ctrl+C)
+	# 3  SIGQUIT  - Quit (Ctrl+\\)
+	# 9  SIGKILL  - Kill (cannot be caught or ignored)
+	# 15 SIGTERM  - Terminate (polite request to exit)
+	# 18 SIGCONT  - Continue (resume after stop)
+	# 19 SIGSTOP  - Stop (cannot be caught or ignored)
+	# 20 SIGTSTP  - Terminal stop (Ctrl+Z)
+Sending Signals: The kill Command
+bash
+# Default signal (SIGTERM - 15)
+kill 1234
+
+# Specific signal by number
+kill -9 1234  # SIGKILL
+
+# Specific signal by name
+kill -TERM 1234
+kill -KILL 1234
+kill -HUP 1234
+
+# Kill multiple processes
+kill 1234 5678 9012
+
+# Kill all processes of a program
+killall python
+killall -9 nginx
+
+# Kill by pattern
+pkill -f "python script.py"
+
+# Interactive kill
+pkill -i python  # Asks for confirmation
+Signal Handling in Practice
+bash
+# Graceful shutdown (SIGTERM)
+kill -15 $(pgrep nginx)
+# Nginx finishes current requests, then exits
+
+# Force kill (SIGKILL)
+kill -9 $(pgrep nginx)
+# Nginx dies immediately, may corrupt data
+
+# Reload configuration (SIGHUP)
+kill -HUP $(pgrep nginx)
+# Nginx reloads config without dropping connections
+The Right Way to Kill Processes
+The Escalation Protocol
+bash
+# Step 1: Polite request (SIGTERM)
+kill PID
+sleep 5
+
+# Step 2: Check if still running
+ps -p PID > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "Process still running, escalating..."
+    
+    # Step 3: Force kill (SIGKILL)
+    kill -9 PID
+fi
+Handling Zombie Processes
+bash
+# Find zombie processes
+ps aux | awk '$8 ~ /^Z/ { print $2, $11 }'
+
+# Find parent of zombie
+ps -o ppid= -p ZOMBIE_PID
+
+# Kill parent to clean zombies
+kill -TERM PARENT_PID
+
+# If parent won't die, force it
+kill -9 PARENT_PID
+Part 5: Parent-Child Process Relationships
+The Process Family Tree
+The Royal Family Analogy "In Linux, processes form a royal family tree:
+	•	init (PID 1): The Queen - mother of all processes
+	•	System services: The nobles - critical system processes
+	•	User processes: The citizens - your applications
+	•	Child processes: The offspring - created by fork()"
+
+Understanding Process Hierarchy
+bash
+# View process tree
+pstree
+
+# Detailed tree with PIDs
+pstree -p
+
+# Tree for specific process
+pstree -p 1234
+
+# Show command line arguments
+pstree -a
+
+# Highlight specific process
+pstree -h PID
+Process Creation: fork() and exec()
+bash
+# See parent-child relationship
+ps -ef | head -20
+# Notice PPID column (Parent PID)
+
+# Create parent-child demonstration
+python3 -c "
+import os
+import time
+
+print(f'Parent PID: {os.getpid()}')
+pid = os.fork()
+
+if pid == 0:
+    # Child process
+    print(f'Child PID: {os.getpid()}, Parent: {os.getppid()}')
+    time.sleep(30)
+else:
+    # Parent process
+    print(f'Created child with PID: {pid}')
+    time.sleep(30)
+" &
+
+# Watch the relationship
+ps -ef | grep python
+Process Groups and Sessions
+bash
+# See process groups
+ps -eo pid,ppid,pgid,sid,cmd
+
+# All processes in a group
+ps -g GROUP_ID
+
+# Kill entire process group
+kill -TERM -GROUP_ID  # Note the minus sign
+
+# Create new session
+setsid command
+Part 6: Real-World DevOps Scenarios
+Scenario 1: The CPU Hog Hunt
+"Production server at 100% CPU. Find and fix in 60 seconds!"
+bash
+# Step 1: Identify the culprit
+top -b -n 1 | head -20
+# or
+ps aux --sort=-%cpu | head -5
+
+# Step 2: Investigate the process
+lsof -p PID  # What files is it using?
+strace -p PID -c  # What system calls?
+
+# Step 3: Take action
+renice +10 PID  # Lower priority
+# or
+kill -STOP PID  # Pause it
+# or
+kill -TERM PID  # Terminate gracefully
+Scenario 2: The Memory Leak Detective
+bash
+# Find memory hogs
+ps aux --sort=-%mem | head -10
+
+# Monitor specific process memory growth
+watch -n 1 'ps -o pid,vsz,rss,comm -p PID'
+
+# Check for memory leaks
+while true; do
+    ps -o vsz= -p PID
+    sleep 5
+done | awk '{print NR, $1}' > memory_trend.txt
+
+# Graph it (if gnuplot available)
+gnuplot -e "plot 'memory_trend.txt' with lines; pause -1"
+Scenario 3: The Zombie Apocalypse
+bash
+# Count zombies
+ps aux | awk '$8 ~ /Z/ { count++ } END { print "Zombies:", count }'
+
+# Find zombie details
+ps aux | awk '$8 ~ /Z/ { print $2, $11 }' | while read zpid cmd; do
+    echo "Zombie PID: $zpid, Command: $cmd"
+    ppid=$(ps -o ppid= -p $zpid)
+    echo "  Parent PID: $ppid"
+    ps -p $ppid -o comm=
+done
+
+# Clean up zombies
+for ppid in $(ps aux | awk '$8 ~ /Z/ { print }' | awk '{print $3}' | sort -u); do
+    echo "Killing parent $ppid to clean zombies"
+    kill -TERM $ppid
+done
+Scenario 4: The Runaway Process Farm
+"A buggy script spawned 1000 processes!"
+bash
+# Quick fix - kill all Python processes (example)
+pkill -9 python
+
+# Safer approach - kill specific script
+pkill -f "script_name.py"
+
+# Even safer - confirm before killing
+pgrep -f "script_name.py" | while read pid; do
+    ps -p $pid -o pid,cmd
+    read -p "Kill this process? (y/n): " answer
+    [ "$answer" = "y" ] && kill $pid
+done
+Scenario 5: Long-Running Job Management
+bash
+# Start a long job that survives logout
+nohup python data_processing.py > processing.log 2>&1 &
+echo $! > processing.pid  # Save PID
+
+# Check on it later
+tail -f processing.log
+
+# Monitor resource usage
+pid=$(cat processing.pid)
+while ps -p $pid > /dev/null; do
+    ps -o %cpu,%mem,etime -p $pid
+    sleep 10
+done
+
+# Set up email notification when done
+pid=$(cat processing.pid)
+while ps -p $pid > /dev/null; do sleep 60; done
+echo "Processing complete" | mail -s "Job Done" your@email.com
+Part 7: Performance Monitoring Best Practices
+Building Your Monitoring Toolkit
+bash
+
+
+#!/bin/bash
+# Ultimate system health check script
+
+echo "=== System Health Report ==="
+echo "Date: $(date)"
+echo
+
+echo "=== CPU Top 5 ==="
+ps aux --sort=-%cpu | head -6
+
+echo -e "\\n=== Memory Top 5 ==="
+ps aux --sort=-%mem | head -6
+
+echo -e "\\n=== Process Count by State ==="
+ps aux | awk 'NR>1 {state[$8]++} END {for(s in state) print s": "state[s]}'
+
+echo -e "\\n=== Zombie Processes ==="
+ps aux | awk '$8 ~ /Z/ { print $2, $11 }'
+
+echo -e "\\n=== Load Average ==="
+uptime
+
+echo -e "\\n=== Memory Status ==="
+free -h
+
+echo -e "\\n=== Disk Usage ==="
+df -h | grep -vE '^tmpfs|^udev'
+Creating Process Monitoring Alerts
+bash
+#!/bin/bash
+# Process monitor with alerts
+
+MAX_CPU=80
+MAX_MEM=80
+
+# Check for high CPU usage
+ps aux | awk -v max=$MAX_CPU '$3 > max {print "HIGH CPU:", $3"%", $11}' | while read alert; do
+    echo "[ALERT] $alert"
+    # Send to monitoring system
+    # curl -X POST monitoring.api/alert -d "$alert"
+done
+
+# Check for high memory usage
+ps aux | awk -v max=$MAX_MEM '$4 > max {print "HIGH MEM:", $4"%", $11}' | while read alert; do
+    echo "[ALERT] $alert"
+done
+
+# Check for zombies
+zombie_count=$(ps aux | awk '$8 ~ /Z/ { count++ } END { print count+0 }')
+if [ $zombie_count -gt 10 ]; then
+    echo "[ALERT] High zombie count: $zombie_count"
+fi
+
+

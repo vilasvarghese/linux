@@ -12,3 +12,13 @@ ls [OPTION] [FILE]
 		ls lh
 	6. Recursively list files in current directory and sub directories
 		ls -lR
+		
+		
+		
+ls -l	Long format	Look at detailed labels
+ls -a	Show hidden files	Use a flashlight to see hidden drawers
+ls -lh	Human-readable	Read labels in plain English
+ls -lt	Sort by time	Show most recently touched items first
+ls -lS	Sort by size	Show biggest boxes first
+ls /path/to/dir	List another directory	Peek into another room
+		

@@ -1,0 +1,1477 @@
+1. Understand the students
+	Name: 
+	IT Experience: 
+	Role:
+	Expertise in Linux, Docker and Kubernetes (on a scale of 10 with 10 being best)
+	Expertise in English, Hindi (on a scale of 10 with 10 being best)
+	Exposure to production infra
+	Highest education: 
+	Hobies:
+		
+	
+	Breaks?
+	
+2. Introducing me 
+	Vilas Varghese
+	Experience
+	Academy 
+	Pattent
+	Teacher: 
+	
+	Challenges in online class.
+	
+Rules 
+	1. Participation 
+	2. Punctuality 
+	3. Questions in question tab 
+	4. Assignments 
+
+
+Class 1: Linux Fundamentals and System Architecture
+
+The DevOps Engineer's Dilemma
+	See a dream 
+	joining Netflix's DevOps engineer. 
+	first day 
+		goodies 
+		
+		9 PM on a Friday
+		huge load. 
+	You 
+		phone alerts
+		manager is calling
+	social media 
+		exploding with complaints. 
+	You 
+		seconds to decide  
+	Impat 
+		millions 
+			of users 
+			in revenue.
+
+
+You need to:
+	Identify 
+		problem (server)
+		what processes are consuming resources
+		locate logs
+		fix issue 
+	
+	black terminal 
+		No GUI, 
+		no drag-and-drop. 
+		
+		
+	Question to Students: 
+		Love black terminals?
+			Yes/No
+	
+	
+	
+Module Introduction: Why This Matters
+	The DevOps Intro.
+
+
+
+What You'll Become
+	By the end of this module, you'll be able to:
+		From 
+			good engineers 
+		to 
+			exceptional ones
+		
+		1. Diagnose system issues faster 
+		2. Automate repetitive tasks 
+		3. production system 
+			Internals
+			how 
+				OS manages memory and processes, 
+				networks route packets across continents, 
+				databases handle concurrent transactions
+		4. Advanced system concepts 
+			kernel internals, 
+			network protocols, 
+			HA design 
+				database replication, and 
+			performance optimization that 
+			
+			
+			
+			
+		Module Structure Overview
+			Roadmap of our (14)24-class journey. 
+			
+
+Our Learning Path:
+	1. Linux commands and Shell Scripting, 
+		Operating Systems and System Administration (Classes 1-8)
+	
+		Master 
+			command line 
+			how o/s work
+			sysadmin tasks 
+				keep production systems running
+			automate scripts 
+				save hours 
+				consistency
+				reproducability
+	
+	2. Computer Networks and Troubleshooting (Classes 9-14)
+		Understand 
+			how data travels in n/w
+			network debugging tools and techniques
+			fix connectivity issues
+
+------------- Ignore for now ----------------------	
+	
+	3. HA, Databases, DB Scaling and Troubleshooting (Classes 15-18)
+		Deep dive into 
+			database internals and 
+			performance optimization
+		Understand 
+			scaling,  
+			high availability
+			performance
+		Master database 
+			troubleshooting and 
+			monitoring
+
+	4. Python Scripting for Systems (Classes 19-22)
+		Build powerful automation scripts for DevOps tasks
+		Create monitoring and alerting systems
+		Develop tools for log analysis and system management
+	
+	5. Advanced Troubleshooting Case Studies (Classes 23-24)
+		Apply everything you've learned to complex real-world scenarios
+		Practice incident response and root cause analysis
+		Prepare for production environment challenges
+
+
+c1
+
+
+How Computer Systems Really Work
+	The Foundation: 
+	Machine 
+		Hardware 
+		Software Dance
+	
+	
+	double-clicking the Google Chrome icon. 
+
+	The Two-Layer Reality
+	Hardware Layer: The Physical World
+		CPU (Central processing unit): 
+			brain 
+			executes instructions 
+				(billions per second)
+		RAM (Randomn access memory): 
+			Fast 
+			Ephemeral
+			data for active programs and 
+				
+		Storage: 
+			Permanent data storage 
+				SSDs, 
+				HDDs
+		Network Interface: 
+			Communication gateway to other computers
+		Peripherals: 
+			Input/output devices 
+				keyboard, 
+				screen, etc.
+	Software Layer: 
+		Applications: 
+			Your Python code, 
+			web browsers, 
+			databases
+		System Software: 
+			Programs 
+				manage other programs
+		Firmware: 
+			Low-level code 
+			embedded in hardware
+		The Problem: 
+			Hardware 
+				understands 
+					electrical signals and 
+					binary. 
+				code is text. 
+				How do they communicate?"
+		Enter the Operating System: 
+			The Universal Translator
+		OS as the Middleman Analogy
+	Think of the OS 
+		hotel concierge. 
+		Guests 
+			(applications) 
+				have needs: 
+					'need a room' 
+						(memory), 
+					'make a call' 
+						(network), 
+					'store my luggage' 
+						(file storage). 
+			The concierge (OS) 
+				manages 
+					hotel resources and 
+					fulfills requests 
+						guests needn't know"
+
+What the OS Actually Does
+--------------------------
+For Applications:
+	"I need memory" → 
+		OS allocates RAM and tracks usage
+	"I want to save a file" → 
+		OS manages disk storage and file organization
+	"I need to communicate over network" → 
+		OS handles network protocols
+	"I want to start another program" → 
+		OS creates and manages processes
+For Hardware:
+	Control and manages 
+		CPU time 
+			between competing applications
+		memory allocation and 
+			prevents conflicts
+		hardware interrupts and 
+			device drivers
+		system security and stability
+
+Real-World Example: 
+	"double-click Chrome, here's what really happens:
+	
+	1. mouse click (hardware) 
+		an interrupt signal
+	2. OS detects 
+		a. want to run Chrome
+			properties in chrome icon 
+		b. locates Chrome exe file 
+			on your disk
+		c. loads Chrome 
+			from storage 
+				into RAM (memory allocation)
+		d. creates a new process 
+			unique Process ID for Chrome
+		e. allocates CPU time for Chrome to initialize
+	Chrome 
+		requests network access to 
+			load your homepage
+	OS 
+		manages display 
+			show Chrome's window
+	Chrome 
+		continues making requests 
+			(more 
+				memory, 
+				network calls, 
+				file access)
+	OS coordinates 
+		everything while protecting system security"
+
+C2
+
+
+Evolution
+---------
+Unix 
+Linux 
+Windows 
+
+
+Why Linux? The Restaurant Chain Analysis
+----------------------------------------
+Windows Restaurant:
+	Costly
+		Expensive franchise fees (licensing costs)
+	Receipe unknown
+		can't customize 
+	Corporate decides everything
+	Great for family dining (desktop users)
+	Good 
+		Beutiful and humble service 
+macOS Restaurant:
+	More costly
+	Premium experience, 
+	beautiful ambiance
+	
+	In limited locations, 
+	expensive
+	Very controlled environment
+	Perfect for upscale customers
+Linux Restaurant:
+	Free to open anywhere (open source)
+	recipe available (configure everything)
+		Completely customizable
+	Chain of independent restaurants sharing recipes (community)
+	Preferred by professional chefs (developers/DevOps)
+
+
+
+The Numbers That Matter
+Student Activity: 
+-----------------
+	"Quick survey - 
+		how many applications do you think are running on your phone right now?"
+
+
+The Reality:
+	Your smartphone: 50-200+ processes
+		can see from developer settings 
+	A typical web server: 
+		500-2000+ processes
+	Netflix's infrastructure: 
+		Millions of processes across thousands of servers
+	Why This Matters: 
+		Every 
+			Netflix stream, 
+			Google search, 
+			WhatsApp message 
+				travels through Linux systems. 
+		Understanding Linux 
+			90% of production runs on linux 
+	Linux OS Deep Dive: 
+		Kernel, 
+		User Space and 
+		System Calls
+	
+	
+	The Kernel: The Core Manager
+	----------------------------
+	The Linux kernel 
+		engine of a car. 
+		You interact with 
+			steering wheel and 
+			pedals (applications), 
+		but engine (kernel) 
+			does all the actual work."
+	Kernel Responsibilities:
+		Process Management: 
+			Create, 
+			schedule, and 
+			terminate
+				programs
+		Memory Management: 
+			Allocating RAM, 
+			handle virtual memory, 
+			managing swap
+		File System Management: 
+			Organize 
+				data storage, 
+				handling permissions
+		Device Management: 
+			Communicate with 
+				hardware through drivers
+		Network Management: 
+			Handling 
+				network protocols and 
+				connections
+		Security Management: 
+			Enforce permissions and 
+			access controls
+
+	Why Kernel is Special:
+		Runs in privileged mode 
+			(can access hardware directly)
+		Always in memory 
+			(never gets swapped out)
+		complete control 
+			over system resources
+		Secured - 
+			Applications cannot 
+			directly access kernel functions
+
+	User Space vs Kernel Space: 
+	----------------------------
+		The Security Boundary
+		User Space (Applications):
+			Python programs, 
+			web browsers, 
+			text editors
+		Restricted access - 
+			cannot directly control hardware
+		If they crash, 
+			don't crash the whole system
+		Must ask kernel 
+			for everything through system calls
+	Kernel Space (OS Core):
+		Device drivers, 
+		memory manager, 
+		process scheduler
+		Full hardware access and control
+		If 
+			kernel crashes, 
+				entire system crashes
+		Directly manipulates 
+			CPU, 
+			memory, and 
+			devices
+		System Calls: 
+			The Application-Kernel Interface
+
+	The API Between Worlds
+	----------------------
+	System calls 
+		ordering food at a restaurant. 
+	You (application) 
+		tell the waiter 
+				(system call) 
+			what you want. 
+	The waiter 
+		goes to the kitchen 	
+			(kernel), 
+		gets your food 
+			(performs the operation), 
+			and brings it back to you."
+	Common System Calls Every DevOps Engineer Should Know:
+	-----------------------------------------------------
+	File Operations:
+		open(): 
+			"Give me access to this file"
+		read(): 
+			"Bring me data from this file"
+		write(): 
+			"Save this data to the file"
+		close(): 
+			"I'm done with this file"
+	Process Operations:
+		fork(): 
+			"Create an identical copy of my process"
+		exec(): 
+			"Replace my process with a different program"
+		wait(): 
+			"Wait for my child process to complete"
+		exit(): 
+			"I'm done, clean up my resources"
+		Memory Operations:
+			malloc(): 	
+				"Give me some memory"
+			mmap(): 
+				"Map a file into memory"
+			brk(): 
+				"Expand my memory space"
+	Live Demonstration: 
+		Seeing System Calls in Action
+
+
+
+# Let's see what system calls happen for a simple command
+
+yum install strace in aws 
+strace echo "Hello DevOps" 2>&1 | head -20
+strace echo "Hello DevOps" 2>&1 | wc -l
+
+	Mind-Blowing Moment: 
+		"Look! 
+			Even printing 'Hello DevOps' 
+			required 20+ system calls - 
+				open libraries, 
+				allocating memory, 
+				writing to terminal, 
+				clean up resources!"
+
+	Why This Matters for DevOps
+	---------------------------
+	Performance Debugging:
+		Understanding system calls 
+			helps identify bottlenecks
+		Too many 
+			file operations? 
+			Memory leaks? 
+			Network issues?
+	Security Understanding:
+		System calls 
+			attack vectors - 
+				understanding them improves security
+		File permissions, 
+		process isolation, 
+		network access controls
+	Application Troubleshooting:
+		When applications fail, 
+			system call traces 
+				show exactly what went wrong
+		"Permission denied" 
+		vs 
+		"File not found" 
+		vs 
+		"Out of memory"
+
+	Example: 
+		Real DevOps Scenario 
+			"Web application 
+				becomes slow. 
+			Use strace, 
+				thousands of unnecessary 
+					file system calls. 
+			Root cause: 
+				inefficient 
+					database connection handling. 
+			Fix: 
+				implement connection pooling. 
+				Result: 
+					10x performance improvement."
+
+
+
+
+Shell Environments: Your Command Center
+---------------------------------------
+The Command Line vs GUI: 
+	Why Professionals Choose Text
+The Great Interface Debate
+	you're managing 
+		100 servers simultaneously. 
+	With a GUI, 
+		you'd need to 
+			remote desktop 
+				into each server, 
+			click through menus, 
+			manually perform tasks. 
+		
+		could take 
+			hours or 
+			days. 
+			probably never find it as issue may get resolved 
+			
+		With a shell, 
+			execute commands 
+				across all 100 servers in seconds. 
+			That's the power of the command line."
+
+GUI vs Shell: The Real Comparison
+---------------------------------
+	Graphical User Interface (GUI) Strengths:
+		Visual and intuitive - 
+			Easy to learn
+		Discovery-friendly - 
+			Can explore 
+				by clicking around
+		Good for one-off tasks - 
+			Opening a file, 
+			viewing an image
+		Multitasking visual cues - 
+			Windows, 
+			icons, 
+			visual feedback
+ 
+
+Examples from a typical DevOps Engineer's Day:
+---------------------------------------------
+Deploy application 
+	to 50 servers → 
+		Shell: 30 seconds, 
+		GUI: 2 hours
+Find all log files containing errors → 
+	Shell: 5 seconds, 
+	GUI: manually impossible
+Monitor system resources across cluster → 
+	Shell: real-time dashboard, 
+	GUI: not scalable
+Backup databases with compression → 
+	Shell: one command, 
+	GUI: multiple steps per database
+	
+	
+	
+
+	
+How the Shell Actually Works: Under the Hood
+--------------------------------------------
+The Shell's Role in the System
+
+
+The shell sits 
+	between 
+		you and 
+		kernel, 
+	like a translator 
+	
+	
+	
+				┌─────────────────────────────────────────┐
+				│           Your Commands                 │
+				│        "ls -la /home"                   │
+				└─────────────────┬───────────────────────┘
+								  │
+				┌─────────────────▼───────────────────────┐
+				│              SHELL                      │
+				│   • Parses your command                 │
+				│   • Finds the program (ls)              │
+				│   • Sets up environment                 │
+				│   • Handles input/output                │
+				└─────────────────┬───────────────────────┘
+								  │
+				┌─────────────────▼───────────────────────┐
+				│           KERNEL                        │
+				│   • Executes the program                │
+				│   • Manages system resources            │
+				│   • Returns results                     │
+				└─────────────────┬───────────────────────┘
+								  │
+				┌─────────────────▼───────────────────────┐
+				│           OUTPUT                        │
+				│    File listings displayed              │
+				└─────────────────────────────────────────┘
+				
+Shell Processing: 
+	Step by Step 
+		(We will learn each of below in detailed depth in upcoming classes)
+
+
+When you type: 
+	ls -la /home | grep user | wc -l
+
+
+Step 1: Command Parsing
+	Shell 
+		breaks down the command into tokens: 
+			ls, 
+			-la, 
+			/home, 
+			|, 
+				grep, 
+				user, 
+				|, 
+					wc, 
+					-l
+	Identifies 
+		three separate commands 
+		connected by pipes
+	Recognizes flags 
+		(-la, -l) and 
+		arguments (/home, user)
+		
+Step 2: Program Location
+	Shell 
+		searches $PATH directories 
+			to find executables
+			/bin/ls, 
+			/bin/grep, /usr/bin/wc - found!
+	If command not found → 
+		"command not found" error
+Step 3: Process Creation and Execution
+	Shell forks itself 
+		to create child processes
+	Uses exec() system call 
+		to run each program
+	Sets up pipes to 
+		connect output of 
+			ls to input of grep, etc.
+Step 4: Environment Setup
+	Passes environment variables 
+		to child processes
+	Sets up standard 
+		input, 
+		output, and 
+		error streams
+	Manages 
+		working directory and 
+		file descriptors
+Step 5: Process Management
+	Shell waits for 
+		processes to complete (foreground)
+	Or 
+		manages background processes (with &)
+	Collects 
+		exit codes and 
+		handles errors
+Step 6: Output Display
+	Receives results from 
+		final command in pipeline
+	Displays output 
+		in terminal
+	Shows new prompt 
+		when ready for next command
+Evolution of Shells: From Basic to Powerful
+	The Shell Family Tree
+	1. Thompson Shell (sh) - 1971 
+		"The grandfather of all shells - basic but revolutionary"
+
+		First command-line 
+			interpreter for UNIX
+		Simple command execution, 
+			basic I/O redirection
+		No 
+			scripting capabilities, 
+			no history
+
+
+2. Bourne Again Shell (bash) - 1989 
+	"The people's champion - combines the best of all worlds"
+
+	Why it became dominant:
+		Added interactive features
+			Control R  
+		Extensive scripting capabilities
+			e.g. chaining commands 
+		Tab completion and command history	
+		Powerful pattern matching and expansion
+
+3. Z Shell (zsh) - 1990 "The modern developer's choice"
+Advanced features:
+	Superior autocompletion 
+		(context-aware)
+	Spelling correction and suggestions
+	Plugin ecosystem 
+	Advanced globbing and pattern matching
+	Theme support and customization
+	Interactive Demo: 
+		Shell Superpowers
+
+
+
+Power Feature 1: Command Composition
+
+
+Challenge to Students: 
+----------------------
+	"this would require 
+		a custom application in GUI, 
+		but just one line in shell."
+bash
+# Find all Python files, 
+	count lines of code, 
+	sort by size
+
+
+	find . -name "*.py" -exec wc -l {} + | sort -n | tail -10
+	
+	
+
+# Translation: 
+	"Find all .py files, 
+		count lines in each, 
+		sort by line count, 
+		show top 10"
+
+	"This one command just analyzed your entire codebase in seconds!"
+	
+	
+	
+Power Feature 2: 
+	Command History and Shortcuts
+
+
+
+# Navigate command history
+history | tail -10          # See last 10 commands
+!!                          # Repeat last command
+!find              			# Repeat last command starting with 'find'
+!?python?                   # Repeat last command containing 'python'
+
+# Quick navigation
+cd -                        # Go back to previous directory
+Control + R 				# search through the commands executed in the past 
+
+
+Power Feature 3: Tab Completion Intelligence
+
+# Type and press TAB to see the magic
+cd /ho<TAB>                 # Completes to /home/
+ls -l /etc/pa<TAB>          # Shows all files starting with 'pa'
+
+
+Power Feature 4: Variables and Environment
+bash
+
+
+# Environment variables - your shell's memory
+echo $HOME                  # Your home directory
+echo $PATH                  # Where shell looks for commands
+echo $USER                  # Your username
+echo $PWD                   # Current directory
+
+# Create your own variables
+export API_KEY="secret123"
+export DATABASE_URL="postgresql://localhost/myapp"
+echo "Connecting to $DATABASE_URL"
+
+# Use in scripts and commands
+cp important.txt $HOME/backups/
+curl https://api.github.com/users/octocat
+
+
+Shell Customization: Making it Yours
+The Power of Aliases
+
+# DevOps-specific aliases
+alias e='export'
+e Hi=Hello
+echo $Hi
+
+
+
+Why Mastering Shell Makes You a Better DevOps Engineer
+------------------------------------------------------
+
+Real-World Scenarios
+Incident Response:
+
+
+# Quick system health check (30 seconds vs 10 minutes GUI clicking)
+uptime && free -h && df -h && ps aux --sort=-%cpu | head -5
+	Uptime and load,
+	Memory usage - free -h,
+		Column	Value	Explanation
+		total	3.7Gi	Total physical RAM .
+		used	681Mi	Memory currently used by running processes excluding buffers/cache.
+		free	197Mi	Memory that is completely free (not used at all). Very small because Linux uses free memory for caching.
+		shared	286Mi	Memory shared between multiple processes (e.g., tmpfs, shared libraries).
+		buff/cache	2.9Gi	Memory used by the kernel for disk buffers and caching. This memory is available to applications if needed — 
+							Linux uses free memory for caching to speed up file I/O.
+		available	2.5Gi	Estimated memory actually available for new applications without swapping. It’s calculated as: free + reclaimable cache/buffers. This is the most practical number for memory monitoring.
+	
+	Disk usage, and
+	Top CPU-consuming processes.
+
+
+Log Investigation:
+
+
+#Find all pid 1 errors 	
+	find /var/log/* -name "*.log" -mtime -1 -exec grep "pid=1" {} \;
+	find /var/log/* -name "*.log" -mtime -1 -exec grep "detected" {} \;
+		shows all pid starting with 1 
+	find /var/log/* -name "*log" -mtime -1 -exec grep "pid=1 " {} \;
+	
+
+
+# Real-time resource monitoring
+watch -n 1 'ps aux --sort=-%cpu | head -10'
+
+
+
+Real-World Application & Hands-On
+The DevOps Scenario: New Server Setup
+
+
+"You've just been given access to a brand new Linux server. Your first day task: set up the environment for a Python web application."
+
+
+Guided Hands-On:
+---------------
+Step 1: Understand Your Environment
+
+# Who am I?
+whoami
+id
+
+# Where am I?
+pwd
+ls -la
+
+# What kind of system is this?
+uname -a
+cat /etc/os-release
+
+
+Step 2: Explore the System Structure
+
+# The root of everything
+ls /
+
+
+
+# Let's understand what each directory does
+echo "This is where programs live:" && ls /bin | head -5
+echo "This is where configuration files live:" && ls /etc | head -5
+echo "This is where user data lives:" && ls /home
+
+
+
+Step 3: Check System Resources
+
+
+# CPU information
+lscpu | head -10
+	lscpu is a Linux command that displays detailed CPU architecture information.
+
+	Shows info such as:
+		Number of CPUs/cores
+		Threads per core
+		CPU family and model
+		CPU MHz (speed)
+		Cache sizes
+		Architecture (x86_64, ARM, etc.)
+
+# Memory information
+	free -h
+
+		Column	Value	Explanation
+		total	3.7Gi	Total physical RAM installed on the system.
+		used	681Mi	Memory currently used by running processes excluding buffers/cache.
+		free	197Mi	Memory that is completely free (not used at all). 
+						Very small because Linux uses free memory for caching.
+		shared	286Mi	Memory shared between multiple processes (e.g., tmpfs, shared libraries).
+		buff/cache	2.9Gi	Memory used by the kernel for disk buffers and caching. This memory is available to applications if needed — 
+						Linux uses free memory for caching to speed up file I/O.
+		available	2.5Gi	
+						Estimated memory actually available for new applications without swapping. It’s calculated as: free + reclaimable cache/buffers. This is the most practical number for memory monitoring.
+	
+
+# Disk space
+	df -h
+
+
+
+1. You are a DevOps engineer on-call. A production server is reported to be running slow. You log in and notice Chrome processes consuming excessive CPU. To confirm how the OS allocated CPU time and which processes are consuming it, which of the following commands provides the most immediate and detailed insight into process CPU usage?
+	df -h
+	free -h
+	ps aux --sort=-%cpu | head -5
+	ls -la /proc
+	strace -p 
+
+ps aux --sort=-%cpu | head -5
+
+	
+2. A junior developer accidentally writes buggy code that repeatedly allocates memory without freeing it. Luckily, the crash only affects that application and not the entire system. Which system concept is responsible for containing the impact of this crash?
+	Kernel space privilege escalation
+	User space isolation enforced by the kernel
+	System calls bypassing hardware
+	Direct process scheduling by CPU
+	Device driver execution priority 
+
+User space isolation enforced by the kernel
+	
+
+3. When you double-click the Chrome icon, the OS loads it from disk into memory, creates a process, and allocates CPU time. From a Linux system architecture perspective, which sequence of actions best describes what happens under the hood?
+	Hardware executes binary → Kernel assigns PID → OS allocates disk space → Application runs
+	Kernel receives system call → Loads executable into RAM → Creates process with PID → Allocates CPU time → Application requests resources
+	Application requests kernel space directly → Kernel bypasses system calls → Hardware executes instructions → Process is created
+	Firmware loads Chrome into RAM → Kernel assigns process scheduling → Application accesses disk directly
+	OS starts GUI handler → Kernel invokes exec() automatically → CPU directly runs instructions → Application gets network access
+
+Kernel receives system call → Loads executable into RAM → Creates process with PID → Allocates CPU time → Application requests resources
+
+	
+4. You are tasked with restarting Nginx on 50 servers during a critical update window. Your manager suggests using a GUI tool, but you argue for the shell. Which shell-based approach demonstrates why DevOps engineers prefer command line for this type of bulk operation?
+	Manually SSH into each server and restart Nginx
+	Use scp to copy configuration files one by one
+	Run a for loop with ssh to restart Nginx on all servers from a single terminal
+	Use a GUI dashboard and click “Restart” for each server
+	Copy the Nginx binary to each server and recompile
+
+Run a for loop with ssh to restart Nginx on all servers from a single terminal
+
+	
+	
+5. 	Your team’s web app is suddenly throwing “Permission denied” errors when writing to log files. You use strace on the application and confirm that file-related system calls are failing. Which specific system call would most directly help you verify whether the application actually has permission to create or write to the log file?
+	exec()
+	read()
+	write()
+	open()
+	malloc()
+open()
+
+
+----------------------------------------------------------------------------------------------------------------
+Phase 2 
+
+Above note in simple form 
+
+
+
+Agenda: 
+	Introduction to Linux (Production & Terminal Focus)
+	Machine/Computer?: 
+	Hardware Layer: 
+	Software Layer: 
+	Role of the Operating System: 
+	Real-World Example: 
+	Evolution of OS: 
+	Introduction to Linux: 
+	System Calls for DevOps: 
+	GUI vs Shell: 
+	Basic commands: 
+		File system navigation and management  
+			ls 
+			cd
+			mkdir)
+	Shell features 
+		(history, aliases, environment variables)
+
+
+		
+			
+
+	Machine 
+		Hardware 
+		Software
+	
+	
+	Hardware Layer: The Physical World
+		CPU (Central processing unit): 
+			min. 16 core for production machines 
+		RAM (Randomn access memory): 
+			Ephemeral
+		Storage: 
+			Permanent data storage 
+				SSDs, 
+				HDDs
+		Network Interface: 
+		Peripherals: 
+	Software Layer: 
+		Applications: 
+		System Software: 
+			Programs 
+				manage other programs
+		Firmware: 
+			Low-level code 
+				embedded in hardware
+
+	Hardware 
+		understands 
+			understands specific commands 
+		OS helps 
+			send specific commands 
+
+
+
+			
+	applications
+		memory
+		network
+		file storage
+		
+	compare to hotel concierge if required.
+	
+		
+What the OS Actually Does
+--------------------------
+OS 
+	allocates RAM and tracks usage
+	manages disk storage and file organization
+	handles network protocols
+	creates and manages processes
+
+For Hardware:
+	OS Control and manages 
+		CPU time 
+			between competing applications
+		memory allocation and 
+			prevents conflicts
+		hardware interrupts and 
+			device drivers
+		system security and stability
+
+Real-World Example: 
+	"double-click Chrome, here's what really happens:
+	
+	1. mouse click (hardware) 
+		an interrupt signal
+	2. OS detects 
+		a. want to run Chrome
+			properties in chrome icon 
+		b. locates Chrome exe file 
+			on your disk
+		c. loads Chrome 
+			from storage 
+				into RAM (memory allocation)
+		d. creates a new process 
+			unique Process ID for Chrome
+		e. allocates CPU time for Chrome to initialize
+	Chrome 
+		requests network access to 
+			load your homepage
+	OS 
+		manages display 
+			show Chrome's window
+	Chrome 
+		continues making requests 
+			(more 
+				memory, 
+				network calls, 
+				file access)
+	OS coordinates 
+		everything while protecting system security"
+
+C2
+
+
+Evolution
+---------
+Unix 	
+	1969
+Linux 
+	1991 Linus Tovalds
+Windows 
+	Microsoft 
+
+Why Linux? The Restaurant Chain Analysis
+----------------------------------------
+Windows Restaurant:
+	Costly
+	Costly franchise
+	closed code 
+	user friendly 
+Linux Restaurant:
+	Free to open anywhere (open source)
+	Completely customizable
+	community
+	Preferred by developers/DevOps
+
+
+
+
+	Linux OS Deep Dive: 
+		Kernel, 
+		User Space and 
+		System Calls
+	
+	
+	The Kernel: The Core Manager
+	----------------------------
+	Kernel Responsibilities:
+		Process Management: 
+		Memory Management: 
+		File System Management: 
+		Device Management:
+			communicate with h/w through drivers 
+		Network Management: 
+		Security Management:
+			enforce permission and access control 
+
+
+	Why Kernel is Special:
+		Runs in privileged mode 
+			(can access hardware directly)
+		Always in memory 
+			(never gets swapped out)
+		complete control 
+			over system resources
+		Secured - 
+			Applications cannot 
+			directly access kernel functions
+
+	User Space vs Kernel Space: 
+	----------------------------
+		The Security Boundary
+		User Space (Applications):
+			programs etc
+		Restricted access - 
+			cannot directly control hardware
+		If they crash, 
+			don't crash the whole system
+	Kernel Space (OS Core):
+		Device drivers, 
+		memory manager, 
+		process scheduler
+	
+	Full hardware access and control
+		If 
+			kernel crashes, 
+				entire system crashes
+		Directly manipulates 
+			CPU, 
+			memory, and 
+			devices
+		System Calls: 
+			The Application-Kernel Interface
+
+	The API Between Worlds
+	----------------------
+	System calls 
+		ordering food at a restaurant. 
+	You (application) 
+		tells the kernel
+	kernel 
+		interacts with hardware 
+		
+	Common System Calls Every DevOps Engineer Should Know:
+	-----------------------------------------------------
+	File Operations:
+		open(): 
+			"Give me access to this file"
+		read(): 
+			"Bring me data from this file"
+		write(): 
+			"Save this data to the file"
+		close(): 
+			"I'm done with this file"
+	Process Operations:
+		fork(): 
+			"Create an identical copy of my process"
+		exec(): 
+			"Replace my process with a different program"
+		wait(): 
+			"Wait for my child process to complete"
+		exit(): 
+			"I'm done, clean up my resources"
+	Memory Operations:
+		malloc(): 	
+				"Give me some memory"
+		mmap(): 
+				"Map a file into memory"
+		brk(): 
+			"Expand my memory space"
+	
+
+
+# Let's see what system calls happen for a simple command
+
+yum install strace in aws 
+strace echo "Hello DevOps" 2>&1 | head -20
+strace echo "Hello DevOps" 2>&1 | wc -l
+
+
+
+
+	Why This Matters for DevOps
+	---------------------------
+	Helps in performance debugging:	
+
+
+
+GUI vs Shell: The Real Comparison
+---------------------------------
+	Graphical User Interface (GUI) Strengths:
+		Visual and intuitive - 
+			Easy to learn
+		Discovery-friendly - 
+			Can explore 
+				by clicking around
+		Good for one-off tasks - 
+			Opening a file, 
+			viewing an image
+		Multitasking visual cues - 
+			Windows, 
+			icons, 
+			visual feedback
+ 
+
+Examples from a typical DevOps Engineer's Day:
+---------------------------------------------
+Deploy application 
+	to 50 servers → 
+		Shell: 30 seconds, 
+		GUI: 2 hours
+Find all log files containing errors → 
+	Shell: 5 seconds, 
+	GUI: manually impossible
+Monitor system resources across cluster → 
+	Shell: real-time dashboard, 
+	GUI: not scalable
+Backup databases with compression → 
+	Shell: one command, 
+	GUI: multiple steps per database
+	
+	
+	
+Free playground for students
+	https://webminal.org/register/
+	https://linuxzoo.net/ctrl/login.cgi
+	what is the recommendation from Scaler 
+
+	
+How the Shell Actually Works: Under the Hood
+--------------------------------------------
+The Shell's Role in the System
+
+
+The shell sits 
+	between 
+		you and 
+		kernel, 
+	like a translator 
+	
+	
+	
+				┌─────────────────────────────────────────┐
+				│           Your Commands                 │
+				│        "ls -la /home"                   │
+				└─────────────────┬───────────────────────┘
+								  │
+				┌─────────────────▼───────────────────────┐
+				│              SHELL                      │
+				│   • Parses your command                 │
+				│   • Finds the program (ls)              │
+				│   • Sets up environment                 │
+				│   • Handles input/output                │
+				└─────────────────┬───────────────────────┘
+								  │
+				┌─────────────────▼───────────────────────┐
+				│           KERNEL                        │
+				│   • Executes the program                │
+				│   • Manages system resources            │
+				│   • Returns results                     │
+				└─────────────────┬───────────────────────┘
+								  │
+				┌─────────────────▼───────────────────────┐
+				│           OUTPUT                        │
+				│    File listings displayed              │
+				└─────────────────────────────────────────┘
+				
+Shell Processing: 
+	Step by Step 
+		(We will learn each of below in detailed depth in upcoming classes)
+
+
+When you type: 
+	ls -la /home | grep user | wc -l
+		draw this if possible 
+
+
+
+
+
+Power Feature 1: Command Composition
+
+
+ 
+1. ls — List Directory Contents
+-------------------------------
+
+	Basic Syntax:
+		ls [options] [path]
+
+
+	Common Usages & Explanations:
+
+	Command	Explanation
+	ls			Lists all files and directories in the current directory.
+	ls /home	Lists contents of the /home directory.
+	ls -l		Long format: shows permissions, owner, group, size, and modification date.
+	ls -a		Shows all files, including hidden ones (those starting with .).
+	ls -lh		Long format + human-readable sizes (e.g., 2K, 4M, 1G).
+	ls -lt		Lists files sorted by modification time (newest first).
+	ls -R		Recursively lists contents of all subdirectories.
+	ls -lhS 
+		-S	Sorts files by size, with the largest first.
+
+
+	ls -l
+	-rw-r--r--  1 user group  5120 Oct  7 10:30 notes.txt
+	drwxr-xr-x  2 user user  4096 Oct  7 09:00 Documents
+
+		1 File type & permissions	-rw-r--r--	
+		2️ Number of links	
+			1	
+		3️ Owner name	user	Who owns the file
+		4️ Group name	group	Which group owns it
+		5️ File size	1234	In bytes
+		6️ Last modified date	Oct 8 08:15	When file was last changed
+		7️ File name	notes.txt	The name of the file
+
+	-rw-r--r--
+		1-	File type (- for file, d for directory, l for symlink)
+		2–4	rw-	Owner permissions (user)
+		5–7	r--	Group permissions
+		8–10	r--	Other users’ permissions
+
+
+
+2. cd — Change Directory
+
+	Purpose:
+	Used to navigate between directories in the Linux filesystem.
+
+	Basic Syntax:
+
+	cd [directory_path]
+
+
+	Common Usages & Explanations:
+
+	Command	Explanation
+	cd /home	Move into the /home directory.
+	cd ./test/test1
+	cd ..	Move up one level (to the parent directory).
+	cd ../..	Move up two levels.
+	cd ~ or cd	Go to the home directory of the current user.
+	cd /	Go to the root directory.
+	cd -	Switch to the previous directory.
+	cd /var/log	Change directory to /var/log.
+
+3. mkdir — Make Directory
+
+
+	Command	Explanation
+	-------------------
+	mkdir test	Creates a directory named test in the current location.
+	mkdir /tmp/newfolder	Creates a directory at the specified absolute path.
+	mkdir -p /home/user/docs/project1	Creates parent directories automatically if they don’t exist.
+	mkdir {dir1,dir2,dir3}	Creates multiple directories at once.
+	
+	
+	
+Power Feature 2: 
+	Command History and Shortcuts
+
+
+
+# Navigate command history
+	history | tail -10          # See last 10 commands
+	!!                          # Repeat last command
+	!find              			# Repeat last command starting with 'find'
+	!?python?                   # Repeat last command containing 'python'
+
+# Quick navigation
+	cd -                        # Go back to previous directory
+	Control + R 				# search through the commands executed in the past 
+
+
+Power Feature 3: Tab Completion Intelligence
+
+# Type and press TAB to see the magic
+	cd /ho<TAB>                 # Completes to /home/
+	ls -l /etc/pa<TAB>          # Shows all files starting with 'pa'
+
+
+Power Feature 4: Variables and Environment
+
+bash
+
+# Environment variables - your shell's memory
+	echo $HOME                  # Your home directory
+	echo $PATH                  # Where shell looks for commands
+	echo $USER                  # Your username
+	echo $PWD                   # Current directory
+
+# Create your own variables
+	export API_KEY="secret123"
+	export DATABASE_URL="postgresql://localhost/myapp"
+	echo "Connecting to $DATABASE_URL"
+
+# Use in scripts and commands
+	cp important.txt $HOME/backups/
+	curl https://api.github.com/users/octocat
+
+
+Shell Customization: Making it Yours
+The Power of Aliases
+
+# DevOps-specific aliases
+	alias e='export'
+	e Hi=Hello
+	echo $Hi
+
+
+
+Step 1: Understand Your Environment
+
+# Who am I?
+whoami
+id
+
+# Where am I?
+pwd
+ls -la
+
+# What kind of system is this?
+uname -a
+cat /etc/os-release
+
+
+Step 2: Explore the System Structure
+
+# The root of everything
+ls /
+
+
+
+# Let's understand what each directory does
+echo "This is where programs live:" && ls /bin | head -5
+echo "This is where configuration files live:" && ls /etc | head -5
+echo "This is where user data lives:" && ls /home
+

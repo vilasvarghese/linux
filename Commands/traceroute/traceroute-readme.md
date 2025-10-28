@@ -7,23 +7,23 @@ The `traceroute` command in Linux is a network diagnostic tool used to display t
 ## Basic Syntax
 
 ```bash
-traceroute [OPTIONS] HOST
-OPTIONS: Control the behavior of traceroute (e.g., protocol, port, max hops).
+	traceroute [OPTIONS] HOST
+	OPTIONS: Control the behavior of traceroute (e.g., protocol, port, max hops).
 
-HOST: The hostname or IP address of the destination you want to trace.
+	HOST: The hostname or IP address of the destination you want to trace.
 
-How traceroute Works (The TTL Mechanism)
-traceroute typically works by sending a sequence of UDP datagrams (or ICMP Echo Request packets, or TCP SYN packets, depending on options) to the destination host, starting with a TTL (Time To Live) value of 1.
+	How traceroute Works (The TTL Mechanism)
+	traceroute typically works by sending a sequence of UDP datagrams (or ICMP Echo Request packets, or TCP SYN packets, depending on options) to the destination host, starting with a TTL (Time To Live) value of 1.
 
-TTL = 1: The first packet is sent with a TTL of 1. When this packet reaches the first router on the path, the router decrements the TTL to 0 and, according to IP protocol rules, drops the packet. It then sends an ICMP "Time Exceeded" message back to the traceroute source. traceroute records the IP address of this router and the round-trip time.
+	TTL = 1: The first packet is sent with a TTL of 1. When this packet reaches the first router on the path, the router decrements the TTL to 0 and, according to IP protocol rules, drops the packet. It then sends an ICMP "Time Exceeded" message back to the traceroute source. traceroute records the IP address of this router and the round-trip time.
 
-TTL = 2: The second packet is sent with a TTL of 2. It passes the first router (TTL becomes 1) and reaches the second router. The second router decrements TTL to 0, drops the packet, and sends an ICMP "Time Exceeded" message back. traceroute records the second router's IP and RTT.
+	TTL = 2: The second packet is sent with a TTL of 2. It passes the first router (TTL becomes 1) and reaches the second router. The second router decrements TTL to 0, drops the packet, and sends an ICMP "Time Exceeded" message back. traceroute records the second router's IP and RTT.
 
-This process continues, incrementing the TTL by 1 for each subsequent packet.
+	This process continues, incrementing the TTL by 1 for each subsequent packet.
 
-Destination Reached: When the packet finally reaches the destination host, the TTL will be sufficient (TTL > 0). If using UDP, the packet will typically be sent to an unusual, unassigned port. The destination host, finding no application listening on that port, sends an ICMP "Port Unreachable" message back to the traceroute source. This Port Unreachable message signals to traceroute that the destination has been reached. If using ICMP Echo Request, the destination responds with an ICMP Echo Reply.
+	Destination Reached: When the packet finally reaches the destination host, the TTL will be sufficient (TTL > 0). If using UDP, the packet will typically be sent to an unusual, unassigned port. The destination host, finding no application listening on that port, sends an ICMP "Port Unreachable" message back to the traceroute source. This Port Unreachable message signals to traceroute that the destination has been reached. If using ICMP Echo Request, the destination responds with an ICMP Echo Reply.
 
-For each TTL value (each hop), traceroute sends three packets by default to measure the RTT more accurately and account for packet loss. The output shows the IP address of each hop and the RTT for each of the three packets. If a packet is lost or no response is received within the timeout, an asterisk (*) is displayed.
+	For each TTL value (each hop), traceroute sends three packets by default to measure the RTT more accurately and account for packet loss. The output shows the IP address of each hop and the RTT for each of the three packets. If a packet is lost or no response is received within the timeout, an asterisk (*) is displayed.
 
 Common Options
 -I (or --icmp): Use ICMP Echo Request packets for probing instead of UDP datagrams. This is often necessary if firewalls block UDP.
@@ -85,6 +85,8 @@ traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
  1  192.168.1.1  0.728 ms  0.647 ms  0.706 ms
  2  10.0.0.1  4.345 ms  4.020 ms  4.567 ms
 ...
+
+
 3. Using ICMP Echo Probes (-I)
 Useful if UDP probes are blocked by firewalls.
 

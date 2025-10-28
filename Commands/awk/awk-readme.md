@@ -109,9 +109,9 @@ awk provides several useful built-in variables that store information about the 
 	Example:
 	Assume data.txt contains:
 
-	Alice 25 Female
-	Bob 30 Male
-	Charlie 22 Male
+Alice 25 Female
+Bob 30 Male
+Charlie 22 Male
 
 	Bash
 

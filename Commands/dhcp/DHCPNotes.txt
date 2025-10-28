@@ -12,11 +12,10 @@ Imagine a large network (like your home Wi-Fi, an office, or a data center). Wit
 
 This manual process is:
 
-Error-prone: Typos, duplicate IPs.
-Time-consuming: For administrators.
-Inefficient: Especially for mobile devices constantly joining and leaving networks.
-
-Difficult for IP address management: Reclaiming addresses from devices that leave the network would be a nightmare.
+	Error-prone: Typos, duplicate IPs.
+	Time-consuming: For administrators.
+	Inefficient: Especially for mobile devices constantly joining and leaving networks.
+	Difficult for IP address management: Reclaiming addresses from devices that leave the network would be a nightmare.
 
 DHCP automates all of this, making network management significantly easier and more reliable.
 

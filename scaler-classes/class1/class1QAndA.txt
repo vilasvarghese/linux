@@ -1,0 +1,36 @@
+find vs locate 
+
+
+find
+	find searches the file system in real time
+locate
+	searches a pre-built database of files on the system (created by updatedb).
+	use sudo updatedb
+	
+	
+ps -ef Vs ps -aux 	
+	ps -ef and ps aux 
+		two of the most common commands 
+			to list running processes in Linux
+			come from different UNIX traditions (System V vs BSD).
+			
+
+diff ps -aux and top 
+
+	top vs ps aux
+---------------------------------------------------------------------------------------------------------	
+Feature			top											ps aux
+---------------------------------------------------------------------------------------------------------
+Type			Interactive, real-time monitor				One-time snapshot
+Output refresh	Automatically updates every few seconds		Shows current state once
+User interface	Interactive—can sort,kill,filter,search		Static text output
+Default sort	By CPU usage								Typically by PID
+CPU & Memory info	
+				Continuously updated summary 				Per-process CPU/MEM usage only 
+					(load avg, per-core CPU, memory usage)		(no system summary)
+Interactivity	Yes — press keys like k, r, M, P, etc.		No — purely command output
+Customizable 	Yes (change columns, color, order)			Only via -o option
+Data source		Reads live data from /proc periodically		Reads once from /proc
+Use case		Monitoring and troubleshooting 				Taking a quick or scriptable snapshot
+					live performance
+---------------------------------------------------------------------------------------------------------

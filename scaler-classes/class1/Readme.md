@@ -4,6 +4,7 @@
 	Role:
 	Expertise in Linux, Docker and Kubernetes
 	Expertise in English, Hindi
+	Exposure to production infra.
 	Breaks?
 	
 2. Introducing me 
@@ -239,7 +240,9 @@ I see a few of you suggesting **Fedora**. That's a great thought! You're thinkin
 
 The lesson here is: **Understanding the goal (maximum uptime/stability) is more important than knowing the features of a system.** Always pick the tool that fits the job!
 
-Great job, everyone! You now understand the core of Linux, the Kernel, and the key Distros that power the world. Let's move on to... *(continue to next topic)*
+
+
+
 Comparison Table
 -------------------------------------------------------------------------------
 Feature			RHEL 9						Ubuntu 24.04 LTS		Fedora (e.g., 40)
@@ -444,48 +447,6 @@ df -h
 \`\`\`
 
 
-
-
-
-
-## The Command Line Revolution: Evolution of Shells
-
-### Need Building: Why the Command Line Still Rules
-
-Every DevOps and Cloud Engineer lives in the **Shell**. You might use a fancy GUI to click buttons, but when a server is down, when you need to automate a task across 50 machines, or when you need to analyze a million lines of logs—you need the Shell.
-
-**The Challenge:** I'm going to show you how a few characters typed into a terminal can accomplish things that would take hours of clicking in a Graphical User Interface (GUI). But first, let's understand where this power came from.
-
----
-
-### The Shell Family Tree
-
-A Shell is just a **command-line interpreter**. It takes your commands and tells the operating system (the Linux Kernel) what to do. Think of it as a **translator**.
-
-| Shell Name | Year | Nickname & Core Feature | Evolution/Analogy |
-| :--- | :--- | :--- | :--- |
-| **Thompson Shell (`sh`)** | 1971 | "The Grandfather" | **The First Calculator.** Basic command execution, no advanced memory (history) or programmable features (scripting). Revolutionary for its time. |
-| **Bourne Again Shell (`bash`)** | 1989 | "The People's Champion" | **The Swiss Army Knife.** Became dominant because it added **interactive features** (history, tab completion) and **scripting capabilities** (allowing you to write programs). It combined the best features of earlier shells. |
-| **Z Shell (`zsh`)** | 1990 | "The Modern Developer's Choice" | **The AI Assistant.** Built on `bash`, adding **superior autocompletion** (it guesses what you mean), spelling correction, themes, and a massive **plugin ecosystem** (like Oh My Zsh) for massive customization. |
-
----
-
-## Interactive Demo: Shell Superpowers 
-
-*(Challenge to Students: "I'll show you something that would require a custom application to do in GUI, but just one line in shell. Try to guess what each symbol means!")*
-
-### Power Feature 1: Command Composition (The Pipeline)
-
-We don't just run one command; we **chain** them together using the **pipe** symbol (`|`).
-
-```bash
-# Find all Python files, count lines of code, sort by size
-```
-find . -name "*.py" -exec wc -l {} + | sort -n | tail -10
-
-
-
-Please keep the part from "Interactive Demo: Shell Superpowers"
 
 
 

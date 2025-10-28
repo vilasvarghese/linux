@@ -242,12 +242,12 @@ When working on a system (especially remote servers), you might want to verify w
 
 Syntax:
 whoami
-📤 Example Output:
+ Example Output:
 
 
 
 john
-🔍 Related Commands:
+ Related Commands:
 id – Shows more details like UID, GID, and groups.
 
 who – Shows who is logged into the system.
@@ -261,7 +261,7 @@ Displays the current date, time, and timezone information. Can also be used to f
 
 
 date
-📤 Example Output:
+ Example Output:
 
 
 
@@ -305,7 +305,7 @@ The man command lets you view the manual (help documentation) for any Linux comm
 
 
 man command_name
-📤 Example:
+ Example:
 
 
 
