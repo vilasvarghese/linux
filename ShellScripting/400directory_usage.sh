@@ -6,8 +6,6 @@ function dir_size() {
   local size=0
 
   find "$dir" -type f -exec du -h {} + | awk '{ size += $1 } END { print size }' 
-
-  echo "Size of directory '$dir': $(($size / 1024 / 1024)) MB" 
 }
 
 # Get the directory path from the user
